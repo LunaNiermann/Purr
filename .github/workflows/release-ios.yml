@@ -27,6 +27,12 @@ jobs:
           flutter-version: 3.44.9
           cache: true
 
+      # Firebase's iOS plugins break `flutter pub get` under Swift Package
+      # Manager on CI (rsync into build/ios/SourcePackages fails). Force the
+      # stable CocoaPods path instead.
+      - name: Use CocoaPods (not SPM) for iOS plugins
+        run: flutter config --no-enable-swift-package-manager
+
       - name: flutter pub get
         working-directory: app
         run: flutter pub get
