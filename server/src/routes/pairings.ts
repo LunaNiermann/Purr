@@ -75,6 +75,10 @@ export function registerPairingRoutes(app: FastifyInstance, ctx: AppContext): vo
       Date.now(),
       pairing.id,
     );
+    req.log.info(
+      { pairingId: pairing.id, hasFcmToken: typeof fcmToken === "string" },
+      "pairing completed",
+    );
     waiters.notify(`pairing:${pairing.id}`);
     return reply.send({ phoneToken, extPub: pairing.ext_pub });
   });
@@ -146,6 +150,7 @@ export function registerPairingRoutes(app: FastifyInstance, ctx: AppContext): vo
       fcmToken,
       auth.pairing.id,
     );
+    req.log.info({ pairingId: auth.pairing.id }, "fcm token registered");
     return reply.code(204).send();
   });
 }

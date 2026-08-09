@@ -330,7 +330,7 @@ Future<void> printRecoveryKit({
                   ),
                   child: pw.BarcodeWidget(
                     barcode: pw.Barcode.qrCode(),
-                    data: 'twokeys-kit:${kit.words.join('-')}',
+                    data: 'purr-kit:${kit.words.join('-')}',
                     color: ink,
                   ),
                 ),

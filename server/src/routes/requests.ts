@@ -67,6 +67,17 @@ export function registerRequestRoutes(app: FastifyInstance, ctx: AppContext): vo
         pairingId,
       });
     }
+    // Diagnostic: makes it obvious in the logs whether the phone registered a
+    // push token and whether a push was actually sent.
+    req.log.info(
+      {
+        pairingId,
+        hasFcmToken: !!auth.pairing.fcm_token,
+        pushConfigured: pusher.configured,
+        pushed,
+      },
+      "approval request created",
+    );
     waiters.notify(`pending:${pairingId}`);
     return reply.code(201).send({ requestId: id, expiresAt: now + REQUEST_TTL_MS, pushed });
   });

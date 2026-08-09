@@ -11,24 +11,41 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 /// carries the domain, account, or code. Its only job is to wake the phone.
 /// When a request arrives we show a local notification that opens the app; the
 /// approval listener then fetches the pending request and shows A11.
+/// A one-glance snapshot of the push subsystem, surfaced in Security so a
+/// person (or we, from a screenshot) can tell where a silent failure is.
+typedef PushDiag = ({bool available, bool hasToken, String? error});
+
 class PushService {
   static bool available = false;
+
+  /// The last thing that went wrong bringing push up (Firebase init or
+  /// getToken). Null when push is healthy. Shown in the Security diagnostics.
+  static String? lastError;
 
   static final FlutterLocalNotificationsPlugin _local =
       FlutterLocalNotificationsPlugin();
   static const _channelId = 'approval_requests';
   static const _channelName = 'Sign-in requests';
 
-  static Future<void> init() async {
+  // init() may be called from startup and again from token()/requestPermission()
+  // if they run before startup's init resolved (fresh pairing races app boot).
+  // Memoise so those callers all await the same one-time initialisation.
+  static Future<void>? _initFuture;
+
+  static Future<void> init() => _initFuture ??= _doInit();
+
+  static Future<void> _doInit() async {
     try {
       await Firebase.initializeApp();
     } catch (e) {
       // No google-services.json (or misconfigured) — push disabled, app fine.
       debugPrint('Push disabled (Firebase not configured): $e');
       available = false;
+      lastError = 'init: $e';
       return;
     }
     available = true;
+    lastError = null;
 
     FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
     await _ensureLocalReady();
@@ -36,6 +53,14 @@ class PushService {
     // App in foreground when the wake arrives: still surface a notification so
     // the user notices; the approval listener also picks the request up live.
     FirebaseMessaging.onMessage.listen((_) => showRequestNotification());
+  }
+
+  /// Everything the Security screen needs to explain the push state in one row.
+  /// Ensures init has run first, so a fresh boot doesn't read a false negative.
+  static Future<PushDiag> diagnose() async {
+    await init();
+    final tok = available ? await token() : null;
+    return (available: available, hasToken: tok != null, error: lastError);
   }
 
   static Future<void> _ensureLocalReady() async {
@@ -75,6 +100,7 @@ class PushService {
 
   /// Triggers the Android 13+ runtime notification prompt (and iOS later).
   static Future<bool> requestPermission() async {
+    await init();
     if (!available) return false;
     final settings = await FirebaseMessaging.instance.requestPermission();
     return settings.authorizationStatus == AuthorizationStatus.authorized ||
@@ -82,10 +108,12 @@ class PushService {
   }
 
   static Future<String?> token() async {
+    await init();
     if (!available) return null;
     try {
       return await FirebaseMessaging.instance.getToken();
-    } catch (_) {
+    } catch (e) {
+      lastError = 'getToken: $e';
       return null;
     }
   }

@@ -62,17 +62,17 @@ class PairingService {
   Future<void> _save(StoredPairing pairing) =>
       _storage.write(key: _key, value: json.encode(pairing.toJson()));
 
-  /// Completes a pairing from a scanned `twokeys-pair:` QR payload.
+  /// Completes a pairing from a scanned `purr-pair:` QR payload.
   /// Throws [FormatException] on unusable QR content.
   Future<StoredPairing> completeFromQr(String qrPayload) async {
-    if (!qrPayload.startsWith('twokeys-pair:')) {
+    if (!qrPayload.startsWith('purr-pair:')) {
       throw const FormatException('Not a pairing code');
     }
     final Map<String, dynamic> data;
     try {
       data = json.decode(
         utf8.decode(base64.decode(
-            base64.normalize(qrPayload.substring('twokeys-pair:'.length)))),
+            base64.normalize(qrPayload.substring('purr-pair:'.length)))),
       ) as Map<String, dynamic>;
     } catch (_) {
       throw const FormatException('That pairing code is damaged');

@@ -125,7 +125,7 @@ async function renderScan(): Promise<void> {
 
   // The QR payload: everything the phone needs, including the secret the
   // relay never sees.
-  const qrPayload = `twokeys-pair:${btoa(
+  const qrPayload = `purr-pair:${btoa(
     JSON.stringify({
       v: 1,
       relay: RELAY_URL,

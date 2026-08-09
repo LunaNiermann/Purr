@@ -44,7 +44,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
           autofocus: true,
           maxLines: 4,
           style: const TextStyle(fontFamily: TkFonts.mono, fontSize: 12),
-          decoration: const InputDecoration(hintText: 'twokeys-pair:…'),
+          decoration: const InputDecoration(hintText: 'purr-pair:…'),
         ),
         actions: [
           TextButton(
@@ -66,7 +66,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
   Future<void> _onDetect(BarcodeCapture capture) async {
     if (_handled) return;
     final raw = capture.barcodes.firstOrNull?.rawValue;
-    if (raw == null || !raw.startsWith('twokeys-pair:')) return;
+    if (raw == null || !raw.startsWith('purr-pair:')) return;
     _handled = true;
     await _complete(raw);
   }

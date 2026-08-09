@@ -164,7 +164,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
 
     // Someone pointed the "add account" scanner at a computer-pairing code.
     // Don't fail silently — offer to pair instead.
-    if (raw.startsWith('twokeys-pair:')) {
+    if (raw.startsWith('purr-pair:')) {
       _handled = true;
       await _handlePairingCode(raw);
       return;

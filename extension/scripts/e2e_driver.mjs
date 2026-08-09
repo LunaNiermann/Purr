@@ -62,7 +62,7 @@ if (mode === "pair") {
   const created = await (
     await api("/v1/pairings", { method: "POST", body: { extPub: b64(pub) } })
   ).json();
-  const qr = `twokeys-pair:${Buffer.from(
+  const qr = `purr-pair:${Buffer.from(
     JSON.stringify({
       v: 1,
       relay: phoneRelay,

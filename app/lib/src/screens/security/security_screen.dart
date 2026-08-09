@@ -11,6 +11,7 @@ import '../../services/approval_service.dart';
 import '../../services/backup_service.dart';
 import '../../services/biometrics.dart';
 import '../../services/kit_pdf.dart';
+import '../../services/push.dart';
 import '../../state/providers.dart';
 import 'pair_computer_screen.dart';
 
@@ -429,6 +430,10 @@ class _ComputerCard extends ConsumerWidget {
                 ],
               ),
             ),
+          if (paired != null) ...[
+            const SizedBox(height: 10),
+            const _PushStatusLine(),
+          ],
         ],
       ),
     );
@@ -440,6 +445,93 @@ class _ComputerCard extends ConsumerWidget {
       'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
     ];
     return '${d.day} ${months[d.month - 1]}';
+  }
+}
+
+/// A one-line readout of whether this phone can be woken by a push. When
+/// something's off it also shows the technical reason — enough to diagnose a
+/// silent failure from a single screenshot.
+class _PushStatusLine extends StatefulWidget {
+  const _PushStatusLine();
+
+  @override
+  State<_PushStatusLine> createState() => _PushStatusLineState();
+}
+
+class _PushStatusLineState extends State<_PushStatusLine> {
+  PushDiag? _diag;
+
+  @override
+  void initState() {
+    super.initState();
+    _refresh();
+  }
+
+  Future<void> _refresh() async {
+    final d = await PushService.diagnose();
+    if (mounted) setState(() => _diag = d);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final d = _diag;
+    final ok = d != null && d.available && d.hasToken;
+    final label = d == null
+        ? 'Checking notifications…'
+        : ok
+            ? 'Notifications ready'
+            : d.available
+                ? "Notifications on, but this phone couldn't register"
+                : 'Notifications unavailable on this device';
+    final color = d == null
+        ? TkColors.ink55
+        : ok
+            ? TkColors.green
+            : const Color(0xFFB4462F);
+    return GestureDetector(
+      onTap: _refresh,
+      behavior: HitTestBehavior.opaque,
+      child: Container(
+        padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
+        decoration: BoxDecoration(
+          color: TkColors.paperSunk,
+          borderRadius: BorderRadius.circular(13),
+        ),
+        child: Row(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Padding(
+              padding: const EdgeInsets.only(top: 2),
+              child: Container(
+                width: 9,
+                height: 9,
+                decoration: BoxDecoration(color: color, shape: BoxShape.circle),
+              ),
+            ),
+            const SizedBox(width: 11),
+            Expanded(
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Text(label,
+                      style: TextStyle(
+                          fontFamily: TkFonts.sans,
+                          fontSize: 13.5,
+                          fontWeight: FontWeight.w600,
+                          color: color)),
+                  if (d?.error != null) ...[
+                    const SizedBox(height: 3),
+                    Text(d!.error!,
+                        style: TkText.metadata.copyWith(
+                            fontFamily: TkFonts.mono, fontSize: 11)),
+                  ],
+                ],
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
   }
 }
 
