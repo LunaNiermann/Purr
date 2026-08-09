@@ -9,15 +9,15 @@ import '../../services/push.dart';
 import '../../services/relay_api.dart';
 import '../../state/providers.dart';
 
-/// Design 5d: ask about notifications only once there's a paired computer AND
-/// at least one account — the first moment a push has something to say. Our
-/// priming sheet precedes the OS prompt and always leaves a graceful "not now".
+/// Ask about notifications the moment a computer is paired — that's when a push
+/// first has something to say, and (per the user's call) the contextual moment
+/// with the best chance of a yes. Our priming sheet precedes the OS prompt and
+/// always leaves a graceful "not now". Guarded so it shows at most once.
 Future<void> maybePrimeNotifications(
     BuildContext context, WidgetRef ref) async {
   if (!PushService.available) return;
   if (ref.read(prefsProvider).notificationsChoice != 'unasked') return;
   if (ref.read(pairingProvider).pairing == null) return;
-  if (ref.read(vaultProvider).accounts.isEmpty) return;
 
   final wants = await showModalBottomSheet<bool>(
     context: context,
