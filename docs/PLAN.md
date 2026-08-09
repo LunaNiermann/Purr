@@ -41,7 +41,7 @@ Pairing, approval-request relay with 60 s TTL, FCM data-only push, backup blob s
 
 ## M3 — Extension
 Pairing B1, autofill B2 (field detection → ready → awaiting phone → filled), popup vault B3 (display via request, holds no secrets), locked B4, unmatched B5, failure popups B6, settings B7.
-"Touch your key": real route per `authenticator-handoff.md` — E2EE vault replica in the extension unlocked by WebAuthn PRF, decrypt-single-entry at fill time. Ships **after** the phone route (M5+); until it lands the option is hidden — never a dead button. YubiKey HMAC-SHA1 fallback deferred further.
+"Touch your key": real route per the original product brief — E2EE vault replica in the extension unlocked by WebAuthn PRF, decrypt-single-entry at fill time. Ships **after** the phone route (M5+); until it lands the option is hidden — never a dead button. YubiKey HMAC-SHA1 fallback deferred further.
 
 ## M4 — Approval flow end-to-end
 Phone A11–A16 (request, biometric, approved, denied, code-only, intrusion aftermath, mute-until-midnight) + FCM in app + notifications permission beats 5d–5g.

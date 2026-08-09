@@ -1,8 +1,9 @@
 # Purr — Architecture
 
-Product: a TOTP authenticator for non-technical people, per `design_handoff_two_keys/README.md`
-(the design source of truth) and `authenticator-handoff.md` (earlier product/crypto brief; applies
-only where the design doc doesn't already cover or override it — see "Reconciliation" at the end).
+Product: a TOTP authenticator for non-technical people, built from a high-fidelity design handoff
+(the design source of truth) and an earlier product/crypto brief (the brief applies only where the
+design doesn't already cover or override it — see "Reconciliation" below). Both were internal
+working documents and are no longer in the repo; the decisions they drove are recorded here.
 Three surfaces: mobile app (Android first, iOS later), browser extension, printable recovery kit.
 Plus one deployable service: an end-to-end-encrypted relay API at `https://2fa.apps.not-final.com`.
 
@@ -15,7 +16,6 @@ app/          Flutter app (Android + iOS from one codebase)
 extension/    Browser extension, Manifest V3, TypeScript + Vite
 server/       Relay API, TypeScript (Node 22, Fastify), Dockerfile for Coolify
 docs/         This documentation
-design_handoff_two_keys/   Design source of truth (do not edit)
 ```
 
 ## Stack choices and why
@@ -28,9 +28,9 @@ design_handoff_two_keys/   Design source of truth (do not edit)
 
 Fonts: Instrument Sans + JetBrains Mono, bundled (no Google Fonts at runtime).
 
-## Reconciliation with `authenticator-handoff.md`
+## Reconciliation with the original product brief
 
-Where the two briefs disagree, the design handoff and the owner's newer instructions win:
+Where the two briefs disagreed, the design handoff and the owner's newer instructions won:
 
 | Topic | Old brief | Decision |
 |---|---|---|
@@ -133,9 +133,9 @@ GET    /healthz
 
 Rate-limited per IP and per pairing. All bodies are small JSON with base64 ciphertext. Long-poll chosen over WebSocket deliberately: MV3 service workers die after ~30 s idle; short long-polls survive worker restarts with no keepalive gymnastics.
 
-## App state (mirrors the handoff)
+## App state
 
-The handoff's state sketch maps to Riverpod providers:
+The design's state sketch maps to Riverpod providers:
 
 - `vault: List<Account>` — decrypted in memory only while unlocked
 - `layout: list|cards`, `hideCodes: bool` — persisted (non-secret prefs)
@@ -155,7 +155,7 @@ RFC 6238 over RFC 4226, SHA-1/256/512, 6–8 digits, configurable period (defaul
 
 The design's B2 flow offers two routes and the filled-state copy for the key route reads
 *"Your key unlocked the vault right here on this Mac. Your phone stayed in your pocket."*
-The crypto behind that (from `authenticator-handoff.md`, which the design doesn't override here):
+The crypto behind that (from the original product brief, which the design doesn't override here):
 
 - The extension keeps an **E2EE vault replica** — ciphertext only, synced from the phone over the
   pairing channel whenever the vault changes. The decryption key is **never stored** on the desktop.

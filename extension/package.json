@@ -2,6 +2,7 @@
   "name": "twokeys-extension",
   "version": "0.1.0",
   "private": true,
+  "license": "GPL-3.0-only",
   "description": "Purr browser extension — the keyhole. Holds no secrets; asks your phone.",
   "type": "module",
   "scripts": {

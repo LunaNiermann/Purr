@@ -10,7 +10,6 @@ Three surfaces + one small service:
 | `app/` | Mobile app (Android now, iOS later) | Flutter |
 | `extension/` | Browser extension — "the keyhole" | TypeScript, Manifest V3 |
 | `server/` | E2EE relay + encrypted backup store | Node 22, Fastify, SQLite |
-| `design_handoff_two_keys/` | The design source of truth (do not edit) | — |
 | `docs/` | Architecture, plan, research, Play readiness | — |
 
 App id: `nl.notfinal.twofa` · Relay: `https://2fa.apps.not-final.com`
@@ -82,6 +81,15 @@ is wired into the app (optional; drop in `google-services.json` — see
 `docs/PUSH.md`). Not yet done: iOS target and the WebAuthn "touch your key"
 desktop route (design and plan in place; ships after the phone route). See
 `docs/PLAN.md`.
+
+## License
+
+GPL-3.0 — see [`LICENSE`](LICENSE). Any fork must stay open source, which is
+the point: for an authenticator, trust comes from code you can read. The
+bundled fonts (Instrument Sans, JetBrains Mono) are under the SIL Open Font
+License; their license texts sit next to the font files in `app/assets/fonts/`.
+
+Found a security issue? Please report it privately — see [`SECURITY.md`](SECURITY.md).
 
 ## Support
 

@@ -1,6 +1,6 @@
 import 'package:flutter/widgets.dart';
 
-/// Design tokens from design_handoff_two_keys/README.md. Two backgrounds only:
+/// Design tokens from the original design handoff. Two backgrounds only:
 /// paper and ink. Green is reserved for approve/secure/success — never
 /// decoration. Red appears only for blocked/destructive.
 abstract final class TkColors {
