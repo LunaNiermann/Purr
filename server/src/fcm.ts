@@ -7,27 +7,79 @@ import { GoogleAuth } from "google-auth-library";
  * account names, or codes. FCM is TLS to Google, not end-to-end encrypted,
  * so the payload must stay meaningless to Google.
  *
- * Configured via FCM_SERVICE_ACCOUNT (path to a service-account JSON).
- * When unconfigured the server still works: phones poll pending requests
- * on app open, so a missing push degrades to "open the app" (design 5f).
+ * The Firebase service account can be supplied three ways (checked in order),
+ * so it fits whatever a host makes easy:
+ *   FCM_SERVICE_ACCOUNT_JSON  — the JSON itself, raw or base64 (PaaS env var)
+ *   FCM_SERVICE_ACCOUNT       — a path to the JSON file (mounted volume)
+ * When none is set the server still works: phones poll pending requests on
+ * app open, so a missing push degrades to "open the app" (design 5f).
  */
 export interface Pusher {
   send(fcmToken: string, data: Record<string, string>): Promise<boolean>;
 }
 
-export function createPusher(serviceAccountPath: string | undefined, log: {
+export interface FcmConfig {
+  /** Raw JSON or base64-encoded JSON of the service account. */
+  json?: string | undefined;
+  /** Path to a service-account JSON file. */
+  path?: string | undefined;
+}
+
+interface ServiceAccount {
+  project_id: string;
+  client_email: string;
+  private_key: string;
+}
+
+function loadServiceAccount(
+  config: FcmConfig,
+  log: { warn: (msg: string) => void },
+): ServiceAccount | null {
+  let raw: string | undefined;
+  if (config.json && config.json.trim()) {
+    const value = config.json.trim();
+    // Accept either the JSON itself or a base64 blob of it — base64 avoids
+    // newline/quote mangling in env-var UIs.
+    raw = value.startsWith("{")
+      ? value
+      : Buffer.from(value, "base64").toString("utf8");
+  } else if (config.path && config.path.trim()) {
+    try {
+      raw = readFileSync(config.path, "utf8");
+    } catch (err) {
+      log.warn(`FCM_SERVICE_ACCOUNT file unreadable: ${(err as Error).message}`);
+      return null;
+    }
+  }
+  if (!raw) return null;
+  try {
+    const parsed = JSON.parse(raw) as Partial<ServiceAccount>;
+    if (!parsed.project_id || !parsed.client_email || !parsed.private_key) {
+      log.warn("FCM service account is missing required fields — push disabled");
+      return null;
+    }
+    return parsed as ServiceAccount;
+  } catch {
+    log.warn("FCM service account is not valid JSON — push disabled");
+    return null;
+  }
+}
+
+export function createPusher(config: FcmConfig, log: {
   info: (msg: string) => void;
   warn: (msg: string) => void;
 }): Pusher {
-  if (!serviceAccountPath) {
-    log.warn("FCM_SERVICE_ACCOUNT not set — push disabled, phones must poll");
+  const creds = loadServiceAccount(config, log);
+  if (!creds) {
+    log.warn("FCM not configured — push disabled, phones must poll");
     return { send: async () => false };
   }
-  const creds = JSON.parse(readFileSync(serviceAccountPath, "utf8")) as {
-    project_id: string;
-  };
   const auth = new GoogleAuth({
-    keyFile: serviceAccountPath,
+    credentials: {
+      client_email: creds.client_email,
+      private_key: creds.private_key,
+    },
+    projectId: creds.project_id,
     scopes: ["https://www.googleapis.com/auth/firebase.messaging"],
   });
   const url = `https://fcm.googleapis.com/v1/projects/${creds.project_id}/messages:send`;

@@ -17,6 +17,7 @@ export interface AppContext {
 export interface AppOptions {
   dbPath?: string;
   fcmServiceAccount?: string | undefined;
+  fcmServiceAccountJson?: string | undefined;
   trustProxy?: boolean;
 }
 
@@ -30,7 +31,10 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
   const ctx: AppContext = {
     db: openDb(opts.dbPath ?? process.env.DB_PATH ?? "data/twokeys.sqlite"),
     pusher: createPusher(
-      opts.fcmServiceAccount ?? process.env.FCM_SERVICE_ACCOUNT,
+      {
+        json: opts.fcmServiceAccountJson ?? process.env.FCM_SERVICE_ACCOUNT_JSON,
+        path: opts.fcmServiceAccount ?? process.env.FCM_SERVICE_ACCOUNT,
+      },
       app.log,
     ),
     waiters: new Waiters(),
