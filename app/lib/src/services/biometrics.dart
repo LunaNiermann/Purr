@@ -57,4 +57,13 @@ class Biometrics {
       return false;
     }
   }
+
+  /// Gate a sensitive action, but don't dead-end on a device with no lock at
+  /// all: there's nothing to authenticate against, and the whole app already
+  /// opened without one, so proceed. Returns false only when a lock exists and
+  /// the person failed/cancelled it.
+  static Future<bool> confirmOrBypass(String reason) async {
+    if (!await canAuthenticate()) return true;
+    return prompt(reason);
+  }
 }

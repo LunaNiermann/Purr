@@ -36,7 +36,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
   }
 
   Future<void> _printKitAgain() async {
-    final ok = await Biometrics.prompt('Confirm to view your recovery kit');
+    final ok = await Biometrics.confirmOrBypass('Confirm to view your recovery kit');
     if (!ok) return;
     final meta = await ref.read(vaultStoreProvider).kitMeta();
     if (meta == null || !mounted) return;
@@ -220,8 +220,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                 children: [
                   if (_canAuth) ...[
                     _ToggleRow(
-                      title: 'Unlock without typing',
-                      subtitle: 'Opens the app — not a second factor',
+                      title: 'Quick unlock',
+                      subtitle: 'Open Purr with your fingerprint, face, or '
+                          "screen lock — it's not your second factor",
                       value: prefs.biometricsEnabled,
                       onChanged: (v) async {
                         if (v) {
@@ -237,8 +238,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     const SizedBox(height: 8),
                   ],
                   _ToggleRow(
-                    title: 'Encrypted backup',
-                    subtitle: "We store scrambled copies we can't read",
+                    title: 'Cloud backup',
+                    subtitle: 'An encrypted copy only your recovery kit can '
+                        'open — how a new phone gets your codes back',
                     value: prefs.encryptedBackup,
                     onChanged: (v) async {
                       await ref
@@ -286,7 +288,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
       shape: const RoundedRectangleBorder(
         borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
       ),
-      builder: (context) => SafeArea(
+      builder: (sheetContext) => SafeArea(
         child: Padding(
           padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
           child: Column(
@@ -316,10 +318,12 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               TkPrimaryButton(
                 label: 'Show my export codes',
                 onPressed: () async {
-                  final ok = await Biometrics.prompt(
+                  // Close the sheet first, then gate and navigate on the
+                  // screen's context — the sheet context is dead after pop.
+                  Navigator.pop(sheetContext);
+                  final ok = await Biometrics.confirmOrBypass(
                       'Confirm to export your accounts');
                   if (!ok || !context.mounted) return;
-                  Navigator.pop(context);
                   _showExportQrs(context);
                 },
               ),
