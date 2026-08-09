@@ -1,0 +1,30 @@
+{
+  "name": "twokeys-extension",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Two Keys browser extension — the keyhole. Holds no secrets; asks your phone.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "watch": "node scripts/build.mjs --watch",
+    "typecheck": "tsc --noEmit",
+    "test": "vitest run"
+  },
+  "dependencies": {
+    "@noble/ciphers": "^1.2.1",
+    "@noble/curves": "^1.8.1",
+    "@noble/hashes": "^1.7.1",
+    "qrcode": "^1.5.4"
+  },
+  "devDependencies": {
+    "@types/chrome": "^0.0.287",
+    "@types/qrcode": "^1.5.5",
+    "esbuild": "^0.24.2",
+    "typescript": "^5.7.3",
+    "vitest": "^2.1.8"
+  },
+  "allowScripts": {
+    "esbuild@0.24.2": true,
+    "esbuild@0.21.5": true
+  }
+}
