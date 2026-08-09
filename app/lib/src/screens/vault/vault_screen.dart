@@ -327,6 +327,18 @@ class _AccountRow extends StatelessWidget {
                 fill: copied ? TkColors.green : TkColors.paperSunk,
               ),
             ),
+            // Explicit way into rename / pin / remove — the row itself copies,
+            // so this needs its own affordance rather than a hidden long-press.
+            const SizedBox(width: 4),
+            GestureDetector(
+              onTap: () => onOpen(account),
+              behavior: HitTestBehavior.opaque,
+              child: const SizedBox(
+                width: 30,
+                height: 38,
+                child: Icon(Icons.more_vert, size: 20, color: TkColors.ink45),
+              ),
+            ),
           ],
         ),
       ),
@@ -407,6 +419,16 @@ class _CardsLayout extends StatelessWidget {
                             fontWeight: FontWeight.w600,
                             color: TkColors.ink,
                           )),
+                    ),
+                    GestureDetector(
+                      onTap: () => onOpen(account),
+                      behavior: HitTestBehavior.opaque,
+                      child: const SizedBox(
+                        width: 24,
+                        height: 22,
+                        child: Icon(Icons.more_vert,
+                            size: 18, color: TkColors.ink45),
+                      ),
                     ),
                   ],
                 ),

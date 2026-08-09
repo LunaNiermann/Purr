@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") void chrome.runtime.openOptionsPage();
 });
 
-chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
   if (msg?.type === "tk-start") {
     // Ack immediately; the flow runs on its own and reports via storage.
     void runApproval(msg.domain as string, msg.tabId as number);
@@ -40,6 +40,26 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   } else if (msg?.type === "tk-cancel") {
     activeRequestId = null;
     void setFlow(null);
+    sendResponse({ ok: true });
+  } else if (msg?.type === "twokeys:field") {
+    // The page reported whether it has a 2FA field: badge that tab's icon.
+    const tabId = sender.tab?.id;
+    if (tabId != null) {
+      const found = msg.found === true;
+      void chrome.action.setBadgeText({ tabId, text: found ? "•" : "" });
+      if (found) {
+        void chrome.action.setBadgeBackgroundColor({
+          tabId,
+          color: "#2F6F5B",
+        });
+        void chrome.action.setTitle({
+          tabId,
+          title: "Purr — this page wants a code. Click to fill.",
+        });
+      } else {
+        void chrome.action.setTitle({ tabId, title: "Purr" });
+      }
+    }
     sendResponse({ ok: true });
   }
   return false;

@@ -98,3 +98,27 @@ chrome.runtime.onMessage.addListener((message, _sender, sendResponse) => {
   }
   return undefined;
 });
+
+// Tell the service worker whether this page has a 2FA field, so it can badge
+// the toolbar icon ("Purr can help here"). We can't force-open the popup in
+// MV3, and injecting UI onto the page is the clickjacking risk we avoid — a
+// badge is the safe automatic signal. Re-checks as SPA forms appear.
+let lastFound: boolean | null = null;
+function reportField(): void {
+  const found = findCodeTarget(document) !== null;
+  if (found === lastFound) return;
+  lastFound = found;
+  try {
+    chrome.runtime.sendMessage({ type: "twokeys:field", found });
+  } catch {
+    // service worker asleep / context gone — harmless
+  }
+}
+
+reportField();
+let debounce: ReturnType<typeof setTimeout> | undefined;
+const observer = new MutationObserver(() => {
+  clearTimeout(debounce);
+  debounce = setTimeout(reportField, 500);
+});
+observer.observe(document.documentElement, { childList: true, subtree: true });
