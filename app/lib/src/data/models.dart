@@ -108,10 +108,55 @@ class Account {
       );
 }
 
+/// A blocked sign-in attempt, kept for the intrusion-aftermath screen (A16).
+class Incident {
+  Incident({
+    required this.domain,
+    required this.browser,
+    required this.at,
+    this.attempts = 1,
+    this.seen = false,
+  });
+
+  final String domain;
+  final String browser;
+  final DateTime at;
+  final int attempts;
+  final bool seen;
+
+  Incident copyWith({int? attempts, bool? seen, DateTime? at}) => Incident(
+        domain: domain,
+        browser: browser,
+        at: at ?? this.at,
+        attempts: attempts ?? this.attempts,
+        seen: seen ?? this.seen,
+      );
+
+  Map<String, dynamic> toJson() => {
+        'domain': domain,
+        'browser': browser,
+        'at': at.toUtc().toIso8601String(),
+        'attempts': attempts,
+        'seen': seen,
+      };
+
+  static Incident fromJson(Map<String, dynamic> json) => Incident(
+        domain: json['domain'] as String,
+        browser: json['browser'] as String? ?? '',
+        at: DateTime.parse(json['at'] as String),
+        attempts: json['attempts'] as int? ?? 1,
+        seen: json['seen'] as bool? ?? false,
+      );
+}
+
 /// The decrypted vault content (the JSON inside the envelope).
 class VaultData {
-  VaultData({required this.accounts, Map<String, String>? mutedSites})
-      : mutedSites = mutedSites ?? {};
+  VaultData({
+    required this.accounts,
+    Map<String, String>? mutedSites,
+    List<Incident>? incidents,
+  })  : mutedSites = mutedSites ?? {},
+        incidents = incidents ?? [];
 
   final List<Account> accounts;
 
@@ -119,9 +164,13 @@ class VaultData {
   /// site today" — today resets at local midnight, not a rolling 24 h.
   final Map<String, String> mutedSites;
 
+  final List<Incident> incidents;
+
   Map<String, dynamic> toJson() => {
         'accounts': accounts.map((a) => a.toJson()).toList(),
         if (mutedSites.isNotEmpty) 'muted': mutedSites,
+        if (incidents.isNotEmpty)
+          'incidents': incidents.map((i) => i.toJson()).toList(),
       };
 
   static VaultData fromJson(Map<String, dynamic> json) => VaultData(
@@ -133,12 +182,17 @@ class VaultData {
           for (final e in ((json['muted'] as Map?) ?? {}).entries)
             e.key as String: e.value as String,
         },
+        incidents: [
+          for (final i in (json['incidents'] as List? ?? []))
+            Incident.fromJson(i as Map<String, dynamic>),
+        ],
       );
 
-  bool isMutedToday(String site) {
-    final today = DateTime.now();
-    final key =
-        '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
-    return mutedSites[site.toLowerCase()] == key;
+  static String todayKey([DateTime? when]) {
+    final today = when ?? DateTime.now();
+    return '${today.year}-${today.month.toString().padLeft(2, '0')}-${today.day.toString().padLeft(2, '0')}';
   }
+
+  bool isMutedToday(String site) =>
+      mutedSites[site.toLowerCase()] == todayKey();
 }

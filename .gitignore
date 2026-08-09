@@ -27,3 +27,6 @@ server/data/
 service-account*.json
 .env
 .env.*
+
+# E2E throwaway state
+extension/.e2e-state.json

@@ -37,9 +37,13 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
   };
 
   await app.register(rateLimit, {
-    max: 120,
+    max: 240,
     timeWindow: "1 minute",
-    // Long-polls hold connections, not request slots; they still count once.
+    // Long-poll /wait endpoints legitimately reconnect ~every 25 s from both
+    // sides; they're cheap (they mostly block) so they're exempt from the
+    // global limit. The write endpoints that matter keep their own tight
+    // per-route limits (see requests.ts / backups.ts).
+    allowList: (req) => req.url.includes("/wait"),
   });
 
   app.get("/healthz", async () => ({ ok: true }));

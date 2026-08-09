@@ -7,9 +7,11 @@ import '../../crypto/recovery.dart';
 import '../../data/models.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
+import '../../services/approval_service.dart';
 import '../../services/biometrics.dart';
 import '../../services/kit_pdf.dart';
 import '../../state/providers.dart';
+import 'pair_computer_screen.dart';
 
 /// A9: the Security tab — status card, recovery, layout pickers, hide codes,
 /// on-this-phone toggles, and (research commandment 1) export.
@@ -42,7 +44,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.only(top: 8, bottom: 110),
+          padding: const EdgeInsets.only(top: 8, bottom: 170),
           children: [
             const Padding(
               padding: EdgeInsets.symmetric(horizontal: 22),
@@ -143,6 +145,11 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                   ],
                 ),
               ),
+            ),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: _ComputerCard(),
             ),
             const SizedBox(height: 22),
             const Padding(
@@ -300,6 +307,105 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
   void _showExportQrs(BuildContext context) {
     Navigator.of(context).push(
       MaterialPageRoute(builder: (_) => const _ExportScreen()),
+    );
+  }
+
+  static String _shortDate(DateTime d) {
+    const months = [
+      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
+      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
+    ];
+    return '${d.day} ${months[d.month - 1]}';
+  }
+}
+
+/// "Your computer" card: pair, show, or unpair the browser extension.
+class _ComputerCard extends ConsumerWidget {
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final pairing = ref.watch(pairingProvider);
+    final paired = pairing.pairing;
+    return TkCard(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          const Text('Your computer',
+              style: TextStyle(
+                  fontFamily: TkFonts.sans,
+                  fontSize: 16,
+                  fontWeight: FontWeight.w600,
+                  color: TkColors.ink)),
+          const SizedBox(height: 6),
+          Text(
+              paired == null
+                  ? 'Pair the browser extension and signing in on your '
+                      'computer becomes one tap here.'
+                  : 'When a site asks your browser for a code, this phone '
+                      'gets the request.',
+              style: TkText.bodySecondary),
+          const SizedBox(height: 12),
+          if (paired == null)
+            _SmallOutlineButton(
+              label: 'Pair a computer',
+              onTap: () async {
+                final ok = await Navigator.of(context).push<bool>(
+                    MaterialPageRoute(
+                        builder: (_) => const PairComputerScreen()));
+                if (ok == true && context.mounted) {
+                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+                    content: Text('Paired. Try a sign-in on your computer.'),
+                    backgroundColor: TkColors.green,
+                  ));
+                }
+              },
+            )
+          else
+            Container(
+              padding:
+                  const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+              decoration: BoxDecoration(
+                color: TkColors.paperSunk,
+                borderRadius: BorderRadius.circular(13),
+              ),
+              child: Row(
+                children: [
+                  Container(
+                    width: 34,
+                    height: 34,
+                    decoration: BoxDecoration(
+                      color: TkColors.ink,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    alignment: Alignment.center,
+                    child: const Icon(Icons.laptop,
+                        size: 17, color: TkColors.paper),
+                  ),
+                  const SizedBox(width: 12),
+                  Expanded(
+                    child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text('Your browser',
+                            style: TextStyle(
+                                fontFamily: TkFonts.sans,
+                                fontSize: 14.5,
+                                fontWeight: FontWeight.w600,
+                                color: TkColors.ink)),
+                        Text('Paired ${_shortDate(paired.pairedAt.toLocal())}',
+                            style: TkText.metadata),
+                      ],
+                    ),
+                  ),
+                  _SmallOutlineButton(
+                    label: 'Unpair',
+                    onTap: () =>
+                        ref.read(pairingProvider.notifier).unpair(),
+                  ),
+                ],
+              ),
+            ),
+        ],
+      ),
     );
   }
 

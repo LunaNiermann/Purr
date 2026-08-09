@@ -84,7 +84,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
       body: SafeArea(
         bottom: false,
         child: ListView(
-          padding: const EdgeInsets.only(top: 8, bottom: 110),
+          padding: const EdgeInsets.only(top: 8, bottom: 170),
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),

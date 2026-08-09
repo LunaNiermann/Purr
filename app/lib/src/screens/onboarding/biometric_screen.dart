@@ -66,7 +66,7 @@ class _BiometricScreenState extends ConsumerState<BiometricScreen> {
   Widget build(BuildContext context) {
     final title = _isFace
         ? 'Use your face instead of typing it'
-        : 'Use your fingerprint instead of typing it';
+        : 'Use your $_label instead of typing it';
     final body = _isFace
         ? 'Face unlock just opens the app faster. Your password still exists '
             'underneath, and you\'ll need it after a restart.'

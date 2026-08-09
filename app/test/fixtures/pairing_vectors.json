@@ -1,0 +1,15 @@
+{
+  "extPriv": "AQIDBAUGBwgJCgsMDQ4PEBESExQVFhcYGRobHB0eHyA=",
+  "extPub": "B6N8vBQgk8i3VdwbEOhstCY3StFqqFPtC9/AsrhtHHw=",
+  "phonePriv": "ZWZnaGlqa2xtbm9wcXJzdHV2d3h5ent8fX5/gIGCg4Q=",
+  "phonePub": "VxR2nRFr92Q2rnS8eT0sMK0ZA8WaxSc4BcfiaYtBDDY=",
+  "pairingSecret": "ycrLzM3Oz9DR0tPU1dbX2A==",
+  "sessionKey": "uLfWYsln8lUWHOmWdb0AM6c16Fclu6peVDW9TeCGGwo=",
+  "sealedBlob": "MzQ1Njc4OTo7PD0+P0BBQkNERUZHSElKASznPM8NMHWpMXZtO/mUqXTZwwf+YZAd3gbYAJcdc4XhNbYX1Jfvp+QhFqshPWySt4/PPEDCqqZ5PxJxTF71v42PK17TyNpy1PR8nVPvmMzcudBdof0lY72b/wyRwmIMCyDkBY6t",
+  "payload": {
+    "kind": "code",
+    "domain": "github.com",
+    "browser": "Chrome · Windows",
+    "ts": 1754745600000
+  }
+}

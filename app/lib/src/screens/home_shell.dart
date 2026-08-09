@@ -2,6 +2,9 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../design/tokens.dart';
+import '../services/approval_service.dart';
+import '../state/providers.dart';
+import 'request/request_screens.dart';
 import 'security/security_screen.dart';
 import 'vault/vault_screen.dart';
 
@@ -16,9 +19,38 @@ class HomeShell extends ConsumerStatefulWidget {
 
 class _HomeShellState extends ConsumerState<HomeShell> {
   int _tab = 0;
+  bool _flowOpen = false;
+
+  @override
+  void initState() {
+    super.initState();
+    // Surface any unseen blocked-attempt aftermath (A16) on arrival.
+    WidgetsBinding.instance.addPostFrameCallback((_) {
+      final data = ref.read(vaultProvider).data;
+      final unseen =
+          data?.incidents.where((i) => !i.seen).toList() ?? const [];
+      if (unseen.isNotEmpty && !_flowOpen) {
+        _flowOpen = true;
+        Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (_) => IntrusionScreen(incident: unseen.last)))
+            .whenComplete(() => _flowOpen = false);
+      }
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
+    // Incoming approval requests cover the vault as full-screen states.
+    ref.listen<PendingApproval?>(approvalProvider, (previous, request) {
+      if (request != null && !_flowOpen) {
+        _flowOpen = true;
+        Navigator.of(context)
+            .push(MaterialPageRoute(
+                builder: (_) => ApprovalFlowScreen(request: request)))
+            .whenComplete(() => _flowOpen = false);
+      }
+    });
     return Scaffold(
       body: Stack(
         children: [
