@@ -1,0 +1,90 @@
+name: Release iOS
+
+# iOS builds run on GitHub's macOS runners — you do NOT need your own Mac.
+#
+# Two modes, chosen automatically by whether signing secrets exist:
+#  - No secrets  → compiles a --no-codesign build. Proves the app builds for
+#    iOS on every push; produces nothing installable (Apple requires signing
+#    to install anywhere, including TestFlight).
+#  - Secrets set → signs and uploads to TestFlight. Requires the Apple
+#    Developer Program ($99/yr). See docs/CD.md for the exact secrets.
+on:
+  push:
+    tags: ["v*"]
+  workflow_dispatch:
+
+jobs:
+  ios:
+    runs-on: macos-14
+    env:
+      ASC_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: subosito/flutter-action@v2
+        with:
+          channel: stable
+          flutter-version: 3.44.9
+          cache: true
+
+      - name: flutter pub get
+        working-directory: app
+        run: flutter pub get
+
+      # ---- Validation build (always) --------------------------------------
+      - name: Build iOS (no code signing)
+        if: env.ASC_KEY_ID == ''
+        working-directory: app
+        run: |
+          flutter build ios --release --no-codesign
+          echo "::notice::Compiled for iOS. Add signing secrets (docs/CD.md) to ship to TestFlight."
+
+      # ---- Signed TestFlight build (when secrets are present) --------------
+      - name: Import signing certificate
+        if: env.ASC_KEY_ID != ''
+        uses: apple-actions/import-codesign-certs@v3
+        with:
+          p12-file-base64: ${{ secrets.IOS_DIST_CERT_P12_BASE64 }}
+          p12-password: ${{ secrets.IOS_DIST_CERT_PASSWORD }}
+
+      - name: Install provisioning profile
+        if: env.ASC_KEY_ID != ''
+        run: |
+          mkdir -p ~/Library/MobileDevice/Provisioning\ Profiles
+          echo "${{ secrets.IOS_PROVISIONING_PROFILE_BASE64 }}" | base64 -d \
+            > ~/Library/MobileDevice/Provisioning\ Profiles/twokeys.mobileprovision
+
+      - name: Write ExportOptions.plist
+        if: env.ASC_KEY_ID != ''
+        working-directory: app/ios
+        run: |
+          cat > ExportOptions.plist <<EOF
+          <?xml version="1.0" encoding="UTF-8"?>
+          <!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+          <plist version="1.0"><dict>
+            <key>method</key><string>app-store</string>
+            <key>teamID</key><string>${{ secrets.APPLE_TEAM_ID }}</string>
+            <key>signingStyle</key><string>manual</string>
+            <key>uploadBitcode</key><false/>
+            <key>uploadSymbols</key><true/>
+          </dict></plist>
+          EOF
+
+      - name: Build signed IPA
+        if: env.ASC_KEY_ID != ''
+        working-directory: app
+        run: |
+          ARGS="--release --build-number=${{ github.run_number }}"
+          if [[ "${{ github.ref_type }}" == "tag" ]]; then
+            ARGS="$ARGS --build-name=${GITHUB_REF_NAME#v}"
+          fi
+          flutter build ipa $ARGS --export-options-plist=ios/ExportOptions.plist
+
+      - name: Upload to TestFlight
+        if: env.ASC_KEY_ID != ''
+        uses: apple-actions/upload-testflight-build@v3
+        with:
+          app-path: app/build/ios/ipa/*.ipa
+          issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
+          api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
+          api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}

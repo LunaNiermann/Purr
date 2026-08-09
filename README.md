@@ -63,9 +63,12 @@ npm install && npm run build   # load dist/ as an unpacked extension
 
 ## Deploy
 
-- Server → Coolify (Dockerfile in `server/`, volume at `/app/data`). See `server/README.md`.
-- App → Google Play. See `docs/PLAY.md`.
+- Server → Coolify (Dockerfile in `server/`, volume at `/app/data`). Live at `https://2fa.apps.not-final.com`. See `server/README.md`.
+- App → built and released from GitHub Actions (no local build; iOS on GitHub's Mac runners). See `docs/CD.md`; Play specifics in `docs/PLAY.md`.
+- Extension → testing and store distribution in `docs/EXTENSION.md`.
 - The landing page and its account-deletion URL live on a separate domain (out of scope here).
+
+Cut a release by tagging: `git tag v0.2.0 && git push origin v0.2.0` — Android/extension artifacts and (when signed) iOS TestFlight builds are produced by CI.
 
 ## Status
 
