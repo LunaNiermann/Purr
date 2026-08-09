@@ -1,0 +1,29 @@
+# OS
+Thumbs.db
+.DS_Store
+
+# Node
+node_modules/
+dist/
+*.tsbuildinfo
+
+# Flutter / Dart
+app/.dart_tool/
+app/.flutter-plugins*
+app/build/
+app/android/.gradle/
+app/android/local.properties
+app/android/key.properties
+app/*.iml
+
+# Server
+server/data/
+*.sqlite
+*.sqlite-*
+
+# Secrets — never commit
+*.keystore
+*.jks
+service-account*.json
+.env
+.env.*
