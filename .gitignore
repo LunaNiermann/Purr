@@ -30,3 +30,7 @@ service-account*.json
 
 # E2E throwaway state
 extension/.e2e-state.json
+
+# scratch screenshots
+docs/screens/tmp.png
+docs/screens/chk.png
