@@ -76,20 +76,22 @@ body.popup { width: 360px; }
   border-bottom: 1px solid var(--ink-07);
 }
 
+/* The Purr paw mark. The tile shows the app icon image; the literal "2"
+   text left in the markup is hidden. */
 .brand-tile {
   width: 26px;
   height: 26px;
   border-radius: 8px;
-  background: var(--green);
-  color: var(--paper);
+  background: url("icons/icon48.png") center / cover no-repeat;
+  color: transparent;
+  font-size: 0;
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 12px;
-  font-weight: 700;
   flex: none;
 }
 
+/* Denied / expired states still tint the tile for emphasis (over the icon). */
 .brand-tile.danger { background: var(--danger); }
 .brand-tile.muted { background: rgba(27,26,23,.35); }
 

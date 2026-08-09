@@ -36,6 +36,9 @@ dev_dependencies:
 flutter:
   uses-material-design: true
 
+  assets:
+    - assets/brand/
+
   fonts:
     - family: InstrumentSans
       fonts:

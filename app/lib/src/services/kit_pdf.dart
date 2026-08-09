@@ -35,6 +35,9 @@ Future<void> printRecoveryKit({
   final sansSemi = await bundled('InstrumentSans-SemiBold.ttf');
   final sansBold = await bundled('InstrumentSans-Bold.ttf');
   final mono = await bundled('JetBrainsMono-Medium.ttf');
+  // The white paw mark, shown inside the green masthead tile.
+  final mark = pw.MemoryImage(
+      (await rootBundle.load('assets/brand/purr_mark.png')).buffer.asUint8List());
 
   pw.Widget step(int n, String text, {bool green = false}) => pw.Row(
         crossAxisAlignment: pw.CrossAxisAlignment.start,
@@ -86,11 +89,7 @@ Future<void> printRecoveryKit({
                     borderRadius: pw.BorderRadius.circular(8),
                   ),
                   alignment: pw.Alignment.center,
-                  child: pw.Text('2',
-                      style: pw.TextStyle(
-                          font: sansBold,
-                          fontSize: 14,
-                          color: PdfColors.white)),
+                  child: pw.Image(mark, width: 19, height: 19),
                 ),
                 pw.SizedBox(width: 11),
                 pw.Expanded(

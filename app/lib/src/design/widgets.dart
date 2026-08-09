@@ -116,8 +116,9 @@ class TkTextButton extends StatelessWidget {
   }
 }
 
-/// The brand tile: rounded square with the digit 2 (all marks are drawn, no
-/// image assets — per the handoff).
+/// The brand tile: a rounded square holding the Purr paw mark. The mark asset
+/// is a white silhouette tinted to [foreground] via srcIn, so it keeps the
+/// same background/foreground contrast the old "2" glyph had on every surface.
 class TkBrandTile extends StatelessWidget {
   const TkBrandTile({
     super.key,
@@ -140,14 +141,13 @@ class TkBrandTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(size * .31),
       ),
       alignment: Alignment.center,
-      child: Text(
-        '2',
-        style: TextStyle(
-          fontFamily: TkFonts.sans,
-          fontSize: size * .44,
-          fontWeight: FontWeight.w700,
-          color: foreground,
-        ),
+      child: Image.asset(
+        'assets/brand/purr_mark.png',
+        width: size * .64,
+        height: size * .64,
+        color: foreground,
+        colorBlendMode: BlendMode.srcIn,
+        filterQuality: FilterQuality.medium,
       ),
     );
   }

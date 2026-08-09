@@ -90,6 +90,10 @@ class ApprovalController extends Notifier<PendingApproval?> {
 
   Future<void> _loop(StoredPairing pairing) async {
     final api = RelayApi(baseUrl: pairing.relayUrl);
+    // Request ids we've already shown or skipped. `wait-pending` keeps
+    // returning a request until it's answered/expires, so without this we'd
+    // re-fetch it in a tight spin every time it comes back.
+    final handled = <String>{};
     while (_running) {
       // Stop when the vault locks or the pairing is removed.
       final vault = ref.read(vaultProvider);
@@ -98,14 +102,33 @@ class ApprovalController extends Notifier<PendingApproval?> {
         _running = false;
         return;
       }
+      // While a request is already on screen, don't poll — wait for the user
+      // to act (approve/deny/dismiss clears `state`).
+      if (state != null) {
+        await Future<void>.delayed(const Duration(milliseconds: 400));
+        continue;
+      }
       try {
         final pending = await api.pendingRequests(
           pairingId: pairing.pairingId,
           phoneToken: pairing.phoneToken,
           wait: true,
         );
-        for (final req in pending) {
-          if (state != null) break; // one at a time
+        if (state != null) continue;
+        // Only act on requests we haven't handled yet.
+        final fresh =
+            pending.where((r) => !handled.contains(r.requestId)).toList();
+        if (fresh.isEmpty) {
+          // Everything pending is already shown/muted — back off so we don't
+          // spin (the endpoint returns muted/handled requests instantly).
+          if (pending.isNotEmpty) {
+            await Future<void>.delayed(const Duration(seconds: 3));
+          }
+          continue;
+        }
+        for (final req in fresh) {
+          handled.add(req.requestId);
+          if (state != null) break;
           final payload = await PairingCrypto.open(
             pairing.sessionKey,
             req.requestBlobB64,
