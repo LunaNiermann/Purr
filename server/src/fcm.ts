@@ -15,6 +15,8 @@ import { GoogleAuth } from "google-auth-library";
  * app open, so a missing push degrades to "open the app" (design 5f).
  */
 export interface Pusher {
+  /** True when a valid service account was loaded and push can be sent. */
+  configured: boolean;
   send(fcmToken: string, data: Record<string, string>): Promise<boolean>;
 }
 
@@ -72,8 +74,9 @@ export function createPusher(config: FcmConfig, log: {
   const creds = loadServiceAccount(config, log);
   if (!creds) {
     log.warn("FCM not configured — push disabled, phones must poll");
-    return { send: async () => false };
+    return { configured: false, send: async () => false };
   }
+  log.info(`FCM configured — push enabled for project ${creds.project_id}`);
   const auth = new GoogleAuth({
     credentials: {
       client_email: creds.client_email,
@@ -85,6 +88,7 @@ export function createPusher(config: FcmConfig, log: {
   const url = `https://fcm.googleapis.com/v1/projects/${creds.project_id}/messages:send`;
 
   return {
+    configured: true,
     async send(fcmToken, data) {
       try {
         const client = await auth.getClient();

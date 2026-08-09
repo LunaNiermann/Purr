@@ -50,7 +50,9 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
     allowList: (req) => req.url.includes("/wait"),
   });
 
-  app.get("/healthz", async () => ({ ok: true }));
+  // `push` reflects whether a valid FCM service account is loaded — a quick
+  // way to confirm push is configured without reading logs.
+  app.get("/healthz", async () => ({ ok: true, push: ctx.pusher.configured }));
 
   registerPairingRoutes(app, ctx);
   registerRequestRoutes(app, ctx);
