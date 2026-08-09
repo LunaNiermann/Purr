@@ -8,11 +8,16 @@ import android.os.Build
 import android.os.Bundle
 import android.os.PersistableBundle
 import android.view.WindowManager
-import io.flutter.embedding.android.FlutterActivity
+import io.flutter.embedding.android.FlutterFragmentActivity
 import io.flutter.embedding.engine.FlutterEngine
 import io.flutter.plugin.common.MethodChannel
 
-class MainActivity : FlutterActivity() {
+// Must be a FlutterFragmentActivity, not FlutterActivity: the local_auth
+// plugin shows the biometric/device-credential prompt via a Fragment, and on a
+// plain FlutterActivity every authenticate() call throws PlatformException
+// ("no_fragment_activity") — which silently breaks every biometric gate
+// (approval, export, unlock).
+class MainActivity : FlutterFragmentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         // Codes and recovery words must never appear in screenshots, screen
