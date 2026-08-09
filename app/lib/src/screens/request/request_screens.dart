@@ -75,7 +75,11 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
     final account = _account;
     if (account == null) return;
     setState(() => _phase = _Phase.bio);
-    final ok = await Biometrics.prompt("Confirming it's really you");
+    // confirmOrBypass, not prompt: on a device with no lock enrolled there is
+    // nothing to authenticate against, and prompt() returns false there — which
+    // would silently bounce back to the request screen and make "Send the code"
+    // look dead. With a lock, it still prompts.
+    final ok = await Biometrics.confirmOrBypass("Confirming it's really you");
     if (!ok) {
       if (mounted) setState(() => _phase = _Phase.request);
       return;
