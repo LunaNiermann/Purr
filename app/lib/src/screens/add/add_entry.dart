@@ -1,0 +1,806 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:mobile_scanner/mobile_scanner.dart';
+
+import '../../core/base32.dart';
+import '../../core/migration.dart';
+import '../../core/otpauth.dart';
+import '../../core/totp.dart';
+import '../../data/models.dart';
+import '../../design/tokens.dart';
+import '../../design/widgets.dart';
+import '../../state/providers.dart';
+
+/// Entry point for adding accounts. The camera permission follows the design
+/// rule: never ask cold, prime first (5a), never render a look-alike system
+/// dialog, and denial never blocks adding an account (5c).
+Future<void> startAddEntry(BuildContext context, WidgetRef ref,
+    {bool scan = true}) async {
+  if (!scan) {
+    await Navigator.of(context).push(
+        MaterialPageRoute(builder: (_) => const ManualEntryScreen()));
+    return;
+  }
+  // Priming sheet (5a) as a bottom sheet over the vault.
+  final choice = await showModalBottomSheet<String>(
+    context: context,
+    backgroundColor: TkColors.surface,
+    barrierColor: const Color.fromRGBO(27, 26, 23, .32),
+    shape: const RoundedRectangleBorder(
+      borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+    ),
+    builder: (context) => SafeArea(
+      child: Padding(
+        padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Center(
+              child: Container(
+                width: 42,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(27, 26, 23, .15),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
+            ),
+            const SizedBox(height: 24),
+            const _CameraGlyph(color: TkColors.green),
+            const SizedBox(height: 20),
+            const Text('The camera is only for reading QR codes',
+                style: TkText.screenTitle),
+            const SizedBox(height: 10),
+            Text(
+              'Your phone will ask for permission next. We use the camera to '
+              'read the setup QR code a site shows you — nothing is '
+              'photographed, saved, or sent anywhere.',
+              style: TkText.body.copyWith(fontSize: 15),
+            ),
+            const SizedBox(height: 22),
+            TkPrimaryButton(
+              label: 'OK, ask me',
+              onPressed: () => Navigator.pop(context, 'scan'),
+            ),
+            const SizedBox(height: 10),
+            TkSecondaryButton(
+              label: "I'll type the code by hand",
+              onPressed: () => Navigator.pop(context, 'manual'),
+            ),
+          ],
+        ),
+      ),
+    ),
+  );
+  if (!context.mounted) return;
+  if (choice == 'manual') {
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const ManualEntryScreen()));
+  } else if (choice == 'scan') {
+    // mobile_scanner triggers the real system permission dialog on first use.
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const ScanScreen()));
+  }
+}
+
+class _CameraGlyph extends StatelessWidget {
+  const _CameraGlyph({required this.color, this.slashed = false});
+
+  final Color color;
+  final bool slashed;
+
+  @override
+  Widget build(BuildContext context) {
+    return SizedBox(
+      width: 56,
+      height: 44,
+      child: Stack(
+        alignment: Alignment.center,
+        children: [
+          Container(
+            decoration: BoxDecoration(
+              border: Border.all(color: color, width: 2.5),
+              borderRadius: BorderRadius.circular(12),
+            ),
+          ),
+          Container(
+            width: 18,
+            height: 18,
+            decoration: BoxDecoration(
+              border: Border.all(color: color, width: 2.5),
+              shape: BoxShape.circle,
+            ),
+          ),
+          if (slashed)
+            Transform.rotate(
+              angle: -.49,
+              child: Container(width: 68, height: 2.5, color: color),
+            ),
+        ],
+      ),
+    );
+  }
+}
+
+/// A17 (4f): the dark scan screen with mint corner brackets.
+class ScanScreen extends ConsumerStatefulWidget {
+  const ScanScreen({super.key});
+
+  @override
+  ConsumerState<ScanScreen> createState() => _ScanScreenState();
+}
+
+class _ScanScreenState extends ConsumerState<ScanScreen> {
+  final _controller = MobileScannerController(
+    formats: [BarcodeFormat.qrCode],
+  );
+  bool _handled = false;
+
+  @override
+  void dispose() {
+    _controller.dispose();
+    super.dispose();
+  }
+
+  Future<void> _onDetect(BarcodeCapture capture) async {
+    if (_handled) return;
+    final raw = capture.barcodes.firstOrNull?.rawValue;
+    if (raw == null) return;
+
+    if (raw.startsWith('otpauth-migration://')) {
+      _handled = true;
+      try {
+        final batch = parseMigrationUri(raw);
+        if (!mounted) return;
+        await Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => ImportReviewScreen(batch: batch)));
+      } on FormatException catch (e) {
+        _showError(e.message);
+      }
+      return;
+    }
+    if (raw.startsWith('otpauth://')) {
+      _handled = true;
+      try {
+        final parsed = parseOtpauthUri(raw);
+        if (!mounted) return;
+        await Navigator.of(context).pushReplacement(MaterialPageRoute(
+            builder: (_) => ManualEntryScreen(prefill: parsed)));
+      } on FormatException catch (e) {
+        _showError(e.message);
+      }
+    }
+  }
+
+  void _showError(String message) {
+    _handled = false;
+    ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+      content: Text("That code didn't work: $message"),
+      backgroundColor: TkColors.ink,
+    ));
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      backgroundColor: TkColors.inkDarkest,
+      body: SafeArea(
+        child: Column(
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 12, 24, 0),
+              child: Row(
+                children: [
+                  GestureDetector(
+                    onTap: () => Navigator.of(context).pop(),
+                    child: Text('Cancel',
+                        style: TkText.secondaryButton.copyWith(
+                            fontSize: 15,
+                            color:
+                                const Color.fromRGBO(247, 245, 241, .6))),
+                  ),
+                  const Expanded(
+                    child: Text('Add an account',
+                        textAlign: TextAlign.center,
+                        style: TextStyle(
+                            fontFamily: TkFonts.sans,
+                            fontSize: 16,
+                            fontWeight: FontWeight.w600,
+                            color: TkColors.paper)),
+                  ),
+                  const SizedBox(width: 52),
+                ],
+              ),
+            ),
+            Expanded(
+              child: Center(
+                child: SizedBox(
+                  width: 244,
+                  height: 244,
+                  child: Stack(
+                    children: [
+                      ClipRRect(
+                        borderRadius: BorderRadius.circular(22),
+                        child: MobileScanner(
+                          controller: _controller,
+                          onDetect: _onDetect,
+                          errorBuilder: (context, error) =>
+                              _CameraDenied(error: error),
+                        ),
+                      ),
+                      ..._corners(),
+                    ],
+                  ),
+                ),
+              ),
+            ),
+            const Text('Hold the QR code inside the corners',
+                style: TextStyle(
+                    fontFamily: TkFonts.sans,
+                    fontSize: 16,
+                    fontWeight: FontWeight.w600,
+                    color: TkColors.paper)),
+            const SizedBox(height: 8),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 38),
+              child: Text(
+                'It\'s on the site\'s security page, usually next to '
+                '"set up authenticator app".',
+                textAlign: TextAlign.center,
+                style: TkText.bodySecondary.copyWith(
+                    color: const Color.fromRGBO(247, 245, 241, .55)),
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
+              child: TkSecondaryButton(
+                label: 'Type the code by hand instead',
+                borderColor: TkColors.paper20,
+                foreground: TkColors.paper,
+                onPressed: () => Navigator.of(context).pushReplacement(
+                    MaterialPageRoute(
+                        builder: (_) => const ManualEntryScreen())),
+              ),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+
+  List<Widget> _corners() {
+    Widget corner({required Alignment alignment}) {
+      final isTop = alignment.y < 0;
+      final isLeft = alignment.x < 0;
+      return Align(
+        alignment: alignment,
+        child: Container(
+          width: 44,
+          height: 44,
+          decoration: BoxDecoration(
+            border: Border(
+              top: isTop
+                  ? const BorderSide(color: TkColors.mint, width: 3)
+                  : BorderSide.none,
+              bottom: !isTop
+                  ? const BorderSide(color: TkColors.mint, width: 3)
+                  : BorderSide.none,
+              left: isLeft
+                  ? const BorderSide(color: TkColors.mint, width: 3)
+                  : BorderSide.none,
+              right: !isLeft
+                  ? const BorderSide(color: TkColors.mint, width: 3)
+                  : BorderSide.none,
+            ),
+            borderRadius: BorderRadius.only(
+              topLeft: isTop && isLeft
+                  ? const Radius.circular(20)
+                  : Radius.zero,
+              topRight: isTop && !isLeft
+                  ? const Radius.circular(20)
+                  : Radius.zero,
+              bottomLeft: !isTop && isLeft
+                  ? const Radius.circular(20)
+                  : Radius.zero,
+              bottomRight: !isTop && !isLeft
+                  ? const Radius.circular(20)
+                  : Radius.zero,
+            ),
+          ),
+        ),
+      );
+    }
+
+    return [
+      corner(alignment: Alignment.topLeft),
+      corner(alignment: Alignment.topRight),
+      corner(alignment: Alignment.bottomLeft),
+      corner(alignment: Alignment.bottomRight),
+    ];
+  }
+}
+
+/// 5c: camera denied — the job is still finishable.
+class _CameraDenied extends StatelessWidget {
+  const _CameraDenied({required this.error});
+
+  final MobileScannerException error;
+
+  @override
+  Widget build(BuildContext context) {
+    if (error.errorCode != MobileScannerErrorCode.permissionDenied) {
+      return ColoredBox(
+        color: TkColors.inkDarkest,
+        child: Center(
+          child: Text('The camera isn\'t available right now.',
+              textAlign: TextAlign.center,
+              style: TkText.bodySecondary.copyWith(
+                  color: const Color.fromRGBO(247, 245, 241, .55))),
+        ),
+      );
+    }
+    return ColoredBox(
+      color: TkColors.inkDarkest,
+      child: Padding(
+        padding: const EdgeInsets.all(16),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            const _CameraGlyph(
+                color: Color.fromRGBO(247, 245, 241, .5), slashed: true),
+            const SizedBox(height: 14),
+            Text(
+              "No camera — that's completely fine. Every site also shows "
+              'the code as text.',
+              textAlign: TextAlign.center,
+              style: TkText.bodySecondary.copyWith(
+                  color: const Color.fromRGBO(247, 245, 241, .65)),
+            ),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+/// A18 (4g): manual entry with live "That code works" confirmation.
+class ManualEntryScreen extends ConsumerStatefulWidget {
+  const ManualEntryScreen({super.key, this.prefill});
+
+  final ParsedOtpEntry? prefill;
+
+  @override
+  ConsumerState<ManualEntryScreen> createState() => _ManualEntryScreenState();
+}
+
+class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
+  late final TextEditingController _site;
+  late final TextEditingController _username;
+  late final TextEditingController _secret;
+  bool _saving = false;
+
+  @override
+  void initState() {
+    super.initState();
+    final p = widget.prefill;
+    _site = TextEditingController(text: p?.issuer ?? '');
+    _username = TextEditingController(text: p?.accountName ?? '');
+    _secret = TextEditingController(
+        text: p == null ? '' : base32Encode(p.secret));
+  }
+
+  @override
+  void dispose() {
+    _site.dispose();
+    _username.dispose();
+    _secret.dispose();
+    super.dispose();
+  }
+
+  Totp? get _preview {
+    final cleaned = _secret.text;
+    if (!looksLikeBase32Secret(cleaned)) return null;
+    try {
+      final p = widget.prefill;
+      return Totp(
+        secret: base32Decode(cleaned),
+        digits: p?.digits ?? 6,
+        period: p?.period ?? 30,
+        algorithm: p?.algorithm ?? TotpAlgorithm.sha1,
+      );
+    } on FormatException {
+      return null;
+    }
+  }
+
+  Future<void> _save() async {
+    final totp = _preview;
+    if (totp == null || _saving) return;
+    setState(() => _saving = true);
+    final p = widget.prefill;
+    final siteRaw = _site.text.trim();
+    final site = siteRaw.isEmpty ? 'Account' : siteRaw;
+    final username = _username.text.trim();
+
+    // Never silently overwrite on collision (the Microsoft lesson): an
+    // identical site+username gets a numbered name instead.
+    final existing = ref.read(vaultProvider).accounts;
+    var finalSite = site;
+    var n = 2;
+    while (existing.any((a) =>
+        a.siteName.toLowerCase() == finalSite.toLowerCase() &&
+        a.username.toLowerCase() == username.toLowerCase())) {
+      finalSite = '$site ($n)';
+      n++;
+    }
+
+    final account = Account(
+      id: UniqueKey().toString() +
+          DateTime.now().microsecondsSinceEpoch.toString(),
+      siteName: finalSite,
+      username: username,
+      secretB32: base32Encode(base32Decode(_secret.text)),
+      digits: p?.digits ?? 6,
+      period: p?.period ?? 30,
+      algorithm: p?.algorithm ?? TotpAlgorithm.sha1,
+      type: p?.type ?? 'totp',
+      counter: p?.counter,
+      createdAt: DateTime.now().toUtc(),
+    );
+    await ref.read(vaultProvider.notifier).mutate((data) => VaultData(
+          accounts: [...data.accounts, account],
+          mutedSites: data.mutedSites,
+        ));
+    if (mounted) Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final preview = _preview;
+    final now = ref.watch(tickProvider).maybeWhen(
+          data: (t) => t,
+          orElse: DateTime.now,
+        );
+    final site = _site.text.trim();
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: TkColors.paper,
+        elevation: 0,
+        leading: const BackButton(color: TkColors.ink),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(22, 0, 22, 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 4),
+                child: Text('Type what the site gave you',
+                    style: TkText.screenTitle),
+              ),
+              const SizedBox(height: 18),
+              Expanded(
+                child: ListView(
+                  children: [
+                    _LabeledField(
+                        label: 'Site or app',
+                        controller: _site,
+                        onChanged: () => setState(() {})),
+                    const SizedBox(height: 12),
+                    _LabeledField(
+                        label: 'Your username there',
+                        controller: _username,
+                        onChanged: () => setState(() {})),
+                    const SizedBox(height: 12),
+                    _LabeledField(
+                      label: 'Setup code — the long one',
+                      controller: _secret,
+                      mono: true,
+                      active: true,
+                      helper: "Spaces and capitals don't matter.",
+                      onChanged: () => setState(() {}),
+                    ),
+                    const SizedBox(height: 18),
+                    AnimatedSwitcher(
+                      duration: TkMotion.feedback,
+                      child: preview == null
+                          ? const SizedBox.shrink()
+                          : Container(
+                              key: const ValueKey('works'),
+                              padding: const EdgeInsets.symmetric(
+                                  horizontal: 16, vertical: 15),
+                              decoration: BoxDecoration(
+                                color: TkColors.greenPale,
+                                borderRadius: BorderRadius.circular(
+                                    TkRadius.panel),
+                              ),
+                              child: Row(
+                                children: [
+                                  Container(
+                                    width: 26,
+                                    height: 26,
+                                    decoration: const BoxDecoration(
+                                      color: TkColors.green,
+                                      shape: BoxShape.circle,
+                                    ),
+                                    alignment: Alignment.center,
+                                    child: const Text('✓',
+                                        style: TextStyle(
+                                            fontSize: 13,
+                                            fontWeight: FontWeight.w700,
+                                            color: TkColors.paper)),
+                                  ),
+                                  const SizedBox(width: 13),
+                                  Expanded(
+                                    child: Column(
+                                      crossAxisAlignment:
+                                          CrossAxisAlignment.start,
+                                      children: [
+                                        const Text('That code works',
+                                            style: TextStyle(
+                                                fontFamily: TkFonts.sans,
+                                                fontSize: 14.5,
+                                                fontWeight: FontWeight.w600,
+                                                color: TkColors.greenDeep)),
+                                        Text.rich(
+                                          TextSpan(
+                                            text: 'First code: ',
+                                            children: [
+                                              TextSpan(
+                                                text: formatCodeForDisplay(
+                                                    preview.codeAt(now)),
+                                                style: const TextStyle(
+                                                    fontFamily: TkFonts.mono,
+                                                    fontWeight:
+                                                        FontWeight.w600),
+                                              ),
+                                            ],
+                                          ),
+                                          style: const TextStyle(
+                                              fontFamily: TkFonts.sans,
+                                              fontSize: 12.8,
+                                              color: Color.fromRGBO(
+                                                  27, 70, 54, .75)),
+                                        ),
+                                      ],
+                                    ),
+                                  ),
+                                ],
+                              ),
+                            ),
+                    ),
+                  ],
+                ),
+              ),
+              TkPrimaryButton(
+                label: site.isEmpty ? 'Save' : 'Save $site',
+                enabled: preview != null && !_saving,
+                onPressed: _save,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class _LabeledField extends StatelessWidget {
+  const _LabeledField({
+    required this.label,
+    required this.controller,
+    required this.onChanged,
+    this.mono = false,
+    this.active = false,
+    this.helper,
+  });
+
+  final String label;
+  final TextEditingController controller;
+  final VoidCallback onChanged;
+  final bool mono;
+  final bool active;
+  final String? helper;
+
+  @override
+  Widget build(BuildContext context) {
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Padding(
+          padding: const EdgeInsets.only(left: 4),
+          child: TkSectionLabel(label),
+        ),
+        const SizedBox(height: 6),
+        Container(
+          decoration: BoxDecoration(
+            color: TkColors.surface,
+            border: Border.all(
+              color: active && controller.text.isNotEmpty
+                  ? TkColors.green
+                  : TkColors.ink10,
+              width: active && controller.text.isNotEmpty ? 1.5 : 1,
+            ),
+            borderRadius: BorderRadius.circular(TkRadius.field),
+          ),
+          padding: const EdgeInsets.symmetric(horizontal: 15),
+          child: TextField(
+            controller: controller,
+            onChanged: (_) => onChanged(),
+            autocorrect: false,
+            enableSuggestions: false,
+            textCapitalization: mono
+                ? TextCapitalization.characters
+                : TextCapitalization.none,
+            style: mono
+                ? const TextStyle(
+                    fontFamily: TkFonts.mono,
+                    fontSize: 15,
+                    letterSpacing: 15 * .08,
+                    height: 1.5)
+                : const TextStyle(fontFamily: TkFonts.sans, fontSize: 16),
+            decoration: const InputDecoration(
+              border: InputBorder.none,
+              contentPadding: EdgeInsets.symmetric(vertical: 14),
+            ),
+          ),
+        ),
+        if (helper != null) ...[
+          const SizedBox(height: 6),
+          Padding(
+            padding: const EdgeInsets.only(left: 4),
+            child: Text(helper!, style: TkText.metadata),
+          ),
+        ],
+      ],
+    );
+  }
+}
+
+/// Import review for otpauth-migration batches: every row reported, nothing
+/// silently dropped (research commandment 4).
+class ImportReviewScreen extends ConsumerStatefulWidget {
+  const ImportReviewScreen({super.key, required this.batch});
+
+  final MigrationBatch batch;
+
+  @override
+  ConsumerState<ImportReviewScreen> createState() =>
+      _ImportReviewScreenState();
+}
+
+class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
+  bool _saving = false;
+
+  Future<void> _import() async {
+    if (_saving) return;
+    setState(() => _saving = true);
+    final existing = ref.read(vaultProvider).accounts;
+    final added = <Account>[];
+    for (final entry in widget.batch.entries) {
+      var site = entry.issuer.isNotEmpty ? entry.issuer : entry.accountName;
+      if (site.isEmpty) site = 'Imported account';
+      final username = entry.issuer.isNotEmpty ? entry.accountName : '';
+      var finalSite = site;
+      var n = 2;
+      bool clashes(String name) =>
+          existing.any((a) =>
+              a.siteName.toLowerCase() == name.toLowerCase() &&
+              a.username.toLowerCase() == username.toLowerCase()) ||
+          added.any((a) =>
+              a.siteName.toLowerCase() == name.toLowerCase() &&
+              a.username.toLowerCase() == username.toLowerCase());
+      while (clashes(finalSite)) {
+        finalSite = '$site ($n)';
+        n++;
+      }
+      added.add(Account(
+        id: UniqueKey().toString() +
+            DateTime.now().microsecondsSinceEpoch.toString() +
+            added.length.toString(),
+        siteName: finalSite,
+        username: username,
+        secretB32: base32Encode(entry.secret),
+        digits: entry.digits,
+        period: entry.period,
+        algorithm: entry.algorithm,
+        type: entry.type,
+        counter: entry.counter,
+        createdAt: DateTime.now().toUtc(),
+      ));
+    }
+    await ref.read(vaultProvider.notifier).mutate((data) => VaultData(
+          accounts: [...data.accounts, ...added],
+          mutedSites: data.mutedSites,
+        ));
+    if (mounted) Navigator.of(context).popUntil((route) => route.isFirst);
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    final entries = widget.batch.entries;
+    final multi = widget.batch.batchSize > 1;
+    return Scaffold(
+      appBar: AppBar(
+        backgroundColor: TkColors.paper,
+        elevation: 0,
+        leading: const BackButton(color: TkColors.ink),
+      ),
+      body: SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(22, 0, 22, 40),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                  entries.length == 1
+                      ? 'One account, ready to move in'
+                      : '${entries.length} accounts, ready to move in',
+                  style: TkText.screenTitle),
+              const SizedBox(height: 10),
+              Text(
+                  multi
+                      ? 'This is part ${widget.batch.batchIndex + 1} of '
+                          '${widget.batch.batchSize} — scan the other squares '
+                          'too, in any order.'
+                      : 'Everything below comes across exactly as it is. '
+                          'Nothing is skipped.',
+                  style: TkText.body.copyWith(fontSize: 14.5)),
+              const SizedBox(height: 16),
+              Expanded(
+                child: ListView.separated(
+                  itemCount: entries.length,
+                  separatorBuilder: (_, _) => const SizedBox(height: 8),
+                  itemBuilder: (context, i) {
+                    final e = entries[i];
+                    final site =
+                        e.issuer.isNotEmpty ? e.issuer : e.accountName;
+                    return TkCard(
+                      child: Row(
+                        children: [
+                          TkAvatarTile(
+                              letter: site.isEmpty
+                                  ? '?'
+                                  : site[0].toUpperCase(),
+                              color: brandColorFor(site)),
+                          const SizedBox(width: 14),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              children: [
+                                Text(site.isEmpty ? 'Unnamed' : site,
+                                    style: const TextStyle(
+                                        fontFamily: TkFonts.sans,
+                                        fontSize: 16,
+                                        fontWeight: FontWeight.w600,
+                                        color: TkColors.ink)),
+                                if (e.accountName.isNotEmpty &&
+                                    e.issuer.isNotEmpty)
+                                  Text(e.accountName,
+                                      style: TkText.metadata),
+                              ],
+                            ),
+                          ),
+                        ],
+                      ),
+                    );
+                  },
+                ),
+              ),
+              const SizedBox(height: 12),
+              TkPrimaryButton(
+                label: entries.length == 1
+                    ? 'Bring it in'
+                    : 'Bring all ${entries.length} in',
+                enabled: !_saving,
+                onPressed: _import,
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
