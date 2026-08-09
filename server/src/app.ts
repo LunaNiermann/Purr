@@ -28,6 +28,27 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
     bodyLimit: 512 * 1024,
   });
 
+  // Some clients send `content-type: application/json` on bodyless requests
+  // (e.g. DELETE /v1/pairings/:id for unpair). Fastify's default parser 400s
+  // on an empty body — tolerate it by treating empty as `undefined`.
+  app.addContentTypeParser(
+    "application/json",
+    { parseAs: "string" },
+    (_req, body, done) => {
+      const text = (body as string).trim();
+      if (text.length === 0) {
+        done(null, undefined);
+        return;
+      }
+      try {
+        done(null, JSON.parse(text));
+      } catch (err) {
+        (err as { statusCode?: number }).statusCode = 400;
+        done(err as Error, undefined);
+      }
+    },
+  );
+
   const ctx: AppContext = {
     db: openDb(opts.dbPath ?? process.env.DB_PATH ?? "data/twokeys.sqlite"),
     pusher: createPusher(

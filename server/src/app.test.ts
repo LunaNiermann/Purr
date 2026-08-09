@@ -63,12 +63,16 @@ describe("pairing", () => {
     expect(bad.statusCode).toBe(404);
   });
 
-  it("unpairs from either side", async () => {
+  it("unpairs from either side, even with an empty JSON body", async () => {
     const { pairingId, phoneToken } = await pair();
+    // Mirror the real client: content-type json, no body.
     const del = await app.inject({
       method: "DELETE",
       url: `/v1/pairings/${pairingId}`,
-      headers: { authorization: `Bearer ${phoneToken}` },
+      headers: {
+        authorization: `Bearer ${phoneToken}`,
+        "content-type": "application/json",
+      },
     });
     expect(del.statusCode).toBe(204);
     const gone = await app.inject({
