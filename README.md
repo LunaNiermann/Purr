@@ -68,7 +68,9 @@ npm install && npm run build   # load dist/ as an unpacked extension
 - Extension → testing and store distribution in `docs/EXTENSION.md`.
 - The landing page and its account-deletion URL live on a separate domain (out of scope here).
 
-Cut a release by tagging: `git tag v0.2.0 && git push origin v0.2.0` — Android/extension artifacts and (when signed) iOS TestFlight builds are produced by CI.
+Releases are cut by tag, and the three surfaces ship independently:
+- `v0.2.0` → Android (AAB/APK, optional Play upload) + iOS (validation, or TestFlight when signed)
+- `ext-v0.2.0` → browser extension (zip, optional Chrome Web Store publish)
 
 ## Status
 

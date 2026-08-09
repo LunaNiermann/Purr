@@ -1,0 +1,73 @@
+name: Release Extension
+
+# Separate from the app flow. Trigger with an extension tag:
+#   git tag ext-v0.1.0 && git push origin ext-v0.1.0
+# or run manually from the Actions tab.
+#
+# Always: builds the MV3 zip and attaches it to a GitHub Release / artifacts.
+# If Chrome Web Store secrets are set: uploads the new package and publishes it.
+on:
+  push:
+    tags: ["ext-v*"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  extension:
+    runs-on: ubuntu-latest
+    env:
+      # Job-level so we can gate the publish step on `env.` in `if:`.
+      EXTENSION_ID: ${{ secrets.CHROME_EXTENSION_ID }}
+      CLIENT_ID: ${{ secrets.CHROME_CLIENT_ID }}
+      CLIENT_SECRET: ${{ secrets.CHROME_CLIENT_SECRET }}
+      REFRESH_TOKEN: ${{ secrets.CHROME_REFRESH_TOKEN }}
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+
+      - name: Sync manifest version from tag
+        if: github.ref_type == 'tag'
+        working-directory: extension
+        run: |
+          V="${GITHUB_REF_NAME#ext-v}"
+          node -e "const f='public/manifest.json',fs=require('fs');const m=JSON.parse(fs.readFileSync(f));m.version=process.argv[1];fs.writeFileSync(f,JSON.stringify(m,null,2)+'\n');" "$V"
+          echo "manifest version -> $V (Chrome requires each published version to increase)"
+
+      - name: Build
+        working-directory: extension
+        run: |
+          npm ci
+          npm run build
+
+      - name: Zip
+        working-directory: extension/dist
+        run: zip -r ../twokeys-extension.zip .
+
+      - uses: actions/upload-artifact@v4
+        with:
+          name: extension
+          path: extension/twokeys-extension.zip
+
+      - name: Attach to GitHub Release
+        if: github.ref_type == 'tag'
+        uses: softprops/action-gh-release@v2
+        with:
+          files: extension/twokeys-extension.zip
+
+      - name: Publish to Chrome Web Store (if configured)
+        if: env.CLIENT_ID != ''
+        working-directory: extension
+        run: |
+          npx --yes chrome-webstore-upload-cli@3 upload \
+            --source twokeys-extension.zip \
+            --auto-publish
+        # EXTENSION_ID / CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN are read
+        # from the env above by the CLI.
+
+      - name: Skipped publish note
+        if: env.CLIENT_ID == ''
+        run: echo "::notice::Chrome Web Store secrets not set — built the zip only. See docs/EXTENSION.md to enable auto-publish."

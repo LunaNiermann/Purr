@@ -1,13 +1,16 @@
-name: Release (Android + Extension)
+name: Release Android
 
-# Build installable artifacts on GitHub's runners — no local build needed.
-# - Push a tag like v0.2.0  → builds, attaches AAB/APK/extension zip to a
-#   GitHub Release, and (if configured) uploads the AAB to Play internal.
-# - Run manually (Actions → Release → Run workflow) → builds and uploads the
-#   same files as workflow artifacts you can download, without a release.
+# Builds the Android app on GitHub's runners — no local build needed.
+# - Push a tag like v0.2.0  → builds, attaches AAB/APK to a GitHub Release,
+#   and (if configured) uploads the AAB to Play internal.
+# - Run manually (Actions → Release Android → Run workflow) → builds and
+#   uploads the same files as artifacts you can download, without a release.
+# The extension has its own flow (release-extension.yml, ext-v* tags).
 on:
   push:
-    tags: ["v*"]
+    tags:
+      - "v*"
+      - "!ext-v*" # extension tags are handled by release-extension.yml
   workflow_dispatch:
     inputs:
       play_track:
@@ -109,28 +112,3 @@ jobs:
           releaseFiles: app/build/app/outputs/bundle/release/app-release.aab
           track: ${{ github.event.inputs.play_track || 'internal' }}
           status: completed
-
-  extension:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
-        with:
-          node-version: "22"
-      - name: Build extension
-        working-directory: extension
-        run: |
-          npm ci
-          npm run build
-      - name: Zip for the stores
-        working-directory: extension/dist
-        run: zip -r ../twokeys-extension.zip .
-      - uses: actions/upload-artifact@v4
-        with:
-          name: extension
-          path: extension/twokeys-extension.zip
-      - name: Attach to GitHub Release
-        if: github.ref_type == 'tag'
-        uses: softprops/action-gh-release@v2
-        with:
-          files: extension/twokeys-extension.zip
