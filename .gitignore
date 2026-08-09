@@ -25,6 +25,10 @@ server/data/
 *.keystore
 *.jks
 service-account*.json
+# Firebase client config: not a hard secret (it ships in the APK), but its API
+# key is best kept out of git. Dropped in locally; injected in CI from a secret.
+app/android/app/google-services.json
+app/ios/Runner/GoogleService-Info.plist
 .env
 .env.*
 

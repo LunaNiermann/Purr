@@ -7,6 +7,13 @@ plugins {
     id("dev.flutter.flutter-gradle-plugin")
 }
 
+// Enable Firebase Cloud Messaging only when the config file has been dropped
+// in at app/android/app/google-services.json. Without it the app still builds
+// and runs — push is simply disabled and the phone polls on open.
+if (file("google-services.json").exists()) {
+    apply(plugin = "com.google.gms.google-services")
+}
+
 // Release signing is read from android/key.properties (never committed).
 // See docs/PLAY.md for how to generate the keystore.
 val keystoreProperties = Properties()
@@ -23,6 +30,8 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+        // Required by flutter_local_notifications (uses java.time on old APIs).
+        isCoreLibraryDesugaringEnabled = true
     }
 
     defaultConfig {
@@ -68,6 +77,10 @@ kotlin {
     compilerOptions {
         jvmTarget = org.jetbrains.kotlin.gradle.dsl.JvmTarget.JVM_17
     }
+}
+
+dependencies {
+    coreLibraryDesugaring("com.android.tools:desugar_jdk_libs:2.1.4")
 }
 
 flutter {

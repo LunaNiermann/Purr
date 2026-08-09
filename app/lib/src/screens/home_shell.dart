@@ -5,6 +5,7 @@ import '../design/tokens.dart';
 import '../services/approval_service.dart';
 import '../services/backup_service.dart';
 import '../state/providers.dart';
+import 'permissions/notification_priming.dart';
 import 'request/request_screens.dart';
 import 'security/security_screen.dart';
 import 'vault/vault_screen.dart';
@@ -21,6 +22,7 @@ class HomeShell extends ConsumerStatefulWidget {
 class _HomeShellState extends ConsumerState<HomeShell> {
   int _tab = 0;
   bool _flowOpen = false;
+  bool _priming = false;
 
   @override
   void initState() {
@@ -37,7 +39,16 @@ class _HomeShellState extends ConsumerState<HomeShell> {
                 builder: (_) => IntrusionScreen(incident: unseen.last)))
             .whenComplete(() => _flowOpen = false);
       }
+      _considerPriming();
     });
+  }
+
+  /// Ask about notifications the first time both a computer is paired and an
+  /// account exists (design 5d). Guarded so it shows at most once.
+  void _considerPriming() {
+    if (_priming || _flowOpen) return;
+    _priming = true;
+    maybePrimeNotifications(context, ref).whenComplete(() => _priming = false);
   }
 
   @override
@@ -46,6 +57,10 @@ class _HomeShellState extends ConsumerState<HomeShell> {
     // vault is open, regardless of which tab is showing.
     ref.watch(approvalProvider);
     ref.watch(backupProvider);
+    // When a computer gets paired or the first account is added, reconsider
+    // prompting for notifications (maybePrimeNotifications guards itself).
+    ref.listen(pairingProvider, (_, _) => _considerPriming());
+    ref.listen(vaultProvider, (_, _) => _considerPriming());
     // Incoming approval requests cover the vault as full-screen states.
     ref.listen<PendingApproval?>(approvalProvider, (previous, request) {
       if (request != null && !_flowOpen) {

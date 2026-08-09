@@ -5,6 +5,7 @@ import 'dart:typed_data';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 
 import 'pairing_crypto.dart';
+import 'push.dart';
 import 'relay_api.dart';
 
 /// A stored browser pairing (phone side).
@@ -97,10 +98,14 @@ class PairingService {
 
     final api = RelayApi(baseUrl: relayUrl);
     final pub = await keyPair.extractPublicKey();
+    // Send our push token now (if push is configured) so the relay can wake us
+    // immediately — no need to wait for the next app start.
+    final fcmToken = await PushService.token();
     final result = await api.completePairing(
       pairingId: pairingId,
       phonePubB64: base64.encode(pub.bytes),
       phoneNameBlobB64: nameBlob,
+      fcmToken: fcmToken,
     );
     // Sanity: the extension pubkey the relay reports must match the QR —
     // if it doesn't, someone is playing games; abort.

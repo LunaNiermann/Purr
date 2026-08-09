@@ -77,7 +77,8 @@ Releases are cut by tag, and the three surfaces ship independently:
 Verified on an Android emulator: onboarding, vault (list/cards, search, copy,
 hide), add-by-QR/manual, account detail, security, **extension↔phone pairing
 through the relay**, **approval request A11 with 60 s expiry**, and the **full
-lost-phone recovery loop** (backup → wipe → 12 words → restored). Not yet done:
-iOS target, FCM wired into the app (relay side is ready; app currently uses the
-poll-on-open path), and the WebAuthn "touch your key" desktop route (design and
-plan in place; ships after the phone route). See `docs/PLAN.md`.
+lost-phone recovery loop** (backup → wipe → 12 words → restored). **FCM push**
+is wired into the app (optional; drop in `google-services.json` — see
+`docs/PUSH.md`). Not yet done: iOS target and the WebAuthn "touch your key"
+desktop route (design and plan in place; ships after the phone route). See
+`docs/PLAN.md`.
