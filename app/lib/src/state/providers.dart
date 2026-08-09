@@ -79,6 +79,7 @@ class Prefs {
     this.layout = 'list',
     this.hideCodes = false,
     this.biometricsEnabled = false,
+    this.encryptedBackup = true,
     this.notificationsChoice = 'unasked', // unasked | granted | declined
     this.kitSavedAt,
   });
@@ -86,6 +87,7 @@ class Prefs {
   final String layout; // 'list' | 'cards'
   final bool hideCodes;
   final bool biometricsEnabled;
+  final bool encryptedBackup;
   final String notificationsChoice;
   final DateTime? kitSavedAt;
 
@@ -93,6 +95,7 @@ class Prefs {
     String? layout,
     bool? hideCodes,
     bool? biometricsEnabled,
+    bool? encryptedBackup,
     String? notificationsChoice,
     DateTime? kitSavedAt,
   }) =>
@@ -100,6 +103,7 @@ class Prefs {
         layout: layout ?? this.layout,
         hideCodes: hideCodes ?? this.hideCodes,
         biometricsEnabled: biometricsEnabled ?? this.biometricsEnabled,
+        encryptedBackup: encryptedBackup ?? this.encryptedBackup,
         notificationsChoice: notificationsChoice ?? this.notificationsChoice,
         kitSavedAt: kitSavedAt ?? this.kitSavedAt,
       );
@@ -118,6 +122,7 @@ class PrefsController extends Notifier<Prefs> {
       layout: sp.getString('layout') ?? 'list',
       hideCodes: sp.getBool('hideCodes') ?? false,
       biometricsEnabled: sp.getBool('biometricsEnabled') ?? false,
+      encryptedBackup: sp.getBool('encryptedBackup') ?? true,
       notificationsChoice: sp.getString('notificationsChoice') ?? 'unasked',
       kitSavedAt: DateTime.tryParse(sp.getString('kitSavedAt') ?? ''),
     );
@@ -129,6 +134,7 @@ class PrefsController extends Notifier<Prefs> {
     await sp.setString('layout', state.layout);
     await sp.setBool('hideCodes', state.hideCodes);
     await sp.setBool('biometricsEnabled', state.biometricsEnabled);
+    await sp.setBool('encryptedBackup', state.encryptedBackup);
     await sp.setString('notificationsChoice', state.notificationsChoice);
     if (state.kitSavedAt != null) {
       await sp.setString(

@@ -9,7 +9,12 @@ class RelayApi {
   RelayApi({this.baseUrl = defaultBaseUrl, http.Client? client})
       : _client = client ?? http.Client();
 
-  static const defaultBaseUrl = 'https://2fa.apps.not-final.com';
+  /// Overridable at build time for local/staging testing:
+  ///   flutter build apk --dart-define=TWOKEYS_RELAY=http://10.0.2.2:3000
+  static const defaultBaseUrl = String.fromEnvironment(
+    'TWOKEYS_RELAY',
+    defaultValue: 'https://2fa.apps.not-final.com',
+  );
 
   final String baseUrl;
   final http.Client _client;

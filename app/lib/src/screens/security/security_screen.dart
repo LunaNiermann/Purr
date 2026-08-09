@@ -8,6 +8,7 @@ import '../../data/models.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../../services/approval_service.dart';
+import '../../services/backup_service.dart';
 import '../../services/biometrics.dart';
 import '../../services/kit_pdf.dart';
 import '../../state/providers.dart';
@@ -219,6 +220,18 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                       await ref
                           .read(prefsProvider.notifier)
                           .update((p) => p.copyWith(biometricsEnabled: v));
+                    },
+                  ),
+                  const SizedBox(height: 8),
+                  _ToggleRow(
+                    title: 'Encrypted backup',
+                    subtitle: "We store scrambled copies we can't read",
+                    value: prefs.encryptedBackup,
+                    onChanged: (v) async {
+                      await ref
+                          .read(prefsProvider.notifier)
+                          .update((p) => p.copyWith(encryptedBackup: v));
+                      if (v) await ref.read(backupProvider.notifier).uploadNow();
                     },
                   ),
                   const SizedBox(height: 8),

@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../design/tokens.dart';
 import '../services/approval_service.dart';
+import '../services/backup_service.dart';
 import '../state/providers.dart';
 import 'request/request_screens.dart';
 import 'security/security_screen.dart';
@@ -41,6 +42,10 @@ class _HomeShellState extends ConsumerState<HomeShell> {
 
   @override
   Widget build(BuildContext context) {
+    // Keep the approval listener and backup sync running the whole time the
+    // vault is open, regardless of which tab is showing.
+    ref.watch(approvalProvider);
+    ref.watch(backupProvider);
     // Incoming approval requests cover the vault as full-screen states.
     ref.listen<PendingApproval?>(approvalProvider, (previous, request) {
       if (request != null && !_flowOpen) {
