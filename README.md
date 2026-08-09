@@ -82,3 +82,10 @@ is wired into the app (optional; drop in `google-services.json` — see
 `docs/PUSH.md`). Not yet done: iOS target and the WebAuthn "touch your key"
 desktop route (design and plan in place; ships after the phone route). See
 `docs/PLAN.md`.
+
+## Support
+
+Purr is free, open, and has no ads or trackers. If it's useful to you and you
+want to help keep it that way:
+
+[![ko-fi](https://ko-fi.com/img/githubbutton_sm.svg)](https://ko-fi.com/K3K01T7UXI)
