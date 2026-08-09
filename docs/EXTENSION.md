@@ -122,13 +122,15 @@ existing item, not create the first one.
   user so the refresh token doesn't expire on an unverified app).
 - **Credentials → Create credentials → OAuth client ID → Desktop app.**
   Note the **Client ID** and **Client secret**.
-- Get a **refresh token** (one time). Easiest is the maintained helper:
+- Get a **refresh token** (one time). Use the companion tool to the uploader
+  the CI already runs (`chrome-webstore-upload-cli`):
   ```bash
-  npx @plasmohq/chrome-webstore-refresh-token
+  npx chrome-webstore-upload-keys
   ```
-  It walks you through the Google consent screen with your client id/secret and
-  prints a refresh token. (Or do the manual OAuth `code`→`token` exchange with
-  scope `https://www.googleapis.com/auth/chromewebstore`.)
+  It prompts for the client id/secret, opens the Google consent screen (sign in
+  with the account that owns the item in the dashboard), and prints the refresh
+  token. (Or do the manual OAuth `code`→`token` exchange with scope
+  `https://www.googleapis.com/auth/chromewebstore`.)
 
 **3. Add the four repo secrets** (Settings → Secrets and variables → Actions):
 
