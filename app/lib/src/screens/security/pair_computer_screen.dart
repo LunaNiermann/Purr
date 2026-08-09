@@ -151,7 +151,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 38),
               child: Text(
                   _status ??
-                      'In your browser, the Two Keys extension shows it '
+                      'In your browser, the Purr extension shows it '
                           'under "Pair my phone".',
                   textAlign: TextAlign.center,
                   style: TkText.bodySecondary.copyWith(

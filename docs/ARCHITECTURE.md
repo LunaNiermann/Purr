@@ -1,4 +1,4 @@
-# Two Keys — Architecture
+# Purr — Architecture
 
 Product: a TOTP authenticator for non-technical people, per `design_handoff_two_keys/README.md`
 (the design source of truth) and `authenticator-handoff.md` (earlier product/crypto brief; applies
@@ -6,7 +6,7 @@ only where the design doc doesn't already cover or override it — see "Reconcil
 Three surfaces: mobile app (Android first, iOS later), browser extension, printable recovery kit.
 Plus one deployable service: an end-to-end-encrypted relay API at `https://2fa.apps.not-final.com`.
 
-App id: `nl.notfinal.twofa` · Name: **Two Keys**
+App id: `nl.notfinal.twofa` · Name: **Purr**
 
 ## Repository layout
 

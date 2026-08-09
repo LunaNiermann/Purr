@@ -2,7 +2,7 @@
   "name": "twokeys-server",
   "version": "0.1.0",
   "private": true,
-  "description": "Two Keys relay server: E2EE pairing/approval relay and encrypted backup store. Sees only ciphertext.",
+  "description": "Purr relay server: E2EE pairing/approval relay and encrypted backup store. Sees only ciphertext.",
   "type": "module",
   "engines": {
     "node": ">=22"

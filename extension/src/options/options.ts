@@ -51,7 +51,7 @@ function pairShell(step: number, inner: string): HTMLElement {
     <div class="pair-card">
       <div class="pair-head">
         <div class="brand-tile">2</div>
-        <div class="name">Two Keys</div>
+        <div class="name">Purr</div>
         ${stepDots(step)}
       </div>
       ${inner}
@@ -142,7 +142,7 @@ async function renderScan(): Promise<void> {
         <div class="pair-main">
           <div class="pair-hero" style="font-size:30px">Point your phone at this</div>
           <div class="pair-copy" style="font-size:15.5px;max-width:360px">Open
-            Two Keys on your phone, tap <b style="color:var(--ink);font-weight:600">Security
+            Purr on your phone, tap <b style="color:var(--ink);font-weight:600">Security
             → Pair a computer</b>, then hold it up to the square.</div>
           <div class="waiting-line">
             <div class="waiting-dot"></div>
@@ -273,7 +273,7 @@ async function renderSettings(): Promise<void> {
     el(`<div>
       <div class="page-head">
         <div class="brand-tile">2</div>
-        <div class="page-title">Two Keys settings</div>
+        <div class="page-title">Purr settings</div>
       </div>
 
       <div class="section-label">When a site asks for a code</div>

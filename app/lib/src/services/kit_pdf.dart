@@ -26,7 +26,7 @@ Future<void> printRecoveryKit({
   const ink70 = PdfColor.fromInt(0xB3000000);
   const ink55 = PdfColor.fromInt(0x8C000000);
 
-  final doc = pw.Document(title: 'Two Keys recovery kit');
+  final doc = pw.Document(title: 'Purr recovery kit');
   // Bundled fonts — the kit must print on a plane, and nothing loads from
   // the network at runtime.
   Future<pw.Font> bundled(String file) async =>
@@ -101,7 +101,7 @@ Future<void> printRecoveryKit({
                           style: pw.TextStyle(font: sansBold, fontSize: 19)),
                       pw.SizedBox(height: 2),
                       pw.Text(
-                          'Two Keys${ownerHint == null ? '' : ' · $ownerHint'} · printed $printedOn',
+                          'Purr${ownerHint == null ? '' : ' · $ownerHint'} · printed $printedOn',
                           style: pw.TextStyle(
                               font: sans, fontSize: 9.5, color: ink55)),
                     ],
@@ -130,7 +130,7 @@ Future<void> printRecoveryKit({
                       'If you lose your phone, your key, and every computer '
                       'you own, the twelve words below are still enough to '
                       'restore all your codes onto a new device. Nobody at '
-                      "Two Keys has a copy — that's the point, and it's also "
+                      "Purr has a copy — that's the point, and it's also "
                       'why losing this sheet without a backup means starting '
                       'over.',
                       style: pw.TextStyle(
@@ -247,7 +247,7 @@ Future<void> printRecoveryKit({
                       pw.Text('How to use it',
                           style: pw.TextStyle(font: sansBold, fontSize: 11)),
                       pw.SizedBox(height: 7),
-                      step(1, 'Install Two Keys on your new phone and open it.'),
+                      step(1, 'Install Purr on your new phone and open it.'),
                       pw.SizedBox(height: 6),
                       step(2,
                           'Tap "Bring my codes back", then "My recovery kit".'),
@@ -389,7 +389,7 @@ Future<void> printRecoveryKit({
   );
 
   await Printing.layoutPdf(
-    name: 'Two Keys recovery kit',
+    name: 'Purr recovery kit',
     onLayout: (_) => doc.save(),
   );
 }

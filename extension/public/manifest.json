@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Two Keys",
+  "name": "Purr",
   "version": "0.1.0",
   "description": "Your phone is the key. This is the keyhole. Codes stay on your phone; only six digits ever travel.",
   "minimum_chrome_version": "116",

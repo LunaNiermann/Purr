@@ -79,7 +79,7 @@ libsodium everywhere (audited, cross-platform for Android/iOS/extension via WASM
 ### What should be E2EE between extension and phone
 Since you control both endpoints, the approval *content* should be end-to-end encrypted with the pairing keys (Section 6), so your relay server sees only opaque blobs and routing metadata: the challenge/number, requesting site origin, browser fingerprint/context, and the signed approval response. The server's job is store-and-forward + expiry, never plaintext access — this also neutralizes server compromise as an approval-forgery vector.
 
-**Two Keys note:** our approval releases a TOTP code only to the *paired, E2E-keyed browser* — an attacker spamming pushes can never receive the code on their own device, unlike Duo-style "approve this login" flows. Push-bombing is therefore an annoyance/social-engineering risk, not a direct account-takeover vector. Mitigations kept: rich context in A11, "I didn't ask for this" as a first-class deny, per-site mute, rate limiting per pairing.
+**Purr note:** our approval releases a TOTP code only to the *paired, E2E-keyed browser* — an attacker spamming pushes can never receive the code on their own device, unlike Duo-style "approve this login" flows. Push-bombing is therefore an annoyance/social-engineering risk, not a direct account-takeover vector. Mitigations kept: rich context in A11, "I didn't ask for this" as a first-class deny, per-site mute, rate limiting per pairing.
 
 ---
 
@@ -154,7 +154,7 @@ Since you control both endpoints, the approval *content* should be end-to-end en
 
 **Push approvals**
 - [ ] Server txid state machine, single-use, 60s expiry; async create + poll/long-poll status; device-signed approvals (Keystore key registered at enrollment) with timestamp freshness.
-- [ ] Push-fatigue mitigations: rich context (origin, browser, geo) in the approval sheet; rate-limit pushes; per-site mute; deny as first-class action. (Number matching noted; see Two Keys note in §4 for why the code-release-to-paired-browser model changes the calculus.)
+- [ ] Push-fatigue mitigations: rich context (origin, browser, geo) in the approval sheet; rate-limit pushes; per-site mute; deny as first-class action. (Number matching noted; see Purr note in §4 for why the code-release-to-paired-browser model changes the calculus.)
 - [ ] Approval content E2EE with pairing keys; relay/server sees opaque blobs only.
 
 **Extension (MV3)**

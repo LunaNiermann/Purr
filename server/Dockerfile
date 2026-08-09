@@ -1,4 +1,4 @@
-# Two Keys relay server — single container for Coolify.
+# Purr relay server — single container for Coolify.
 # Mount a volume at /app/data to persist the SQLite database.
 FROM node:22-bookworm-slim AS build
 WORKDIR /app

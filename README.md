@@ -1,4 +1,4 @@
-# Two Keys
+# Purr
 
 A two-factor (TOTP) authenticator for people who aren't security experts.
 Your codes live on your phone; signing in on your computer is one tap.

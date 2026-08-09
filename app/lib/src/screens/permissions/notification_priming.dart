@@ -66,7 +66,7 @@ Future<void> maybePrimeNotifications(
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Two Keys',
+                        const Text('Purr',
                             style: TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 14,

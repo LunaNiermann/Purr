@@ -1,6 +1,6 @@
-# Two Keys relay server
+# Purr relay server
 
-E2EE relay + encrypted backup store for the Two Keys authenticator.
+E2EE relay + encrypted backup store for the Purr authenticator.
 The server never sees a TOTP secret, a code, a domain, or an account name —
 only ciphertext blobs, pairing ids, FCM tokens, and timestamps.
 

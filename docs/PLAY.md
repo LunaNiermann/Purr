@@ -1,4 +1,4 @@
-# Google Play readiness — Two Keys (`nl.notfinal.twofa`)
+# Google Play readiness — Purr (`nl.notfinal.twofa`)
 
 ## Signing
 
@@ -42,7 +42,7 @@ Output: `app/build/app/outputs/bundle/release/app-release.aab`.
 
 ## Data safety form
 
-Two Keys is local-first and zero-knowledge. Declare precisely:
+Purr is local-first and zero-knowledge. Declare precisely:
 
 | Question | Answer |
 |---|---|

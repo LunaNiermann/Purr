@@ -56,7 +56,7 @@ class TwoKeysApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Two Keys',
+      title: 'Purr',
       debugShowCheckedModeBanner: false,
       theme: ThemeData(
         useMaterial3: true,

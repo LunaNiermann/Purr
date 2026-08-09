@@ -3,7 +3,7 @@ import 'dart:typed_data';
 
 import 'package:http/http.dart' as http;
 
-/// Client for the Two Keys relay (server/). Everything the phone sends or
+/// Client for the Purr relay (server/). Everything the phone sends or
 /// receives through here is ciphertext except routing metadata.
 class RelayApi {
   RelayApi({this.baseUrl = defaultBaseUrl, http.Client? client})
