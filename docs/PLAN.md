@@ -5,8 +5,25 @@ Working order. Each milestone leaves the repo in a working, testable state.
 ## M0 — Foundations (docs, research, toolchain)
 - [x] Study design handoff (README + both prototype HTML files, all screens 1a–5g)
 - [x] Architecture doc (`docs/ARCHITECTURE.md`)
-- [ ] Research report on existing 2FA apps' failures → `docs/RESEARCH.md` (two agents running)
+- [x] Research: `docs/RESEARCH-complaints.md` (what users hate/love in Authy, Google/Microsoft Authenticator, Bitwarden, 2FAS, Aegis, Ente) and `docs/RESEARCH-technical.md` (TOTP/Keystore/backup/push/MV3/pairing engineering)
 - [ ] Flutter SDK installed, `flutter doctor` clean for Android, empty app builds an APK
+
+### Research-derived commitments (binding for this codebase)
+From the complaints report ("design commandments") and the technical checklist:
+1. **Exit rights forever**: plaintext export (otpauth:// list) + encrypted export, plus `otpauth-migration://` import AND export. No lock-in, ever (the Authy lesson). Export UI lives in Security, styled in the design's idiom.
+2. **No phone numbers, no accounts, no email** anywhere in the system (matches the design's "no account to make" promise; avoids Authy's enumeration breach class entirely). No unauthenticated endpoint may confirm existence of anything (backup GETs need proof-of-knowledge, rate limiting).
+3. **Never silently drop or overwrite an entry.** Same issuer+username → save as a distinguishable second entry with a rename prompt; every import reports per-row success/failure.
+4. **E2EE from day one** for everything that leaves the phone; server stores only ciphertext + routing metadata (no plaintext issuer names server-side).
+5. **Aegis-style key slots**: biometric/Keystore invalidation must never cost data — password and recovery wraps always remain. Catch `KeyPermanentlyInvalidatedException` and fall back gracefully.
+6. **Backups verified at write time**: after upload, download + decrypt + compare digest (Authy's silent corruption lesson); versioned envelope with KDF params.
+7. **Clock drift handled**: NTP-style offset check with a visible, friendly warning ("your phone's clock is a bit off — codes may be rejected").
+8. **Argon2id, never weak PBKDF2** for the password KEK (2FAS shipped PBKDF2@10k; OWASP says 600k — we use libsodium Argon2id moderate).
+9. **Vault excluded from OS backup and device-to-device transfer** via `dataExtractionRules` (allowBackup=false is not enough on Android 12+); our encrypted backup is the only backup.
+10. **Clipboard hygiene**: `EXTRA_IS_SENSITIVE` flag + self-clear after ~45 s.
+11. **Extension holds no long-term secrets** (already the design); popup-owned UI only, no injected DOM chrome (DEF CON 33 clickjacking class); strict origin binding before offering a fill.
+12. **Push = wake-up hint only**: FCM data-only, high priority, payload is `{requestId, pairingId}`; app polls pending requests on open so a dropped push degrades to "open the app", which the design's 5f banner already frames.
+13. **Push-fatigue posture**: our approval releases a code only to the paired, E2E-keyed browser — an attacker spamming pushes can't receive codes. Keep: rich context in A11, deny as first-class, per-site mute, per-pairing rate limits, auto-cooldown after repeated denies.
+14. **Free core, no subscription, no ads, no trackers** — the category is poisoned by scam clones; trust is the product.
 
 ## M1 — App core (offline, no server needed)
 The app must be fully useful with zero network — that's a design promise ("works on a plane").
@@ -24,7 +41,7 @@ Pairing, approval-request relay with 60 s TTL, FCM data-only push, backup blob s
 
 ## M3 — Extension
 Pairing B1, autofill B2 (field detection → ready → awaiting phone → filled), popup vault B3 (display via request, holds no secrets), locked B4, unmatched B5, failure popups B6, settings B7.
-"Touch your key" (WebAuthn/CTAP2 route) ships as a visible option only if a real security-key story lands; otherwise the option is hidden — never a dead button.
+"Touch your key": real route per `authenticator-handoff.md` — E2EE vault replica in the extension unlocked by WebAuthn PRF, decrypt-single-entry at fill time. Ships **after** the phone route (M5+); until it lands the option is hidden — never a dead button. YubiKey HMAC-SHA1 fallback deferred further.
 
 ## M4 — Approval flow end-to-end
 Phone A11–A16 (request, biometric, approved, denied, code-only, intrusion aftermath, mute-until-midnight) + FCM in app + notifications permission beats 5d–5g.

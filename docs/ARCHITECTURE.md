@@ -1,6 +1,8 @@
 # Two Keys — Architecture
 
-Product: a TOTP authenticator for non-technical people, per `design_handoff_two_keys/README.md`.
+Product: a TOTP authenticator for non-technical people, per `design_handoff_two_keys/README.md`
+(the design source of truth) and `authenticator-handoff.md` (earlier product/crypto brief; applies
+only where the design doc doesn't already cover or override it — see "Reconciliation" at the end).
 Three surfaces: mobile app (Android first, iOS later), browser extension, printable recovery kit.
 Plus one deployable service: an end-to-end-encrypted relay API at `https://2fa.apps.not-final.com`.
 
@@ -25,6 +27,22 @@ design_handoff_two_keys/   Design source of truth (do not edit)
 | Server | **Node 22 + Fastify + SQLite** (better-sqlite3), Docker | Coolify-friendly single container + volume. The server is a dumb encrypted relay — SQLite is more than enough and keeps ops at zero. Postgres migration path documented but not needed. |
 
 Fonts: Instrument Sans + JetBrains Mono, bundled (no Google Fonts at runtime).
+
+## Reconciliation with `authenticator-handoff.md`
+
+Where the two briefs disagree, the design handoff and the owner's newer instructions win:
+
+| Topic | Old brief | Decision |
+|---|---|---|
+| Accounts | `users` table, auth credentials for sync | **No accounts, no email** (design: "no account to make"); sync rides the pairing channel, backups are addressed by kit-derived ids |
+| Hosting | Render + Postgres | **Owner's Coolify** + SQLite single container |
+| Realtime | WebSocket relay | **Long-poll** (MV3 service-worker lifetime research) |
+| Mobile stack | React Native or native | **Flutter** |
+| Extension vault | Full local encrypted vault from day one | Phone-route-first; E2EE replica added with the PRF key route (see below) |
+
+Adopted from the old brief (not covered by the design doc): the key-first crypto design (PRF/HMAC),
+decrypt-single-entry-at-fill, never-hold-vault-decrypted, the two-devices non-negotiables, and the
+honest-tradeoff framing between the key and phone routes.
 
 ## Security model
 
@@ -132,6 +150,29 @@ Android specifics: `FLAG_SECURE` on recovery-kit and code screens; clipboard wri
 ## TOTP engine
 
 RFC 6238 over RFC 4226, SHA-1/256/512, 6–8 digits, configurable period (default 30 s), tolerant otpauth:// parser (padding-less/lowercase/spaced base32, issuer-prefix duplication), plus `otpauth-migration://` import (Google Authenticator export). Display always `NNN NNN`; clipboard always bare digits. All accounts tick on the shared epoch boundary.
+
+## Desktop key-first route ("Touch your key")
+
+The design's B2 flow offers two routes and the filled-state copy for the key route reads
+*"Your key unlocked the vault right here on this Mac. Your phone stayed in your pocket."*
+The crypto behind that (from `authenticator-handoff.md`, which the design doesn't override here):
+
+- The extension keeps an **E2EE vault replica** — ciphertext only, synced from the phone over the
+  pairing channel whenever the vault changes. The decryption key is **never stored** on the desktop.
+- Unlock reconstructs the key from a physical touch: **WebAuthn PRF extension** (preferred; browser-
+  native, Chrome supports it) — the PRF output for a fixed salt feeds HKDF → replica key. Fallback
+  for older keys: YubiKey HMAC-SHA1 challenge-response (needs WebUSB/native helper; deferred).
+- At autofill time, decrypt **only the matched entry**, generate the code locally, autofill, and
+  drop plaintext immediately. The vault is never held decrypted in the background.
+- Honest tradeoff (kept visible in docs): phone route = secret never touches the laptop;
+  key route = ciphertext on the laptop + physical key as the separate factor. Both respect the
+  two-devices rule; a master password alone on the desktop is never an unlock method.
+
+Non-negotiables inherited from the product brief: two factors never collapse onto one machine;
+biometrics are local unlock only, never the second factor; the server is a dumb pipe.
+
+Ship order: phone-handoff route first (works with zero extension-side storage), key-first PRF route
+second, HMAC-SHA1 fallback last.
 
 ## iOS later
 
