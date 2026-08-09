@@ -9,7 +9,7 @@ Please report vulnerabilities **privately** — not in a public issue:
 
 - Preferred: [GitHub private vulnerability reporting](https://github.com/LunaNiermann/Purr/security/advisories/new)
   ("Report a vulnerability" on the repo's Security tab).
-- Or email: **lunaniermann@gmail.com** (subject starting with `[Purr security]`).
+- Or email: **luna@not-final.com** (subject starting with `[Purr security]`).
 
 Include what you found, where (app / extension / relay), and how to reproduce
 it. A proof of concept helps; a fix suggestion is welcome but not expected.

@@ -20,12 +20,11 @@
   "devDependencies": {
     "@types/chrome": "^0.0.287",
     "@types/qrcode": "^1.5.5",
-    "esbuild": "^0.24.2",
+    "esbuild": "^0.28.2",
     "typescript": "^5.7.3",
-    "vitest": "^2.1.8"
+    "vitest": "^4.1.10"
   },
   "allowScripts": {
-    "esbuild@0.24.2": true,
-    "esbuild@0.21.5": true
+    "esbuild@0.28.2": true
   }
 }
