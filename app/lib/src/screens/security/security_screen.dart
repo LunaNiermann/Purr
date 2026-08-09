@@ -472,24 +472,33 @@ class _PushStatusLineState extends State<_PushStatusLine> {
     if (mounted) setState(() => _diag = d);
   }
 
+  Future<void> _enable() async {
+    await PushService.requestPermission();
+    await _refresh();
+  }
+
   @override
   Widget build(BuildContext context) {
     final d = _diag;
-    final ok = d != null && d.available && d.hasToken;
+    final registered = d != null && d.available && d.hasToken;
+    final ok = registered && d.notificationsAllowed;
+    final needsPermission = registered && !d.notificationsAllowed;
     final label = d == null
         ? 'Checking notifications…'
         : ok
             ? 'Notifications ready'
-            : d.available
-                ? "Notifications on, but this phone couldn't register"
-                : 'Notifications unavailable on this device';
+            : needsPermission
+                ? 'Turn on notifications to be alerted'
+                : d.available
+                    ? "Notifications on, but this phone couldn't register"
+                    : 'Notifications unavailable on this device';
     final color = d == null
         ? TkColors.ink55
         : ok
             ? TkColors.green
             : const Color(0xFFB4462F);
     return GestureDetector(
-      onTap: _refresh,
+      onTap: needsPermission ? _enable : _refresh,
       behavior: HitTestBehavior.opaque,
       child: Container(
         padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 11),
@@ -522,6 +531,12 @@ class _PushStatusLineState extends State<_PushStatusLine> {
                   if (d?.error != null) ...[
                     const SizedBox(height: 3),
                     Text(d!.error!,
+                        style: TkText.metadata.copyWith(
+                            fontFamily: TkFonts.mono, fontSize: 11)),
+                  ],
+                  if (ApprovalDiag.last != null) ...[
+                    const SizedBox(height: 5),
+                    Text('Last request: ${ApprovalDiag.last}',
                         style: TkText.metadata.copyWith(
                             fontFamily: TkFonts.mono, fontSize: 11)),
                   ],

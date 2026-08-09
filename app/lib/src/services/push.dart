@@ -13,7 +13,15 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 /// approval listener then fetches the pending request and shows A11.
 /// A one-glance snapshot of the push subsystem, surfaced in Security so a
 /// person (or we, from a screenshot) can tell where a silent failure is.
-typedef PushDiag = ({bool available, bool hasToken, String? error});
+/// [notificationsAllowed] is the OS-level display permission (Android 13+
+/// POST_NOTIFICATIONS): a push can arrive and wake us with this off, but no
+/// banner will show — a distinct failure from "no token".
+typedef PushDiag = ({
+  bool available,
+  bool hasToken,
+  bool notificationsAllowed,
+  String? error,
+});
 
 class PushService {
   static bool available = false;
@@ -60,7 +68,24 @@ class PushService {
   static Future<PushDiag> diagnose() async {
     await init();
     final tok = available ? await token() : null;
-    return (available: available, hasToken: tok != null, error: lastError);
+    var allowed = false;
+    if (available) {
+      try {
+        final settings =
+            await FirebaseMessaging.instance.getNotificationSettings();
+        allowed =
+            settings.authorizationStatus == AuthorizationStatus.authorized ||
+                settings.authorizationStatus == AuthorizationStatus.provisional;
+      } catch (_) {
+        allowed = false;
+      }
+    }
+    return (
+      available: available,
+      hasToken: tok != null,
+      notificationsAllowed: allowed,
+      error: lastError,
+    );
   }
 
   static Future<void> _ensureLocalReady() async {

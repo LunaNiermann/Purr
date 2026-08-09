@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../data/models.dart';
@@ -7,6 +8,20 @@ import '../state/providers.dart';
 import 'pairing_crypto.dart';
 import 'pairing_service.dart';
 import 'relay_api.dart';
+
+/// A breadcrumb of what the foreground approval loop last did, so a silent
+/// "nothing happened" is diagnosable from the Security screen (and logcat)
+/// without a debugger. Purely diagnostic — carries no secret material.
+class ApprovalDiag {
+  ApprovalDiag._();
+
+  static String? last;
+
+  static void note(String message) {
+    last = message;
+    debugPrint('approval: $message');
+  }
+}
 
 /// A decrypted approval request waiting on this phone.
 class PendingApproval {
@@ -122,21 +137,41 @@ class ApprovalController extends Notifier<PendingApproval?> {
           // Everything pending is already shown/muted — back off so we don't
           // spin (the endpoint returns muted/handled requests instantly).
           if (pending.isNotEmpty) {
+            ApprovalDiag.note(
+                'poll: ${pending.length} pending, all already handled');
             await Future<void>.delayed(const Duration(seconds: 3));
           }
           continue;
         }
+        ApprovalDiag.note('poll: ${fresh.length} new request(s)');
         for (final req in fresh) {
-          handled.add(req.requestId);
           if (state != null) break;
-          final payload = await PairingCrypto.open(
-            pairing.sessionKey,
-            req.requestBlobB64,
-          );
-          if (payload['kind'] != 'code') continue;
+          // Decrypt failures are per-request: record and skip this one, but
+          // don't let it abort the batch or (via the outer catch) look like a
+          // network error. Mark handled only once we've decided about it.
+          final Map<String, dynamic> payload;
+          try {
+            payload = await PairingCrypto.open(
+              pairing.sessionKey,
+              req.requestBlobB64,
+            );
+          } catch (e) {
+            handled.add(req.requestId);
+            ApprovalDiag.note('decrypt failed (key mismatch?): $e');
+            continue;
+          }
+          handled.add(req.requestId);
+          if (payload['kind'] != 'code') {
+            ApprovalDiag.note("skip: kind='${payload['kind']}' (want 'code')");
+            continue;
+          }
           final domain = (payload['domain'] as String? ?? '').toLowerCase();
           final data = ref.read(vaultProvider).data;
-          if (data != null && data.isMutedToday(domain)) continue;
+          if (data != null && data.isMutedToday(domain)) {
+            ApprovalDiag.note('skip: $domain muted today');
+            continue;
+          }
+          ApprovalDiag.note('showing approval for $domain');
           state = PendingApproval(
             requestId: req.requestId,
             domain: domain,
@@ -145,8 +180,9 @@ class ApprovalController extends Notifier<PendingApproval?> {
             expiresAt: req.expiresAt,
           );
         }
-      } catch (_) {
+      } catch (e) {
         // Network hiccup: back off briefly, keep listening.
+        ApprovalDiag.note('poll error: $e');
         await Future<void>.delayed(const Duration(seconds: 4));
       }
     }
@@ -169,10 +205,13 @@ class ApprovalController extends Notifier<PendingApproval?> {
         phoneToken: pairing.phoneToken,
         answerBlobB64: blob,
       );
+      ApprovalDiag.note('approved ${request.domain} — code sent');
       return true;
     } on RelayExpiredException {
+      ApprovalDiag.note('approve failed: request expired');
       return false;
-    } catch (_) {
+    } catch (e) {
+      ApprovalDiag.note('approve failed: $e');
       return false;
     } finally {
       state = null;
