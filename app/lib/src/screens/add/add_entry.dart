@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
+import 'package:permission_handler/permission_handler.dart';
 
 import '../../core/base32.dart';
 import '../../core/migration.dart';
@@ -9,6 +10,7 @@ import '../../core/totp.dart';
 import '../../data/models.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
+import '../../services/approval_service.dart';
 import '../../state/providers.dart';
 
 /// Entry point for adding accounts. The camera permission follows the design
@@ -21,6 +23,18 @@ Future<void> startAddEntry(BuildContext context, WidgetRef ref,
         MaterialPageRoute(builder: (_) => const ManualEntryScreen()));
     return;
   }
+
+  // If the camera is already granted, there's no system prompt coming — so
+  // the priming sheet (whose only job is to precede that prompt) is just noise.
+  // Go straight to the scanner. (First-time / not-yet-granted still primes.)
+  final alreadyGranted = await Permission.camera.status.isGranted;
+  if (!context.mounted) return;
+  if (alreadyGranted) {
+    await Navigator.of(context)
+        .push(MaterialPageRoute(builder: (_) => const ScanScreen()));
+    return;
+  }
+
   // Priming sheet (5a) as a bottom sheet over the vault.
   final choice = await showModalBottomSheet<String>(
     context: context,
@@ -148,6 +162,14 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
     final raw = capture.barcodes.firstOrNull?.rawValue;
     if (raw == null) return;
 
+    // Someone pointed the "add account" scanner at a computer-pairing code.
+    // Don't fail silently — offer to pair instead.
+    if (raw.startsWith('twokeys-pair:')) {
+      _handled = true;
+      await _handlePairingCode(raw);
+      return;
+    }
+
     if (raw.startsWith('otpauth-migration://')) {
       _handled = true;
       try {
@@ -179,6 +201,56 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
       content: Text("That code didn't work: $message"),
       backgroundColor: TkColors.ink,
     ));
+  }
+
+  /// A pairing QR scanned in the account scanner: confirm, then pair.
+  Future<void> _handlePairingCode(String raw) async {
+    final pair = await showDialog<bool>(
+      context: context,
+      builder: (context) => AlertDialog(
+        backgroundColor: TkColors.paper,
+        title: const Text('Pair this computer?',
+            style: TextStyle(
+                fontFamily: TkFonts.sans,
+                fontSize: 19,
+                fontWeight: FontWeight.w600)),
+        content: Text(
+          "That's a code for linking a computer, not a website account. "
+          'Want to pair it now?',
+          style: TkText.body.copyWith(fontSize: 14.5),
+        ),
+        actions: [
+          TextButton(
+            onPressed: () => Navigator.pop(context, false),
+            child:
+                const Text('Not now', style: TextStyle(color: TkColors.ink50)),
+          ),
+          TextButton(
+            onPressed: () => Navigator.pop(context, true),
+            child:
+                const Text('Pair', style: TextStyle(color: TkColors.green)),
+          ),
+        ],
+      ),
+    );
+    if (pair != true) {
+      _handled = false; // let them keep scanning for an account code
+      return;
+    }
+    try {
+      await ref.read(pairingServiceProvider).completeFromQr(raw);
+      await ref.read(pairingProvider.notifier).refresh();
+      if (!mounted) return;
+      Navigator.of(context).pop();
+      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
+        content: Text('Paired. Try a sign-in on your computer.'),
+        backgroundColor: TkColors.green,
+      ));
+    } on FormatException catch (e) {
+      _showError(e.message);
+    } catch (_) {
+      _showError('couldn\'t reach the pairing service');
+    }
   }
 
   @override

@@ -10,9 +10,16 @@ import '../../state/providers.dart';
 /// A4 (4d): step 3 of 3 — create the vault and show the twelve words.
 /// FLAG_SECURE is on app-wide, so this screen can't be screenshotted.
 class RecoveryKitScreen extends ConsumerStatefulWidget {
-  const RecoveryKitScreen({super.key, required this.password});
+  const RecoveryKitScreen({
+    super.key,
+    required this.password,
+    this.stepNumber = 3,
+    this.totalSteps = 3,
+  });
 
   final String password;
+  final int stepNumber;
+  final int totalSteps;
 
   @override
   ConsumerState<RecoveryKitScreen> createState() => _RecoveryKitScreenState();
@@ -57,9 +64,10 @@ class _RecoveryKitScreenState extends ConsumerState<RecoveryKitScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: TkStepPills(step: 3),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: TkStepPills(
+                    step: widget.stepNumber, total: widget.totalSteps),
               ),
               const SizedBox(height: 20),
               const Padding(

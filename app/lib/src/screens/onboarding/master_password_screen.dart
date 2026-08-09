@@ -3,7 +3,9 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
+import '../../services/biometrics.dart';
 import 'biometric_screen.dart';
+import 'recovery_kit_screen.dart';
 
 /// A2 (4b): pick the master password. Continue is disabled until both fields
 /// match and strength is at least "Strong".
@@ -19,6 +21,19 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
   final _password = TextEditingController();
   final _confirm = TextEditingController();
   bool _show = false;
+  // Whether the device can unlock without typing (biometric or PIN). Until we
+  // know, assume yes so the step count doesn't flicker; corrected in initState.
+  bool _bioAvailable = true;
+
+  int get _totalSteps => _bioAvailable ? 3 : 2;
+
+  @override
+  void initState() {
+    super.initState();
+    Biometrics.canAuthenticate().then((v) {
+      if (mounted) setState(() => _bioAvailable = v);
+    });
+  }
 
   @override
   void dispose() {
@@ -66,7 +81,7 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const TkStepPills(step: 1),
+              TkStepPills(step: 1, total: _totalSteps),
               const SizedBox(height: 22),
               const Text('Pick one password to lock this app',
                   style: TkText.screenTitle),
@@ -140,7 +155,16 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
                 enabled: _canContinue,
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
-                    builder: (_) => BiometricScreen(password: _password.text),
+                    builder: (_) => _bioAvailable
+                        // Step 2: offer biometric/PIN unlock.
+                        ? BiometricScreen(password: _password.text)
+                        // No lock method on this device — skip straight to the
+                        // recovery kit as step 2 of 2.
+                        : RecoveryKitScreen(
+                            password: _password.text,
+                            stepNumber: 2,
+                            totalSteps: 2,
+                          ),
                   ),
                 ),
               ),

@@ -24,6 +24,16 @@ class SecurityScreen extends ConsumerStatefulWidget {
 }
 
 class _SecurityScreenState extends ConsumerState<SecurityScreen> {
+  bool _canAuth = true; // corrected in initState; hides the unlock toggle if false
+
+  @override
+  void initState() {
+    super.initState();
+    Biometrics.canAuthenticate().then((v) {
+      if (mounted) setState(() => _canAuth = v);
+    });
+  }
+
   Future<void> _printKitAgain() async {
     final ok = await Biometrics.prompt('Confirm to view your recovery kit');
     if (!ok) return;
@@ -207,22 +217,24 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               padding: const EdgeInsets.symmetric(horizontal: 14),
               child: Column(
                 children: [
-                  _ToggleRow(
-                    title: 'Unlock without typing',
-                    subtitle: 'Opens the app — not a second factor',
-                    value: prefs.biometricsEnabled,
-                    onChanged: (v) async {
-                      if (v) {
-                        final ok = await Biometrics.prompt(
-                            'Confirm it works — one try now');
-                        if (!ok) return;
-                      }
-                      await ref
-                          .read(prefsProvider.notifier)
-                          .update((p) => p.copyWith(biometricsEnabled: v));
-                    },
-                  ),
-                  const SizedBox(height: 8),
+                  if (_canAuth) ...[
+                    _ToggleRow(
+                      title: 'Unlock without typing',
+                      subtitle: 'Opens the app — not a second factor',
+                      value: prefs.biometricsEnabled,
+                      onChanged: (v) async {
+                        if (v) {
+                          final ok = await Biometrics.prompt(
+                              'Confirm it works — one try now');
+                          if (!ok) return;
+                        }
+                        await ref
+                            .read(prefsProvider.notifier)
+                            .update((p) => p.copyWith(biometricsEnabled: v));
+                      },
+                    ),
+                    const SizedBox(height: 8),
+                  ],
                   _ToggleRow(
                     title: 'Encrypted backup',
                     subtitle: "We store scrambled copies we can't read",

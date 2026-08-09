@@ -6,6 +6,19 @@ import 'package:local_auth/local_auth.dart';
 class Biometrics {
   static final _auth = LocalAuthentication();
 
+  /// True if the device has *any* secure way to authenticate — a biometric OR
+  /// a device credential (PIN/pattern/password). This is what our
+  /// `biometricOnly: false` unlock actually needs; if it's false there is no
+  /// point offering "unlock without typing" at all, so we skip that screen.
+  static Future<bool> canAuthenticate() async {
+    try {
+      return await _auth.isDeviceSupported();
+    } on PlatformException {
+      return false;
+    }
+  }
+
+  /// True if dedicated biometric hardware is enrolled (face/fingerprint).
   static Future<bool> available() async {
     try {
       return await _auth.isDeviceSupported() &&
