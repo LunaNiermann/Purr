@@ -2,12 +2,23 @@
 
 ## Signing
 
-Play uses Play App Signing; you upload with an **upload key**. Generate it once:
+Play uses Play App Signing; you upload with an **upload key**. Generate it once.
+
+macOS / Linux:
 
 ```bash
-keytool -genkey -v -keystore ~/twokeys-upload.jks -keyalg RSA -keysize 2048 \
-  -validity 10000 -alias upload
+keytool -genkey -v -keystore ~/twokeys-upload.jks -keyalg RSA -keysize 2048 -validity 10000 -alias upload
 ```
+
+Windows PowerShell (use `$HOME`, not `~` — PowerShell doesn't expand `~` in
+arguments passed to `keytool`, so `~/...` fails with FileNotFoundException):
+
+```powershell
+keytool -genkey -v -keystore "$HOME\twokeys-upload.jks" -keyalg RSA -keysize 2048 -validity 10000 -alias upload
+```
+
+Keep the store and key passwords safe — losing them means you can never ship
+another update signed with this key.
 
 Then create `app/android/key.properties` (git-ignored):
 
