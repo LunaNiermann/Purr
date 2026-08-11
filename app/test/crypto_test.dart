@@ -162,15 +162,21 @@ void main() {
   });
 
   group('recovery kit', () {
-    test('twelve valid words, checksum enforced', () {
+    test('twelve valid words', () {
       final kit = RecoveryKit.generate();
       expect(kit.words, hasLength(12));
       expect(kit.words.every(RecoveryKit.isValidWord), isTrue);
-      // Deterministic word swap that keeps words valid but breaks checksum
-      // (overwhelmingly likely); fromWords must reject it.
-      final tampered = List<String>.from(kit.words);
-      tampered[0] = tampered[0] == 'abandon' ? 'ability' : 'abandon';
-      expect(RecoveryKit.fromWords(tampered), isNull);
+      expect(RecoveryKit.fromWords(kit.words), isNotNull);
+    });
+
+    test('checksum rejects a tampered phrase', () {
+      // Canonical BIP39 zero-entropy mnemonic — "about" is the checksum word.
+      final valid = [...List.filled(11, 'abandon'), 'about'];
+      expect(RecoveryKit.fromWords(valid), isNotNull);
+      // All-"abandon" is the well-known invalid phrase (checksum mismatch).
+      // Deterministic, unlike a random single-word swap (only 4 checksum bits
+      // → a swap still validates ~1/16 of the time, which flaked CI).
+      expect(RecoveryKit.fromWords(List.filled(12, 'abandon')), isNull);
     });
 
     test('case and whitespace insensitive', () {
