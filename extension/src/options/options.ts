@@ -11,6 +11,7 @@ import {
 import { RELAY_URL, createPairing, unpair, waitForPhone } from "../lib/relay";
 import {
   addSecurityKey,
+  confirmSecurityKey,
   defaultSettings,
   getPairing,
   getSecurityKeys,
@@ -407,11 +408,14 @@ async function populateSecurityKeys(): Promise<void> {
 
   const keys = await getSecurityKeys();
   for (const k of keys) {
+    const state = k.prfConfirmed
+      ? `<span style="color:var(--green)">Ready</span>`
+      : `<span style="color:var(--ink-55)">Not confirmed — tap Test unlock</span>`;
     const row = el(`<div class="row">
       <div class="tile">⚿</div>
       <div class="grow">
         <div class="title" style="font-size:14.5px">${esc(k.label)}</div>
-        <div class="subtitle">Added ${new Date(k.addedAt).toLocaleDateString()}</div>
+        <div class="subtitle">Added ${new Date(k.addedAt).toLocaleDateString()} · ${state}</div>
       </div>
       <button class="small-outline">Remove</button>
     </div>`);
@@ -437,10 +441,11 @@ async function populateSecurityKeys(): Promise<void> {
         credentialIdB64: res.credentialIdB64,
         label,
         addedAt: Date.now(),
+        prfConfirmed: false,
       });
       status.textContent = res.prfSupported
-        ? `✓ ${label} registered — PRF supported. Tap "Test unlock" to confirm.`
-        : `⚠ ${label} registered, but it reported no PRF support — it can't unlock the key route.`;
+        ? `✓ ${label} registered. Tap "Test unlock" and touch it to confirm PRF works.`
+        : `⚠ ${label} registered, but it reported no PRF support — it likely can't unlock the key route. Try Test unlock to be sure.`;
       await populateSecurityKeys();
     } catch (e) {
       status.textContent = `Couldn't register: ${(e as Error).message}`;
@@ -458,10 +463,12 @@ async function populateSecurityKeys(): Promise<void> {
       try {
         const ids = (await getSecurityKeys()).map((k) => k.credentialIdB64);
         const { credentialIdB64 } = await deriveReplicaKey(ids);
+        await confirmSecurityKey(credentialIdB64);
         const used = (await getSecurityKeys()).find(
           (k) => k.credentialIdB64 === credentialIdB64,
         );
         status.textContent = `✓ Unlock confirmed with ${used?.label ?? "your key"} — PRF works end to end.`;
+        await populateSecurityKeys();
       } catch (e) {
         status.textContent = `Unlock failed: ${(e as Error).message}`;
       }

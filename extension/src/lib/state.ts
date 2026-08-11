@@ -62,6 +62,10 @@ export interface SecurityKey {
   credentialIdB64: string;
   label: string;
   addedAt: number;
+  /** True once a touch has actually produced PRF output — the only proof the
+   * key can drive the route. Keys that can't (e.g. FIDO-only Titan) stay false
+   * and are never used for unlock. */
+  prfConfirmed: boolean;
 }
 
 export async function getSecurityKeys(): Promise<SecurityKey[]> {
@@ -83,6 +87,16 @@ export async function removeSecurityKey(credentialIdB64: string): Promise<void> 
   const keys = await getSecurityKeys();
   await chrome.storage.local.set({
     securityKeys: keys.filter((k) => k.credentialIdB64 !== credentialIdB64),
+  });
+}
+
+/** Mark a key as PRF-confirmed after a successful touch-test. */
+export async function confirmSecurityKey(credentialIdB64: string): Promise<void> {
+  const keys = await getSecurityKeys();
+  await chrome.storage.local.set({
+    securityKeys: keys.map((k) =>
+      k.credentialIdB64 === credentialIdB64 ? { ...k, prfConfirmed: true } : k,
+    ),
   });
 }
 
