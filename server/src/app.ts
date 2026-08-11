@@ -7,6 +7,7 @@ import { Waiters } from "./waiter.js";
 import { registerPairingRoutes } from "./routes/pairings.js";
 import { registerRequestRoutes } from "./routes/requests.js";
 import { registerBackupRoutes } from "./routes/backups.js";
+import { registerReplicaRoutes } from "./routes/replica.js";
 
 export interface AppContext {
   db: Database.Database;
@@ -78,6 +79,7 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
   registerPairingRoutes(app, ctx);
   registerRequestRoutes(app, ctx);
   registerBackupRoutes(app, ctx);
+  registerReplicaRoutes(app, ctx);
 
   const sweeper = setInterval(() => cleanup(ctx.db), 30_000);
   sweeper.unref();

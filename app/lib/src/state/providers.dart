@@ -5,6 +5,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 import '../data/models.dart';
 import '../data/vault_store.dart';
+import '../services/replica_service.dart';
 
 /// 1 Hz heartbeat driving every countdown. Recomputed from wall clock on each
 /// tick so a backgrounded app snaps to the right remaining time on resume.
@@ -48,6 +49,7 @@ class VaultController extends Notifier<VaultState> {
 
   void setUnlocked(VaultData data) {
     state = VaultState(status: VaultStatus.unlocked, data: data);
+    _syncReplica();
   }
 
   void lock() {
@@ -61,6 +63,15 @@ class VaultController extends Notifier<VaultState> {
     final updated = transform(current);
     await _store.save(updated);
     state = state.copyWith(data: updated);
+    _syncReplica();
+  }
+
+  /// Push the encrypted vault replica to the desktop key route, if enrolled.
+  /// Fire-and-forget: a no-op unless a security key has been set up.
+  void _syncReplica() {
+    final data = state.data;
+    if (data == null) return;
+    unawaited(const ReplicaService().syncFromAccounts(data.accounts));
   }
 
   /// After onboarding created the vault.

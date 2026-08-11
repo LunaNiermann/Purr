@@ -252,3 +252,113 @@ describe("backups", () => {
     expect(hijack.statusCode).toBe(404);
   });
 });
+
+describe("vault replica (touch-your-key)", () => {
+  const keyBlob = Buffer.from("sealed-master-key").toString("base64");
+  const replicaBlob = Buffer.from("encrypted-vault-replica").toString("base64");
+
+  it("syncs the key ext→phone and the replica phone→ext", async () => {
+    const { pairingId, extToken, phoneToken } = await pair();
+
+    // Ext publishes the sealed master key.
+    const putKey = await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica-key`,
+      headers: { authorization: `Bearer ${extToken}` },
+      payload: { keyBlob },
+    });
+    expect(putKey.statusCode).toBe(204);
+
+    // Phone reads it back.
+    const getKey = await app.inject({
+      method: "GET",
+      url: `/v1/pairings/${pairingId}/replica-key`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+    });
+    expect(getKey.statusCode).toBe(200);
+    expect(getKey.json().keyBlob).toBe(keyBlob);
+
+    // Phone pushes the encrypted replica.
+    const putReplica = await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+      payload: { replicaBlob },
+    });
+    expect(putReplica.statusCode).toBe(204);
+
+    // Ext reads it.
+    const getReplica = await app.inject({
+      method: "GET",
+      url: `/v1/pairings/${pairingId}/replica`,
+      headers: { authorization: `Bearer ${extToken}` },
+    });
+    expect(getReplica.statusCode).toBe(200);
+    expect(getReplica.json().replicaBlob).toBe(replicaBlob);
+  });
+
+  it("rejects a replica before a key is enrolled", async () => {
+    const { pairingId, phoneToken } = await pair();
+    const res = await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+      payload: { replicaBlob },
+    });
+    expect(res.statusCode).toBe(409);
+  });
+
+  it("a new key invalidates the stored replica", async () => {
+    const { pairingId, extToken, phoneToken } = await pair();
+    for (const p of [
+      { url: `/v1/pairings/${pairingId}/replica-key`, token: extToken, body: { keyBlob } },
+      { url: `/v1/pairings/${pairingId}/replica`, token: phoneToken, body: { replicaBlob } },
+    ]) {
+      await app.inject({
+        method: "PUT",
+        url: p.url,
+        headers: { authorization: `Bearer ${p.token}` },
+        payload: p.body,
+      });
+    }
+    // Re-publish a new key.
+    await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica-key`,
+      headers: { authorization: `Bearer ${extToken}` },
+      payload: { keyBlob: Buffer.from("new-key").toString("base64") },
+    });
+    // The stale replica is gone.
+    const getReplica = await app.inject({
+      method: "GET",
+      url: `/v1/pairings/${pairingId}/replica`,
+      headers: { authorization: `Bearer ${extToken}` },
+    });
+    expect(getReplica.statusCode).toBe(404);
+  });
+
+  it("enforces sides: phone can't publish a key, ext can't publish a replica", async () => {
+    const { pairingId, extToken, phoneToken } = await pair();
+    const phoneKey = await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica-key`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+      payload: { keyBlob },
+    });
+    expect(phoneKey.statusCode).toBe(404);
+
+    await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica-key`,
+      headers: { authorization: `Bearer ${extToken}` },
+      payload: { keyBlob },
+    });
+    const extReplica = await app.inject({
+      method: "PUT",
+      url: `/v1/pairings/${pairingId}/replica`,
+      headers: { authorization: `Bearer ${extToken}` },
+      payload: { replicaBlob },
+    });
+    expect(extReplica.statusCode).toBe(404);
+  });
+});

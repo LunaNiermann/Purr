@@ -35,6 +35,21 @@ export interface BackupRow {
   updated_at: number;
 }
 
+/**
+ * Per-pairing vault replica for the "touch your key" desktop route.
+ *   key_blob     — ext → phone: the replica master key K, sealed with the
+ *                  pairing session key so only the phone can open it.
+ *   replica_blob — phone → ext: the vault replica, encrypted with K.
+ * The server stores opaque ciphertext for both and can read neither.
+ */
+export interface ReplicaRow {
+  pairing_id: string;
+  key_blob: string | null;
+  key_updated_at: number | null;
+  replica_blob: string | null;
+  replica_updated_at: number | null;
+}
+
 export function openDb(path: string): Database.Database {
   if (path !== ":memory:") mkdirSync(dirname(path), { recursive: true });
   const db = new Database(path);
@@ -71,6 +86,13 @@ export function openDb(path: string): Database.Database {
       blob BLOB NOT NULL,
       digest TEXT NOT NULL,
       updated_at INTEGER NOT NULL
+    );
+    CREATE TABLE IF NOT EXISTS replicas (
+      pairing_id TEXT PRIMARY KEY REFERENCES pairings(id) ON DELETE CASCADE,
+      key_blob TEXT,
+      key_updated_at INTEGER,
+      replica_blob TEXT,
+      replica_updated_at INTEGER
     );
   `);
   return db;

@@ -186,6 +186,41 @@ class RelayApi {
       throw RelayException('fcm token', res.statusCode);
     }
   }
+
+  // ---- Vault replica (touch-your-key) -----------------------------------
+
+  /// The sealed replica master key the extension published for us, or null if
+  /// the key route isn't enrolled on this pairing.
+  Future<String?> getReplicaKey({
+    required String pairingId,
+    required String phoneToken,
+  }) async {
+    final res = await _client.get(
+      _u('/v1/pairings/$pairingId/replica-key'),
+      headers: _headers(bearer: phoneToken),
+    );
+    if (res.statusCode == 404) return null;
+    if (res.statusCode != 200) {
+      throw RelayException('replica key', res.statusCode);
+    }
+    return (json.decode(res.body) as Map<String, dynamic>)['keyBlob'] as String?;
+  }
+
+  /// Push the vault replica (encrypted under the master key) to the extension.
+  Future<void> putReplica({
+    required String pairingId,
+    required String phoneToken,
+    required String replicaBlobB64,
+  }) async {
+    final res = await _client.put(
+      _u('/v1/pairings/$pairingId/replica'),
+      headers: _headers(bearer: phoneToken),
+      body: json.encode({'replicaBlob': replicaBlobB64}),
+    );
+    if (res.statusCode != 204) {
+      throw RelayException('replica', res.statusCode);
+    }
+  }
 }
 
 class PendingRelayRequest {
