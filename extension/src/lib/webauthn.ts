@@ -51,7 +51,7 @@ function ab(u8: Uint8Array): ArrayBuffer {
   return out.buffer;
 }
 
-function replicaKeyFromPrf(prfOutput: Uint8Array): Uint8Array {
+function kekFromPrf(prfOutput: Uint8Array): Uint8Array {
   return hkdf(sha256, prfOutput, undefined, REPLICA_KEY_INFO, 32);
 }
 
@@ -116,13 +116,14 @@ export async function registerKey(label: string): Promise<RegisterResult> {
 }
 
 /**
- * Touch a registered key and reconstruct the replica key from its PRF output.
- * Accepts every registered credential id so any of the user's keys can unlock.
+ * Touch a registered key and derive its key-encryption key (KEK) from PRF
+ * output. The KEK wraps/unwraps the replica master key K. Accepts every
+ * registered credential id so any of the user's keys can be the one touched.
  * Throws if PRF output is absent (key/browser can't do it).
  */
-export async function deriveReplicaKey(
+export async function deriveKek(
   credentialIdsB64: string[],
-): Promise<{ replicaKey: Uint8Array; credentialIdB64: string }> {
+): Promise<{ kek: Uint8Array; credentialIdB64: string }> {
   const assertion = (await navigator.credentials.get({
     publicKey: {
       rpId: rpId(),
@@ -149,7 +150,7 @@ export async function deriveReplicaKey(
     );
   }
   return {
-    replicaKey: replicaKeyFromPrf(new Uint8Array(first)),
+    kek: kekFromPrf(new Uint8Array(first)),
     credentialIdB64: toB64(new Uint8Array(assertion.rawId)),
   };
 }

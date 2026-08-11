@@ -66,6 +66,16 @@ export interface SecurityKey {
    * key can drive the route. Keys that can't (e.g. FIDO-only Titan) stay false
    * and are never used for unlock. */
   prfConfirmed: boolean;
+  /** The replica master key K, wrapped for this key: seal(KEK, {k}). Present
+   * once the key is enrolled into sign-in. Never the key itself. */
+  wrappedKB64?: string;
+}
+
+/** The cached, encrypted vault replica pulled from the relay. Ciphertext under
+ * the replica master key K — useless without a key touch. */
+export interface ReplicaCache {
+  replicaBlob: string;
+  updatedAt: number;
 }
 
 export async function getSecurityKeys(): Promise<SecurityKey[]> {
@@ -98,6 +108,29 @@ export async function confirmSecurityKey(credentialIdB64: string): Promise<void>
       k.credentialIdB64 === credentialIdB64 ? { ...k, prfConfirmed: true } : k,
     ),
   });
+}
+
+/** Store (or clear) the wrapped master key for a security key. */
+export async function setSecurityKeyWrap(
+  credentialIdB64: string,
+  wrappedKB64: string | undefined,
+): Promise<void> {
+  const keys = await getSecurityKeys();
+  await chrome.storage.local.set({
+    securityKeys: keys.map((k) =>
+      k.credentialIdB64 === credentialIdB64 ? { ...k, wrappedKB64 } : k,
+    ),
+  });
+}
+
+export async function getReplicaCache(): Promise<ReplicaCache | null> {
+  const { replicaCache } = await chrome.storage.local.get("replicaCache");
+  return (replicaCache as ReplicaCache | undefined) ?? null;
+}
+
+export async function setReplicaCache(cache: ReplicaCache | null): Promise<void> {
+  if (cache === null) await chrome.storage.local.remove("replicaCache");
+  else await chrome.storage.local.set({ replicaCache: cache });
 }
 
 export async function getMatch(domain: string): Promise<DomainMatch | null> {

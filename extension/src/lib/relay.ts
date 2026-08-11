@@ -66,3 +66,30 @@ export async function waitForAnswer(
   if (!res.ok) throw new Error(`answer wait failed (${res.status})`);
   return res.json();
 }
+
+// ---- Vault replica (touch-your-key) ---------------------------------------
+
+/** Publish the replica master key (sealed to the phone) so it starts syncing. */
+export async function putReplicaKey(
+  pairingId: string,
+  extToken: string,
+  keyBlob: string,
+): Promise<void> {
+  const res = await req(`/v1/pairings/${pairingId}/replica-key`, {
+    method: "PUT",
+    bearer: extToken,
+    body: JSON.stringify({ keyBlob }),
+  });
+  if (!res.ok) throw new Error(`replica-key publish failed (${res.status})`);
+}
+
+/** Fetch the phone's latest encrypted vault replica, or null if none yet. */
+export async function getReplica(
+  pairingId: string,
+  extToken: string,
+): Promise<{ replicaBlob: string; replicaUpdatedAt: number } | null> {
+  const res = await req(`/v1/pairings/${pairingId}/replica`, { bearer: extToken });
+  if (res.status === 404) return null;
+  if (!res.ok) throw new Error(`replica fetch failed (${res.status})`);
+  return res.json();
+}

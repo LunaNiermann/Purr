@@ -22,7 +22,16 @@ import {
   type Pairing,
   type Settings,
 } from "../lib/state";
-import { deriveReplicaKey, registerKey, webauthnAvailable } from "../lib/webauthn";
+import { deriveKek, registerKey, webauthnAvailable } from "../lib/webauthn";
+import {
+  addTouchedKey,
+  codeFor,
+  disableKeyRoute,
+  enrollFirstKey,
+  isEnrolled,
+  refreshReplica,
+  unlockReplica,
+} from "../lib/keyroute";
 
 /**
  * Options page: first-run pairing (B1: intro → scan → paired) when no phone
@@ -462,7 +471,7 @@ async function populateSecurityKeys(): Promise<void> {
       status.textContent = "Touch your key…";
       try {
         const ids = (await getSecurityKeys()).map((k) => k.credentialIdB64);
-        const { credentialIdB64 } = await deriveReplicaKey(ids);
+        const { credentialIdB64 } = await deriveKek(ids);
         await confirmSecurityKey(credentialIdB64);
         const used = (await getSecurityKeys()).find(
           (k) => k.credentialIdB64 === credentialIdB64,
@@ -474,6 +483,80 @@ async function populateSecurityKeys(): Promise<void> {
       }
     });
     card.appendChild(testRow);
+  }
+
+  // Enable / manage the actual sign-in route (needs a confirmed key).
+  const confirmed = keys.filter((k) => k.prfConfirmed);
+  if (confirmed.length > 0 && !(await isEnrolled())) {
+    const enableRow = el(`<div class="row">
+      <div class="grow"><div class="subtitle" style="font-size:13.5px">Turn on sign-in with your key</div></div>
+      <button class="small-outline" id="sk-enable">Enable key sign-in</button>
+    </div>`);
+    enableRow.querySelector("#sk-enable")!.addEventListener("click", async () => {
+      status.textContent = "Touch your key…";
+      try {
+        const { label } = await enrollFirstKey();
+        status.textContent = `✓ Key sign-in on with ${label}. Open the phone app once so it syncs your vault here.`;
+        await populateSecurityKeys();
+      } catch (e) {
+        status.textContent = `Couldn't enable: ${(e as Error).message}`;
+      }
+    });
+    card.appendChild(enableRow);
+  } else if (confirmed.length > 0) {
+    const onRow = el(`<div class="row">
+      <div class="grow">
+        <div class="title" style="font-size:14.5px;color:var(--green)">Key sign-in is on</div>
+        <div class="subtitle">Touch a key to fill a code — your phone stays in your pocket.</div>
+      </div>
+      <button class="small-outline" id="sk-show">Show a code</button>
+    </div>`);
+    onRow.querySelector("#sk-show")!.addEventListener("click", async () => {
+      status.textContent = "Touch your key…";
+      try {
+        await refreshReplica();
+        const accounts = await unlockReplica();
+        if (accounts.length === 0) {
+          status.textContent =
+            "Unlocked, but the vault is empty. Add an account on your phone.";
+        } else {
+          const a = accounts[0]!;
+          status.textContent = `✓ ${a.site || "First account"}: ${codeFor(a)} — decrypted here from your touch.`;
+        }
+      } catch (e) {
+        status.textContent = `${(e as Error).message}`;
+      }
+    });
+    card.appendChild(onRow);
+
+    for (const k of confirmed.filter((c) => !c.wrappedKB64)) {
+      const addToRow = el(`<div class="row">
+        <div class="grow"><div class="subtitle" style="font-size:13.5px">Add ${esc(k.label)} as a backup key</div></div>
+        <button class="small-outline">Add to sign-in</button>
+      </div>`);
+      addToRow.querySelector("button")!.addEventListener("click", async () => {
+        status.textContent = "Touch an enrolled key, then the new one…";
+        try {
+          const { label } = await addTouchedKey(k.credentialIdB64);
+          status.textContent = `✓ ${label} added — it's now a backup key.`;
+          await populateSecurityKeys();
+        } catch (e) {
+          status.textContent = `Couldn't add: ${(e as Error).message}`;
+        }
+      });
+      card.appendChild(addToRow);
+    }
+
+    const offRow = el(`<div class="row">
+      <div class="grow"></div>
+      <button class="small-outline" id="sk-off">Turn off key sign-in</button>
+    </div>`);
+    offRow.querySelector("#sk-off")!.addEventListener("click", async () => {
+      await disableKeyRoute();
+      status.textContent = "Key sign-in turned off on this computer.";
+      await populateSecurityKeys();
+    });
+    card.appendChild(offRow);
   }
 
   card.appendChild(status);
