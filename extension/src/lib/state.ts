@@ -55,6 +55,37 @@ export async function setSettings(settings: Settings): Promise<void> {
   await chrome.storage.local.set({ settings });
 }
 
+/** A registered "touch your key" security key. No secret material — the
+ * credential id is a public handle; the replica key is only ever reconstructed
+ * live from a touch, never stored. */
+export interface SecurityKey {
+  credentialIdB64: string;
+  label: string;
+  addedAt: number;
+}
+
+export async function getSecurityKeys(): Promise<SecurityKey[]> {
+  const { securityKeys } = await chrome.storage.local.get("securityKeys");
+  return (securityKeys as SecurityKey[] | undefined) ?? [];
+}
+
+export async function addSecurityKey(key: SecurityKey): Promise<void> {
+  const keys = await getSecurityKeys();
+  // Replace on duplicate credential id (re-register), else append.
+  const next = [
+    ...keys.filter((k) => k.credentialIdB64 !== key.credentialIdB64),
+    key,
+  ];
+  await chrome.storage.local.set({ securityKeys: next });
+}
+
+export async function removeSecurityKey(credentialIdB64: string): Promise<void> {
+  const keys = await getSecurityKeys();
+  await chrome.storage.local.set({
+    securityKeys: keys.filter((k) => k.credentialIdB64 !== credentialIdB64),
+  });
+}
+
 export async function getMatch(domain: string): Promise<DomainMatch | null> {
   const { matches } = await chrome.storage.local.get("matches");
   return ((matches as Record<string, DomainMatch> | undefined) ?? {})[domain] ?? null;

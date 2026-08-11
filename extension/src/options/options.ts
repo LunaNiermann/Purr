@@ -10,14 +10,18 @@ import {
 } from "../lib/crypto";
 import { RELAY_URL, createPairing, unpair, waitForPhone } from "../lib/relay";
 import {
+  addSecurityKey,
   defaultSettings,
   getPairing,
+  getSecurityKeys,
   getSettings,
+  removeSecurityKey,
   setPairing,
   setSettings,
   type Pairing,
   type Settings,
 } from "../lib/state";
+import { deriveReplicaKey, registerKey, webauthnAvailable } from "../lib/webauthn";
 
 /**
  * Options page: first-run pairing (B1: intro → scan → paired) when no phone
@@ -297,6 +301,12 @@ async function renderSettings(): Promise<void> {
       <div class="section-label">Sites with their own rules</div>
       <div class="card" id="rules"></div>
 
+      <div class="section-label">Sign in with a security key <span style="opacity:.6;font-weight:500">· experimental</span></div>
+      <div class="card" id="security-keys"></div>
+      <div class="sub" style="margin-top:10px">Touch a registered key to fill a
+        code on this computer with your phone in your pocket. Your codes live
+        here only as ciphertext; the key is what unlocks them.</div>
+
       <div class="section-label">Paired devices</div>
       <div class="card">
         <div class="row">
@@ -364,12 +374,102 @@ async function renderSettings(): Promise<void> {
   });
   rules.appendChild(addRow);
 
+  await populateSecurityKeys();
+
   document.getElementById("unpair")!.addEventListener("click", async () => {
     await unpair(pairing.pairingId, pairing.extToken).catch(() => {});
     await setPairing(null);
     await setSettings(defaultSettings);
     renderIntro();
   });
+}
+
+// ---- "Touch your key": register + validate security keys -------------------
+
+/** (Re)build the security-keys card: registered keys, add, and a touch test
+ * that confirms PRF unlock works end to end on the real hardware. */
+async function populateSecurityKeys(): Promise<void> {
+  const card = document.getElementById("security-keys");
+  if (!card) return;
+  card.replaceChildren();
+
+  if (!webauthnAvailable()) {
+    card.appendChild(
+      el(`<div class="subtitle" style="font-size:13.5px;color:var(--ink-55)">
+        This browser doesn't support security keys.</div>`),
+    );
+    return;
+  }
+
+  const status = el(
+    `<div class="subtitle" style="font-size:13px;color:var(--ink-55);margin-top:6px"></div>`,
+  );
+
+  const keys = await getSecurityKeys();
+  for (const k of keys) {
+    const row = el(`<div class="row">
+      <div class="tile">⚿</div>
+      <div class="grow">
+        <div class="title" style="font-size:14.5px">${esc(k.label)}</div>
+        <div class="subtitle">Added ${new Date(k.addedAt).toLocaleDateString()}</div>
+      </div>
+      <button class="small-outline">Remove</button>
+    </div>`);
+    row.querySelector("button")!.addEventListener("click", async () => {
+      await removeSecurityKey(k.credentialIdB64);
+      await populateSecurityKeys();
+    });
+    card.appendChild(row);
+  }
+
+  const addRow = el(`<div class="row">
+    <input class="vault-search" id="sk-label" placeholder="Name this key (e.g. YubiKey)" style="max-width:240px">
+    <button class="small-outline" id="sk-add">Add a security key</button>
+  </div>`);
+  addRow.querySelector("#sk-add")!.addEventListener("click", async () => {
+    const label =
+      (document.getElementById("sk-label") as HTMLInputElement).value.trim() ||
+      "Security key";
+    status.textContent = "Touch your key…";
+    try {
+      const res = await registerKey(label);
+      await addSecurityKey({
+        credentialIdB64: res.credentialIdB64,
+        label,
+        addedAt: Date.now(),
+      });
+      status.textContent = res.prfSupported
+        ? `✓ ${label} registered — PRF supported. Tap "Test unlock" to confirm.`
+        : `⚠ ${label} registered, but it reported no PRF support — it can't unlock the key route.`;
+      await populateSecurityKeys();
+    } catch (e) {
+      status.textContent = `Couldn't register: ${(e as Error).message}`;
+    }
+  });
+  card.appendChild(addRow);
+
+  if (keys.length > 0) {
+    const testRow = el(`<div class="row">
+      <div class="grow"><div class="subtitle" style="font-size:13.5px">Confirm a touch unlocks the vault</div></div>
+      <button class="small-outline" id="sk-test">Test unlock</button>
+    </div>`);
+    testRow.querySelector("#sk-test")!.addEventListener("click", async () => {
+      status.textContent = "Touch your key…";
+      try {
+        const ids = (await getSecurityKeys()).map((k) => k.credentialIdB64);
+        const { credentialIdB64 } = await deriveReplicaKey(ids);
+        const used = (await getSecurityKeys()).find(
+          (k) => k.credentialIdB64 === credentialIdB64,
+        );
+        status.textContent = `✓ Unlock confirmed with ${used?.label ?? "your key"} — PRF works end to end.`;
+      } catch (e) {
+        status.textContent = `Unlock failed: ${(e as Error).message}`;
+      }
+    });
+    card.appendChild(testRow);
+  }
+
+  card.appendChild(status);
 }
 
 // ---- Boot -----------------------------------------------------------------
