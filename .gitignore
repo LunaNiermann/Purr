@@ -38,3 +38,6 @@ extension/.e2e-state.json
 # scratch screenshots
 docs/screens/tmp.png
 docs/screens/chk.png
+
+# Legal drafts — hosted on the website, not tracked in the public repo
+legal/
