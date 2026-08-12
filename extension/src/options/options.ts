@@ -222,6 +222,10 @@ async function renderScan(): Promise<void> {
       lastUsedAt: null,
     };
     await setPairing(pairing);
+    // A new pairing rotates the session key, so any prior key-route state (the
+    // wrapped master key + the cached replica) is orphaned and would fill stale
+    // codes. Clear it; the person re-enables key sign-in to get a fresh vault.
+    await disableKeyRoute();
     renderPaired(pairing);
     return;
   }
@@ -402,6 +406,7 @@ async function renderSettings(): Promise<void> {
     await unpair(pairing.pairingId, pairing.extToken).catch(() => {});
     await setPairing(null);
     await setSettings(defaultSettings);
+    await disableKeyRoute(); // drop the wrapped key + cached replica with the pairing
     renderIntro();
   });
 }
