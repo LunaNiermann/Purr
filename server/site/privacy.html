@@ -1,0 +1,214 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Privacy Policy · Purr</title>
+<meta name="description" content="Purr's privacy policy. No account, no email, no phone number. Two-factor secrets are encrypted on your phone; the relay only ever sees ciphertext.">
+<link rel="canonical" href="https://purr2fa.app/privacy">
+<meta name="theme-color" content="#F4F7F5">
+<link rel="icon" href="/assets/img/purr-icon-rounded.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/outfit-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <mask id="paw" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+    <g fill="#fff">
+      <rect x="48" y="92" width="104" height="92" rx="30"></rect>
+      <ellipse cx="52" cy="68" rx="16" ry="20" transform="rotate(-22 52 68)"></ellipse>
+      <ellipse cx="86" cy="44" rx="16" ry="21" transform="rotate(-7 86 44)"></ellipse>
+      <ellipse cx="124" cy="44" rx="16" ry="21" transform="rotate(7 124 44)"></ellipse>
+      <ellipse cx="158" cy="68" rx="16" ry="20" transform="rotate(22 158 68)"></ellipse>
+    </g>
+    <g fill="#000">
+      <circle cx="100" cy="126" r="15"></circle>
+      <path d="M90,168 L95,133 L105,133 L110,168 Z"></path>
+    </g>
+  </mask>
+</defs></svg>
+
+<header class="privacy-header">
+  <div class="inner">
+    <a href="/" class="brand" aria-label="Purr home">
+      <svg viewBox="0 0 200 200" class="mark" aria-hidden="true"><rect width="200" height="200" fill="currentColor" mask="url(#paw)"></rect></svg>
+      <span class="wordmark">Purr</span>
+    </a>
+    <a href="/" class="back">&#8592; Back to purr2fa.app</a>
+  </div>
+</header>
+
+<article class="privacy">
+
+  <div class="privacy-title">
+    <span class="eyebrow">PURR2FA.APP/PRIVACY</span>
+    <h1>Privacy Policy</h1>
+    <p class="updated">Last updated: <span>12 August 2026</span></p>
+  </div>
+
+  <div class="callout">
+    <svg viewBox="0 0 200 200" class="mark" aria-hidden="true"><rect width="200" height="200" fill="currentColor" mask="url(#paw)"></rect></svg>
+    <p>Purr is built to know as little about you as technically possible. No account, no email, no phone number, no sign-up. Your two-factor secrets are encrypted on your phone with a key only you hold. We never receive them and could not read them if we tried.</p>
+  </div>
+
+  <section>
+    <h2>Who we are</h2>
+    <p>Purr is a two-factor (TOTP) authenticator app, browser extension, and relay service. The data controller is:</p>
+    <div class="address-card">
+      <strong>Not Final</strong><br>
+      PO Box 110, 8430 AC Oosterwolde, Netherlands<br>
+      Email: <a href="mailto:luna@not-final.com">luna@not-final.com</a><br>
+      Phone: +31 85 369 6103<br>
+      KVK (Netherlands Chamber of Commerce): 86022164
+    </div>
+    <p>Website: <a href="https://purr2fa.app/">purr2fa.app</a>. Source code: <a href="https://github.com/LunaNiermann/Purr">github.com/LunaNiermann/Purr</a> (open source, GPL-3.0).</p>
+  </section>
+
+  <section>
+    <h2>What stays on your device</h2>
+    <p>The following never leaves your phone in a form we can read:</p>
+    <ul>
+      <li>Your <strong>two-factor secrets</strong> and the codes generated from them.</li>
+      <li>Your <strong>master password</strong> and the keys derived from it.</li>
+      <li>Your <strong>12-word recovery phrase.</strong></li>
+    </ul>
+    <p>These are encrypted on the device with a random data key, itself protected by your master password (Argon2id) and your recovery phrase. We hold no copy of any of these keys.</p>
+  </section>
+
+  <section>
+    <h2>What the Purr relay processes</h2>
+    <p>To let your browser receive a code from your phone, and to store an encrypted backup, our relay service (<span class="inline-code">2fa.apps.not-final.com</span>) processes:</p>
+    <ul class="wide">
+      <li><strong>Encrypted pairing, approval, and backup data.</strong> When you pair a browser, ask for a code, or enable backup, the relay stores and forwards ciphertext only, end-to-end encrypted between your devices. This includes your encrypted vault backup and the encrypted name of a paired device (for example, "Your Android phone"). The relay cannot decrypt any of it.</li>
+      <li><strong>A push notification token.</strong> If you enable notifications, your device's Firebase Cloud Messaging (FCM) token is stored so the relay can wake your phone when your browser asks for a code. The wake message carries only routing identifiers (a request id and a pairing id), never a domain, account, or code.</li>
+      <li><strong>IP address and basic request metadata.</strong> Like any internet service, our servers briefly log the IP address, timestamp, and endpoint of incoming requests for security, abuse prevention, and debugging.</li>
+    </ul>
+    <p>The relay is a dumb pipe. It enforces timing and delivery (approval requests expire after 60 seconds; an answer is deleted the moment it is delivered) but has no ability to read the protected content.</p>
+  </section>
+
+  <section>
+    <h2>What we do not collect</h2>
+    <ul>
+      <li>No name, email address, phone number, or postal address.</li>
+      <li>No advertising identifiers, no analytics, no trackers, no ad networks.</li>
+      <li>No location data.</li>
+      <li>No contact lists, no browsing history, no page content.</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Third parties and sub-processors</h2>
+    <ul class="wide">
+      <li><strong>Google Firebase Cloud Messaging</strong> (Google Ireland Ltd. / Google LLC) delivers push notifications. Google receives your FCM push token and the routing-only wake payload. See Google's privacy policy for how they process this. Push is optional; if you decline notifications, no FCM token is created or shared.</li>
+      <li><strong>Hetzner Online GmbH</strong> (Germany) provides the server infrastructure the relay runs on. The relay itself is operated by Not Final; Hetzner hosts the machine, so the encrypted data and server logs described above reside on their infrastructure in the EU.</li>
+    </ul>
+    <p>We do not sell or rent personal data, and we do not share it except as needed to run these services or where required by law.</p>
+  </section>
+
+  <section>
+    <h2>International transfers</h2>
+    <p>Push notifications are delivered through Google's global infrastructure, which may process the FCM token outside the European Economic Area. Such transfers rely on the safeguards Google provides, for example Standard Contractual Clauses. All other processing takes place on our own relay.</p>
+  </section>
+
+  <section>
+    <h2>Legal bases (GDPR)</h2>
+    <ul class="wide">
+      <li><strong>Providing the service you request</strong> (pairing a browser, relaying a code, storing your encrypted backup): performance of a service at your request and our legitimate interest in operating it (Art. 6(1)(b)/(f)).</li>
+      <li><strong>Push notifications:</strong> your consent, given when you turn them on and withdrawable at any time (Art. 6(1)(a)).</li>
+      <li><strong>Security logging:</strong> our legitimate interest in keeping the service safe and available (Art. 6(1)(f)).</li>
+    </ul>
+  </section>
+
+  <section>
+    <h2>Retention</h2>
+    <div class="retention-wrap">
+      <table class="retention-table">
+        <thead>
+          <tr>
+            <th>DATA</th>
+            <th>KEPT FOR</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>Approval requests</td>
+            <td>Deleted 60 seconds after creation, or immediately once answered</td>
+          </tr>
+          <tr>
+            <td>Pairings and push tokens</td>
+            <td>Until you unpair the browser or uninstall</td>
+          </tr>
+          <tr>
+            <td>Encrypted backup</td>
+            <td>Until you turn backup off or delete it, which you can do in the app at any time</td>
+          </tr>
+          <tr>
+            <td>Server logs</td>
+            <td>Briefly, for security and operations, then discarded after a maximum of 30 days. Does not include tokens or codes.</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </section>
+
+  <section>
+    <h2>How to delete your data</h2>
+    <ul>
+      <li><strong>Unpair a browser</strong> in the app to remove that pairing and its push token.</li>
+      <li><strong>Turn off Encrypted/Cloud backup</strong> in the app to delete your stored backup.</li>
+      <li><strong>Uninstall the app</strong> to remove everything held on your device.</li>
+      <li>Or email <a href="mailto:luna@not-final.com">luna@not-final.com</a> and we will delete relay-side data associated with your pairing or backup identifiers.</li>
+    </ul>
+    <p>Because the service is zero-knowledge, we identify your data only by opaque, device-generated identifiers. We have no name or email to look you up by.</p>
+  </section>
+
+  <section>
+    <h2>Your rights</h2>
+    <p>If you are in the EU/EEA, you have the right to access, rectify, erase, restrict, and port your personal data, and to object to processing. Since we hold no account and no directly identifying data, some of these may be satisfied simply by the self-service deletion steps above. To exercise a right, contact <a href="mailto:luna@not-final.com">luna@not-final.com</a>.</p>
+    <p>You also have the right to lodge a complaint with your supervisory authority. In the Netherlands this is the <strong>Autoriteit Persoonsgegevens</strong> (<a href="https://autoriteitpersoonsgegevens.nl">autoriteitpersoonsgegevens.nl</a>).</p>
+  </section>
+
+  <section>
+    <h2>Security</h2>
+    <p>Secrets are encrypted on the device (XChaCha20-Poly1305 with an Argon2id-derived key wrap); data between your paired devices is end-to-end encrypted; the relay stores ciphertext only. Screens that reveal sensitive content are protected against screenshots on Android. No system is perfectly secure, but Purr is designed so that a breach of our relay exposes no readable secrets. To report a vulnerability, see our security policy or email <a href="mailto:luna@not-final.com">luna@not-final.com</a>.</p>
+  </section>
+
+  <section>
+    <h2>Children</h2>
+    <p>Purr is not directed at children and does not knowingly collect data from children under 16.</p>
+  </section>
+
+  <section>
+    <h2>Changes to this policy</h2>
+    <p>We may update this policy. Material changes will be posted at <a href="https://purr2fa.app/">purr2fa.app</a> with a new effective date.</p>
+  </section>
+
+  <section>
+    <h2>Contact</h2>
+    <div class="address-card">
+      <strong>Not Final</strong><br>
+      <a href="mailto:luna@not-final.com">luna@not-final.com</a><br>
+      PO Box 110, 8430 AC Oosterwolde, Netherlands
+    </div>
+  </section>
+
+</article>
+
+<footer class="privacy-footer">
+  <div class="inner">
+    <span>&copy; 2026 Not Final</span>
+    <div class="links">
+      <a href="/">Home</a>
+      <a href="https://status.not-final.com/" target="_blank" rel="noopener noreferrer">Status</a>
+      <a href="https://github.com/LunaNiermann/Purr" target="_blank" rel="noopener noreferrer">Source</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>

@@ -18,6 +18,16 @@ are deleted on first delivery. Backups require proof-of-knowledge (`backupAuth`,
 HKDF-derived from recovery-kit entropy) on every verb, with uniform 404s so
 existence can't be probed.
 
+## Marketing site (purr2fa.app)
+
+The same container serves the static marketing site from `site/`:
+`/` (landing), `/privacy`, plus `robots.txt`, `sitemap.xml`, `social-card.png`
+and `/assets/*` (self-hosted fonts, images). Point the `purr2fa.app` domain at
+this app in Coolify (add it as an additional domain; Traefik handles TLS) and
+the API keeps working unchanged under `/v1` and `/healthz`. If `site/index.html`
+is missing the static routes are simply not registered. Override the directory
+with `SITE_DIR` if needed.
+
 ## Deploy on Coolify
 
 ### 1. Create the resource

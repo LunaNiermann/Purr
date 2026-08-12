@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://purr2fa.app/sitemap.xml

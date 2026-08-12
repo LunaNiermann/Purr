@@ -84,6 +84,30 @@ describe("pairing", () => {
   });
 });
 
+describe("marketing site", () => {
+  it("serves the landing page at /", async () => {
+    const res = await app.inject({ method: "GET", url: "/" });
+    expect(res.statusCode).toBe(200);
+    expect(res.headers["content-type"]).toContain("text/html");
+    expect(res.body).toContain("Codes stay on your phone.");
+  });
+
+  it("serves the privacy policy at /privacy", async () => {
+    const res = await app.inject({ method: "GET", url: "/privacy" });
+    expect(res.statusCode).toBe(200);
+    expect(res.body).toContain("Privacy Policy");
+    expect(res.body).toContain("Hetzner");
+    // The design handoff's unresolved-TODO amber highlight must never ship.
+    expect(res.body).not.toContain("#FFF3D6");
+  });
+
+  it("keeps the API reachable alongside the site", async () => {
+    const res = await app.inject({ method: "GET", url: "/healthz" });
+    expect(res.statusCode).toBe(200);
+    expect(res.json().ok).toBe(true);
+  });
+});
+
 describe("approval requests", () => {
   it("relays a request to the phone and the answer back, single-use", async () => {
     const { pairingId, extToken, phoneToken } = await pair();

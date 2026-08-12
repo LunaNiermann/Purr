@@ -1,5 +1,8 @@
+import { existsSync } from "node:fs";
+import path from "node:path";
 import Fastify, { type FastifyInstance } from "fastify";
 import rateLimit from "@fastify/rate-limit";
+import fastifyStatic from "@fastify/static";
 import type Database from "better-sqlite3";
 import { cleanup, openDb } from "./db.js";
 import { createPusher, type Pusher } from "./fcm.js";
@@ -20,6 +23,7 @@ export interface AppOptions {
   fcmServiceAccount?: string | undefined;
   fcmServiceAccountJson?: string | undefined;
   trustProxy?: boolean;
+  siteDir?: string;
 }
 
 export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> {
@@ -80,6 +84,30 @@ export async function buildApp(opts: AppOptions = {}): Promise<FastifyInstance> 
   registerRequestRoutes(app, ctx);
   registerBackupRoutes(app, ctx);
   registerReplicaRoutes(app, ctx);
+
+  // Marketing site for purr2fa.app — the domain points at this same container.
+  // Static files live in `site/` (copied into the image); the API stays under
+  // /v1 and /healthz, so there is no route overlap.
+  const siteDir = path.resolve(
+    opts.siteDir ?? process.env.SITE_DIR ?? "site",
+  );
+  if (existsSync(path.join(siteDir, "index.html"))) {
+    await app.register(fastifyStatic, {
+      root: siteDir,
+      index: "index.html",
+      setHeaders(res, filePath) {
+        // Fonts/images/CSS may cache for a day; HTML revalidates quickly so
+        // policy or copy fixes propagate.
+        res.header(
+          "cache-control",
+          filePath.endsWith(".html")
+            ? "public, max-age=300"
+            : "public, max-age=86400",
+        );
+      },
+    });
+    app.get("/privacy", (_req, reply) => reply.sendFile("privacy.html"));
+  }
 
   const sweeper = setInterval(() => cleanup(ctx.db), 30_000);
   sweeper.unref();

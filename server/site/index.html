@@ -1,0 +1,303 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Purr: 2FA authenticator with no account</title>
+<meta name="description" content="Purr is a free, open-source two-factor authenticator. Codes stay encrypted on your phone, the browser extension asks for them, and there is no account, email or phone number.">
+<link rel="canonical" href="https://purr2fa.app/">
+<meta property="og:type" content="website">
+<meta property="og:url" content="https://purr2fa.app/">
+<meta property="og:title" content="Purr: 2FA authenticator with no account">
+<meta property="og:description" content="Codes stay on your phone. The extension asks, you tap once, six digits cross encrypted.">
+<meta property="og:image" content="https://purr2fa.app/social-card.png">
+<meta name="twitter:card" content="summary_large_image">
+<meta name="theme-color" content="#F4F7F5">
+<link rel="icon" href="/assets/img/purr-icon-rounded.svg" type="image/svg+xml">
+<link rel="icon" href="/assets/img/favicon-32.png" sizes="32x32" type="image/png">
+<link rel="icon" href="/assets/img/favicon-16.png" sizes="16x16" type="image/png">
+<link rel="apple-touch-icon" href="/assets/img/apple-touch-icon.png">
+<link rel="preload" href="/assets/fonts/outfit-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/outfit-latin-400-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="/assets/fonts/jetbrains-mono-latin-700-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="/assets/site.css">
+<script type="application/ld+json">
+{"@context":"https://schema.org","@graph":[
+{"@type":"SoftwareApplication","name":"Purr","alternateName":"Purr 2FA Authenticator","applicationCategory":"SecurityApplication","operatingSystem":"iOS, Android, Chrome, Edge, Firefox","url":"https://purr2fa.app/","description":"Free open-source two-factor (TOTP) authenticator. TOTP secrets stay encrypted on the phone; the browser extension requests a single six-digit code per login. No account, email or phone number.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true},
+{"@type":"FAQPage","mainEntity":[
+{"@type":"Question","name":"Does Purr need an account?","acceptedAnswer":{"@type":"Answer","text":"No account, no email, no phone number. It works offline."}},
+{"@type":"Question","name":"Can I export my codes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Plaintext otpauth:// or encrypted, any time."}},
+{"@type":"Question","name":"What if I lose my phone?","acceptedAnswer":{"@type":"Answer","text":"Twelve printed words restore every code on a new one."}},
+{"@type":"Question","name":"Can you see my codes?","acceptedAnswer":{"@type":"Answer","text":"No. Your secrets are encrypted on your device. Our relay only carries ciphertext."}},
+{"@type":"Question","name":"Switching from Authy?","acceptedAnswer":{"@type":"Answer","text":"Authy has no export, so those entries get re-added from each service. Google Authenticator, Aegis, 2FAS and Ente import directly."}},
+{"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"Nothing. Open source, no ads, no trackers."}}]}]}
+</script>
+<script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js" async></script>
+<script src="/assets/site.js" defer></script>
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true"><defs>
+  <mask id="paw" maskUnits="userSpaceOnUse" x="0" y="0" width="200" height="200">
+    <g fill="#fff">
+      <rect x="48" y="92" width="104" height="92" rx="30"></rect>
+      <ellipse cx="52" cy="68" rx="16" ry="20" transform="rotate(-22 52 68)"></ellipse>
+      <ellipse cx="86" cy="44" rx="16" ry="21" transform="rotate(-7 86 44)"></ellipse>
+      <ellipse cx="124" cy="44" rx="16" ry="21" transform="rotate(7 124 44)"></ellipse>
+      <ellipse cx="158" cy="68" rx="16" ry="20" transform="rotate(22 158 68)"></ellipse>
+    </g>
+    <g fill="#000">
+      <circle cx="100" cy="126" r="15"></circle>
+      <path d="M90,168 L95,133 L105,133 L110,168 Z"></path>
+    </g>
+  </mask>
+</defs></svg>
+
+<header class="site-header">
+  <div class="inner">
+    <a href="/" class="brand" aria-label="Purr home">
+      <svg viewBox="0 0 200 200" class="mark" aria-hidden="true"><rect width="200" height="200" fill="currentColor" mask="url(#paw)"></rect></svg>
+      <span class="wordmark">Purr</span>
+    </a>
+    <nav class="site-nav">
+      <a href="#how">How it works</a>
+      <a href="#compare">Compare</a>
+      <a href="#faq">FAQ</a>
+      <a href="#get" class="btn-nav">Get Purr</a>
+    </nav>
+  </div>
+</header>
+
+<main>
+<section class="hero">
+  <div class="hero-copy">
+    <h1>Codes stay on your phone.</h1>
+    <p class="sub">The extension asks. You tap once. Six digits cross, encrypted, and expire.</p>
+    <div class="cta-row">
+      <a href="#get" class="btn-primary js-ext-href">
+        <span>Add to <span class="js-browser-name">your browser</span></span>
+        <span class="free-tag">FREE</span>
+      </a>
+      <a href="#get" class="btn-secondary">All downloads</a>
+    </div>
+    <div class="trust-line">
+      <span>Open source</span><span>No trackers</span><span>Works offline</span>
+    </div>
+  </div>
+  <div class="hero-shot">
+    <img src="/assets/img/hero-approve.png" width="1000" height="750" loading="eager" fetchpriority="high" alt="Purr filling a six-digit two-factor code: the browser shows the code fields while the phone asks to approve sending the code.">
+  </div>
+</section>
+
+<section id="how" class="band white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">HOW IT WORKS</span>
+      <h2>Two factors. Two devices.</h2>
+    </div>
+    <div class="step-grid">
+      <div class="step-card">
+        <span class="num">01</span>
+        <h3>Pair once</h3>
+        <p>Scan a QR. Our relay only ever sees ciphertext.</p>
+      </div>
+      <div class="step-card">
+        <span class="num">02</span>
+        <h3>Sign in</h3>
+        <p>The extension spots the field and asks your phone.</p>
+      </div>
+      <div class="step-card">
+        <span class="num">03</span>
+        <h3>Tap to approve</h3>
+        <p>Six digits cross. The secret behind them never does.</p>
+      </div>
+      <div class="step-card">
+        <span class="num">04</span>
+        <h3>Lose the phone</h3>
+        <p>Twelve printed words bring every code back.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="compare" class="band">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">HONEST COMPARISON</span>
+      <h2>How Purr compares</h2>
+    </div>
+    <div class="table-wrap">
+      <table class="compare-table">
+        <thead>
+          <tr>
+            <th></th>
+            <th class="purr">Purr</th>
+            <th>Bitwarden</th>
+            <th>Authy</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>No account, no phone number</td>
+            <td class="purr">Yes</td>
+            <td>Sync needs an account</td>
+            <td>Phone number required</td>
+          </tr>
+          <tr>
+            <td>Export your codes</td>
+            <td class="purr">Yes</td>
+            <td>Yes</td>
+            <td>No</td>
+          </tr>
+          <tr>
+            <td>Codes in the browser</td>
+            <td class="purr">Yes</td>
+            <td>Yes</td>
+            <td>Desktop ended 2024</td>
+          </tr>
+          <tr>
+            <td>Second factor off your computer</td>
+            <td class="purr">Always</td>
+            <td>Optional</td>
+            <td>Phone only</td>
+          </tr>
+          <tr>
+            <td>Price</td>
+            <td class="purr">Free</td>
+            <td>Paid</td>
+            <td>Free</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="compare-note">Purr has no watch app and no password manager. Both of the others do more there.</p>
+    <p class="compare-legal">From vendor documentation, August 2026. Features change, so check theirs before deciding. Bitwarden is a trademark of Bitwarden, Inc.; Authy and Twilio are trademarks of Twilio Inc. Purr is not affiliated with or endorsed by either, and their names are used only for factual comparison.</p>
+  </div>
+</section>
+
+<section id="get" class="band white">
+  <div class="container">
+    <div class="section-head">
+      <span class="eyebrow">GET PURR</span>
+      <h2>Extension first, then the app</h2>
+    </div>
+    <div class="get-grid">
+      <div class="get-card">
+        <div class="get-card-head">
+          <h3>Browser extension</h3>
+          <span class="detected-pill">DETECTED: <span class="js-browser-name">your browser</span></span>
+        </div>
+        <a href="#get" class="big-cta js-ext-href">
+          <span class="stack">
+            <span class="label">Add to <span class="js-browser-name">your browser</span></span>
+            <span class="store js-ext-store">Free · MV3 · no telemetry</span>
+          </span>
+          <span class="arrow" aria-hidden="true">&#8594;</span>
+        </a>
+        <div class="other-browsers">
+          <span class="eyebrow-sm">EVERY OTHER BROWSER</span>
+          <div class="chip-grid">
+            <a href="https://chrome.google.com/webstore/" class="chip">Chrome</a>
+            <a href="https://microsoftedge.microsoft.com/addons/" class="chip">Edge</a>
+            <a href="https://addons.mozilla.org/" class="chip">Firefox</a>
+            <a href="https://chrome.google.com/webstore/" class="chip">Brave</a>
+            <a href="https://github.com/LunaNiermann/Purr/releases" class="chip">.zip build</a>
+          </div>
+          <p class="footnote">No Safari yet.</p>
+        </div>
+      </div>
+      <div class="get-card">
+        <h3>Phone app</h3>
+        <div class="badge-row">
+          <a href="#" class="badge-apple" data-store="apple" data-todo="replace-with-app-store-url" aria-label="Download on the App Store">
+            <img src="https://tools.applemediaservices.com/api/badges/download-on-the-app-store/black/en-us?size=250x83" alt="Download on the App Store">
+          </a>
+          <a href="#" class="badge-google" data-store="google" data-todo="replace-with-play-store-url" aria-label="Get it on Google Play">
+            <img src="https://play.google.com/intl/en_us/badges/images/generic/en_badge_web_generic.png" alt="Get it on Google Play">
+          </a>
+        </div>
+        <div class="phone-links">
+          <p>iPhone and Android. Free, no account.</p>
+          <a href="https://github.com/LunaNiermann/Purr/releases">Direct APK download &#8594;</a>
+        </div>
+        <div class="import-note">
+          <svg viewBox="0 0 200 200" class="mark" aria-hidden="true"><rect width="200" height="200" fill="currentColor" mask="url(#paw)"></rect></svg>
+          <p>Imports from Google Authenticator, Aegis, 2FAS and Ente.</p>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="faq" class="band">
+  <div class="container">
+    <h2>Questions</h2>
+    <div class="faq-grid">
+      <div class="faq-item">
+        <h3>Does Purr need an account?</h3>
+        <p>No account, no email, no phone number. It works offline.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can I export my codes?</h3>
+        <p>Yes. Plaintext <span class="mono">otpauth://</span> or encrypted, any time.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What if I lose my phone?</h3>
+        <p>Twelve printed words restore every code on a new one.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Can you see my codes?</h3>
+        <p>No. Your secrets are encrypted on your device. Our relay only carries ciphertext.</p>
+      </div>
+      <div class="faq-item">
+        <h3>Switching from Authy?</h3>
+        <p>Authy has no export, so those entries get re-added from each service. Google Authenticator, Aegis, 2FAS and Ente import directly.</p>
+      </div>
+      <div class="faq-item">
+        <h3>What does it cost?</h3>
+        <p>Nothing. Open source, no ads, no trackers.</p>
+      </div>
+    </div>
+  </div>
+</section>
+</main>
+
+<footer class="site-footer">
+  <div class="top">
+    <div class="footer-brand">
+      <a href="/" class="brand" aria-label="Purr home">
+        <svg viewBox="0 0 200 200" class="mark" aria-hidden="true"><rect width="200" height="200" fill="currentColor" mask="url(#paw)"></rect></svg>
+        <span class="wordmark">Purr</span>
+      </a>
+      <p class="tagline">Two-factor codes. No account.</p>
+      <div class="kofi-slot" id="kofi-slot">
+        <a href="https://ko-fi.com/luna20945" target="_blank" rel="noopener" class="kofi-fallback">Support me on Ko-fi</a>
+      </div>
+    </div>
+    <div class="footer-cols">
+      <div class="footer-col">
+        <span class="eyebrow-sm">PRODUCT</span>
+        <a href="#how">How it works</a>
+        <a href="#compare">Compare</a>
+        <a href="#get">Download</a>
+        <a href="#faq">FAQ</a>
+      </div>
+      <div class="footer-col">
+        <span class="eyebrow-sm">TRUST</span>
+        <a href="/privacy">Privacy policy</a>
+        <a href="https://status.not-final.com/" target="_blank" rel="noopener noreferrer">Status</a>
+        <a href="https://github.com/LunaNiermann/Purr" target="_blank" rel="noopener noreferrer">Source code</a>
+        <a href="https://ko-fi.com/luna20945" target="_blank" rel="noopener">Ko-fi</a>
+      </div>
+    </div>
+  </div>
+  <div class="bottom">
+    <div class="inner">
+      <span>&copy; 2026 Not Final. All product names and trademarks are the property of their respective owners.</span>
+      <a href="/privacy">purr2fa.app/privacy</a>
+    </div>
+  </div>
+</footer>
+
+</body>
+</html>
