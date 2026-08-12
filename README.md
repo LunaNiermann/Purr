@@ -12,7 +12,9 @@ Three surfaces + one small service:
 | `server/` | E2EE relay + encrypted backup store | Node 22, Fastify, SQLite |
 | `docs/` | Architecture, plan, research, Play readiness | — |
 
-App id: `nl.notfinal.twofa` · Relay: `https://2fa.apps.not-final.com`
+App id: `nl.notfinal.twofa` · Relay: `https://2fa.apps.not-final.com` · Website: [purr2fa.app](https://purr2fa.app/)
+
+**Get Purr for Android:** [Google Play](https://play.google.com/store/apps/details?id=nl.notfinal.twofa) · [direct APK](https://github.com/LunaNiermann/Purr/releases/latest)
 
 ## What makes it different
 
@@ -65,7 +67,7 @@ npm install && npm run build   # load dist/ as an unpacked extension
 - Server → Coolify (Dockerfile in `server/`, volume at `/app/data`). Live at `https://2fa.apps.not-final.com`. See `server/README.md`.
 - App → built and released from GitHub Actions (no local build; iOS on GitHub's Mac runners). See `docs/CD.md`; Play specifics in `docs/PLAY.md`.
 - Extension → testing and store distribution in `docs/EXTENSION.md`.
-- The landing page and its account-deletion URL live on a separate domain (out of scope here).
+- The marketing site (`https://purr2fa.app/` — landing + privacy policy) is static HTML in `server/site/`, served by the relay container itself.
 
 Releases are cut by tag, and the three surfaces ship independently:
 - `v0.2.0` → Android (AAB/APK, optional Play upload) + iOS (validation, or TestFlight when signed)
