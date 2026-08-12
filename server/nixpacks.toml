@@ -1,0 +1,7 @@
+# Coolify builds this app with Nixpacks (not the Dockerfile, which is kept for
+# plain-Docker deploys). better-sqlite3 normally installs a prebuilt binary,
+# but when that download flakes npm falls back to node-gyp — which needs
+# python3 + a C toolchain that the stock Nixpacks node image lacks.
+[phases.setup]
+nixPkgs = ["...", "python3"]
+aptPkgs = ["build-essential"]
