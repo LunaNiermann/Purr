@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:qr_flutter/qr_flutter.dart';
+import 'package:url_launcher/url_launcher.dart';
 
 import '../../core/otpauth.dart';
 import '../../crypto/recovery.dart';
@@ -273,6 +274,24 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     ),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 26),
+            Center(
+              child: InkWell(
+                onTap: () => launchUrl(
+                  Uri.parse('https://purr2fa.app/privacy'),
+                  mode: LaunchMode.externalApplication,
+                ),
+                borderRadius: BorderRadius.circular(9),
+                child: Padding(
+                  padding:
+                      const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
+                  child: Text('Privacy policy',
+                      style: TkText.metadata.copyWith(
+                          fontWeight: FontWeight.w600,
+                          color: TkColors.green)),
+                ),
               ),
             ),
           ],
