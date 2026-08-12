@@ -532,18 +532,6 @@ class _PushStatusLineState extends State<_PushStatusLine> {
                           fontSize: 13.5,
                           fontWeight: FontWeight.w600,
                           color: color)),
-                  if (d?.error != null) ...[
-                    const SizedBox(height: 3),
-                    Text(d!.error!,
-                        style: TkText.metadata.copyWith(
-                            fontFamily: TkFonts.mono, fontSize: 11)),
-                  ],
-                  if (ApprovalDiag.last != null) ...[
-                    const SizedBox(height: 5),
-                    Text('Last request: ${ApprovalDiag.last}',
-                        style: TkText.metadata.copyWith(
-                            fontFamily: TkFonts.mono, fontSize: 11)),
-                  ],
                 ],
               ),
             ),

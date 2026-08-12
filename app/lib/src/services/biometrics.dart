@@ -1,4 +1,3 @@
-import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
 import 'package:local_auth/local_auth.dart';
 
@@ -54,11 +53,9 @@ class Biometrics {
           stickyAuth: true,
         ),
       );
-    } on PlatformException catch (e) {
-      // e.g. "no_fragment_activity" (host not a FlutterFragmentActivity),
-      // "NotEnrolled", "LockedOut". Surfaced so a config error can't hide as a
-      // plain user-cancel again.
-      debugPrint('biometrics: authenticate failed — ${e.code}: ${e.message}');
+    } on PlatformException {
+      // No enrolled biometric/credential, locked out, or cancelled — the
+      // caller treats a false return as "not confirmed".
       return false;
     }
   }

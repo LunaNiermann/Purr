@@ -11,24 +11,18 @@ import 'package:flutter_local_notifications/flutter_local_notifications.dart';
 /// carries the domain, account, or code. Its only job is to wake the phone.
 /// When a request arrives we show a local notification that opens the app; the
 /// approval listener then fetches the pending request and shows A11.
-/// A one-glance snapshot of the push subsystem, surfaced in Security so a
-/// person (or we, from a screenshot) can tell where a silent failure is.
+/// A one-glance snapshot of the push subsystem, surfaced in Security.
 /// [notificationsAllowed] is the OS-level display permission (Android 13+
 /// POST_NOTIFICATIONS): a push can arrive and wake us with this off, but no
-/// banner will show — a distinct failure from "no token".
+/// banner will show — a distinct state from "no token".
 typedef PushDiag = ({
   bool available,
   bool hasToken,
   bool notificationsAllowed,
-  String? error,
 });
 
 class PushService {
   static bool available = false;
-
-  /// The last thing that went wrong bringing push up (Firebase init or
-  /// getToken). Null when push is healthy. Shown in the Security diagnostics.
-  static String? lastError;
 
   static final FlutterLocalNotificationsPlugin _local =
       FlutterLocalNotificationsPlugin();
@@ -49,11 +43,9 @@ class PushService {
       // No google-services.json (or misconfigured) — push disabled, app fine.
       debugPrint('Push disabled (Firebase not configured): $e');
       available = false;
-      lastError = 'init: $e';
       return;
     }
     available = true;
-    lastError = null;
 
     FirebaseMessaging.onBackgroundMessage(firebaseBackgroundHandler);
     await _ensureLocalReady();
@@ -84,7 +76,6 @@ class PushService {
       available: available,
       hasToken: tok != null,
       notificationsAllowed: allowed,
-      error: lastError,
     );
   }
 
@@ -137,8 +128,7 @@ class PushService {
     if (!available) return null;
     try {
       return await FirebaseMessaging.instance.getToken();
-    } catch (e) {
-      lastError = 'getToken: $e';
+    } catch (_) {
       return null;
     }
   }

@@ -409,7 +409,7 @@ async function renderSettings(): Promise<void> {
 // ---- "Touch your key": register + validate security keys -------------------
 
 /** (Re)build the security-keys card: registered keys, add, and a touch test
- * that confirms PRF unlock works end to end on the real hardware. */
+ * that confirms a touch unlocks the vault on the real hardware. */
 async function populateSecurityKeys(): Promise<void> {
   const card = document.getElementById("security-keys");
   if (!card) return;
@@ -465,8 +465,8 @@ async function populateSecurityKeys(): Promise<void> {
         prfConfirmed: false,
       });
       status.textContent = res.prfSupported
-        ? `✓ ${label} registered. Tap "Test unlock" and touch it to confirm PRF works.`
-        : `⚠ ${label} registered, but it reported no PRF support — it likely can't unlock the key route. Try Test unlock to be sure.`;
+        ? `✓ ${label} registered. Tap "Test unlock" and touch it to confirm.`
+        : `⚠ ${label} registered, but it may not support touch-to-unlock. Try Test unlock to be sure.`;
       await populateSecurityKeys();
     } catch (e) {
       status.textContent = `Couldn't register: ${(e as Error).message}`;
@@ -488,7 +488,7 @@ async function populateSecurityKeys(): Promise<void> {
         const used = (await getSecurityKeys()).find(
           (k) => k.credentialIdB64 === credentialIdB64,
         );
-        status.textContent = `✓ Unlock confirmed with ${used?.label ?? "your key"} — PRF works end to end.`;
+        status.textContent = `✓ ${used?.label ?? "Your key"} unlocks Purr here. You're all set.`;
         await populateSecurityKeys();
       } catch (e) {
         status.textContent = `Unlock failed: ${(e as Error).message}`;
@@ -533,7 +533,7 @@ async function populateSecurityKeys(): Promise<void> {
             "Unlocked, but the vault is empty. Add an account on your phone.";
         } else {
           const a = accounts[0]!;
-          status.textContent = `✓ ${a.site || "First account"}: ${codeFor(a)} — decrypted here from your touch.`;
+          status.textContent = `✓ ${a.site || "First account"}: ${codeFor(a)} — unlocked with your key.`;
         }
       } catch (e) {
         status.textContent = `${(e as Error).message}`;
