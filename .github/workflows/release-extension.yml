@@ -45,25 +45,25 @@ jobs:
 
       - name: Zip
         working-directory: extension/dist
-        run: zip -r ../twokeys-extension.zip .
+        run: zip -r ../purr-extension.zip .
 
       - uses: actions/upload-artifact@v4
         with:
           name: extension
-          path: extension/twokeys-extension.zip
+          path: extension/purr-extension.zip
 
       - name: Attach to GitHub Release
         if: github.ref_type == 'tag'
         uses: softprops/action-gh-release@v2
         with:
-          files: extension/twokeys-extension.zip
+          files: extension/purr-extension.zip
 
       - name: Publish to Chrome Web Store (if configured)
         if: env.CLIENT_ID != ''
         working-directory: extension
         run: |
           npx --yes chrome-webstore-upload-cli@3 upload \
-            --source twokeys-extension.zip \
+            --source purr-extension.zip \
             --auto-publish
         # EXTENSION_ID / CLIENT_ID / CLIENT_SECRET / REFRESH_TOKEN are read
         # from the env above by the CLI.
