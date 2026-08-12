@@ -41,6 +41,18 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
     activeRequestId = null;
     void setFlow(null);
     sendResponse({ ok: true });
+  } else if (msg?.type === "tk-key-fill") {
+    // Key route: the popup already unlocked the code with a touch. Fill it
+    // through the same path as a phone answer (settings, rules, clipboard
+    // fallback) and reflect the result via the flow.
+    void keyFill(
+      msg.code as string,
+      msg.domain as string,
+      msg.tabId as number,
+      msg.site as string | undefined,
+      msg.username as string | undefined,
+    );
+    sendResponse({ ok: true });
   } else if (msg?.type === "twokeys:field") {
     // The page reported whether it has a 2FA field: badge that tab's icon.
     const tabId = sender.tab?.id;
@@ -74,6 +86,27 @@ function browserLabel(): string {
       ? "Mac"
       : "Linux";
   return `${browser} · ${os}`;
+}
+
+/** Fill a code the popup already unlocked with a security-key touch. Reuses the
+ * phone-route fill path so settings, per-site rules, and the clipboard fallback
+ * all apply identically. */
+async function keyFill(
+  code: string,
+  domain: string,
+  tabId: number,
+  site: string | undefined,
+  username: string | undefined,
+): Promise<void> {
+  activeRequestId = null; // supersede any phone flow in flight
+  if (site) await rememberMatch(domain, { site, username: username ?? "" });
+  const filled = await tryFill(tabId, code);
+  await setFlow({
+    status: filled ? "filled" : "filledClipboard",
+    domain,
+    code: filled ? undefined : code,
+    at: Date.now(),
+  });
 }
 
 async function runApproval(domain: string, tabId: number): Promise<void> {

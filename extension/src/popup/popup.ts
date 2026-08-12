@@ -1,5 +1,12 @@
 import { getFlow, type Flow } from "../lib/flow";
-import { getMatch, getPairing } from "../lib/state";
+import {
+  codeFor,
+  isEnrolled,
+  matchAccount,
+  refreshReplica,
+  unlockReplica,
+} from "../lib/keyroute";
+import { getMatch, getPairing, getSettings } from "../lib/state";
 
 /**
  * The popup is a thin controller. It kicks off an approval ("tk-start" →
@@ -78,27 +85,104 @@ function renderNoField(): void {
 
 async function renderReady(domain: string): Promise<void> {
   const match = await getMatch(domain);
+  const settings = await getSettings();
+  const paired = (await getPairing()) !== null;
+  // The key route is available when a key is enrolled and the site isn't pinned
+  // to the phone. preferKey decides which action leads.
+  const keyOn = (await isEnrolled()) && settings.siteRules[domain] !== "always-phone";
+  const keyLeads = keyOn && settings.preferKey;
+
+  const keyBtn = (primary: boolean) => `
+    <button class="btn${primary ? "" : " secondary"}" id="key">
+      <div class="glyph"></div>
+      <div class="btn-col">Fill with my key
+        <span class="btn-sub">Touch your security key — your phone stays in your pocket</span>
+      </div>
+    </button>`;
+  const phoneBtn = (primary: boolean) => `
+    <button class="btn${primary ? "" : " secondary"}" id="ask">
+      <div class="glyph"></div>
+      <div class="btn-col">Ask my phone
+        <span class="btn-sub">Approve there and the code lands here</span>
+      </div>
+    </button>`;
+
+  const actions: string[] = [];
+  if (keyLeads) {
+    actions.push(keyBtn(true));
+    if (paired) actions.push(phoneBtn(false));
+  } else {
+    if (paired) actions.push(phoneBtn(true));
+    if (keyOn) actions.push(keyBtn(!paired));
+  }
+
   main.replaceChildren(
     el(`<div>
       ${chip(domain, match?.username ?? null, match !== null)}
       <div class="headline">Ready when you are.</div>
-      <div class="sub">Your code has to come from something you're holding —
-        your phone.</div>
-      <div class="stack">
-        <button class="btn" id="ask">
-          <div class="glyph"></div>
-          <div class="btn-col">Ask my phone
-            <span class="btn-sub">Approve there and the code lands here</span>
-          </div>
-        </button>
-      </div>
-      <div class="footnote">Only the six digits travel, and only after you
-        approve. You can close this — it'll fill in when you approve.</div>
+      <div class="sub">${
+        keyOn
+          ? "Touch your key to fill the code right here, or ask your phone."
+          : "Your code has to come from something you're holding — your phone."
+      }</div>
+      <div class="stack">${actions.join("")}</div>
+      <div class="footnote">Only the six digits ever reach the page. You can
+        close this — a phone approval still fills in when you tap Approve.</div>
     </div>`),
   );
-  document.getElementById("ask")!.addEventListener("click", () => {
-    void start(domain);
-  });
+  document.getElementById("ask")?.addEventListener("click", () => void start(domain));
+  document.getElementById("key")?.addEventListener("click", () => void fillWithKey(domain));
+}
+
+function renderKeyTouching(domain: string): void {
+  main.replaceChildren(
+    el(`<div>
+      ${chip(domain, null, false)}
+      <div class="center">
+        <div class="pulse-wrap"><div class="pulse-ring"></div><div class="phone-glyph"></div></div>
+        <div class="wait-title">Touch your key</div>
+        <div class="wait-sub">Tap your security key to unlock this code right
+          here — nothing leaves this computer but the six digits.</div>
+      </div>
+    </div>`),
+  );
+}
+
+function renderKeyError(domain: string, message: string): void {
+  main.replaceChildren(
+    el(`<div>
+      <div class="headline">Couldn't use your key</div>
+      <div class="sub">${esc(message)}</div>
+      <div class="stack"><button class="btn" id="again">Try again</button></div>
+    </div>`),
+  );
+  document.getElementById("again")!.addEventListener("click", () => void fillWithKey(domain));
+}
+
+/** Key route: touch (in this popup) → decrypt the replica → match → fill.
+ * The touch must run here — WebAuthn needs the extension page's user gesture. */
+async function fillWithKey(domain: string): Promise<void> {
+  currentDomain = domain;
+  renderKeyTouching(domain);
+  try {
+    const accounts = await unlockReplica(); // the touch happens inside
+    const account = matchAccount(accounts, domain);
+    if (!account) return renderUnmatched(domain);
+    const code = codeFor(account);
+    const tabId = (await activeTab())?.id;
+    if (tabId == null) return renderKeyError(domain, "No active tab to fill.");
+    // Hand off to the worker to fill + report via the flow (renders next).
+    await chrome.runtime.sendMessage({
+      type: "tk-key-fill",
+      code,
+      domain,
+      tabId,
+      site: account.site,
+      username: account.user,
+    });
+  } catch (e) {
+    renderKeyError(domain, (e as Error).message);
+  }
 }
 
 function renderAwaiting(domain: string): void {
@@ -259,6 +343,10 @@ async function init(): Promise<void> {
 
   const domain = domainOf(await activeTab());
   currentDomain = domain;
+
+  // Warm the replica cache now (network), so a later key touch decrypts from a
+  // fresh local copy without racing a fetch against the WebAuthn gesture window.
+  if (domain != null && (await isEnrolled())) void refreshReplica();
 
   // Reflect any in-progress/terminal flow the service worker owns.
   const flow = await getFlow();

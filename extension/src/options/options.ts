@@ -267,6 +267,7 @@ async function renderSettings(): Promise<void> {
     return;
   }
   const settings = await getSettings();
+  const keyEnrolled = await isEnrolled();
 
   const agoDays = Math.floor((Date.now() - pairing.pairedAt) / 86_400_000);
   const pairedAgo =
@@ -306,6 +307,17 @@ async function renderSettings(): Promise<void> {
           </div>
           <button class="toggle${settings.autoSubmit ? " on" : ""}" data-key="autoSubmit"><div class="knob"></div></button>
         </div>
+        ${
+          keyEnrolled
+            ? `<div class="row">
+          <div class="grow">
+            <div class="title">Lead with my security key</div>
+            <div class="subtitle">Offer the key touch first; your phone stays a tap away</div>
+          </div>
+          <button class="toggle${settings.preferKey ? " on" : ""}" data-key="preferKey"><div class="knob"></div></button>
+        </div>`
+            : ""
+        }
       </div>
 
       <div class="section-label">Sites with their own rules</div>
