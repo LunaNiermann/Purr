@@ -1,6 +1,6 @@
 {
   "manifest_version": 3,
-  "name": "Purr",
+  "name": "Purr 2FA Authenticator",
   "version": "0.1.0",
   "description": "Sign in on your computer with one tap. Purr brings your 2FA code from your phone or a security key. It never sees your secret.",
   "minimum_chrome_version": "116",
