@@ -1,4 +1,7 @@
-# Purr relay server — single container for Coolify.
+# Purr relay server — single container for plain Docker deploys.
+# NOTE: the live Coolify instance does NOT use this file; it builds with
+# Nixpacks (see nixpacks.toml and README "Deploy on Coolify"). Kept in sync
+# as the reference for what the deployed container must do.
 # Mount a volume at /app/data to persist the SQLite database.
 FROM node:22-bookworm-slim AS build
 WORKDIR /app

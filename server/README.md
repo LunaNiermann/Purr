@@ -31,8 +31,15 @@ with `SITE_DIR` if needed.
 ## Deploy on Coolify
 
 ### 1. Create the resource
-New resource → **Dockerfile** application from this repo. Set **Base Directory**
-to `/server` (so Coolify uses `server/Dockerfile` and builds in that folder).
+New resource → application from this repo with build pack **Nixpacks** and
+**Base Directory** `/server` — this is how the live instance is set up. Nixpacks
+detects a Node app and runs `npm ci` / `npm run build` / `npm start`;
+`nixpacks.toml` adds python3 + build-essential so better-sqlite3 can compile
+from source when its prebuilt-binary download flakes. Set
+`NIXPACKS_NODE_VERSION=22`.
+
+(`Dockerfile` in this folder is *not* used by Coolify — it's kept for plain
+`docker build`/`docker run` deploys and mirrors the same behavior.)
 
 ### 2. Domain & port
 - Domain: `https://2fa.apps.not-final.com` (Coolify/Traefik terminates TLS).
@@ -48,11 +55,11 @@ The app writes `twokeys.sqlite` (+ `-wal`/`-shm`) to `/app/data`. Add a
 - **Destination Path:** `/app/data`  ← must match exactly.
 - **Source Path:** leave **empty**. This is the important bit — an empty source
   makes it a *named Docker volume*, and Docker seeds it with the image's
-  directory ownership (`node:node`, uid 1000). If you instead type a host path
-  it becomes a *bind mount* that comes in **root-owned**, and the container
-  (which runs as the non-root `node` user) can't write → you'll see
-  `SQLITE_CANTOPEN`. If you must use a host bind mount, `chown -R 1000:1000`
-  that host directory first.
+  directory ownership. If you instead type a host path it becomes a *bind
+  mount* that comes in **root-owned** — harmless under Nixpacks (its container
+  runs as root) but fatal for the Dockerfile build, whose non-root `node` user
+  can't write → `SQLITE_CANTOPEN`. If you must use a host bind mount with the
+  Dockerfile build, `chown -R 1000:1000` that host directory first.
 
 The `VOLUME /app/data` line in the Dockerfile is only a fallback (anonymous
 volume); declaring the named volume here is what actually persists across
@@ -92,12 +99,15 @@ rather than crashing the server.
 
 ### 5. Other env
 - `PORT` defaults to `3000`, `LOG_LEVEL` to `info` — leave unset unless changing.
-- `DB_PATH` is already `/app/data/twokeys.sqlite` (set in the Dockerfile); only
-  override if you mount the volume somewhere else.
+- `DB_PATH` defaults to `data/twokeys.sqlite`, which resolves to
+  `/app/data/twokeys.sqlite` in the container (Nixpacks workdir is `/app`; the
+  Dockerfile sets the same path explicitly). Only override if you mount the
+  volume somewhere else.
 
 ### 6. Health check
-The container has a built-in `HEALTHCHECK` hitting `/healthz`. Coolify shows the
-app healthy once it returns `{"ok":true}`. You can also curl
+`GET /healthz` returns `{"ok":true,"push":<bool>}`. Point Coolify's health
+check at it (the Nixpacks image has no baked-in `HEALTHCHECK`; only the
+Dockerfile build carries one). You can also curl
 `https://2fa.apps.not-final.com/healthz` after deploy.
 
 ## Develop
