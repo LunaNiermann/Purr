@@ -2,7 +2,7 @@
   "manifest_version": 3,
   "name": "Purr",
   "version": "0.1.0",
-  "description": "Your phone is the key. This is the keyhole. Codes stay on your phone; only six digits ever travel.",
+  "description": "Sign in on your computer with one tap. Purr brings your 2FA code from your phone or a security key. It never sees your secret.",
   "minimum_chrome_version": "116",
   "action": {
     "default_popup": "popup.html",
