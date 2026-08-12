@@ -6,12 +6,11 @@ const watch = process.argv.includes("--watch");
 const options = {
   entryPoints: {
     background: "src/background.ts",
-    content: "src/content.ts",
     popup: "src/popup/popup.ts",
     options: "src/options/options.ts",
   },
   bundle: true,
-  format: "iife", // MV3 content scripts can't be ES modules; iife works everywhere
+  format: "iife", // keep the classic-script format the popup/options expect
   outdir: "dist",
   target: "chrome116",
   sourcemap: false,

@@ -1,7 +1,7 @@
 {
   "manifest_version": 3,
   "name": "Purr 2FA Authenticator",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "Sign in on your computer with one tap. Purr brings your 2FA code from your phone or a security key. It never sees your secret.",
   "minimum_chrome_version": "116",
   "action": {
@@ -22,13 +22,6 @@
   "background": {
     "service_worker": "background.js"
   },
-  "content_scripts": [
-    {
-      "matches": ["http://*/*", "https://*/*"],
-      "js": ["content.js"],
-      "run_at": "document_idle"
-    }
-  ],
   "options_page": "options.html",
   "permissions": ["storage", "activeTab", "alarms", "scripting"],
   "host_permissions": ["https://2fa.apps.not-final.com/*"]

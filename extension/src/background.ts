@@ -32,7 +32,7 @@ chrome.runtime.onInstalled.addListener((details) => {
   if (details.reason === "install") void chrome.runtime.openOptionsPage();
 });
 
-chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
+chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   if (msg?.type === "tk-start") {
     // Ack immediately; the flow runs on its own and reports via storage.
     void runApproval(msg.domain as string, msg.tabId as number);
@@ -52,26 +52,6 @@ chrome.runtime.onMessage.addListener((msg, sender, sendResponse) => {
       msg.site as string | undefined,
       msg.username as string | undefined,
     );
-    sendResponse({ ok: true });
-  } else if (msg?.type === "twokeys:field") {
-    // The page reported whether it has a 2FA field: badge that tab's icon.
-    const tabId = sender.tab?.id;
-    if (tabId != null) {
-      const found = msg.found === true;
-      void chrome.action.setBadgeText({ tabId, text: found ? "•" : "" });
-      if (found) {
-        void chrome.action.setBadgeBackgroundColor({
-          tabId,
-          color: "#2F6F5B",
-        });
-        void chrome.action.setTitle({
-          tabId,
-          title: "Purr — this page wants a code. Click to fill.",
-        });
-      } else {
-        void chrome.action.setTitle({ tabId, title: "Purr" });
-      }
-    }
     sendResponse({ ok: true });
   }
   return false;
@@ -188,23 +168,101 @@ async function runApproval(domain: string, tabId: number): Promise<void> {
   }
 }
 
-/** Ask the content script to fill the code into the page's 2FA field. */
+/**
+ * Fill the code into the page's 2FA field via a one-shot injection.
+ *
+ * No standing content script: we inject `pageFill` into the tab only now, under
+ * the activeTab grant the user created by opening the popup. That keeps the
+ * extension off the broad "all sites" host permission — it never touches a page
+ * until the person asks it to. Returns false (→ clipboard fallback) if the tab
+ * can't be scripted (chrome:// pages, PDF viewer, no field found).
+ */
 async function tryFill(tabId: number, code: string): Promise<boolean> {
   const settings = await getSettings();
   const rule = settings.siteRules[await domainOfTab(tabId)] ?? undefined;
   if (!settings.autofill || rule === "never-autofill") return false;
   try {
-    const res = await chrome.tabs.sendMessage(tabId, {
-      type: "twokeys:fill",
-      code,
-      submit: settings.autoSubmit,
+    const [res] = await chrome.scripting.executeScript({
+      target: { tabId },
+      func: pageFill,
+      args: [code, settings.autoSubmit],
     });
-    return res?.filled === true;
+    return res?.result === true;
   } catch {
-    // No content script on that tab (e.g. it loaded before install) — the
-    // popup will show the code for manual copy instead.
     return false;
   }
+}
+
+/**
+ * Injected into the page (must be fully self-contained — it is serialised and
+ * runs in the page's world, so it can close over nothing from this module).
+ * Finds the 2FA field, fills it the way frameworks notice, optionally submits.
+ */
+function pageFill(code: string, submit: boolean): boolean {
+  const OTP_RE =
+    /(^|[-_ ])(otp|totp|2fa|mfa|one[-_ ]?time|verification|auth(entication)?)([-_ ]?(code|token|pin))?([-_ ]|$)|^code$|^token$/i;
+  const visible = (el: HTMLElement): boolean => {
+    const r = el.getBoundingClientRect();
+    if (r.width === 0 || r.height === 0) return false;
+    const s = getComputedStyle(el);
+    return s.visibility !== "hidden" && s.display !== "none";
+  };
+  const inputs = [...document.querySelectorAll("input")].filter(
+    (i) =>
+      !i.disabled &&
+      !i.readOnly &&
+      visible(i) &&
+      ["text", "tel", "number", "password", ""].includes(i.type || "text"),
+  );
+  const singles = inputs.filter(
+    (i) => i.maxLength === 1 || i.getAttribute("maxlength") === "1",
+  );
+  let target: HTMLInputElement[] | null = null;
+  let segmented = false;
+  if (singles.length >= 4 && singles.length <= 8) {
+    target = singles;
+    segmented = true;
+  } else {
+    const one =
+      inputs.find((i) => i.autocomplete === "one-time-code") ??
+      inputs.find(
+        (i) =>
+          OTP_RE.test(i.name) ||
+          OTP_RE.test(i.id) ||
+          OTP_RE.test(i.getAttribute("aria-label") ?? ""),
+      );
+    if (one) target = [one];
+  }
+  if (!target) return false;
+
+  const setValue = (input: HTMLInputElement, value: string): void => {
+    const setter = Object.getOwnPropertyDescriptor(
+      HTMLInputElement.prototype,
+      "value",
+    )?.set;
+    setter?.call(input, value);
+    input.dispatchEvent(new Event("input", { bubbles: true }));
+    input.dispatchEvent(new Event("change", { bubbles: true }));
+  };
+  if (segmented) {
+    const digits = code.split("");
+    target.forEach((input, i) => {
+      input.focus();
+      setValue(input, digits[i] ?? "");
+    });
+  } else {
+    target[0]!.focus();
+    setValue(target[0]!, code);
+  }
+  if (submit) {
+    const form = target[0]!.form;
+    form
+      ?.querySelector<HTMLButtonElement>(
+        'button[type="submit"], input[type="submit"], button:not([type])',
+      )
+      ?.click();
+  }
+  return true;
 }
 
 async function domainOfTab(tabId: number): Promise<string> {
