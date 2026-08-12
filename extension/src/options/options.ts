@@ -25,12 +25,9 @@ import {
 import { deriveKek, registerKey, webauthnAvailable } from "../lib/webauthn";
 import {
   addTouchedKey,
-  codeFor,
   disableKeyRoute,
   enrollFirstKey,
   isEnrolled,
-  refreshReplica,
-  unlockReplica,
 } from "../lib/keyroute";
 
 /**
@@ -524,26 +521,9 @@ async function populateSecurityKeys(): Promise<void> {
     const onRow = el(`<div class="row">
       <div class="grow">
         <div class="title" style="font-size:14.5px;color:var(--green)">Key sign-in is on</div>
-        <div class="subtitle">Touch a key to fill a code — your phone stays in your pocket.</div>
+        <div class="subtitle">On a site's code field, touch your key to fill it — your phone stays in your pocket.</div>
       </div>
-      <button class="small-outline" id="sk-show">Show a code</button>
     </div>`);
-    onRow.querySelector("#sk-show")!.addEventListener("click", async () => {
-      status.textContent = "Touch your key…";
-      try {
-        await refreshReplica();
-        const accounts = await unlockReplica();
-        if (accounts.length === 0) {
-          status.textContent =
-            "Unlocked, but the vault is empty. Add an account on your phone.";
-        } else {
-          const a = accounts[0]!;
-          status.textContent = `✓ ${a.site || "First account"}: ${codeFor(a)} — unlocked with your key.`;
-        }
-      } catch (e) {
-        status.textContent = `${(e as Error).message}`;
-      }
-    });
     card.appendChild(onRow);
 
     for (const k of confirmed.filter((c) => !c.wrappedKB64)) {
