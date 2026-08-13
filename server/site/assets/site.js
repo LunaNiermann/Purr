@@ -5,11 +5,11 @@
 
   // --- Browser detection (order matters: Brave/Opera/Edge UAs contain "Chrome") ---
   var stores = {
-    chrome: ["Chrome", "https://chrome.google.com/webstore/", "Chrome Web Store"],
+    chrome: ["Chrome", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     edge: ["Edge", "https://microsoftedge.microsoft.com/addons/", "Edge Add-ons"],
     firefox: ["Firefox", "https://addons.mozilla.org/", "Firefox Add-ons"],
-    brave: ["Brave", "https://chrome.google.com/webstore/", "Chrome Web Store"],
-    opera: ["Opera", "https://chrome.google.com/webstore/", "Chrome Web Store"],
+    brave: ["Brave", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
+    opera: ["Opera", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     safari: ["Safari", "#get", "Not supported yet, see other options"]
   };
   var ua = navigator.userAgent;
