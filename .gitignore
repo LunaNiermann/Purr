@@ -15,6 +15,8 @@ app/android/.gradle/
 app/android/local.properties
 app/android/key.properties
 app/*.iml
+# Generated localizations (rebuilt by flutter gen-l10n during pub get/build)
+app/lib/l10n/app_localizations*.dart
 
 # Server
 server/data/
@@ -41,3 +43,4 @@ docs/screens/chk.png
 
 # Legal drafts — hosted on the website, not tracked in the public repo
 legal/
+store-assets/

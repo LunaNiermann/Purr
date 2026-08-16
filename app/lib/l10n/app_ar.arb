@@ -1,0 +1,20 @@
+{
+  "@@locale": "ar",
+  "appTitle": "Purr",
+  "tabCodes": "الرموز",
+  "tabSecurity": "الأمان",
+  "securityTitle": "الأمان",
+  "lockedTitle": "مقفل",
+  "lockedBodyBiometric": "رموزك هنا وآمنة. افتح القفل للدخول.",
+  "lockedBodyPassword": "رموزك هنا وآمنة. اكتب كلمة المرور للدخول.",
+  "passwordHint": "كلمة المرور",
+  "lockedTypePasswordThisTime": "اكتب كلمة المرور هذه المرة.",
+  "lockedWrongPassword": "ليست هذه — تحقّق من الأخطاء وحاول مرة أخرى.",
+  "unlock": "فتح القفل",
+  "unlocking": "جارٍ فتح القفل…",
+  "useMyPassword": "استخدام كلمة المرور",
+  "unlockYourCodes": "افتح قفل رموزك",
+  "language": "اللغة",
+  "languageSubtitle": "اختر اللغة التي يتحدث بها Purr",
+  "languageSystemDefault": "حسب جهازي"
+}

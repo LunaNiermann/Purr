@@ -2,8 +2,10 @@ import 'dart:async';
 
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import 'l10n/app_localizations.dart';
 import 'src/design/tokens.dart';
 import 'src/screens/home_shell.dart';
 import 'src/screens/lock_screen.dart';
@@ -55,9 +57,19 @@ class TwoKeysApp extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    // null → follow the device language; a tag → the user's chosen override.
+    final locale = ref.watch(prefsProvider.select((p) => p.localeOverride));
     return MaterialApp(
       title: 'Purr',
       debugShowCheckedModeBanner: false,
+      locale: locale,
+      localizationsDelegates: const [
+        AppLocalizations.delegate,
+        GlobalMaterialLocalizations.delegate,
+        GlobalWidgetsLocalizations.delegate,
+        GlobalCupertinoLocalizations.delegate,
+      ],
+      supportedLocales: AppLocalizations.supportedLocales,
       theme: ThemeData(
         useMaterial3: true,
         fontFamily: TkFonts.sans,

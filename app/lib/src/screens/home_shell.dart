@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../design/tokens.dart';
 import '../services/approval_service.dart';
 import '../services/backup_service.dart';
@@ -98,13 +99,13 @@ class _HomeShellState extends ConsumerState<HomeShell> {
               child: Row(
                 children: [
                   _TabButton(
-                    label: 'Codes',
+                    label: AppLocalizations.of(context).tabCodes,
                     active: _tab == 0,
                     onTap: () => setState(() => _tab = 0),
                   ),
                   const SizedBox(width: 6),
                   _TabButton(
-                    label: 'Security',
+                    label: AppLocalizations.of(context).tabSecurity,
                     active: _tab == 1,
                     onTap: () => setState(() => _tab = 1),
                   ),

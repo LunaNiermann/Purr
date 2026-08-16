@@ -1,0 +1,20 @@
+{
+  "@@locale": "es",
+  "appTitle": "Purr",
+  "tabCodes": "Códigos",
+  "tabSecurity": "Seguridad",
+  "securityTitle": "Seguridad",
+  "lockedTitle": "Bloqueado",
+  "lockedBodyBiometric": "Tus códigos están aquí y a salvo. Desbloquea para abrir.",
+  "lockedBodyPassword": "Tus códigos están aquí y a salvo. Escribe tu contraseña para abrir.",
+  "passwordHint": "Tu contraseña",
+  "lockedTypePasswordThisTime": "Esta vez escribe tu contraseña.",
+  "lockedWrongPassword": "No es esa. Revisa si hay errores e inténtalo de nuevo.",
+  "unlock": "Desbloquear",
+  "unlocking": "Desbloqueando…",
+  "useMyPassword": "Usar mi contraseña",
+  "unlockYourCodes": "Desbloquea tus códigos",
+  "language": "Idioma",
+  "languageSubtitle": "Elige cómo te habla Purr",
+  "languageSystemDefault": "Según mi dispositivo"
+}

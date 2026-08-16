@@ -1,5 +1,6 @@
 import 'dart:async';
 
+import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -93,6 +94,7 @@ class Prefs {
     this.encryptedBackup = true,
     this.notificationsChoice = 'unasked', // unasked | granted | declined
     this.kitSavedAt,
+    this.localeTag = 'system', // 'system' or a BCP-47 tag like 'es', 'pt'
   });
 
   final String layout; // 'list' | 'cards'
@@ -101,6 +103,11 @@ class Prefs {
   final bool encryptedBackup;
   final String notificationsChoice;
   final DateTime? kitSavedAt;
+  final String localeTag;
+
+  /// The chosen [Locale], or null to follow the device language.
+  Locale? get localeOverride =>
+      localeTag == 'system' ? null : Locale(localeTag);
 
   Prefs copyWith({
     String? layout,
@@ -109,6 +116,7 @@ class Prefs {
     bool? encryptedBackup,
     String? notificationsChoice,
     DateTime? kitSavedAt,
+    String? localeTag,
   }) =>
       Prefs(
         layout: layout ?? this.layout,
@@ -117,6 +125,7 @@ class Prefs {
         encryptedBackup: encryptedBackup ?? this.encryptedBackup,
         notificationsChoice: notificationsChoice ?? this.notificationsChoice,
         kitSavedAt: kitSavedAt ?? this.kitSavedAt,
+        localeTag: localeTag ?? this.localeTag,
       );
 }
 
@@ -136,6 +145,7 @@ class PrefsController extends Notifier<Prefs> {
       encryptedBackup: sp.getBool('encryptedBackup') ?? true,
       notificationsChoice: sp.getString('notificationsChoice') ?? 'unasked',
       kitSavedAt: DateTime.tryParse(sp.getString('kitSavedAt') ?? ''),
+      localeTag: sp.getString('localeTag') ?? 'system',
     );
   }
 
@@ -147,6 +157,7 @@ class PrefsController extends Notifier<Prefs> {
     await sp.setBool('biometricsEnabled', state.biometricsEnabled);
     await sp.setBool('encryptedBackup', state.encryptedBackup);
     await sp.setString('notificationsChoice', state.notificationsChoice);
+    await sp.setString('localeTag', state.localeTag);
     if (state.kitSavedAt != null) {
       await sp.setString(
           'kitSavedAt', state.kitSavedAt!.toUtc().toIso8601String());

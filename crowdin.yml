@@ -1,0 +1,23 @@
+# Crowdin config for Purr. Connect via the GitHub integration or the CLI:
+#   crowdin upload sources   # push new/changed English source strings
+#   crowdin download         # pull translations back into the repo
+# Auth comes from env vars (CROWDIN_PROJECT_ID, CROWDIN_PERSONAL_TOKEN).
+"project_id_env": "CROWDIN_PROJECT_ID"
+"api_token_env": "CROWDIN_PERSONAL_TOKEN"
+"preserve_hierarchy": true
+
+files:
+  # Flutter app — ARB. English is the source; the rest are translations.
+  - source: /app/lib/l10n/app_en.arb
+    translation: /app/lib/l10n/app_%two_letters_code%.arb
+    type: arb
+
+  # Browser extension — Chrome i18n messages.json.
+  - source: /extension/_locales/en/messages.json
+    translation: /extension/_locales/%two_letters_code%/messages.json
+    type: chrome
+
+  # Store listings (filled later) — plain per-locale text/markdown.
+  - source: /store-listings/en/*.txt
+    translation: /store-listings/%two_letters_code%/%original_file_name%
+    type: txt

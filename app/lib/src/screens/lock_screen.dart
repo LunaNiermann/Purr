@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../l10n/app_localizations.dart';
 import '../design/tokens.dart';
 import '../design/widgets.dart';
 import '../services/biometrics.dart';
@@ -43,8 +44,9 @@ class _LockScreenState extends ConsumerState<LockScreen> {
 
   Future<void> _unlockWithBiometric() async {
     if (_busy) return;
+    final l = AppLocalizations.of(context);
     setState(() => _busy = true);
-    final ok = await Biometrics.prompt('Unlock your codes');
+    final ok = await Biometrics.prompt(l.unlockYourCodes);
     if (ok) {
       final data = await ref.read(vaultStoreProvider).unlockWithStoredDek();
       if (data != null && mounted) {
@@ -54,7 +56,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
       if (mounted) {
         setState(() {
           _showPassword = true;
-          _error = 'Please type your password this time.';
+          _error = l.lockedTypePasswordThisTime;
         });
       }
     }
@@ -76,7 +78,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
       if (mounted) {
         setState(() {
           _busy = false;
-          _error = "That's not it — check for typos and try again.";
+          _error = AppLocalizations.of(context).lockedWrongPassword;
         });
       }
     }
@@ -84,6 +86,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final prefs = ref.watch(prefsProvider);
     final biometricsOn = prefs.biometricsEnabled;
     return Scaffold(
@@ -117,8 +120,8 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                             ),
                           ),
                           const SizedBox(height: 18),
-                          const Text('Locked',
-                              style: TextStyle(
+                          Text(l.lockedTitle,
+                              style: const TextStyle(
                                   fontFamily: TkFonts.sans,
                                   fontSize: 23,
                                   fontWeight: FontWeight.w600,
@@ -130,10 +133,8 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                                 const EdgeInsets.symmetric(horizontal: 18),
                             child: Text(
                               biometricsOn && !_showPassword
-                                  ? 'Your codes are here and safe. '
-                                      'Unlock to open up.'
-                                  : 'Your codes are here and safe. '
-                                      'Type your password to open up.',
+                                  ? l.lockedBodyBiometric
+                                  : l.lockedBodyPassword,
                               textAlign: TextAlign.center,
                               style: TkText.body.copyWith(
                                   fontSize: 14.5, color: TkColors.paper55),
@@ -164,9 +165,9 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                                   color: TkColors.paper,
                                   letterSpacing: 17 * .06,
                                 ),
-                                decoration: const InputDecoration(
-                                  hintText: 'Your password',
-                                  hintStyle: TextStyle(
+                                decoration: InputDecoration(
+                                  hintText: l.passwordHint,
+                                  hintStyle: const TextStyle(
                                     fontFamily: TkFonts.sans,
                                     fontSize: 15,
                                     color: TkColors.paper55,
@@ -193,7 +194,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                 ),
                 if (_showPassword || !biometricsOn)
                   TkPrimaryButton(
-                    label: _busy ? 'Unlocking…' : 'Unlock',
+                    label: _busy ? l.unlocking : l.unlock,
                     background: TkColors.greenBright,
                     foreground: TkColors.onGreenBrightText,
                     enabled: !_busy,
@@ -201,7 +202,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                   )
                 else ...[
                   TkPrimaryButton(
-                    label: 'Unlock',
+                    label: l.unlock,
                     background: TkColors.greenBright,
                     foreground: TkColors.onGreenBrightText,
                     enabled: !_busy,
@@ -209,7 +210,7 @@ class _LockScreenState extends ConsumerState<LockScreen> {
                   ),
                   const SizedBox(height: 10),
                   TkTextButton(
-                    label: 'Use my password',
+                    label: l.useMyPassword,
                     color: const Color.fromRGBO(247, 245, 241, .6),
                     onPressed: () => setState(() => _showPassword = true),
                   ),

@@ -1,0 +1,20 @@
+{
+  "@@locale": "hi",
+  "appTitle": "Purr",
+  "tabCodes": "कोड",
+  "tabSecurity": "सुरक्षा",
+  "securityTitle": "सुरक्षा",
+  "lockedTitle": "लॉक है",
+  "lockedBodyBiometric": "आपके कोड यहाँ सुरक्षित हैं। खोलने के लिए अनलॉक करें।",
+  "lockedBodyPassword": "आपके कोड यहाँ सुरक्षित हैं। खोलने के लिए अपना पासवर्ड टाइप करें।",
+  "passwordHint": "आपका पासवर्ड",
+  "lockedTypePasswordThisTime": "इस बार अपना पासवर्ड टाइप करें।",
+  "lockedWrongPassword": "यह सही नहीं है — टाइपिंग जाँचें और फिर से कोशिश करें।",
+  "unlock": "अनलॉक करें",
+  "unlocking": "अनलॉक हो रहा है…",
+  "useMyPassword": "मेरा पासवर्ड इस्तेमाल करें",
+  "unlockYourCodes": "अपने कोड अनलॉक करें",
+  "language": "भाषा",
+  "languageSubtitle": "चुनें कि Purr आपसे किस भाषा में बात करे",
+  "languageSystemDefault": "मेरे डिवाइस के अनुसार"
+}

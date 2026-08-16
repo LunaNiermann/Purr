@@ -1,0 +1,20 @@
+{
+  "@@locale": "id",
+  "appTitle": "Purr",
+  "tabCodes": "Kode",
+  "tabSecurity": "Keamanan",
+  "securityTitle": "Keamanan",
+  "lockedTitle": "Terkunci",
+  "lockedBodyBiometric": "Kode Anda ada di sini dan aman. Buka kunci untuk masuk.",
+  "lockedBodyPassword": "Kode Anda ada di sini dan aman. Ketik kata sandi untuk masuk.",
+  "passwordHint": "Kata sandi Anda",
+  "lockedTypePasswordThisTime": "Kali ini ketik kata sandi Anda.",
+  "lockedWrongPassword": "Bukan itu — periksa salah ketik dan coba lagi.",
+  "unlock": "Buka kunci",
+  "unlocking": "Membuka kunci…",
+  "useMyPassword": "Gunakan kata sandi saya",
+  "unlockYourCodes": "Buka kunci kode Anda",
+  "language": "Bahasa",
+  "languageSubtitle": "Pilih bahasa yang digunakan Purr",
+  "languageSystemDefault": "Ikuti perangkat saya"
+}

@@ -10,6 +10,9 @@ environment:
 dependencies:
   flutter:
     sdk: flutter
+  flutter_localizations:
+    sdk: flutter
+  intl: any
   flutter_riverpod: ^3.0.3
   flutter_secure_storage: ^9.2.4
   shared_preferences: ^2.5.3
@@ -36,6 +39,7 @@ dev_dependencies:
 
 flutter:
   uses-material-design: true
+  generate: true # gen_l10n: builds AppLocalizations from lib/l10n/*.arb
 
   assets:
     - assets/brand/

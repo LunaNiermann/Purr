@@ -1,0 +1,21 @@
+{
+  "@@locale": "en",
+  "appTitle": "Purr",
+  "tabCodes": "Codes",
+  "tabSecurity": "Security",
+  "securityTitle": "Security",
+  "lockedTitle": "Locked",
+  "lockedBodyBiometric": "Your codes are here and safe. Unlock to open up.",
+  "lockedBodyPassword": "Your codes are here and safe. Type your password to open up.",
+  "passwordHint": "Your password",
+  "lockedTypePasswordThisTime": "Please type your password this time.",
+  "lockedWrongPassword": "That's not it — check for typos and try again.",
+  "unlock": "Unlock",
+  "unlocking": "Unlocking…",
+  "useMyPassword": "Use my password",
+  "unlockYourCodes": "Unlock your codes",
+  "@unlockYourCodes": { "description": "Reason shown in the OS biometric prompt when unlocking the app." },
+  "language": "Language",
+  "languageSubtitle": "Choose how Purr speaks to you",
+  "languageSystemDefault": "Match my device"
+}

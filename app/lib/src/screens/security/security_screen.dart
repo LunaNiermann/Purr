@@ -6,6 +6,8 @@ import 'package:url_launcher/url_launcher.dart';
 import '../../core/otpauth.dart';
 import '../../crypto/recovery.dart';
 import '../../data/models.dart';
+import '../../../l10n/app_localizations.dart';
+import '../../l10n/languages.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../../services/approval_service.dart';
@@ -48,6 +50,96 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
     await printRecoveryKit(kit: kit, accountCount: count);
   }
 
+  String _currentLanguageName(String tag) {
+    if (tag == 'system') {
+      return AppLocalizations.of(context).languageSystemDefault;
+    }
+    return kAppLanguages
+        .firstWhere((l) => l.tag == tag,
+            orElse: () => const AppLanguage('en', 'English'))
+        .nativeName;
+  }
+
+  void _showLanguagePicker() {
+    final l = AppLocalizations.of(context);
+    final current = ref.read(prefsProvider).localeTag;
+    showModalBottomSheet<void>(
+      context: context,
+      backgroundColor: TkColors.surface,
+      shape: const RoundedRectangleBorder(
+        borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
+      ),
+      builder: (sheetCtx) {
+        Widget tile(String tag, String name) {
+          final selected = tag == current;
+          return InkWell(
+            onTap: () async {
+              Navigator.pop(sheetCtx);
+              await ref
+                  .read(prefsProvider.notifier)
+                  .update((p) => p.copyWith(localeTag: tag));
+            },
+            child: Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 26, vertical: 16),
+              child: Row(
+                children: [
+                  Expanded(
+                    child: Text(name,
+                        style: TextStyle(
+                            fontFamily: TkFonts.sans,
+                            fontSize: 16.5,
+                            fontWeight:
+                                selected ? FontWeight.w700 : FontWeight.w500,
+                            color: selected ? TkColors.green : TkColors.ink)),
+                  ),
+                  if (selected)
+                    const Icon(Icons.check, color: TkColors.green, size: 20),
+                ],
+              ),
+            ),
+          );
+        }
+
+        return SafeArea(
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            children: [
+              const SizedBox(height: 14),
+              Container(
+                width: 42,
+                height: 5,
+                decoration: BoxDecoration(
+                  color: const Color.fromRGBO(27, 26, 23, .15),
+                  borderRadius: BorderRadius.circular(99),
+                ),
+              ),
+              const SizedBox(height: 18),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 26),
+                child: Align(
+                  alignment: AlignmentDirectional.centerStart,
+                  child: Text(l.language, style: TkText.screenTitle),
+                ),
+              ),
+              const SizedBox(height: 8),
+              Flexible(
+                child: ListView(
+                  shrinkWrap: true,
+                  padding: const EdgeInsets.only(bottom: 12),
+                  children: [
+                    tile('system', l.languageSystemDefault),
+                    for (final lang in kAppLanguages)
+                      tile(lang.tag, lang.nativeName),
+                  ],
+                ),
+              ),
+            ],
+          ),
+        );
+      },
+    );
+  }
+
   @override
   Widget build(BuildContext context) {
     final prefs = ref.watch(prefsProvider);
@@ -59,9 +151,10 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
         child: ListView(
           padding: const EdgeInsets.only(top: 8, bottom: 170),
           children: [
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 22),
-              child: Text('Security', style: TkText.pageHeading),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 22),
+              child: Text(AppLocalizations.of(context).securityTitle,
+                  style: TkText.pageHeading),
             ),
             const SizedBox(height: 18),
             Padding(
@@ -208,6 +301,38 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                         .update((p) => p.copyWith(hideCodes: v)),
                   ),
                 ],
+              ),
+            ),
+            const SizedBox(height: 22),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
+              child: TkSectionLabel(AppLocalizations.of(context).language),
+            ),
+            Padding(
+              padding: const EdgeInsets.symmetric(horizontal: 14),
+              child: TkCard(
+                onTap: _showLanguagePicker,
+                child: Row(
+                  children: [
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Text(_currentLanguageName(prefs.localeTag),
+                              style: const TextStyle(
+                                  fontFamily: TkFonts.sans,
+                                  fontSize: 15.5,
+                                  fontWeight: FontWeight.w600,
+                                  color: TkColors.ink)),
+                          const SizedBox(height: 3),
+                          Text(AppLocalizations.of(context).languageSubtitle,
+                              style: TkText.metadata),
+                        ],
+                      ),
+                    ),
+                    const Icon(Icons.chevron_right, color: TkColors.ink50),
+                  ],
+                ),
               ),
             ),
             const SizedBox(height: 22),
