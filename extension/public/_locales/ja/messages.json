@@ -1,125 +1,359 @@
 {
-  "extName": { "message": "Purr: 2FA認証アプリ" },
-  "extDescription": { "message": "ワンタップでパソコンにサインイン。Purrはスマホやセキュリティキーから2FAコードを届けます。あなたの秘密は決して見ません。" },
-
-  "barAllCodes": { "message": "すべてのコード" },
-  "barSettings": { "message": "設定" },
-
-  "pairMyPhone": { "message": "スマホを連携" },
-  "tryAgain": { "message": "もう一度試す" },
-  "askAgain": { "message": "もう一度頼む" },
-  "remove": { "message": "削除" },
-  "unpair": { "message": "連携を解除" },
-  "copied": { "message": "コピーしました" },
-  "badgeMatched": { "message": "一致" },
-
-  "popupUnpairedTitle": { "message": "スマホが鍵。これが鍵穴です。" },
-  "popupUnpairedSub": { "message": "スマホを一度連携すれば、サインインはワンタップに。コードはスマホに残り、この拡張機能は秘密を決して見ません。" },
-  "popupNoFieldTitle": { "message": "ここに入力するものはありません。" },
-  "popupNoFieldSub": { "message": "6桁のコードを求めるページで開けば、コードはスマホから直接届きます。" },
-  "popupFillKey": { "message": "自分の鍵で入力" },
-  "popupFillKeySub": { "message": "セキュリティキーに触れて — スマホはポケットのまま" },
-  "popupAskPhone": { "message": "スマホに頼む" },
-  "popupAskPhoneSub": { "message": "スマホで承認すればコードがここに届きます" },
-  "popupReadyTitle": { "message": "準備できています。" },
-  "popupReadySubKey": { "message": "鍵に触れてコードをここに入力するか、スマホに頼んでください。" },
-  "popupReadySubPhone": { "message": "コードは手にしているもの — スマホから来る必要があります。" },
-  "popupReadyFootnote": { "message": "ページに届くのは6桁だけです。これを閉じても、承認をタップすればスマホの承認で入力されます。" },
-  "popupKeyTouchTitle": { "message": "鍵に触れてください" },
-  "popupKeyTouchSub": { "message": "セキュリティキーに触れてこのコードをここで解錠 — 6桁以外はこのパソコンから出ません。" },
-  "popupKeyErrorTitle": { "message": "鍵を使えませんでした" },
-  "popupNoTab": { "message": "入力できるアクティブなタブがありません。" },
-  "popupSentTitle": { "message": "スマホに送信しました" },
-  "popupSentSub": { "message": "スマホで承認すればコードがここに届きます。このウィンドウは閉じても動作し続けます。" },
-  "cancel": { "message": "キャンセル" },
-  "popupFilledTitle": { "message": "入力しました。" },
-  "popupFilledSub": { "message": "スマホがコードを生成し、その6桁だけを送りました。ほかには何も渡っていません。" },
-  "popupClipTitle": { "message": "コードはこちらです。" },
-  "popupClipSub": { "message": "このページでコード欄が見つからなかったので、ご自分で貼り付けてください:" },
-  "popupCopyCode": { "message": "{0} {1} をコピー" },
-  "popupDeniedTitle": { "message": "これを拒否しました" },
-  "popupDeniedSub": { "message": "コードは送信されていません。誤りなら、もう一度頼んでください。そうでなければ、このサイトのパスワードを変えてください。" },
-  "popupChangePassword": { "message": "パスワードを変更" },
-  "popupExpiredTitle": { "message": "そのリクエストは時間切れです" },
-  "popupExpiredSub": { "message": "古いものが誤って承認されないよう、リクエストは1分で期限切れになります。問題はありません — もう一度頼んでください。" },
-  "popupUnreachableTitle": { "message": "スマホが応答しませんでした" },
-  "popupUnreachableSub": { "message": "スリープ中か、電波がないか、テーブルに伏せてあるのかもしれません。アカウントに問題はありません。" },
-  "popupOpenApp": { "message": "またはアプリを開いてコードを読む" },
-  "popupUnmatchedTitle": { "message": "{0} はまだ保存されていません" },
-  "popupUnmatchedSub": { "message": "このアカウントを別の名前で既にスマホに持っているなら、そこで開いて承認してください — このポップアップは次回その対応を覚えます。" },
-
-  "optStepOf": { "message": "ステップ {0} / 3" },
-  "optIntroHero": { "message": "スマホが鍵。これが鍵穴です。" },
-  "optIntroCopy": { "message": "連携は約1分。その後は、どこでもサインインはスマホでワンタップ — 入力するコードも、覚えることもありません。" },
-  "optTick1": { "message": "コードはスマホに残ります。この拡張機能は秘密を決して見ません。" },
-  "optTick2": { "message": "アカウントなしで動作。登録は不要です。" },
-  "optTick3": { "message": "どちら側からでも、いつでも連携を解除できます。" },
-  "optGetApp": { "message": "まだならアプリを先に入手してください" },
-  "optScanErrTitle": { "message": "連携サービスに接続できません" },
-  "optScanErrCopy": { "message": "接続を確認してもう一度お試しください。まだ何も設定していないので、中途半端になることはありません。" },
-  "optScanTitle": { "message": "スマホをこれに向けてください" },
-  "optScanPath": { "message": "セキュリティ → パソコンを連携" },
-  "optScanCopy": { "message": "スマホでPurrを開き、{0} をタップして、四角に向けてください。" },
-  "optWaitingPhone": { "message": "スマホを待っています…" },
-  "optBack": { "message": "戻る" },
-  "optDefaultPhone": { "message": "あなたのスマホ" },
-  "optPairedTitle": { "message": "「{0}」と連携しました" },
-  "optPairedCopy": { "message": "次にサイトがコードを求めると、この拡張機能がそれを見つけてスマホに尋ねます。あなたは承認をタップするだけです。" },
-  "optPairedJustNow": { "message": "たった今連携" },
-  "optActive": { "message": "アクティブ" },
-  "optDone": { "message": "完了" },
-  "optToday": { "message": "今日" },
-  "optYesterday": { "message": "昨日" },
-  "optDaysAgo": { "message": "{0}日前" },
-  "optMonthAgo": { "message": "{0}か月前" },
-  "optMonthsAgo": { "message": "{0}か月前" },
-  "optRuleAlwaysPhone": { "message": "常にスマホに尋ねる" },
-  "optRuleNeverAutofill": { "message": "自動入力しない" },
-  "optSettingsTitle": { "message": "Purrの設定" },
-  "optSecWhenAsks": { "message": "サイトがコードを求めたとき" },
-  "optFillAuto": { "message": "自動で入力する" },
-  "optFillAutoSub": { "message": "あなたの承認後 — どこかでのタップなしに入力することはありません" },
-  "optSubmit": { "message": "入力後にフォームを送信" },
-  "optSubmitSub": { "message": "クリックを1回省けます。サイトの動作がおかしければオフに" },
-  "optLeadKey": { "message": "セキュリティキーを優先" },
-  "optLeadKeySub": { "message": "先に鍵のタッチを提示。スマホはワンタップのまま" },
-  "optSecSiteRules": { "message": "独自ルールのあるサイト" },
-  "optSecKeys": { "message": "セキュリティキーでサインイン" },
-  "optExperimental": { "message": "· 実験的" },
-  "optKeysBlurb": { "message": "登録した鍵に触れて、スマホをポケットに入れたままこのパソコンでコードを入力します。コードはここでは暗号文としてのみ存在し、鍵がそれを解錠します。" },
-  "optSecDevices": { "message": "連携済みデバイス" },
-  "optPaired": { "message": "連携 {0}" },
-  "optLastUsed": { "message": "最近使用" },
-  "optUnpairNote": { "message": "連携解除はこのブラウザだけに影響します。コードはスマホにそのまま残ります。" },
-  "optNoRules": { "message": "まだ特別なルールはありません。追加するとここに表示されます。" },
-  "optRulePlaceholder": { "message": "site.example.com" },
-  "optNoWebauthn": { "message": "このブラウザはセキュリティキーに対応していません。" },
-  "optKeyReady": { "message": "準備完了" },
-  "optKeyNotConfirmed": { "message": "未確認 — 解錠テストをタップ" },
-  "optAddedOn": { "message": "追加 {0}" },
-  "optKeyNamePlaceholder": { "message": "この鍵に名前を付ける（例: YubiKey）" },
-  "optAddKey": { "message": "セキュリティキーを追加" },
-  "optDefaultKeyLabel": { "message": "セキュリティキー" },
-  "optTouchKey": { "message": "鍵に触れてください…" },
-  "optKeyRegistered": { "message": "✓ {0} を登録しました。「解錠テスト」をタップして触れ、確認してください。" },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} を登録しましたが、タッチ解錠に対応していない可能性があります。念のため解錠テストをお試しください。" },
-  "optRegisterFailed": { "message": "登録できませんでした: {0}" },
-  "optConfirmTouch": { "message": "タッチで金庫が解錠されることを確認" },
-  "optTestUnlock": { "message": "解錠テスト" },
-  "optUnlockOk": { "message": "✓ {0} でここのPurrが解錠します。準備完了です。" },
-  "optYourKey": { "message": "あなたの鍵" },
-  "optUnlockFailed": { "message": "解錠に失敗: {0}" },
-  "optTurnOnKeySignin": { "message": "鍵でのサインインを有効化" },
-  "optEnableKeySignin": { "message": "鍵サインインを有効化" },
-  "optKeySigninOn": { "message": "✓ {0} で鍵サインインを有効化。スマホアプリを一度開いて金庫をここに同期してください。" },
-  "optEnableFailed": { "message": "有効化できませんでした: {0}" },
-  "optKeySigninIsOn": { "message": "鍵サインインはオンです" },
-  "optKeySigninIsOnSub": { "message": "サイトのコード欄で鍵に触れて入力します — スマホはポケットのままです。" },
-  "optAddBackup": { "message": "{0} をバックアップ鍵として追加" },
-  "optAddToSignin": { "message": "サインインに追加" },
-  "optTouchEnrolledThenNew": { "message": "登録済みの鍵に触れ、次に新しい鍵に…" },
-  "optBackupAdded": { "message": "✓ {0} を追加 — これでバックアップ鍵になりました。" },
-  "optAddFailed": { "message": "追加できませんでした: {0}" },
-  "optTurnOffKeySignin": { "message": "鍵サインインをオフに" },
-  "optKeySigninOff": { "message": "このパソコンで鍵サインインをオフにしました。" }
+  "extName": {
+    "message": "Purr: 2FA認証アプリ"
+  },
+  "extDescription": {
+    "message": "ワンタップでパソコンにサインイン。Purrはスマホやセキュリティキーから2FAコードを届けます。あなたの秘密は決して見ません。"
+  },
+  "barAllCodes": {
+    "message": "すべてのコード"
+  },
+  "barSettings": {
+    "message": "設定"
+  },
+  "pairMyPhone": {
+    "message": "スマホを連携"
+  },
+  "tryAgain": {
+    "message": "もう一度試す"
+  },
+  "askAgain": {
+    "message": "もう一度頼む"
+  },
+  "remove": {
+    "message": "削除"
+  },
+  "unpair": {
+    "message": "連携を解除"
+  },
+  "copied": {
+    "message": "コピーしました"
+  },
+  "badgeMatched": {
+    "message": "一致"
+  },
+  "popupUnpairedTitle": {
+    "message": "スマホが鍵。これが鍵穴です。"
+  },
+  "popupUnpairedSub": {
+    "message": "スマホを一度連携すれば、サインインはワンタップに。コードはスマホに残り、この拡張機能は秘密を決して見ません。"
+  },
+  "popupNoFieldTitle": {
+    "message": "ここに入力するものはありません。"
+  },
+  "popupNoFieldSub": {
+    "message": "6桁のコードを求めるページで開けば、コードはスマホから直接届きます。"
+  },
+  "popupFillKey": {
+    "message": "自分の鍵で入力"
+  },
+  "popupFillKeySub": {
+    "message": "セキュリティキーに触れて — スマホはポケットのまま"
+  },
+  "popupAskPhone": {
+    "message": "スマホに頼む"
+  },
+  "popupAskPhoneSub": {
+    "message": "スマホで承認すればコードがここに届きます"
+  },
+  "popupReadyTitle": {
+    "message": "準備できています。"
+  },
+  "popupReadySubKey": {
+    "message": "鍵に触れてコードをここに入力するか、スマホに頼んでください。"
+  },
+  "popupReadySubPhone": {
+    "message": "コードは手にしているもの — スマホから来る必要があります。"
+  },
+  "popupReadyFootnote": {
+    "message": "ページに届くのは6桁だけです。これを閉じても、承認をタップすればスマホの承認で入力されます。"
+  },
+  "popupKeyTouchTitle": {
+    "message": "鍵に触れてください"
+  },
+  "popupKeyTouchSub": {
+    "message": "セキュリティキーに触れてこのコードをここで解錠 — 6桁以外はこのパソコンから出ません。"
+  },
+  "popupKeyErrorTitle": {
+    "message": "鍵を使えませんでした"
+  },
+  "popupNoTab": {
+    "message": "入力できるアクティブなタブがありません。"
+  },
+  "popupSentTitle": {
+    "message": "スマホに送信しました"
+  },
+  "popupSentSub": {
+    "message": "スマホで承認すればコードがここに届きます。このウィンドウは閉じても動作し続けます。"
+  },
+  "cancel": {
+    "message": "キャンセル"
+  },
+  "popupFilledTitle": {
+    "message": "入力しました。"
+  },
+  "popupFilledSub": {
+    "message": "スマホがコードを生成し、その6桁だけを送りました。ほかには何も渡っていません。"
+  },
+  "popupClipTitle": {
+    "message": "コードはこちらです。"
+  },
+  "popupClipSub": {
+    "message": "このページでコード欄が見つからなかったので、ご自分で貼り付けてください:"
+  },
+  "popupCopyCode": {
+    "message": "{0} {1} をコピー"
+  },
+  "popupDeniedTitle": {
+    "message": "これを拒否しました"
+  },
+  "popupDeniedSub": {
+    "message": "コードは送信されていません。誤りなら、もう一度頼んでください。そうでなければ、このサイトのパスワードを変えてください。"
+  },
+  "popupChangePassword": {
+    "message": "パスワードを変更"
+  },
+  "popupExpiredTitle": {
+    "message": "そのリクエストは時間切れです"
+  },
+  "popupExpiredSub": {
+    "message": "古いものが誤って承認されないよう、リクエストは1分で期限切れになります。問題はありません — もう一度頼んでください。"
+  },
+  "popupUnreachableTitle": {
+    "message": "スマホが応答しませんでした"
+  },
+  "popupUnreachableSub": {
+    "message": "スリープ中か、電波がないか、テーブルに伏せてあるのかもしれません。アカウントに問題はありません。"
+  },
+  "popupOpenApp": {
+    "message": "またはアプリを開いてコードを読む"
+  },
+  "popupUnmatchedTitle": {
+    "message": "{0} はまだ保存されていません"
+  },
+  "popupUnmatchedSub": {
+    "message": "このアカウントを別の名前で既にスマホに持っているなら、そこで開いて承認してください — このポップアップは次回その対応を覚えます。"
+  },
+  "optStepOf": {
+    "message": "ステップ {0} / 3"
+  },
+  "optIntroHero": {
+    "message": "スマホが鍵。これが鍵穴です。"
+  },
+  "optIntroCopy": {
+    "message": "連携は約1分。その後は、どこでもサインインはスマホでワンタップ — 入力するコードも、覚えることもありません。"
+  },
+  "optTick1": {
+    "message": "コードはスマホに残ります。この拡張機能は秘密を決して見ません。"
+  },
+  "optTick2": {
+    "message": "アカウントなしで動作。登録は不要です。"
+  },
+  "optTick3": {
+    "message": "どちら側からでも、いつでも連携を解除できます。"
+  },
+  "optGetApp": {
+    "message": "まだならアプリを先に入手してください"
+  },
+  "optScanErrTitle": {
+    "message": "連携サービスに接続できません"
+  },
+  "optScanErrCopy": {
+    "message": "接続を確認してもう一度お試しください。まだ何も設定していないので、中途半端になることはありません。"
+  },
+  "optScanTitle": {
+    "message": "スマホをこれに向けてください"
+  },
+  "optScanPath": {
+    "message": "セキュリティ → パソコンを連携"
+  },
+  "optScanCopy": {
+    "message": "スマホでPurrを開き、{0} をタップして、四角に向けてください。"
+  },
+  "optWaitingPhone": {
+    "message": "スマホを待っています…"
+  },
+  "optBack": {
+    "message": "戻る"
+  },
+  "optDefaultPhone": {
+    "message": "あなたのスマホ"
+  },
+  "optPairedTitle": {
+    "message": "「{0}」と連携しました"
+  },
+  "optPairedCopy": {
+    "message": "次にサイトがコードを求めると、この拡張機能がそれを見つけてスマホに尋ねます。あなたは承認をタップするだけです。"
+  },
+  "optPairedJustNow": {
+    "message": "たった今連携"
+  },
+  "optActive": {
+    "message": "アクティブ"
+  },
+  "optDone": {
+    "message": "完了"
+  },
+  "optToday": {
+    "message": "今日"
+  },
+  "optYesterday": {
+    "message": "昨日"
+  },
+  "optDaysAgo": {
+    "message": "{0}日前"
+  },
+  "optMonthAgo": {
+    "message": "{0}か月前"
+  },
+  "optMonthsAgo": {
+    "message": "{0}か月前"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "常にスマホに尋ねる"
+  },
+  "optRuleNeverAutofill": {
+    "message": "自動入力しない"
+  },
+  "optSettingsTitle": {
+    "message": "Purrの設定"
+  },
+  "optSecWhenAsks": {
+    "message": "サイトがコードを求めたとき"
+  },
+  "optFillAuto": {
+    "message": "自動で入力する"
+  },
+  "optFillAutoSub": {
+    "message": "あなたの承認後 — どこかでのタップなしに入力することはありません"
+  },
+  "optSubmit": {
+    "message": "入力後にフォームを送信"
+  },
+  "optSubmitSub": {
+    "message": "クリックを1回省けます。サイトの動作がおかしければオフに"
+  },
+  "optLeadKey": {
+    "message": "セキュリティキーを優先"
+  },
+  "optLeadKeySub": {
+    "message": "先に鍵のタッチを提示。スマホはワンタップのまま"
+  },
+  "optSecSiteRules": {
+    "message": "独自ルールのあるサイト"
+  },
+  "optSecKeys": {
+    "message": "セキュリティキーでサインイン"
+  },
+  "optExperimental": {
+    "message": "· 実験的"
+  },
+  "optKeysBlurb": {
+    "message": "登録した鍵に触れて、スマホをポケットに入れたままこのパソコンでコードを入力します。コードはここでは暗号文としてのみ存在し、鍵がそれを解錠します。"
+  },
+  "optSecDevices": {
+    "message": "連携済みデバイス"
+  },
+  "optPaired": {
+    "message": "連携 {0}"
+  },
+  "optLastUsed": {
+    "message": "最近使用"
+  },
+  "optUnpairNote": {
+    "message": "連携解除はこのブラウザだけに影響します。コードはスマホにそのまま残ります。"
+  },
+  "optNoRules": {
+    "message": "まだ特別なルールはありません。追加するとここに表示されます。"
+  },
+  "optRulePlaceholder": {
+    "message": "site.example.com"
+  },
+  "optNoWebauthn": {
+    "message": "このブラウザはセキュリティキーに対応していません。"
+  },
+  "optKeyReady": {
+    "message": "準備完了"
+  },
+  "optKeyNotConfirmed": {
+    "message": "未確認 — 解錠テストをタップ"
+  },
+  "optAddedOn": {
+    "message": "追加 {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "この鍵に名前を付ける（例: YubiKey）"
+  },
+  "optAddKey": {
+    "message": "セキュリティキーを追加"
+  },
+  "optDefaultKeyLabel": {
+    "message": "セキュリティキー"
+  },
+  "optTouchKey": {
+    "message": "鍵に触れてください…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} を登録しました。「解錠テスト」をタップして触れ、確認してください。"
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} を登録しましたが、タッチ解錠に対応していない可能性があります。念のため解錠テストをお試しください。"
+  },
+  "optRegisterFailed": {
+    "message": "登録できませんでした: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "タッチで金庫が解錠されることを確認"
+  },
+  "optTestUnlock": {
+    "message": "解錠テスト"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0} でここのPurrが解錠します。準備完了です。"
+  },
+  "optYourKey": {
+    "message": "あなたの鍵"
+  },
+  "optUnlockFailed": {
+    "message": "解錠に失敗: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "鍵でのサインインを有効化"
+  },
+  "optEnableKeySignin": {
+    "message": "鍵サインインを有効化"
+  },
+  "optKeySigninOn": {
+    "message": "✓ {0} で鍵サインインを有効化。スマホアプリを一度開いて金庫をここに同期してください。"
+  },
+  "optEnableFailed": {
+    "message": "有効化できませんでした: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "鍵サインインはオンです"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "サイトのコード欄で鍵に触れて入力します — スマホはポケットのままです。"
+  },
+  "optAddBackup": {
+    "message": "{0} をバックアップ鍵として追加"
+  },
+  "optAddToSignin": {
+    "message": "サインインに追加"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "登録済みの鍵に触れ、次に新しい鍵に…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} を追加 — これでバックアップ鍵になりました。"
+  },
+  "optAddFailed": {
+    "message": "追加できませんでした: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "鍵サインインをオフに"
+  },
+  "optKeySigninOff": {
+    "message": "このパソコンで鍵サインインをオフにしました。"
+  }
 }
