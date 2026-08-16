@@ -1,125 +1,359 @@
 {
-  "extName": { "message": "Purr: 2FA प्रमाणक" },
-  "extDescription": { "message": "अपने कंप्यूटर पर एक टैप से साइन इन करें। Purr आपका 2FA कोड आपके फ़ोन या सुरक्षा कुंजी से लाता है। यह आपका सीक्रेट कभी नहीं देखता।" },
-
-  "barAllCodes": { "message": "सभी कोड" },
-  "barSettings": { "message": "सेटिंग्स" },
-
-  "pairMyPhone": { "message": "मेरा फ़ोन जोड़ें" },
-  "tryAgain": { "message": "फिर से कोशिश करें" },
-  "askAgain": { "message": "फिर से पूछें" },
-  "remove": { "message": "हटाएँ" },
-  "unpair": { "message": "अलग करें" },
-  "copied": { "message": "कॉपी हो गया" },
-  "badgeMatched": { "message": "मिलान" },
-
-  "popupUnpairedTitle": { "message": "आपका फ़ोन चाबी है। यह ताला है।" },
-  "popupUnpairedSub": { "message": "अपना फ़ोन एक बार जोड़ें और साइन इन एक टैप बन जाता है। आपके कोड फ़ोन पर रहते हैं — यह एक्सटेंशन सीक्रेट कभी नहीं देखता।" },
-  "popupNoFieldTitle": { "message": "यहाँ भरने के लिए कुछ नहीं है।" },
-  "popupNoFieldSub": { "message": "इसे किसी ऐसे पेज पर खोलें जो छह अंकों का कोड माँगता है, और कोड सीधे आपके फ़ोन से आ सकता है।" },
-  "popupFillKey": { "message": "मेरी कुंजी से भरें" },
-  "popupFillKeySub": { "message": "अपनी सुरक्षा कुंजी को छुएँ — आपका फ़ोन जेब में रहता है" },
-  "popupAskPhone": { "message": "मेरे फ़ोन से पूछें" },
-  "popupAskPhoneSub": { "message": "वहाँ मंज़ूरी दें और कोड यहाँ आ जाता है" },
-  "popupReadyTitle": { "message": "जब आप तैयार हों।" },
-  "popupReadySubKey": { "message": "कोड यहीं भरने के लिए अपनी कुंजी छुएँ, या अपने फ़ोन से पूछें।" },
-  "popupReadySubPhone": { "message": "आपका कोड किसी ऐसी चीज़ से आना चाहिए जो आप पकड़े हों — आपका फ़ोन।" },
-  "popupReadyFootnote": { "message": "पेज तक केवल छह अंक ही पहुँचते हैं। आप इसे बंद कर सकते हैं — जब आप मंज़ूरी टैप करते हैं तो फ़ोन की मंज़ूरी फिर भी भर देती है।" },
-  "popupKeyTouchTitle": { "message": "अपनी कुंजी छुएँ" },
-  "popupKeyTouchSub": { "message": "इस कोड को यहीं अनलॉक करने के लिए अपनी सुरक्षा कुंजी छुएँ — इस कंप्यूटर से छह अंकों के अलावा कुछ नहीं जाता।" },
-  "popupKeyErrorTitle": { "message": "आपकी कुंजी इस्तेमाल नहीं हो सकी" },
-  "popupNoTab": { "message": "भरने के लिए कोई सक्रिय टैब नहीं।" },
-  "popupSentTitle": { "message": "आपके फ़ोन पर भेजा गया" },
-  "popupSentSub": { "message": "वहाँ मंज़ूरी दें और कोड यहाँ आ जाता है। आप यह विंडो बंद कर सकते हैं — यह चलता रहता है।" },
-  "cancel": { "message": "रद्द करें" },
-  "popupFilledTitle": { "message": "आपके लिए भर दिया।" },
-  "popupFilledSub": { "message": "आपके फ़ोन ने कोड बनाया और केवल वे छह अंक भेजे। और कुछ पार नहीं गया।" },
-  "popupClipTitle": { "message": "यह रहा आपका कोड।" },
-  "popupClipSub": { "message": "हमें इस पेज पर कोड बॉक्स नहीं मिला, तो इसे खुद कॉपी करें:" },
-  "popupCopyCode": { "message": "{0} {1} कॉपी करें" },
-  "popupDeniedTitle": { "message": "आपने इसे अस्वीकार किया" },
-  "popupDeniedSub": { "message": "कोई कोड नहीं भेजा गया। अगर यह गलती थी तो फिर से पूछें — अगर नहीं थी, तो इस साइट का पासवर्ड बदलें।" },
-  "popupChangePassword": { "message": "मेरा पासवर्ड बदलें" },
-  "popupExpiredTitle": { "message": "उस अनुरोध का समय समाप्त हो गया" },
-  "popupExpiredSub": { "message": "अनुरोध एक मिनट बाद समाप्त हो जाते हैं ताकि कोई पुराना गलती से मंज़ूर न हो। कुछ गलत नहीं हुआ — बस फिर से पूछें।" },
-  "popupUnreachableTitle": { "message": "आपके फ़ोन ने जवाब नहीं दिया" },
-  "popupUnreachableSub": { "message": "यह सो रहा हो सकता है, सिग्नल से बाहर, या मेज़ पर उल्टा रखा हो। आपके खाते में कुछ गलत नहीं है।" },
-  "popupOpenApp": { "message": "या ऐप खोलें और कोड पढ़ें" },
-  "popupUnmatchedTitle": { "message": "आपने अभी तक {0} सहेजा नहीं है" },
-  "popupUnmatchedSub": { "message": "अगर यह खाता आपके फ़ोन पर पहले से किसी और नाम से है, तो उसे वहाँ खोलें और मंज़ूरी दें — यह पॉपअप अगली बार मिलान याद रखेगा।" },
-
-  "optStepOf": { "message": "चरण {0} / 3" },
-  "optIntroHero": { "message": "आपका फ़ोन चाबी है। यह ताला है।" },
-  "optIntroCopy": { "message": "जोड़ने में लगभग एक मिनट लगता है। उसके बाद, कहीं भी साइन इन आपके फ़ोन पर एक टैप है — न कोड टाइप करना, न कुछ याद रखना।" },
-  "optTick1": { "message": "आपके कोड आपके फ़ोन पर रहते हैं। यह एक्सटेंशन सीक्रेट कभी नहीं देखता।" },
-  "optTick2": { "message": "बिना खाते के काम करता है। कुछ साइन अप करने को नहीं।" },
-  "optTick3": { "message": "किसी भी ओर से, कभी भी अलग करें।" },
-  "optGetApp": { "message": "पहले ऐप लें, अगर अभी तक नहीं लिया" },
-  "optScanErrTitle": { "message": "पेयरिंग सेवा तक नहीं पहुँच सके" },
-  "optScanErrCopy": { "message": "कनेक्शन जाँचें और फिर से कोशिश करें। अभी कुछ सेट नहीं हुआ, तो कुछ अधूरा नहीं है।" },
-  "optScanTitle": { "message": "अपना फ़ोन इस पर ताकें" },
-  "optScanPath": { "message": "सुरक्षा → कंप्यूटर जोड़ें" },
-  "optScanCopy": { "message": "अपने फ़ोन पर Purr खोलें, {0} टैप करें, फिर उसे वर्ग की ओर पकड़ें।" },
-  "optWaitingPhone": { "message": "आपके फ़ोन का इंतज़ार…" },
-  "optBack": { "message": "पीछे" },
-  "optDefaultPhone": { "message": "आपका फ़ोन" },
-  "optPairedTitle": { "message": "\"{0}\" से जुड़ा" },
-  "optPairedCopy": { "message": "अगली बार जब कोई साइट कोड माँगेगी, यह एक्सटेंशन उसे पहचानेगा और आपके फ़ोन से पूछेगा। आप बस मंज़ूरी टैप करेंगे।" },
-  "optPairedJustNow": { "message": "अभी-अभी जुड़ा" },
-  "optActive": { "message": "सक्रिय" },
-  "optDone": { "message": "हो गया" },
-  "optToday": { "message": "आज" },
-  "optYesterday": { "message": "कल" },
-  "optDaysAgo": { "message": "{0} दिन पहले" },
-  "optMonthAgo": { "message": "{0} महीने पहले" },
-  "optMonthsAgo": { "message": "{0} महीने पहले" },
-  "optRuleAlwaysPhone": { "message": "हमेशा मेरे फ़ोन से पूछें" },
-  "optRuleNeverAutofill": { "message": "कभी अपने-आप न भरें" },
-  "optSettingsTitle": { "message": "Purr सेटिंग्स" },
-  "optSecWhenAsks": { "message": "जब कोई साइट कोड माँगती है" },
-  "optFillAuto": { "message": "मेरे लिए अपने-आप भर दें" },
-  "optFillAutoSub": { "message": "आपकी मंज़ूरी के बाद — हम कहीं टैप के बिना कभी नहीं भरते" },
-  "optSubmit": { "message": "भरने के बाद फ़ॉर्म सबमिट करें" },
-  "optSubmitSub": { "message": "एक क्लिक बचाता है; अगर कोई साइट अजीब व्यवहार करे तो बंद करें" },
-  "optLeadKey": { "message": "मेरी सुरक्षा कुंजी को प्राथमिकता दें" },
-  "optLeadKeySub": { "message": "पहले कुंजी का स्पर्श पेश करें; आपका फ़ोन एक टैप दूर रहता है" },
-  "optSecSiteRules": { "message": "अपने नियमों वाली साइटें" },
-  "optSecKeys": { "message": "सुरक्षा कुंजी से साइन इन करें" },
-  "optExperimental": { "message": "· प्रायोगिक" },
-  "optKeysBlurb": { "message": "अपने फ़ोन को जेब में रखते हुए इस कंप्यूटर पर कोड भरने के लिए एक पंजीकृत कुंजी छुएँ। आपके कोड यहाँ केवल सिफरटेक्स्ट के रूप में रहते हैं; कुंजी ही उन्हें अनलॉक करती है।" },
-  "optSecDevices": { "message": "जुड़े हुए डिवाइस" },
-  "optPaired": { "message": "जुड़ा {0}" },
-  "optLastUsed": { "message": "हाल ही में इस्तेमाल" },
-  "optUnpairNote": { "message": "अलग करना केवल इस ब्राउज़र को प्रभावित करता है। आपके कोड आपके फ़ोन पर, अछूते रहते हैं।" },
-  "optNoRules": { "message": "अभी कोई विशेष नियम नहीं। जब आप एक जोड़ेंगे तो नियम यहाँ आएँगे।" },
-  "optRulePlaceholder": { "message": "साइट.उदाहरण.com" },
-  "optNoWebauthn": { "message": "यह ब्राउज़र सुरक्षा कुंजियों का समर्थन नहीं करता।" },
-  "optKeyReady": { "message": "तैयार" },
-  "optKeyNotConfirmed": { "message": "पुष्टि नहीं — Test unlock टैप करें" },
-  "optAddedOn": { "message": "जोड़ा गया {0}" },
-  "optKeyNamePlaceholder": { "message": "इस कुंजी को नाम दें (जैसे YubiKey)" },
-  "optAddKey": { "message": "सुरक्षा कुंजी जोड़ें" },
-  "optDefaultKeyLabel": { "message": "सुरक्षा कुंजी" },
-  "optTouchKey": { "message": "अपनी कुंजी छुएँ…" },
-  "optKeyRegistered": { "message": "✓ {0} पंजीकृत। \"Test unlock\" टैप करें और पुष्टि के लिए इसे छुएँ।" },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} पंजीकृत, पर यह छू-कर-अनलॉक का समर्थन शायद न करे। पक्का करने के लिए Test unlock आज़माएँ।" },
-  "optRegisterFailed": { "message": "पंजीकरण नहीं हो सका: {0}" },
-  "optConfirmTouch": { "message": "पुष्टि करें कि एक स्पर्श वॉल्ट अनलॉक करता है" },
-  "optTestUnlock": { "message": "Test unlock" },
-  "optUnlockOk": { "message": "✓ {0} यहाँ Purr अनलॉक करती है। आप तैयार हैं।" },
-  "optYourKey": { "message": "आपकी कुंजी" },
-  "optUnlockFailed": { "message": "अनलॉक विफल: {0}" },
-  "optTurnOnKeySignin": { "message": "अपनी कुंजी से साइन इन चालू करें" },
-  "optEnableKeySignin": { "message": "कुंजी साइन-इन सक्षम करें" },
-  "optKeySigninOn": { "message": "✓ {0} के साथ कुंजी साइन-इन चालू। एक बार फ़ोन ऐप खोलें ताकि यह आपका वॉल्ट यहाँ सिंक करे।" },
-  "optEnableFailed": { "message": "सक्षम नहीं हो सका: {0}" },
-  "optKeySigninIsOn": { "message": "कुंजी साइन-इन चालू है" },
-  "optKeySigninIsOnSub": { "message": "किसी साइट के कोड फ़ील्ड पर, उसे भरने के लिए अपनी कुंजी छुएँ — आपका फ़ोन जेब में रहता है।" },
-  "optAddBackup": { "message": "{0} को बैकअप कुंजी के रूप में जोड़ें" },
-  "optAddToSignin": { "message": "साइन-इन में जोड़ें" },
-  "optTouchEnrolledThenNew": { "message": "एक पंजीकृत कुंजी छुएँ, फिर नई…" },
-  "optBackupAdded": { "message": "✓ {0} जोड़ी गई — अब यह बैकअप कुंजी है।" },
-  "optAddFailed": { "message": "जोड़ा नहीं जा सका: {0}" },
-  "optTurnOffKeySignin": { "message": "कुंजी साइन-इन बंद करें" },
-  "optKeySigninOff": { "message": "इस कंप्यूटर पर कुंजी साइन-इन बंद कर दिया गया।" }
+  "extName": {
+    "message": "Purr: 2FA प्रमाणक"
+  },
+  "extDescription": {
+    "message": "अपने कंप्यूटर पर एक टैप से साइन इन करें। Purr आपका 2FA कोड आपके फ़ोन या सुरक्षा कुंजी से लाता है। यह आपका सीक्रेट कभी नहीं देखता।"
+  },
+  "barAllCodes": {
+    "message": "सभी कोड"
+  },
+  "barSettings": {
+    "message": "सेटिंग्स"
+  },
+  "pairMyPhone": {
+    "message": "मेरा फ़ोन जोड़ें"
+  },
+  "tryAgain": {
+    "message": "फिर से कोशिश करें"
+  },
+  "askAgain": {
+    "message": "फिर से पूछें"
+  },
+  "remove": {
+    "message": "हटाएँ"
+  },
+  "unpair": {
+    "message": "अलग करें"
+  },
+  "copied": {
+    "message": "कॉपी हो गया"
+  },
+  "badgeMatched": {
+    "message": "मिलान"
+  },
+  "popupUnpairedTitle": {
+    "message": "आपका फ़ोन चाबी है। यह ताला है।"
+  },
+  "popupUnpairedSub": {
+    "message": "अपना फ़ोन एक बार जोड़ें और साइन इन एक टैप बन जाता है। आपके कोड फ़ोन पर रहते हैं — यह एक्सटेंशन सीक्रेट कभी नहीं देखता।"
+  },
+  "popupNoFieldTitle": {
+    "message": "यहाँ भरने के लिए कुछ नहीं है।"
+  },
+  "popupNoFieldSub": {
+    "message": "इसे किसी ऐसे पेज पर खोलें जो छह अंकों का कोड माँगता है, और कोड सीधे आपके फ़ोन से आ सकता है।"
+  },
+  "popupFillKey": {
+    "message": "मेरी कुंजी से भरें"
+  },
+  "popupFillKeySub": {
+    "message": "अपनी सुरक्षा कुंजी को छुएँ — आपका फ़ोन जेब में रहता है"
+  },
+  "popupAskPhone": {
+    "message": "मेरे फ़ोन से पूछें"
+  },
+  "popupAskPhoneSub": {
+    "message": "वहाँ मंज़ूरी दें और कोड यहाँ आ जाता है"
+  },
+  "popupReadyTitle": {
+    "message": "जब आप तैयार हों।"
+  },
+  "popupReadySubKey": {
+    "message": "कोड यहीं भरने के लिए अपनी कुंजी छुएँ, या अपने फ़ोन से पूछें।"
+  },
+  "popupReadySubPhone": {
+    "message": "आपका कोड किसी ऐसी चीज़ से आना चाहिए जो आप पकड़े हों — आपका फ़ोन।"
+  },
+  "popupReadyFootnote": {
+    "message": "पेज तक केवल छह अंक ही पहुँचते हैं। आप इसे बंद कर सकते हैं — जब आप मंज़ूरी टैप करते हैं तो फ़ोन की मंज़ूरी फिर भी भर देती है।"
+  },
+  "popupKeyTouchTitle": {
+    "message": "अपनी कुंजी छुएँ"
+  },
+  "popupKeyTouchSub": {
+    "message": "इस कोड को यहीं अनलॉक करने के लिए अपनी सुरक्षा कुंजी छुएँ — इस कंप्यूटर से छह अंकों के अलावा कुछ नहीं जाता।"
+  },
+  "popupKeyErrorTitle": {
+    "message": "आपकी कुंजी इस्तेमाल नहीं हो सकी"
+  },
+  "popupNoTab": {
+    "message": "भरने के लिए कोई सक्रिय टैब नहीं।"
+  },
+  "popupSentTitle": {
+    "message": "आपके फ़ोन पर भेजा गया"
+  },
+  "popupSentSub": {
+    "message": "वहाँ मंज़ूरी दें और कोड यहाँ आ जाता है। आप यह विंडो बंद कर सकते हैं — यह चलता रहता है।"
+  },
+  "cancel": {
+    "message": "रद्द करें"
+  },
+  "popupFilledTitle": {
+    "message": "आपके लिए भर दिया।"
+  },
+  "popupFilledSub": {
+    "message": "आपके फ़ोन ने कोड बनाया और केवल वे छह अंक भेजे। और कुछ पार नहीं गया।"
+  },
+  "popupClipTitle": {
+    "message": "यह रहा आपका कोड।"
+  },
+  "popupClipSub": {
+    "message": "हमें इस पेज पर कोड बॉक्स नहीं मिला, तो इसे खुद कॉपी करें:"
+  },
+  "popupCopyCode": {
+    "message": "{0} {1} कॉपी करें"
+  },
+  "popupDeniedTitle": {
+    "message": "आपने इसे अस्वीकार किया"
+  },
+  "popupDeniedSub": {
+    "message": "कोई कोड नहीं भेजा गया। अगर यह गलती थी तो फिर से पूछें — अगर नहीं थी, तो इस साइट का पासवर्ड बदलें।"
+  },
+  "popupChangePassword": {
+    "message": "मेरा पासवर्ड बदलें"
+  },
+  "popupExpiredTitle": {
+    "message": "उस अनुरोध का समय समाप्त हो गया"
+  },
+  "popupExpiredSub": {
+    "message": "अनुरोध एक मिनट बाद समाप्त हो जाते हैं ताकि कोई पुराना गलती से मंज़ूर न हो। कुछ गलत नहीं हुआ — बस फिर से पूछें।"
+  },
+  "popupUnreachableTitle": {
+    "message": "आपके फ़ोन ने जवाब नहीं दिया"
+  },
+  "popupUnreachableSub": {
+    "message": "यह सो रहा हो सकता है, सिग्नल से बाहर, या मेज़ पर उल्टा रखा हो। आपके खाते में कुछ गलत नहीं है।"
+  },
+  "popupOpenApp": {
+    "message": "या ऐप खोलें और कोड पढ़ें"
+  },
+  "popupUnmatchedTitle": {
+    "message": "आपने अभी तक {0} सहेजा नहीं है"
+  },
+  "popupUnmatchedSub": {
+    "message": "अगर यह खाता आपके फ़ोन पर पहले से किसी और नाम से है, तो उसे वहाँ खोलें और मंज़ूरी दें — यह पॉपअप अगली बार मिलान याद रखेगा।"
+  },
+  "optStepOf": {
+    "message": "चरण {0} / 3"
+  },
+  "optIntroHero": {
+    "message": "आपका फ़ोन चाबी है। यह ताला है।"
+  },
+  "optIntroCopy": {
+    "message": "जोड़ने में लगभग एक मिनट लगता है। उसके बाद, कहीं भी साइन इन आपके फ़ोन पर एक टैप है — न कोड टाइप करना, न कुछ याद रखना।"
+  },
+  "optTick1": {
+    "message": "आपके कोड आपके फ़ोन पर रहते हैं। यह एक्सटेंशन सीक्रेट कभी नहीं देखता।"
+  },
+  "optTick2": {
+    "message": "बिना खाते के काम करता है। कुछ साइन अप करने को नहीं।"
+  },
+  "optTick3": {
+    "message": "किसी भी ओर से, कभी भी अलग करें।"
+  },
+  "optGetApp": {
+    "message": "पहले ऐप लें, अगर अभी तक नहीं लिया"
+  },
+  "optScanErrTitle": {
+    "message": "पेयरिंग सेवा तक नहीं पहुँच सके"
+  },
+  "optScanErrCopy": {
+    "message": "कनेक्शन जाँचें और फिर से कोशिश करें। अभी कुछ सेट नहीं हुआ, तो कुछ अधूरा नहीं है।"
+  },
+  "optScanTitle": {
+    "message": "अपना फ़ोन इस पर ताकें"
+  },
+  "optScanPath": {
+    "message": "सुरक्षा → कंप्यूटर जोड़ें"
+  },
+  "optScanCopy": {
+    "message": "अपने फ़ोन पर Purr खोलें, {0} टैप करें, फिर उसे वर्ग की ओर पकड़ें।"
+  },
+  "optWaitingPhone": {
+    "message": "आपके फ़ोन का इंतज़ार…"
+  },
+  "optBack": {
+    "message": "पीछे"
+  },
+  "optDefaultPhone": {
+    "message": "आपका फ़ोन"
+  },
+  "optPairedTitle": {
+    "message": "\"{0}\" से जुड़ा"
+  },
+  "optPairedCopy": {
+    "message": "अगली बार जब कोई साइट कोड माँगेगी, यह एक्सटेंशन उसे पहचानेगा और आपके फ़ोन से पूछेगा। आप बस मंज़ूरी टैप करेंगे।"
+  },
+  "optPairedJustNow": {
+    "message": "अभी-अभी जुड़ा"
+  },
+  "optActive": {
+    "message": "सक्रिय"
+  },
+  "optDone": {
+    "message": "हो गया"
+  },
+  "optToday": {
+    "message": "आज"
+  },
+  "optYesterday": {
+    "message": "कल"
+  },
+  "optDaysAgo": {
+    "message": "{0} दिन पहले"
+  },
+  "optMonthAgo": {
+    "message": "{0} महीने पहले"
+  },
+  "optMonthsAgo": {
+    "message": "{0} महीने पहले"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "हमेशा मेरे फ़ोन से पूछें"
+  },
+  "optRuleNeverAutofill": {
+    "message": "कभी अपने-आप न भरें"
+  },
+  "optSettingsTitle": {
+    "message": "Purr सेटिंग्स"
+  },
+  "optSecWhenAsks": {
+    "message": "जब कोई साइट कोड माँगती है"
+  },
+  "optFillAuto": {
+    "message": "मेरे लिए अपने-आप भर दें"
+  },
+  "optFillAutoSub": {
+    "message": "आपकी मंज़ूरी के बाद — हम कहीं टैप के बिना कभी नहीं भरते"
+  },
+  "optSubmit": {
+    "message": "भरने के बाद फ़ॉर्म सबमिट करें"
+  },
+  "optSubmitSub": {
+    "message": "एक क्लिक बचाता है; अगर कोई साइट अजीब व्यवहार करे तो बंद करें"
+  },
+  "optLeadKey": {
+    "message": "मेरी सुरक्षा कुंजी को प्राथमिकता दें"
+  },
+  "optLeadKeySub": {
+    "message": "पहले कुंजी का स्पर्श पेश करें; आपका फ़ोन एक टैप दूर रहता है"
+  },
+  "optSecSiteRules": {
+    "message": "अपने नियमों वाली साइटें"
+  },
+  "optSecKeys": {
+    "message": "सुरक्षा कुंजी से साइन इन करें"
+  },
+  "optExperimental": {
+    "message": "· प्रायोगिक"
+  },
+  "optKeysBlurb": {
+    "message": "अपने फ़ोन को जेब में रखते हुए इस कंप्यूटर पर कोड भरने के लिए एक पंजीकृत कुंजी छुएँ। आपके कोड यहाँ केवल सिफरटेक्स्ट के रूप में रहते हैं; कुंजी ही उन्हें अनलॉक करती है।"
+  },
+  "optSecDevices": {
+    "message": "जुड़े हुए डिवाइस"
+  },
+  "optPaired": {
+    "message": "जुड़ा {0}"
+  },
+  "optLastUsed": {
+    "message": "हाल ही में इस्तेमाल"
+  },
+  "optUnpairNote": {
+    "message": "अलग करना केवल इस ब्राउज़र को प्रभावित करता है। आपके कोड आपके फ़ोन पर, अछूते रहते हैं।"
+  },
+  "optNoRules": {
+    "message": "अभी कोई विशेष नियम नहीं। जब आप एक जोड़ेंगे तो नियम यहाँ आएँगे।"
+  },
+  "optRulePlaceholder": {
+    "message": "साइट.उदाहरण.com"
+  },
+  "optNoWebauthn": {
+    "message": "यह ब्राउज़र सुरक्षा कुंजियों का समर्थन नहीं करता।"
+  },
+  "optKeyReady": {
+    "message": "तैयार"
+  },
+  "optKeyNotConfirmed": {
+    "message": "पुष्टि नहीं — Test unlock टैप करें"
+  },
+  "optAddedOn": {
+    "message": "जोड़ा गया {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "इस कुंजी को नाम दें (जैसे YubiKey)"
+  },
+  "optAddKey": {
+    "message": "सुरक्षा कुंजी जोड़ें"
+  },
+  "optDefaultKeyLabel": {
+    "message": "सुरक्षा कुंजी"
+  },
+  "optTouchKey": {
+    "message": "अपनी कुंजी छुएँ…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} पंजीकृत। \"Test unlock\" टैप करें और पुष्टि के लिए इसे छुएँ।"
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} पंजीकृत, पर यह छू-कर-अनलॉक का समर्थन शायद न करे। पक्का करने के लिए Test unlock आज़माएँ।"
+  },
+  "optRegisterFailed": {
+    "message": "पंजीकरण नहीं हो सका: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "पुष्टि करें कि एक स्पर्श वॉल्ट अनलॉक करता है"
+  },
+  "optTestUnlock": {
+    "message": "Test unlock"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0} यहाँ Purr अनलॉक करती है। आप तैयार हैं।"
+  },
+  "optYourKey": {
+    "message": "आपकी कुंजी"
+  },
+  "optUnlockFailed": {
+    "message": "अनलॉक विफल: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "अपनी कुंजी से साइन इन चालू करें"
+  },
+  "optEnableKeySignin": {
+    "message": "कुंजी साइन-इन सक्षम करें"
+  },
+  "optKeySigninOn": {
+    "message": "✓ {0} के साथ कुंजी साइन-इन चालू। एक बार फ़ोन ऐप खोलें ताकि यह आपका वॉल्ट यहाँ सिंक करे।"
+  },
+  "optEnableFailed": {
+    "message": "सक्षम नहीं हो सका: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "कुंजी साइन-इन चालू है"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "किसी साइट के कोड फ़ील्ड पर, उसे भरने के लिए अपनी कुंजी छुएँ — आपका फ़ोन जेब में रहता है।"
+  },
+  "optAddBackup": {
+    "message": "{0} को बैकअप कुंजी के रूप में जोड़ें"
+  },
+  "optAddToSignin": {
+    "message": "साइन-इन में जोड़ें"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "एक पंजीकृत कुंजी छुएँ, फिर नई…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} जोड़ी गई — अब यह बैकअप कुंजी है।"
+  },
+  "optAddFailed": {
+    "message": "जोड़ा नहीं जा सका: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "कुंजी साइन-इन बंद करें"
+  },
+  "optKeySigninOff": {
+    "message": "इस कंप्यूटर पर कुंजी साइन-इन बंद कर दिया गया।"
+  }
 }
