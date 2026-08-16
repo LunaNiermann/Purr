@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "このパソコンで鍵サインインをオフにしました。"
+  },
+  "optLanguage": {
+    "message": "言語"
+  },
+  "optLanguageAuto": {
+    "message": "ブラウザに合わせる"
+  },
+  "optLanguageSub": {
+    "message": "ここでPurrが話す言語を選択"
   }
 }
