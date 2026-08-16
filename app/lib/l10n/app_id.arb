@@ -19,5 +19,40 @@
   },
   "language": "Bahasa",
   "languageSubtitle": "Pilih bahasa yang digunakan Purr",
-  "languageSystemDefault": "Ikuti perangkat saya"
+  "languageSystemDefault": "Ikuti perangkat saya",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchAccountsHint": "Cari akun",
+  "cancel": "Batal",
+  "tapToCopySeconds": "KETUK UNTUK MENYALIN · {seconds}D",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "copied": "Disalin",
+  "searchScopeNote": "Pencarian melihat nama situs dan nama pengguna Anda — bukan kodenya.",
+  "emptyVaultTitle": "Belum ada akun",
+  "emptyVaultBody": "Buka pengaturan keamanan sebuah situs, pilih \"aplikasi autentikator\", lalu arahkan ponsel ini ke kotak yang ditampilkan.",
+  "scanQrCode": "Pindai kode QR",
+  "typeSetupCode": "Ketik kode penyiapan saja"
 }
