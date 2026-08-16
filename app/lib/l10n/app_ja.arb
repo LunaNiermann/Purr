@@ -14,14 +14,41 @@
   "unlocking": "ロック解除中…",
   "useMyPassword": "パスワードを使う",
   "unlockYourCodes": "コードのロックを解除",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "言語",
   "languageSubtitle": "Purr が話す言語を選びます",
   "languageSystemDefault": "端末に合わせる",
-  "accountCount": "{count, plural, other{{count} 件}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "アカウントを検索",
   "cancel": "キャンセル",
   "tapToCopySeconds": "タップしてコピー · {seconds}秒",
-  "searchMatchCount": "{total, plural, other{{total} 件}}中 {shown} 件",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "コピーしました",
   "searchScopeNote": "検索はサイト名とユーザー名のみを対象とし、コード自体は対象にしません。",
   "emptyVaultTitle": "アカウントはまだありません",
@@ -35,8 +62,20 @@
   "detailBrowser": "ブラウザ",
   "detailAsked": "要求",
   "justNow": "たった今",
-  "secondsAgo": "{count, plural, other{{count} 秒前}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "どのアカウントですか？{domain} には保存されていません。",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "コードを送信",
   "didntAskForThis": "これは私ではありません",
   "justShowCode": "コードだけ表示",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "本人であることを確認中",
   "youreIn": "サインインしました。",
   "signingYouIn": "{domain} がパソコンでサインインしています。入力は不要です。",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "送信したコードは30秒で期限切れになり、一度だけ使えます。",
   "done": "完了",
   "blockedNothingSent": "ブロックしました。何も送信していません。",
   "deniedBody": "誰かがあなたとしてサインインしようとしました。コードはこのスマホから出ていません。相手は何も得ていません。",
   "deniedChangePassword": "もし誤りでなければ、今日 {domain} のパスワードを変更してください。相手が持っているのはパスワードです。",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "了解",
   "typeThisInto": "ここに入力",
   "newCodeInSeconds": "新しいコードまで {seconds}秒",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "ブラウザには何も送信していません。自分で入力または貼り付けてください。",
   "copyCode": "コードをコピー",
   "intrusionBadge": "ブロック · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "たった今",
-  "relativeMinutesAgo": "{count, plural, other{{count} 分前}}",
-  "relativeHoursAgo": "{count, plural, other{{count} 時間前}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "誰かがあなたの {domain} のパスワードを知っています。",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "相手は入れませんでした。このスマホも必要だからです。ただしパスワードは漏れているので、今日変更するのがおすすめです。",
   "intrusionTried": "試行",
-  "triedTimes": "{count, plural, other{{count} 回}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "OK",
   "muteToday": "今日はこのサイトのリクエストをミュート",
   "onbHeroTitle": "パスワードだけでは不十分です。",
@@ -103,6 +190,11 @@
   "addCameraOk": "OK、確認して",
   "addTypeByHand": "コードは手で入力します",
   "scanCodeError": "そのコードは使えませんでした: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "このパソコンを連携しますか？",
   "pairBody": "これはパソコンを連携するためのコードで、サイトのアカウントではありません。今すぐ連携しますか？",
   "notNow": "今はしない",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "最初のコード: ",
   "saveLabel": "保存",
   "saveNamed": "{site}を保存",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "アカウント",
   "importedAccountName": "インポートしたアカウント",
-  "importReadyCount": "{count, plural, other{{count}件のアカウントを移行できます}}",
+  "importReadyCount": "{count, plural, =1{One account, ready to move in} other{{count} accounts, ready to move in}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "これは{size}分の{index}です — 他の四角も、順番は問わず読み取ってください。",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "以下のすべてがそのまま移ります。省かれるものはありません。",
   "unnamedAccount": "名称なし",
   "importBringOne": "取り込む",
   "importBringAll": "{count}件すべて取り込む",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "名前を変更",
   "detailRemoveTitle": "{site}を削除しますか？",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "先に{site}で2段階認証をオフにしてください。さもないと締め出されます。",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "残す",
   "detailRemove": "削除",
   "detailNewIn": "{seconds}秒後に更新",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "これがある場所",
   "detailThisPhone": "この端末",
   "detailPlusKit": "さらに紙のキットも — この端末をなくしても安心です",
@@ -153,7 +291,14 @@
   "restoreWordsSubtitle": "順番に、1つの枠に1語。大文字小文字は気にしないでください。",
   "restoreWordsError": "その語はうまく合いません — 紙と1語ずつ照合してください。順番も大切です。",
   "restoreLostSheet": "紙もなくしましたか？ 古い端末がまだ動くなら、そのセキュリティタブで新しく印刷できます。",
-  "restoreWordsToGo": "{count, plural, other{あと{count}語}}",
+  "restoreWordsToGo": "{count, plural, =1{1 word to go} other{{count} words to go}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "その語のバックアップが見つかりませんでした。古い端末でバックアップがオフだった場合、紙だけではアカウントを戻せません — 新規に設定できます。",
   "restoreGenericError": "何かが妨げました — 接続を確認してもう一度お試しください。何も失われていません。",
   "restoreErrorTitle": "うまくいきませんでした — でも何も失われていません",
@@ -161,10 +306,24 @@
   "restoreUnscrambling": "コードを復元しています…",
   "restoreCheckFound": "暗号化バックアップが見つかりました",
   "restoreCheckUnlocked": "あなたの語で解錠できました",
-  "restoreCheckPutting": "{count, plural, other{{count}件のアカウントを戻しています}}",
+  "restoreCheckPutting": "{count, plural, =1{Putting 1 account back} other{Putting {count} accounts back}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "アカウントを戻しています",
   "restoreOnPhoneNote": "すべてこの端末で行われます。私たちは読めない暗号化コピーだけを保管していました。",
-  "restoreDoneTitle": "{count, plural, other{{count}件すべてのアカウントが戻りました。}}",
+  "restoreDoneTitle": "{count, plural, =1{Your account is back.} other{All {count} accounts are back.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "古い端末は切り離されました — 誰かが見つけても、そのコードはもう使えません。",
   "restorePrintFreshTitle": "あと1つ：新しいキットを印刷",
   "restorePrintFreshBody": "古い紙は引退しました。新しい紙は10秒で、次回に備えられます。",
@@ -189,6 +348,11 @@
   "secLoseSection": "この端末をなくしたら",
   "secRecoveryKit": "リカバリーキット",
   "secSavedOn": "{date}に保存",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "すべての端末をなくしても、すべてを取り戻せる1枚の紙です。いつでも別のコピーを印刷できます。",
   "secPrintAgain": "もう一度印刷",
   "secKitReason": "リカバリーキットを表示するには確認してください",
@@ -213,6 +377,11 @@
   "secComputerPaired": "サイトがブラウザにコードを求めると、この端末がリクエストを受け取ります。",
   "secYourBrowser": "あなたのブラウザ",
   "secPairedOn": "{date}に連携",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "連携を解除",
   "secPushChecking": "通知を確認しています…",
   "secPushReady": "通知の準備完了",
