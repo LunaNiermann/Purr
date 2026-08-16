@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Inicio con llave desactivado en esta computadora."
+  },
+  "optLanguage": {
+    "message": "Idioma"
+  },
+  "optLanguageAuto": {
+    "message": "Según mi navegador"
+  },
+  "optLanguageSub": {
+    "message": "Elige cómo te habla Purr aquí"
   }
 }
