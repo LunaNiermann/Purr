@@ -14,6 +14,9 @@
   "unlocking": "Déverrouillage…",
   "useMyPassword": "Utiliser mon mot de passe",
   "unlockYourCodes": "Déverrouillez vos codes",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Langue",
   "languageSubtitle": "Choisissez la langue de Purr",
   "languageSystemDefault": "Comme mon appareil"
