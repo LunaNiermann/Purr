@@ -14,14 +14,41 @@
   "unlocking": "جارٍ فتح القفل…",
   "useMyPassword": "استخدام كلمة المرور",
   "unlockYourCodes": "افتح قفل رموزك",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "اللغة",
   "languageSubtitle": "اختر اللغة التي يتحدث بها Purr",
   "languageSystemDefault": "حسب جهازي",
-  "accountCount": "{count, plural, zero{لا حسابات} one{حساب واحد} two{حسابان} few{{count} حسابات} many{{count} حسابًا} other{{count} حساب}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "ابحث في الحسابات",
   "cancel": "إلغاء",
   "tapToCopySeconds": "انقر للنسخ · {seconds}ث",
-  "searchMatchCount": "{shown} من {total, plural, zero{لا حسابات} one{حساب واحد} two{حسابين} few{{total} حسابات} many{{total} حسابًا} other{{total} حساب}}",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "تم النسخ",
   "searchScopeNote": "يبحث النظام في اسم الموقع واسم المستخدم فقط، وليس في الرموز نفسها.",
   "emptyVaultTitle": "لا حسابات بعد",
@@ -35,8 +62,20 @@
   "detailBrowser": "المتصفح",
   "detailAsked": "طُلب",
   "justNow": "الآن",
-  "secondsAgo": "{count, plural, zero{الآن} one{قبل ثانية} two{قبل ثانيتين} few{قبل {count} ثوانٍ} many{قبل {count} ثانية} other{قبل {count} ثانية}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "لأي حساب هذا؟ إنه غير محفوظ ضمن {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "إرسال الرمز",
   "didntAskForThis": "لم أطلب هذا",
   "justShowCode": "أرِني الرمز فقط",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "جارٍ التأكد من أنك أنت",
   "youreIn": "لقد دخلت.",
   "signingYouIn": "يقوم {domain} بتسجيل دخولك على حاسوبك. لا شيء لتكتبه.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "ينتهي الرمز المُرسَل خلال 30 ثانية ويُستخدَم مرة واحدة فقط.",
   "done": "تم",
   "blockedNothingSent": "تم الحظر. لم يُرسَل شيء.",
   "deniedBody": "حاول أحدهم تسجيل الدخول باسمك. لم تغادر رموزك هذا الهاتف — لم يحصلوا على شيء.",
   "deniedChangePassword": "إن لم يكن ذلك خطأً، غيّر كلمة مرور {domain} اليوم. كلمة المرور هي ما بحوزتهم.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "فهمت",
   "typeThisInto": "اكتب هذا في",
   "newCodeInSeconds": "رمز جديد خلال {seconds}ث",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "لم يُرسَل شيء إلى متصفّحك. اكتبه أو الصقه بنفسك.",
   "copyCode": "نسخ الرمز",
   "intrusionBadge": "محظور · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "الآن",
-  "relativeMinutesAgo": "{count, plural, zero{الآن} one{قبل دقيقة} two{قبل دقيقتين} few{قبل {count} دقائق} many{قبل {count} دقيقة} other{قبل {count} دقيقة}}",
-  "relativeHoursAgo": "{count, plural, zero{الآن} one{قبل ساعة} two{قبل ساعتين} few{قبل {count} ساعات} many{قبل {count} ساعة} other{قبل {count} ساعة}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "أحدهم يملك كلمة مرور {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "لم يتمكنوا من الدخول — يحتاجون هذا الهاتف أيضًا. لكن كلمة المرور بحوزتهم، لذا يُستحسن تغييرها اليوم.",
   "intrusionTried": "المحاولات",
-  "triedTimes": "{count, plural, zero{0 مرة} one{مرة واحدة} two{مرتان} few{{count} مرات} many{{count} مرة} other{{count} مرة}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "حسنًا",
   "muteToday": "كتم طلبات هذا الموقع اليوم",
   "onbHeroTitle": "كلمة المرور وحدها لا تكفي.",
@@ -103,6 +190,11 @@
   "addCameraOk": "حسنًا، اسألني",
   "addTypeByHand": "سأكتب الرمز يدويًا",
   "scanCodeError": "لم ينجح هذا الرمز: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "إقران هذا الحاسوب؟",
   "pairBody": "هذا رمز لربط حاسوب، وليس حساب موقع. هل تريد إقرانه الآن؟",
   "notNow": "ليس الآن",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "أول رمز: ",
   "saveLabel": "حفظ",
   "saveNamed": "حفظ {site}",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "حساب",
   "importedAccountName": "حساب مستورد",
-  "importReadyCount": "{count, plural, zero{لا حسابات جاهزة} one{حساب واحد، جاهز للانتقال} two{حسابان، جاهزان للانتقال} few{{count} حسابات، جاهزة للانتقال} many{{count} حسابًا، جاهزة للانتقال} other{{count} حساب، جاهزة للانتقال}}",
+  "importReadyCount": "{count, plural, =1{One account, ready to move in} other{{count} accounts, ready to move in}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "هذا الجزء {index} من {size} — امسح المربعات الأخرى أيضًا، بأي ترتيب.",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "كل ما بالأسفل يُنقل تمامًا كما هو. لا شيء يُتجاوز.",
   "unnamedAccount": "بلا اسم",
   "importBringOne": "أحضره",
   "importBringAll": "أحضر كل الـ {count}",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "إعادة تسمية",
   "detailRemoveTitle": "إزالة {site}؟",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "أوقف التحقق بخطوتين على {site} أولًا، وإلا ستحبس نفسك خارجه.",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "الإبقاء عليه",
   "detailRemove": "إزالة",
   "detailNewIn": "جديد خلال {seconds}ث",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "أين يوجد هذا",
   "detailThisPhone": "هذا الهاتف",
   "detailPlusKit": "بالإضافة إلى حقيبتك الورقية — أنت مغطّى إذا فُقد هذا الهاتف",
@@ -153,7 +291,14 @@
   "restoreWordsSubtitle": "بالترتيب، كلمة لكل خانة. لا تهتم بالأحرف الكبيرة.",
   "restoreWordsError": "هذه الكلمات لا تتطابق تمامًا — راجع كل كلمة مع الورقة. الترتيب مهم.",
   "restoreLostSheet": "فقدت الورقة أيضًا؟ إن كان هاتفك القديم لا يزال يعمل، فيمكن لعلامة الأمان فيه طباعة واحدة جديدة.",
-  "restoreWordsToGo": "{count, plural, zero{لم تتبقَّ كلمات} one{تبقّت كلمة واحدة} two{تبقّت كلمتان} few{تبقّت {count} كلمات} many{تبقّت {count} كلمة} other{تبقّت {count} كلمة}}",
+  "restoreWordsToGo": "{count, plural, =1{1 word to go} other{{count} words to go}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "لم نعثر على نسخة احتياطية لتلك الكلمات. إن كانت النسخ الاحتياطية معطّلة على هاتفك القديم، فالورقة وحدها لا تستطيع استعادة الحسابات — لكن يمكنك البدء من جديد.",
   "restoreGenericError": "اعترض شيء ما — تحقق من الاتصال وحاول مجددًا. لم يُفقد شيء.",
   "restoreErrorTitle": "لم ينجح ذلك — لكن لم يُفقد شيء",
@@ -161,10 +306,24 @@
   "restoreUnscrambling": "جارٍ فك تشفير رموزك…",
   "restoreCheckFound": "عُثر على نسختك الاحتياطية المشفّرة",
   "restoreCheckUnlocked": "كلماتك فتحتها",
-  "restoreCheckPutting": "{count, plural, zero{إعادة الحسابات} one{إعادة حساب واحد} two{إعادة حسابين} few{إعادة {count} حسابات} many{إعادة {count} حسابًا} other{إعادة {count} حساب}}",
+  "restoreCheckPutting": "{count, plural, =1{Putting 1 account back} other{Putting {count} accounts back}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "إعادة حساباتك",
   "restoreOnPhoneNote": "كل هذا يحدث على هذا الهاتف. لم نخزّن سوى نسخة مشفّرة لا يمكننا قراءتها.",
-  "restoreDoneTitle": "{count, plural, zero{عادت حساباتك.} one{عاد حسابك.} two{عاد حسابان.} few{عادت {count} حسابات.} many{عاد {count} حسابًا.} other{عادت كل الـ {count} حساب.}}",
+  "restoreDoneTitle": "{count, plural, =1{Your account is back.} other{All {count} accounts are back.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "قُطع هاتفك القديم — إن عثر عليه أحد، فلن تعمل رموزه بعد الآن.",
   "restorePrintFreshTitle": "بقي شيء واحد: اطبع حقيبة جديدة",
   "restorePrintFreshBody": "الورقة القديمة تقاعدت الآن. الجديدة تستغرق عشر ثوانٍ وتغطيك في المرة القادمة.",
@@ -189,6 +348,11 @@
   "secLoseSection": "إذا فقدت هذا الهاتف",
   "secRecoveryKit": "حقيبة الاسترداد",
   "secSavedOn": "حُفظت في {date}",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "ورقة واحدة يمكنها استعادة كل شيء، حتى لو فقدت كل جهاز. اطبع نسخة أخرى في أي وقت.",
   "secPrintAgain": "اطبع مجددًا",
   "secKitReason": "أكّد لعرض حقيبة الاسترداد",
@@ -213,6 +377,11 @@
   "secComputerPaired": "عندما يطلب موقع رمزًا من متصفحك، يتلقى هذا الهاتف الطلب.",
   "secYourBrowser": "متصفحك",
   "secPairedOn": "اقترن في {date}",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "إلغاء الإقران",
   "secPushChecking": "جارٍ فحص الإشعارات…",
   "secPushReady": "الإشعارات جاهزة",
