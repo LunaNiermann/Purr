@@ -19,5 +19,40 @@
   },
   "language": "اللغة",
   "languageSubtitle": "اختر اللغة التي يتحدث بها Purr",
-  "languageSystemDefault": "حسب جهازي"
+  "languageSystemDefault": "حسب جهازي",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchAccountsHint": "ابحث في الحسابات",
+  "cancel": "إلغاء",
+  "tapToCopySeconds": "انقر للنسخ · {seconds}ث",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "copied": "تم النسخ",
+  "searchScopeNote": "يبحث النظام في اسم الموقع واسم المستخدم فقط، وليس في الرموز نفسها.",
+  "emptyVaultTitle": "لا حسابات بعد",
+  "emptyVaultBody": "افتح إعدادات الأمان لأحد المواقع، واختر «تطبيق المصادقة»، ثم وجّه هذا الهاتف نحو المربّع الذي يظهر لك.",
+  "scanQrCode": "مسح رمز QR",
+  "typeSetupCode": "أدخل رمز الإعداد بدلاً من ذلك"
 }
