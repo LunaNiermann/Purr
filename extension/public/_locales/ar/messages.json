@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "أُوقف الدخول بالمفتاح على هذا الحاسوب."
+  },
+  "optLanguage": {
+    "message": "اللغة"
+  },
+  "optLanguageAuto": {
+    "message": "حسب متصفحي"
+  },
+  "optLanguageSub": {
+    "message": "اختر اللغة التي يخاطبك بها Purr هنا"
   }
 }
