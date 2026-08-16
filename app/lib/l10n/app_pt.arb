@@ -1,5 +1,5 @@
 {
-  "@@locale": "pt",
+  "@@locale": "pt-PT",
   "appTitle": "Purr",
   "tabCodes": "Códigos",
   "tabSecurity": "Segurança",
@@ -14,14 +14,41 @@
   "unlocking": "Desbloqueando…",
   "useMyPassword": "Usar minha senha",
   "unlockYourCodes": "Desbloqueie seus códigos",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Idioma",
   "languageSubtitle": "Escolha como o Purr fala com você",
   "languageSystemDefault": "Conforme meu dispositivo",
   "accountCount": "{count, plural, =1{1 conta} other{{count} contas}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Buscar contas",
   "cancel": "Cancelar",
   "tapToCopySeconds": "TOQUE PARA COPIAR · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} de {total, plural, =1{1 conta} other{{total} contas}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Copiado",
   "searchScopeNote": "A busca considera o nome do site e seu usuário — não os códigos.",
   "emptyVaultTitle": "Ainda sem contas",
@@ -36,7 +63,19 @@
   "detailAsked": "Solicitado",
   "justNow": "Agora mesmo",
   "secondsAgo": "{count, plural, =1{há 1 segundo} other{há {count} segundos}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Para qual conta é? Não está salva em {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Enviar o código",
   "didntAskForThis": "Não fui eu que pedi",
   "justShowCode": "Só me mostre o código",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Confirmando que é você",
   "youreIn": "Você entrou.",
   "signingYouIn": "{domain} está conectando você no computador. Nada para digitar.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "O código enviado expira em 30 segundos e só pode ser usado uma vez.",
   "done": "Concluído",
   "blockedNothingSent": "Bloqueado. Nada foi enviado.",
   "deniedBody": "Alguém tentou entrar como você. Seus códigos nunca saíram deste telefone — não conseguiram nada.",
   "deniedChangePassword": "Se não foi engano, troque hoje sua senha de {domain}. A senha é a parte que eles têm.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Entendi",
   "typeThisInto": "Digite isto em",
   "newCodeInSeconds": "Novo código em {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Nada foi enviado ao seu navegador. Digite ou cole você mesmo.",
   "copyCode": "Copiar código",
   "intrusionBadge": "BLOQUEADO · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "agora mesmo",
   "relativeMinutesAgo": "{count, plural, =1{há 1 minuto} other{há {count} minutos}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{há 1 hora} other{há {count} horas}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Alguém tem sua senha de {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Não conseguiram entrar — precisariam também deste telefone. Mas a senha está por aí, então vale trocá-la hoje.",
   "intrusionTried": "Tentativas",
   "triedTimes": "{count, plural, =1{1 vez} other{{count} vezes}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Ok",
   "muteToday": "Silenciar solicitações deste site hoje"
 }
