@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "इस कंप्यूटर पर कुंजी साइन-इन बंद कर दिया गया।"
+  },
+  "optLanguage": {
+    "message": "भाषा"
+  },
+  "optLanguageAuto": {
+    "message": "मेरे ब्राउज़र के अनुसार"
+  },
+  "optLanguageSub": {
+    "message": "चुनें कि Purr यहाँ आपसे किस भाषा में बात करे"
   }
 }
