@@ -14,14 +14,41 @@
   "unlocking": "ロック解除中…",
   "useMyPassword": "パスワードを使う",
   "unlockYourCodes": "コードのロックを解除",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "言語",
   "languageSubtitle": "Purr が話す言語を選びます",
   "languageSystemDefault": "端末に合わせる",
-  "accountCount": "{count, plural, other{{count} 件}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "アカウントを検索",
   "cancel": "キャンセル",
   "tapToCopySeconds": "タップしてコピー · {seconds}秒",
-  "searchMatchCount": "{total, plural, other{{total} 件}}中 {shown} 件",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "コピーしました",
   "searchScopeNote": "検索はサイト名とユーザー名のみを対象とし、コード自体は対象にしません。",
   "emptyVaultTitle": "アカウントはまだありません",
@@ -35,8 +62,20 @@
   "detailBrowser": "ブラウザ",
   "detailAsked": "要求",
   "justNow": "たった今",
-  "secondsAgo": "{count, plural, other{{count} 秒前}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "どのアカウントですか？{domain} には保存されていません。",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "コードを送信",
   "didntAskForThis": "これは私ではありません",
   "justShowCode": "コードだけ表示",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "本人であることを確認中",
   "youreIn": "サインインしました。",
   "signingYouIn": "{domain} がパソコンでサインインしています。入力は不要です。",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "送信したコードは30秒で期限切れになり、一度だけ使えます。",
   "done": "完了",
   "blockedNothingSent": "ブロックしました。何も送信していません。",
   "deniedBody": "誰かがあなたとしてサインインしようとしました。コードはこのスマホから出ていません。相手は何も得ていません。",
   "deniedChangePassword": "もし誤りでなければ、今日 {domain} のパスワードを変更してください。相手が持っているのはパスワードです。",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "了解",
   "typeThisInto": "ここに入力",
   "newCodeInSeconds": "新しいコードまで {seconds}秒",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "ブラウザには何も送信していません。自分で入力または貼り付けてください。",
   "copyCode": "コードをコピー",
   "intrusionBadge": "ブロック · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "たった今",
-  "relativeMinutesAgo": "{count, plural, other{{count} 分前}}",
-  "relativeHoursAgo": "{count, plural, other{{count} 時間前}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "誰かがあなたの {domain} のパスワードを知っています。",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "相手は入れませんでした。このスマホも必要だからです。ただしパスワードは漏れているので、今日変更するのがおすすめです。",
   "intrusionTried": "試行",
-  "triedTimes": "{count, plural, other{{count} 回}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "OK",
   "muteToday": "今日はこのサイトのリクエストをミュート"
 }
