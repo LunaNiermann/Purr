@@ -1,125 +1,359 @@
 {
-  "extName": { "message": "Purr: 2FA 인증기" },
-  "extDescription": { "message": "한 번의 탭으로 컴퓨터에 로그인하세요. Purr는 휴대폰이나 보안 키에서 2FA 코드를 가져옵니다. 당신의 비밀은 절대 보지 않습니다." },
-
-  "barAllCodes": { "message": "모든 코드" },
-  "barSettings": { "message": "설정" },
-
-  "pairMyPhone": { "message": "내 휴대폰 페어링" },
-  "tryAgain": { "message": "다시 시도" },
-  "askAgain": { "message": "다시 요청" },
-  "remove": { "message": "삭제" },
-  "unpair": { "message": "페어링 해제" },
-  "copied": { "message": "복사됨" },
-  "badgeMatched": { "message": "일치" },
-
-  "popupUnpairedTitle": { "message": "당신의 휴대폰이 열쇠입니다. 이것은 열쇠 구멍입니다." },
-  "popupUnpairedSub": { "message": "휴대폰을 한 번 페어링하면 로그인이 한 번의 탭이 됩니다. 코드는 휴대폰에 남고, 이 확장 프로그램은 비밀을 절대 보지 않습니다." },
-  "popupNoFieldTitle": { "message": "여기에 채울 것이 없습니다." },
-  "popupNoFieldSub": { "message": "여섯 자리 코드를 요구하는 페이지에서 열면 코드가 휴대폰에서 바로 올 수 있습니다." },
-  "popupFillKey": { "message": "내 키로 채우기" },
-  "popupFillKeySub": { "message": "보안 키를 터치하세요 — 휴대폰은 주머니에 그대로" },
-  "popupAskPhone": { "message": "내 휴대폰에 요청" },
-  "popupAskPhoneSub": { "message": "거기서 승인하면 코드가 여기에 도착합니다" },
-  "popupReadyTitle": { "message": "준비됐습니다." },
-  "popupReadySubKey": { "message": "키를 터치해 여기에서 코드를 채우거나, 휴대폰에 요청하세요." },
-  "popupReadySubPhone": { "message": "코드는 당신이 쥐고 있는 것 — 휴대폰에서 와야 합니다." },
-  "popupReadyFootnote": { "message": "페이지에 도달하는 것은 여섯 자리뿐입니다. 이 창을 닫아도 됩니다 — 승인을 탭하면 휴대폰 승인으로 채워집니다." },
-  "popupKeyTouchTitle": { "message": "키를 터치하세요" },
-  "popupKeyTouchSub": { "message": "보안 키를 터치해 이 코드를 여기에서 잠금 해제하세요 — 여섯 자리 외에는 이 컴퓨터를 떠나지 않습니다." },
-  "popupKeyErrorTitle": { "message": "키를 사용할 수 없습니다" },
-  "popupNoTab": { "message": "채울 활성 탭이 없습니다." },
-  "popupSentTitle": { "message": "휴대폰으로 보냈습니다" },
-  "popupSentSub": { "message": "거기서 승인하면 코드가 여기에 도착합니다. 이 창을 닫아도 계속 작동합니다." },
-  "cancel": { "message": "취소" },
-  "popupFilledTitle": { "message": "대신 채웠습니다." },
-  "popupFilledSub": { "message": "휴대폰이 코드를 만들어 그 여섯 자리만 보냈습니다. 다른 것은 넘어오지 않았습니다." },
-  "popupClipTitle": { "message": "여기 코드입니다." },
-  "popupClipSub": { "message": "이 페이지에서 코드 입력란을 찾지 못해, 직접 붙여넣으세요:" },
-  "popupCopyCode": { "message": "{0} {1} 복사" },
-  "popupDeniedTitle": { "message": "이것을 거절했습니다" },
-  "popupDeniedSub": { "message": "코드가 전송되지 않았습니다. 실수였다면 다시 요청하고, 아니라면 이 사이트의 비밀번호를 바꾸세요." },
-  "popupChangePassword": { "message": "비밀번호 변경" },
-  "popupExpiredTitle": { "message": "그 요청은 시간이 지났습니다" },
-  "popupExpiredSub": { "message": "오래된 요청이 실수로 승인되지 않도록 요청은 1분 후 만료됩니다. 잘못된 것은 없습니다 — 다시 요청하세요." },
-  "popupUnreachableTitle": { "message": "휴대폰이 응답하지 않았습니다" },
-  "popupUnreachableSub": { "message": "잠자고 있거나, 신호가 없거나, 책상에 엎어져 있을 수 있습니다. 계정에는 아무 문제가 없습니다." },
-  "popupOpenApp": { "message": "또는 앱을 열어 코드를 읽으세요" },
-  "popupUnmatchedTitle": { "message": "아직 {0}을(를) 저장하지 않았습니다" },
-  "popupUnmatchedSub": { "message": "이 계정을 휴대폰에 다른 이름으로 이미 가지고 있다면, 거기서 열어 승인하세요 — 이 팝업이 다음에 그 연결을 기억합니다." },
-
-  "optStepOf": { "message": "3단계 중 {0}단계" },
-  "optIntroHero": { "message": "당신의 휴대폰이 열쇠입니다. 이것은 열쇠 구멍입니다." },
-  "optIntroCopy": { "message": "페어링은 약 1분 걸립니다. 그 후에는 어디서든 로그인이 휴대폰에서 한 번의 탭입니다 — 입력할 코드도, 기억할 것도 없습니다." },
-  "optTick1": { "message": "코드는 휴대폰에 남습니다. 이 확장 프로그램은 비밀을 절대 보지 않습니다." },
-  "optTick2": { "message": "계정 없이 작동합니다. 가입할 것이 없습니다." },
-  "optTick3": { "message": "어느 쪽에서든, 언제든 페어링을 해제하세요." },
-  "optGetApp": { "message": "아직이라면 앱을 먼저 받으세요" },
-  "optScanErrTitle": { "message": "페어링 서비스에 연결할 수 없습니다" },
-  "optScanErrCopy": { "message": "연결을 확인하고 다시 시도하세요. 아직 설정된 것이 없어 중간에 멈춘 것도 없습니다." },
-  "optScanTitle": { "message": "휴대폰을 여기에 대세요" },
-  "optScanPath": { "message": "보안 → 컴퓨터 페어링" },
-  "optScanCopy": { "message": "휴대폰에서 Purr를 열고 {0}을(를) 탭한 다음, 사각형에 대세요." },
-  "optWaitingPhone": { "message": "휴대폰을 기다리는 중…" },
-  "optBack": { "message": "뒤로" },
-  "optDefaultPhone": { "message": "당신의 휴대폰" },
-  "optPairedTitle": { "message": "\"{0}\"와(과) 페어링됨" },
-  "optPairedCopy": { "message": "다음에 사이트가 코드를 요청하면, 이 확장 프로그램이 이를 알아채고 휴대폰에 묻습니다. 당신은 승인만 탭하면 됩니다." },
-  "optPairedJustNow": { "message": "방금 페어링됨" },
-  "optActive": { "message": "활성" },
-  "optDone": { "message": "완료" },
-  "optToday": { "message": "오늘" },
-  "optYesterday": { "message": "어제" },
-  "optDaysAgo": { "message": "{0}일 전" },
-  "optMonthAgo": { "message": "{0}개월 전" },
-  "optMonthsAgo": { "message": "{0}개월 전" },
-  "optRuleAlwaysPhone": { "message": "항상 내 휴대폰에 묻기" },
-  "optRuleNeverAutofill": { "message": "자동으로 채우지 않기" },
-  "optSettingsTitle": { "message": "Purr 설정" },
-  "optSecWhenAsks": { "message": "사이트가 코드를 요청할 때" },
-  "optFillAuto": { "message": "자동으로 채워 주기" },
-  "optFillAutoSub": { "message": "당신의 승인 후 — 어딘가의 탭 없이는 절대 채우지 않습니다" },
-  "optSubmit": { "message": "채워지면 양식 제출" },
-  "optSubmitSub": { "message": "클릭 한 번을 아낍니다. 사이트가 이상하게 동작하면 끄세요" },
-  "optLeadKey": { "message": "내 보안 키 우선" },
-  "optLeadKeySub": { "message": "키 터치를 먼저 제공합니다. 휴대폰은 한 번의 탭 거리에 있습니다" },
-  "optSecSiteRules": { "message": "자체 규칙이 있는 사이트" },
-  "optSecKeys": { "message": "보안 키로 로그인" },
-  "optExperimental": { "message": "· 실험적" },
-  "optKeysBlurb": { "message": "등록된 키를 터치해 휴대폰을 주머니에 둔 채 이 컴퓨터에서 코드를 채웁니다. 코드는 여기서 암호문으로만 존재하며, 키가 그것을 잠금 해제합니다." },
-  "optSecDevices": { "message": "페어링된 기기" },
-  "optPaired": { "message": "페어링 {0}" },
-  "optLastUsed": { "message": "최근 사용" },
-  "optUnpairNote": { "message": "페어링 해제는 이 브라우저에만 영향을 줍니다. 코드는 휴대폰에 그대로 남습니다." },
-  "optNoRules": { "message": "아직 특별한 규칙이 없습니다. 하나 추가하면 여기에 나타납니다." },
-  "optRulePlaceholder": { "message": "site.example.com" },
-  "optNoWebauthn": { "message": "이 브라우저는 보안 키를 지원하지 않습니다." },
-  "optKeyReady": { "message": "준비됨" },
-  "optKeyNotConfirmed": { "message": "미확인 — 잠금 해제 테스트를 탭하세요" },
-  "optAddedOn": { "message": "추가됨 {0}" },
-  "optKeyNamePlaceholder": { "message": "이 키에 이름 지정 (예: YubiKey)" },
-  "optAddKey": { "message": "보안 키 추가" },
-  "optDefaultKeyLabel": { "message": "보안 키" },
-  "optTouchKey": { "message": "키를 터치하세요…" },
-  "optKeyRegistered": { "message": "✓ {0} 등록됨. \"잠금 해제 테스트\"를 탭하고 터치해 확인하세요." },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} 등록됨, 하지만 터치 잠금 해제를 지원하지 않을 수 있습니다. 확실히 하려면 잠금 해제 테스트를 해 보세요." },
-  "optRegisterFailed": { "message": "등록할 수 없습니다: {0}" },
-  "optConfirmTouch": { "message": "터치가 금고를 여는지 확인" },
-  "optTestUnlock": { "message": "잠금 해제 테스트" },
-  "optUnlockOk": { "message": "✓ {0}이(가) 여기서 Purr를 엽니다. 모두 준비됐습니다." },
-  "optYourKey": { "message": "당신의 키" },
-  "optUnlockFailed": { "message": "잠금 해제 실패: {0}" },
-  "optTurnOnKeySignin": { "message": "키로 로그인 켜기" },
-  "optEnableKeySignin": { "message": "키 로그인 사용" },
-  "optKeySigninOn": { "message": "✓ {0}(으)로 키 로그인 켜짐. 휴대폰 앱을 한 번 열어 금고를 여기에 동기화하세요." },
-  "optEnableFailed": { "message": "사용 설정할 수 없습니다: {0}" },
-  "optKeySigninIsOn": { "message": "키 로그인이 켜져 있습니다" },
-  "optKeySigninIsOnSub": { "message": "사이트의 코드 입력란에서 키를 터치해 채우세요 — 휴대폰은 주머니에 그대로 있습니다." },
-  "optAddBackup": { "message": "{0}을(를) 백업 키로 추가" },
-  "optAddToSignin": { "message": "로그인에 추가" },
-  "optTouchEnrolledThenNew": { "message": "등록된 키를 터치한 다음, 새 키를…" },
-  "optBackupAdded": { "message": "✓ {0} 추가됨 — 이제 백업 키입니다." },
-  "optAddFailed": { "message": "추가할 수 없습니다: {0}" },
-  "optTurnOffKeySignin": { "message": "키 로그인 끄기" },
-  "optKeySigninOff": { "message": "이 컴퓨터에서 키 로그인을 껐습니다." }
+  "extName": {
+    "message": "Purr: 2FA 인증기"
+  },
+  "extDescription": {
+    "message": "한 번의 탭으로 컴퓨터에 로그인하세요. Purr는 휴대폰이나 보안 키에서 2FA 코드를 가져옵니다. 당신의 비밀은 절대 보지 않습니다."
+  },
+  "barAllCodes": {
+    "message": "모든 코드"
+  },
+  "barSettings": {
+    "message": "설정"
+  },
+  "pairMyPhone": {
+    "message": "내 휴대폰 페어링"
+  },
+  "tryAgain": {
+    "message": "다시 시도"
+  },
+  "askAgain": {
+    "message": "다시 요청"
+  },
+  "remove": {
+    "message": "삭제"
+  },
+  "unpair": {
+    "message": "페어링 해제"
+  },
+  "copied": {
+    "message": "복사됨"
+  },
+  "badgeMatched": {
+    "message": "일치"
+  },
+  "popupUnpairedTitle": {
+    "message": "당신의 휴대폰이 열쇠입니다. 이것은 열쇠 구멍입니다."
+  },
+  "popupUnpairedSub": {
+    "message": "휴대폰을 한 번 페어링하면 로그인이 한 번의 탭이 됩니다. 코드는 휴대폰에 남고, 이 확장 프로그램은 비밀을 절대 보지 않습니다."
+  },
+  "popupNoFieldTitle": {
+    "message": "여기에 채울 것이 없습니다."
+  },
+  "popupNoFieldSub": {
+    "message": "여섯 자리 코드를 요구하는 페이지에서 열면 코드가 휴대폰에서 바로 올 수 있습니다."
+  },
+  "popupFillKey": {
+    "message": "내 키로 채우기"
+  },
+  "popupFillKeySub": {
+    "message": "보안 키를 터치하세요 — 휴대폰은 주머니에 그대로"
+  },
+  "popupAskPhone": {
+    "message": "내 휴대폰에 요청"
+  },
+  "popupAskPhoneSub": {
+    "message": "거기서 승인하면 코드가 여기에 도착합니다"
+  },
+  "popupReadyTitle": {
+    "message": "준비됐습니다."
+  },
+  "popupReadySubKey": {
+    "message": "키를 터치해 여기에서 코드를 채우거나, 휴대폰에 요청하세요."
+  },
+  "popupReadySubPhone": {
+    "message": "코드는 당신이 쥐고 있는 것 — 휴대폰에서 와야 합니다."
+  },
+  "popupReadyFootnote": {
+    "message": "페이지에 도달하는 것은 여섯 자리뿐입니다. 이 창을 닫아도 됩니다 — 승인을 탭하면 휴대폰 승인으로 채워집니다."
+  },
+  "popupKeyTouchTitle": {
+    "message": "키를 터치하세요"
+  },
+  "popupKeyTouchSub": {
+    "message": "보안 키를 터치해 이 코드를 여기에서 잠금 해제하세요 — 여섯 자리 외에는 이 컴퓨터를 떠나지 않습니다."
+  },
+  "popupKeyErrorTitle": {
+    "message": "키를 사용할 수 없습니다"
+  },
+  "popupNoTab": {
+    "message": "채울 활성 탭이 없습니다."
+  },
+  "popupSentTitle": {
+    "message": "휴대폰으로 보냈습니다"
+  },
+  "popupSentSub": {
+    "message": "거기서 승인하면 코드가 여기에 도착합니다. 이 창을 닫아도 계속 작동합니다."
+  },
+  "cancel": {
+    "message": "취소"
+  },
+  "popupFilledTitle": {
+    "message": "대신 채웠습니다."
+  },
+  "popupFilledSub": {
+    "message": "휴대폰이 코드를 만들어 그 여섯 자리만 보냈습니다. 다른 것은 넘어오지 않았습니다."
+  },
+  "popupClipTitle": {
+    "message": "여기 코드입니다."
+  },
+  "popupClipSub": {
+    "message": "이 페이지에서 코드 입력란을 찾지 못해, 직접 붙여넣으세요:"
+  },
+  "popupCopyCode": {
+    "message": "{0} {1} 복사"
+  },
+  "popupDeniedTitle": {
+    "message": "이것을 거절했습니다"
+  },
+  "popupDeniedSub": {
+    "message": "코드가 전송되지 않았습니다. 실수였다면 다시 요청하고, 아니라면 이 사이트의 비밀번호를 바꾸세요."
+  },
+  "popupChangePassword": {
+    "message": "비밀번호 변경"
+  },
+  "popupExpiredTitle": {
+    "message": "그 요청은 시간이 지났습니다"
+  },
+  "popupExpiredSub": {
+    "message": "오래된 요청이 실수로 승인되지 않도록 요청은 1분 후 만료됩니다. 잘못된 것은 없습니다 — 다시 요청하세요."
+  },
+  "popupUnreachableTitle": {
+    "message": "휴대폰이 응답하지 않았습니다"
+  },
+  "popupUnreachableSub": {
+    "message": "잠자고 있거나, 신호가 없거나, 책상에 엎어져 있을 수 있습니다. 계정에는 아무 문제가 없습니다."
+  },
+  "popupOpenApp": {
+    "message": "또는 앱을 열어 코드를 읽으세요"
+  },
+  "popupUnmatchedTitle": {
+    "message": "아직 {0}을(를) 저장하지 않았습니다"
+  },
+  "popupUnmatchedSub": {
+    "message": "이 계정을 휴대폰에 다른 이름으로 이미 가지고 있다면, 거기서 열어 승인하세요 — 이 팝업이 다음에 그 연결을 기억합니다."
+  },
+  "optStepOf": {
+    "message": "3단계 중 {0}단계"
+  },
+  "optIntroHero": {
+    "message": "당신의 휴대폰이 열쇠입니다. 이것은 열쇠 구멍입니다."
+  },
+  "optIntroCopy": {
+    "message": "페어링은 약 1분 걸립니다. 그 후에는 어디서든 로그인이 휴대폰에서 한 번의 탭입니다 — 입력할 코드도, 기억할 것도 없습니다."
+  },
+  "optTick1": {
+    "message": "코드는 휴대폰에 남습니다. 이 확장 프로그램은 비밀을 절대 보지 않습니다."
+  },
+  "optTick2": {
+    "message": "계정 없이 작동합니다. 가입할 것이 없습니다."
+  },
+  "optTick3": {
+    "message": "어느 쪽에서든, 언제든 페어링을 해제하세요."
+  },
+  "optGetApp": {
+    "message": "아직이라면 앱을 먼저 받으세요"
+  },
+  "optScanErrTitle": {
+    "message": "페어링 서비스에 연결할 수 없습니다"
+  },
+  "optScanErrCopy": {
+    "message": "연결을 확인하고 다시 시도하세요. 아직 설정된 것이 없어 중간에 멈춘 것도 없습니다."
+  },
+  "optScanTitle": {
+    "message": "휴대폰을 여기에 대세요"
+  },
+  "optScanPath": {
+    "message": "보안 → 컴퓨터 페어링"
+  },
+  "optScanCopy": {
+    "message": "휴대폰에서 Purr를 열고 {0}을(를) 탭한 다음, 사각형에 대세요."
+  },
+  "optWaitingPhone": {
+    "message": "휴대폰을 기다리는 중…"
+  },
+  "optBack": {
+    "message": "뒤로"
+  },
+  "optDefaultPhone": {
+    "message": "당신의 휴대폰"
+  },
+  "optPairedTitle": {
+    "message": "\"{0}\"와(과) 페어링됨"
+  },
+  "optPairedCopy": {
+    "message": "다음에 사이트가 코드를 요청하면, 이 확장 프로그램이 이를 알아채고 휴대폰에 묻습니다. 당신은 승인만 탭하면 됩니다."
+  },
+  "optPairedJustNow": {
+    "message": "방금 페어링됨"
+  },
+  "optActive": {
+    "message": "활성"
+  },
+  "optDone": {
+    "message": "완료"
+  },
+  "optToday": {
+    "message": "오늘"
+  },
+  "optYesterday": {
+    "message": "어제"
+  },
+  "optDaysAgo": {
+    "message": "{0}일 전"
+  },
+  "optMonthAgo": {
+    "message": "{0}개월 전"
+  },
+  "optMonthsAgo": {
+    "message": "{0}개월 전"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "항상 내 휴대폰에 묻기"
+  },
+  "optRuleNeverAutofill": {
+    "message": "자동으로 채우지 않기"
+  },
+  "optSettingsTitle": {
+    "message": "Purr 설정"
+  },
+  "optSecWhenAsks": {
+    "message": "사이트가 코드를 요청할 때"
+  },
+  "optFillAuto": {
+    "message": "자동으로 채워 주기"
+  },
+  "optFillAutoSub": {
+    "message": "당신의 승인 후 — 어딘가의 탭 없이는 절대 채우지 않습니다"
+  },
+  "optSubmit": {
+    "message": "채워지면 양식 제출"
+  },
+  "optSubmitSub": {
+    "message": "클릭 한 번을 아낍니다. 사이트가 이상하게 동작하면 끄세요"
+  },
+  "optLeadKey": {
+    "message": "내 보안 키 우선"
+  },
+  "optLeadKeySub": {
+    "message": "키 터치를 먼저 제공합니다. 휴대폰은 한 번의 탭 거리에 있습니다"
+  },
+  "optSecSiteRules": {
+    "message": "자체 규칙이 있는 사이트"
+  },
+  "optSecKeys": {
+    "message": "보안 키로 로그인"
+  },
+  "optExperimental": {
+    "message": "· 실험적"
+  },
+  "optKeysBlurb": {
+    "message": "등록된 키를 터치해 휴대폰을 주머니에 둔 채 이 컴퓨터에서 코드를 채웁니다. 코드는 여기서 암호문으로만 존재하며, 키가 그것을 잠금 해제합니다."
+  },
+  "optSecDevices": {
+    "message": "페어링된 기기"
+  },
+  "optPaired": {
+    "message": "페어링 {0}"
+  },
+  "optLastUsed": {
+    "message": "최근 사용"
+  },
+  "optUnpairNote": {
+    "message": "페어링 해제는 이 브라우저에만 영향을 줍니다. 코드는 휴대폰에 그대로 남습니다."
+  },
+  "optNoRules": {
+    "message": "아직 특별한 규칙이 없습니다. 하나 추가하면 여기에 나타납니다."
+  },
+  "optRulePlaceholder": {
+    "message": "site.example.com"
+  },
+  "optNoWebauthn": {
+    "message": "이 브라우저는 보안 키를 지원하지 않습니다."
+  },
+  "optKeyReady": {
+    "message": "준비됨"
+  },
+  "optKeyNotConfirmed": {
+    "message": "미확인 — 잠금 해제 테스트를 탭하세요"
+  },
+  "optAddedOn": {
+    "message": "추가됨 {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "이 키에 이름 지정 (예: YubiKey)"
+  },
+  "optAddKey": {
+    "message": "보안 키 추가"
+  },
+  "optDefaultKeyLabel": {
+    "message": "보안 키"
+  },
+  "optTouchKey": {
+    "message": "키를 터치하세요…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} 등록됨. \"잠금 해제 테스트\"를 탭하고 터치해 확인하세요."
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} 등록됨, 하지만 터치 잠금 해제를 지원하지 않을 수 있습니다. 확실히 하려면 잠금 해제 테스트를 해 보세요."
+  },
+  "optRegisterFailed": {
+    "message": "등록할 수 없습니다: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "터치가 금고를 여는지 확인"
+  },
+  "optTestUnlock": {
+    "message": "잠금 해제 테스트"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0}이(가) 여기서 Purr를 엽니다. 모두 준비됐습니다."
+  },
+  "optYourKey": {
+    "message": "당신의 키"
+  },
+  "optUnlockFailed": {
+    "message": "잠금 해제 실패: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "키로 로그인 켜기"
+  },
+  "optEnableKeySignin": {
+    "message": "키 로그인 사용"
+  },
+  "optKeySigninOn": {
+    "message": "✓ {0}(으)로 키 로그인 켜짐. 휴대폰 앱을 한 번 열어 금고를 여기에 동기화하세요."
+  },
+  "optEnableFailed": {
+    "message": "사용 설정할 수 없습니다: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "키 로그인이 켜져 있습니다"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "사이트의 코드 입력란에서 키를 터치해 채우세요 — 휴대폰은 주머니에 그대로 있습니다."
+  },
+  "optAddBackup": {
+    "message": "{0}을(를) 백업 키로 추가"
+  },
+  "optAddToSignin": {
+    "message": "로그인에 추가"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "등록된 키를 터치한 다음, 새 키를…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} 추가됨 — 이제 백업 키입니다."
+  },
+  "optAddFailed": {
+    "message": "추가할 수 없습니다: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "키 로그인 끄기"
+  },
+  "optKeySigninOff": {
+    "message": "이 컴퓨터에서 키 로그인을 껐습니다."
+  }
 }
