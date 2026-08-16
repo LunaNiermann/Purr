@@ -14,14 +14,41 @@
   "unlocking": "Membuka kunci…",
   "useMyPassword": "Gunakan kata sandi saya",
   "unlockYourCodes": "Buka kunci kode Anda",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Bahasa",
   "languageSubtitle": "Pilih bahasa yang digunakan Purr",
   "languageSystemDefault": "Ikuti perangkat saya",
-  "accountCount": "{count, plural, other{{count} akun}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Cari akun",
   "cancel": "Batal",
   "tapToCopySeconds": "KETUK UNTUK MENYALIN · {seconds}D",
-  "searchMatchCount": "{shown} dari {total, plural, other{{total} akun}}",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Disalin",
   "searchScopeNote": "Pencarian melihat nama situs dan nama pengguna Anda — bukan kodenya.",
   "emptyVaultTitle": "Belum ada akun",
@@ -35,8 +62,20 @@
   "detailBrowser": "Browser",
   "detailAsked": "Diminta",
   "justNow": "Baru saja",
-  "secondsAgo": "{count, plural, other{{count} detik lalu}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Untuk akun yang mana? Tidak tersimpan di {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Kirim kode",
   "didntAskForThis": "Saya tidak meminta ini",
   "justShowCode": "Cukup tampilkan kodenya",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Memastikan ini benar Anda",
   "youreIn": "Anda berhasil masuk.",
   "signingYouIn": "{domain} sedang memasukkan Anda di komputer. Tidak ada yang perlu diketik.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Kode yang dikirim kedaluwarsa dalam 30 detik dan hanya bisa dipakai sekali.",
   "done": "Selesai",
   "blockedNothingSent": "Diblokir. Tidak ada yang dikirim.",
   "deniedBody": "Seseorang mencoba masuk sebagai Anda. Kode Anda tidak pernah keluar dari ponsel ini — mereka tidak dapat apa-apa.",
   "deniedChangePassword": "Jika itu bukan kesalahan, ganti kata sandi {domain} Anda hari ini. Kata sandi itulah yang mereka miliki.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Mengerti",
   "typeThisInto": "Ketik ini di",
   "newCodeInSeconds": "Kode baru dalam {seconds}d",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Tidak ada yang dikirim ke browser Anda. Ketik atau tempel sendiri.",
   "copyCode": "Salin kode",
   "intrusionBadge": "DIBLOKIR · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "baru saja",
-  "relativeMinutesAgo": "{count, plural, other{{count} menit lalu}}",
-  "relativeHoursAgo": "{count, plural, other{{count} jam lalu}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Seseorang memiliki kata sandi {domain} Anda.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Mereka tidak bisa masuk — mereka juga butuh ponsel ini. Tapi kata sandinya sudah bocor, jadi sebaiknya diganti hari ini.",
   "intrusionTried": "Percobaan",
-  "triedTimes": "{count, plural, other{{count} kali}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Oke",
   "muteToday": "Bisukan permintaan situs ini hari ini"
 }
