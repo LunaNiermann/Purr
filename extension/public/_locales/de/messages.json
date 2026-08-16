@@ -1,125 +1,359 @@
 {
-  "extName": { "message": "Purr: 2FA-Authenticator" },
-  "extDescription": { "message": "Melde dich an deinem Computer mit einem Tippen an. Purr holt deinen 2FA-Code von deinem Handy oder einem Sicherheitsschlüssel. Es sieht dein Geheimnis nie." },
-
-  "barAllCodes": { "message": "Alle Codes" },
-  "barSettings": { "message": "Einstellungen" },
-
-  "pairMyPhone": { "message": "Mein Handy koppeln" },
-  "tryAgain": { "message": "Erneut versuchen" },
-  "askAgain": { "message": "Erneut fragen" },
-  "remove": { "message": "Entfernen" },
-  "unpair": { "message": "Entkoppeln" },
-  "copied": { "message": "Kopiert" },
-  "badgeMatched": { "message": "PASST" },
-
-  "popupUnpairedTitle": { "message": "Dein Handy ist der Schlüssel. Das ist das Schlüsselloch." },
-  "popupUnpairedSub": { "message": "Kopple dein Handy einmal, und die Anmeldung wird zum Tippen. Deine Codes bleiben auf dem Handy — diese Erweiterung sieht das Geheimnis nie." },
-  "popupNoFieldTitle": { "message": "Hier gibt es nichts auszufüllen." },
-  "popupNoFieldSub": { "message": "Öffne dies auf einer Seite, die einen sechsstelligen Code verlangt, dann kann der Code direkt von deinem Handy kommen." },
-  "popupFillKey": { "message": "Mit meinem Schlüssel ausfüllen" },
-  "popupFillKeySub": { "message": "Berühre deinen Sicherheitsschlüssel — dein Handy bleibt in der Tasche" },
-  "popupAskPhone": { "message": "Mein Handy fragen" },
-  "popupAskPhoneSub": { "message": "Bestätige dort, und der Code landet hier" },
-  "popupReadyTitle": { "message": "Bereit, wenn du es bist." },
-  "popupReadySubKey": { "message": "Berühre deinen Schlüssel, um den Code direkt hier auszufüllen, oder frag dein Handy." },
-  "popupReadySubPhone": { "message": "Dein Code muss von etwas kommen, das du in der Hand hältst — deinem Handy." },
-  "popupReadyFootnote": { "message": "Nur die sechs Ziffern erreichen je die Seite. Du kannst dies schließen — eine Handy-Bestätigung füllt trotzdem aus, wenn du auf Bestätigen tippst." },
-  "popupKeyTouchTitle": { "message": "Berühre deinen Schlüssel" },
-  "popupKeyTouchSub": { "message": "Tippe deinen Sicherheitsschlüssel an, um diesen Code direkt hier freizuschalten — nichts verlässt diesen Computer außer den sechs Ziffern." },
-  "popupKeyErrorTitle": { "message": "Schlüssel konnte nicht genutzt werden" },
-  "popupNoTab": { "message": "Kein aktiver Tab zum Ausfüllen." },
-  "popupSentTitle": { "message": "An dein Handy gesendet" },
-  "popupSentSub": { "message": "Bestätige es dort, und der Code landet hier. Du kannst dieses Fenster schließen — es läuft weiter." },
-  "cancel": { "message": "Abbrechen" },
-  "popupFilledTitle": { "message": "Für dich ausgefüllt." },
-  "popupFilledSub": { "message": "Dein Handy hat den Code erzeugt und nur diese sechs Ziffern gesendet. Sonst kam nichts herüber." },
-  "popupClipTitle": { "message": "Hier ist dein Code." },
-  "popupClipSub": { "message": "Wir konnten das Code-Feld auf dieser Seite nicht finden, also füge ihn selbst ein:" },
-  "popupCopyCode": { "message": "{0} {1} kopieren" },
-  "popupDeniedTitle": { "message": "Du hast das abgelehnt" },
-  "popupDeniedSub": { "message": "Es wurde kein Code gesendet. War das ein Versehen, frag erneut — war es keins, ändere dein Passwort für diese Seite." },
-  "popupChangePassword": { "message": "Mein Passwort ändern" },
-  "popupExpiredTitle": { "message": "Diese Anfrage ist abgelaufen" },
-  "popupExpiredSub": { "message": "Anfragen laufen nach einer Minute ab, damit eine alte nicht versehentlich bestätigt wird. Es ist nichts schiefgelaufen — frag einfach erneut." },
-  "popupUnreachableTitle": { "message": "Dein Handy hat nicht geantwortet" },
-  "popupUnreachableSub": { "message": "Es könnte im Ruhezustand sein, ohne Empfang oder mit der Vorderseite nach unten auf dem Tisch liegen. Mit deinem Konto ist alles in Ordnung." },
-  "popupOpenApp": { "message": "Oder öffne die App und lies den Code" },
-  "popupUnmatchedTitle": { "message": "Du hast {0} noch nicht gespeichert" },
-  "popupUnmatchedSub": { "message": "Wenn du dieses Konto schon unter einem anderen Namen auf deinem Handy hast, öffne es dort und bestätige — dieses Popup merkt sich die Zuordnung beim nächsten Mal." },
-
-  "optStepOf": { "message": "Schritt {0} von 3" },
-  "optIntroHero": { "message": "Dein Handy ist der Schlüssel. Das ist das Schlüsselloch." },
-  "optIntroCopy": { "message": "Das Koppeln dauert etwa eine Minute. Danach ist die Anmeldung überall ein Tippen auf deinem Handy — nichts zu tippen, nichts zu merken." },
-  "optTick1": { "message": "Deine Codes bleiben auf deinem Handy. Diese Erweiterung sieht das Geheimnis nie." },
-  "optTick2": { "message": "Funktioniert ohne Konto. Nichts anzumelden." },
-  "optTick3": { "message": "Entkopple von jeder Seite, jederzeit." },
-  "optGetApp": { "message": "Hol dir zuerst die App, falls noch nicht geschehen" },
-  "optScanErrTitle": { "message": "Kopplungsdienst nicht erreichbar" },
-  "optScanErrCopy": { "message": "Prüfe die Verbindung und versuche es erneut. Es wurde noch nichts eingerichtet, also bleibt nichts halbfertig." },
-  "optScanTitle": { "message": "Richte dein Handy hierauf" },
-  "optScanPath": { "message": "Sicherheit → Einen Computer koppeln" },
-  "optScanCopy": { "message": "Öffne Purr auf deinem Handy, tippe auf {0} und halte es an das Quadrat." },
-  "optWaitingPhone": { "message": "Warte auf dein Handy…" },
-  "optBack": { "message": "Zurück" },
-  "optDefaultPhone": { "message": "Dein Handy" },
-  "optPairedTitle": { "message": "Gekoppelt mit \"{0}\"" },
-  "optPairedCopy": { "message": "Wenn eine Seite das nächste Mal einen Code verlangt, erkennt diese Erweiterung das und fragt dein Handy. Du tippst nur auf Bestätigen." },
-  "optPairedJustNow": { "message": "Gerade gekoppelt" },
-  "optActive": { "message": "AKTIV" },
-  "optDone": { "message": "Fertig" },
-  "optToday": { "message": "heute" },
-  "optYesterday": { "message": "gestern" },
-  "optDaysAgo": { "message": "vor {0} Tagen" },
-  "optMonthAgo": { "message": "vor {0} Monat" },
-  "optMonthsAgo": { "message": "vor {0} Monaten" },
-  "optRuleAlwaysPhone": { "message": "Immer mein Handy fragen" },
-  "optRuleNeverAutofill": { "message": "Nie automatisch ausfüllen" },
-  "optSettingsTitle": { "message": "Purr-Einstellungen" },
-  "optSecWhenAsks": { "message": "Wenn eine Seite einen Code verlangt" },
-  "optFillAuto": { "message": "Automatisch für mich ausfüllen" },
-  "optFillAutoSub": { "message": "Nach deiner Bestätigung — wir füllen nie ohne ein Tippen irgendwo aus" },
-  "optSubmit": { "message": "Formular absenden, sobald es ausgefüllt ist" },
-  "optSubmitSub": { "message": "Spart einen Klick; ausschalten, wenn eine Seite sich seltsam verhält" },
-  "optLeadKey": { "message": "Mit meinem Sicherheitsschlüssel führen" },
-  "optLeadKeySub": { "message": "Biete zuerst den Schlüssel-Touch an; dein Handy bleibt ein Tippen entfernt" },
-  "optSecSiteRules": { "message": "Seiten mit eigenen Regeln" },
-  "optSecKeys": { "message": "Mit einem Sicherheitsschlüssel anmelden" },
-  "optExperimental": { "message": "· experimentell" },
-  "optKeysBlurb": { "message": "Berühre einen registrierten Schlüssel, um einen Code auf diesem Computer auszufüllen, während dein Handy in der Tasche bleibt. Deine Codes liegen hier nur als Chiffretext; der Schlüssel entsperrt sie." },
-  "optSecDevices": { "message": "Gekoppelte Geräte" },
-  "optPaired": { "message": "Gekoppelt {0}" },
-  "optLastUsed": { "message": "kürzlich genutzt" },
-  "optUnpairNote": { "message": "Das Entkoppeln betrifft nur diesen Browser. Deine Codes bleiben unangetastet auf deinem Handy." },
-  "optNoRules": { "message": "Noch keine besonderen Regeln. Sie erscheinen hier, sobald du eine hinzufügst." },
-  "optRulePlaceholder": { "message": "seite.beispiel.com" },
-  "optNoWebauthn": { "message": "Dieser Browser unterstützt keine Sicherheitsschlüssel." },
-  "optKeyReady": { "message": "Bereit" },
-  "optKeyNotConfirmed": { "message": "Nicht bestätigt — tippe auf Entsperren testen" },
-  "optAddedOn": { "message": "Hinzugefügt {0}" },
-  "optKeyNamePlaceholder": { "message": "Diesen Schlüssel benennen (z. B. YubiKey)" },
-  "optAddKey": { "message": "Sicherheitsschlüssel hinzufügen" },
-  "optDefaultKeyLabel": { "message": "Sicherheitsschlüssel" },
-  "optTouchKey": { "message": "Berühre deinen Schlüssel…" },
-  "optKeyRegistered": { "message": "✓ {0} registriert. Tippe auf \"Entsperren testen\" und berühre ihn zur Bestätigung." },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} registriert, unterstützt aber möglicherweise kein Touch-zum-Entsperren. Teste das Entsperren zur Sicherheit." },
-  "optRegisterFailed": { "message": "Registrieren fehlgeschlagen: {0}" },
-  "optConfirmTouch": { "message": "Bestätige, dass ein Touch den Tresor entsperrt" },
-  "optTestUnlock": { "message": "Entsperren testen" },
-  "optUnlockOk": { "message": "✓ {0} entsperrt Purr hier. Alles bereit." },
-  "optYourKey": { "message": "Dein Schlüssel" },
-  "optUnlockFailed": { "message": "Entsperren fehlgeschlagen: {0}" },
-  "optTurnOnKeySignin": { "message": "Anmeldung mit deinem Schlüssel aktivieren" },
-  "optEnableKeySignin": { "message": "Schlüssel-Anmeldung aktivieren" },
-  "optKeySigninOn": { "message": "✓ Schlüssel-Anmeldung mit {0} an. Öffne einmal die Handy-App, damit sie deinen Tresor hierher synchronisiert." },
-  "optEnableFailed": { "message": "Aktivieren fehlgeschlagen: {0}" },
-  "optKeySigninIsOn": { "message": "Schlüssel-Anmeldung ist an" },
-  "optKeySigninIsOnSub": { "message": "Berühre auf dem Code-Feld einer Seite deinen Schlüssel, um es auszufüllen — dein Handy bleibt in der Tasche." },
-  "optAddBackup": { "message": "{0} als Ersatzschlüssel hinzufügen" },
-  "optAddToSignin": { "message": "Zur Anmeldung hinzufügen" },
-  "optTouchEnrolledThenNew": { "message": "Berühre einen eingetragenen Schlüssel, dann den neuen…" },
-  "optBackupAdded": { "message": "✓ {0} hinzugefügt — jetzt ein Ersatzschlüssel." },
-  "optAddFailed": { "message": "Hinzufügen fehlgeschlagen: {0}" },
-  "optTurnOffKeySignin": { "message": "Schlüssel-Anmeldung ausschalten" },
-  "optKeySigninOff": { "message": "Schlüssel-Anmeldung auf diesem Computer ausgeschaltet." }
+  "extName": {
+    "message": "Purr: 2FA-Authenticator"
+  },
+  "extDescription": {
+    "message": "Melde dich an deinem Computer mit einem Tippen an. Purr holt deinen 2FA-Code von deinem Handy oder einem Sicherheitsschlüssel. Es sieht dein Geheimnis nie."
+  },
+  "barAllCodes": {
+    "message": "Alle Codes"
+  },
+  "barSettings": {
+    "message": "Einstellungen"
+  },
+  "pairMyPhone": {
+    "message": "Mein Handy koppeln"
+  },
+  "tryAgain": {
+    "message": "Erneut versuchen"
+  },
+  "askAgain": {
+    "message": "Erneut fragen"
+  },
+  "remove": {
+    "message": "Entfernen"
+  },
+  "unpair": {
+    "message": "Entkoppeln"
+  },
+  "copied": {
+    "message": "Kopiert"
+  },
+  "badgeMatched": {
+    "message": "PASST"
+  },
+  "popupUnpairedTitle": {
+    "message": "Dein Handy ist der Schlüssel. Das ist das Schlüsselloch."
+  },
+  "popupUnpairedSub": {
+    "message": "Kopple dein Handy einmal, und die Anmeldung wird zum Tippen. Deine Codes bleiben auf dem Handy — diese Erweiterung sieht das Geheimnis nie."
+  },
+  "popupNoFieldTitle": {
+    "message": "Hier gibt es nichts auszufüllen."
+  },
+  "popupNoFieldSub": {
+    "message": "Öffne dies auf einer Seite, die einen sechsstelligen Code verlangt, dann kann der Code direkt von deinem Handy kommen."
+  },
+  "popupFillKey": {
+    "message": "Mit meinem Schlüssel ausfüllen"
+  },
+  "popupFillKeySub": {
+    "message": "Berühre deinen Sicherheitsschlüssel — dein Handy bleibt in der Tasche"
+  },
+  "popupAskPhone": {
+    "message": "Mein Handy fragen"
+  },
+  "popupAskPhoneSub": {
+    "message": "Bestätige dort, und der Code landet hier"
+  },
+  "popupReadyTitle": {
+    "message": "Bereit, wenn du es bist."
+  },
+  "popupReadySubKey": {
+    "message": "Berühre deinen Schlüssel, um den Code direkt hier auszufüllen, oder frag dein Handy."
+  },
+  "popupReadySubPhone": {
+    "message": "Dein Code muss von etwas kommen, das du in der Hand hältst — deinem Handy."
+  },
+  "popupReadyFootnote": {
+    "message": "Nur die sechs Ziffern erreichen je die Seite. Du kannst dies schließen — eine Handy-Bestätigung füllt trotzdem aus, wenn du auf Bestätigen tippst."
+  },
+  "popupKeyTouchTitle": {
+    "message": "Berühre deinen Schlüssel"
+  },
+  "popupKeyTouchSub": {
+    "message": "Tippe deinen Sicherheitsschlüssel an, um diesen Code direkt hier freizuschalten — nichts verlässt diesen Computer außer den sechs Ziffern."
+  },
+  "popupKeyErrorTitle": {
+    "message": "Schlüssel konnte nicht genutzt werden"
+  },
+  "popupNoTab": {
+    "message": "Kein aktiver Tab zum Ausfüllen."
+  },
+  "popupSentTitle": {
+    "message": "An dein Handy gesendet"
+  },
+  "popupSentSub": {
+    "message": "Bestätige es dort, und der Code landet hier. Du kannst dieses Fenster schließen — es läuft weiter."
+  },
+  "cancel": {
+    "message": "Abbrechen"
+  },
+  "popupFilledTitle": {
+    "message": "Für dich ausgefüllt."
+  },
+  "popupFilledSub": {
+    "message": "Dein Handy hat den Code erzeugt und nur diese sechs Ziffern gesendet. Sonst kam nichts herüber."
+  },
+  "popupClipTitle": {
+    "message": "Hier ist dein Code."
+  },
+  "popupClipSub": {
+    "message": "Wir konnten das Code-Feld auf dieser Seite nicht finden, also füge ihn selbst ein:"
+  },
+  "popupCopyCode": {
+    "message": "{0} {1} kopieren"
+  },
+  "popupDeniedTitle": {
+    "message": "Du hast das abgelehnt"
+  },
+  "popupDeniedSub": {
+    "message": "Es wurde kein Code gesendet. War das ein Versehen, frag erneut — war es keins, ändere dein Passwort für diese Seite."
+  },
+  "popupChangePassword": {
+    "message": "Mein Passwort ändern"
+  },
+  "popupExpiredTitle": {
+    "message": "Diese Anfrage ist abgelaufen"
+  },
+  "popupExpiredSub": {
+    "message": "Anfragen laufen nach einer Minute ab, damit eine alte nicht versehentlich bestätigt wird. Es ist nichts schiefgelaufen — frag einfach erneut."
+  },
+  "popupUnreachableTitle": {
+    "message": "Dein Handy hat nicht geantwortet"
+  },
+  "popupUnreachableSub": {
+    "message": "Es könnte im Ruhezustand sein, ohne Empfang oder mit der Vorderseite nach unten auf dem Tisch liegen. Mit deinem Konto ist alles in Ordnung."
+  },
+  "popupOpenApp": {
+    "message": "Oder öffne die App und lies den Code"
+  },
+  "popupUnmatchedTitle": {
+    "message": "Du hast {0} noch nicht gespeichert"
+  },
+  "popupUnmatchedSub": {
+    "message": "Wenn du dieses Konto schon unter einem anderen Namen auf deinem Handy hast, öffne es dort und bestätige — dieses Popup merkt sich die Zuordnung beim nächsten Mal."
+  },
+  "optStepOf": {
+    "message": "Schritt {0} von 3"
+  },
+  "optIntroHero": {
+    "message": "Dein Handy ist der Schlüssel. Das ist das Schlüsselloch."
+  },
+  "optIntroCopy": {
+    "message": "Das Koppeln dauert etwa eine Minute. Danach ist die Anmeldung überall ein Tippen auf deinem Handy — nichts zu tippen, nichts zu merken."
+  },
+  "optTick1": {
+    "message": "Deine Codes bleiben auf deinem Handy. Diese Erweiterung sieht das Geheimnis nie."
+  },
+  "optTick2": {
+    "message": "Funktioniert ohne Konto. Nichts anzumelden."
+  },
+  "optTick3": {
+    "message": "Entkopple von jeder Seite, jederzeit."
+  },
+  "optGetApp": {
+    "message": "Hol dir zuerst die App, falls noch nicht geschehen"
+  },
+  "optScanErrTitle": {
+    "message": "Kopplungsdienst nicht erreichbar"
+  },
+  "optScanErrCopy": {
+    "message": "Prüfe die Verbindung und versuche es erneut. Es wurde noch nichts eingerichtet, also bleibt nichts halbfertig."
+  },
+  "optScanTitle": {
+    "message": "Richte dein Handy hierauf"
+  },
+  "optScanPath": {
+    "message": "Sicherheit → Einen Computer koppeln"
+  },
+  "optScanCopy": {
+    "message": "Öffne Purr auf deinem Handy, tippe auf {0} und halte es an das Quadrat."
+  },
+  "optWaitingPhone": {
+    "message": "Warte auf dein Handy…"
+  },
+  "optBack": {
+    "message": "Zurück"
+  },
+  "optDefaultPhone": {
+    "message": "Dein Handy"
+  },
+  "optPairedTitle": {
+    "message": "Gekoppelt mit \"{0}\""
+  },
+  "optPairedCopy": {
+    "message": "Wenn eine Seite das nächste Mal einen Code verlangt, erkennt diese Erweiterung das und fragt dein Handy. Du tippst nur auf Bestätigen."
+  },
+  "optPairedJustNow": {
+    "message": "Gerade gekoppelt"
+  },
+  "optActive": {
+    "message": "AKTIV"
+  },
+  "optDone": {
+    "message": "Fertig"
+  },
+  "optToday": {
+    "message": "heute"
+  },
+  "optYesterday": {
+    "message": "gestern"
+  },
+  "optDaysAgo": {
+    "message": "vor {0} Tagen"
+  },
+  "optMonthAgo": {
+    "message": "vor {0} Monat"
+  },
+  "optMonthsAgo": {
+    "message": "vor {0} Monaten"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "Immer mein Handy fragen"
+  },
+  "optRuleNeverAutofill": {
+    "message": "Nie automatisch ausfüllen"
+  },
+  "optSettingsTitle": {
+    "message": "Purr-Einstellungen"
+  },
+  "optSecWhenAsks": {
+    "message": "Wenn eine Seite einen Code verlangt"
+  },
+  "optFillAuto": {
+    "message": "Automatisch für mich ausfüllen"
+  },
+  "optFillAutoSub": {
+    "message": "Nach deiner Bestätigung — wir füllen nie ohne ein Tippen irgendwo aus"
+  },
+  "optSubmit": {
+    "message": "Formular absenden, sobald es ausgefüllt ist"
+  },
+  "optSubmitSub": {
+    "message": "Spart einen Klick; ausschalten, wenn eine Seite sich seltsam verhält"
+  },
+  "optLeadKey": {
+    "message": "Mit meinem Sicherheitsschlüssel führen"
+  },
+  "optLeadKeySub": {
+    "message": "Biete zuerst den Schlüssel-Touch an; dein Handy bleibt ein Tippen entfernt"
+  },
+  "optSecSiteRules": {
+    "message": "Seiten mit eigenen Regeln"
+  },
+  "optSecKeys": {
+    "message": "Mit einem Sicherheitsschlüssel anmelden"
+  },
+  "optExperimental": {
+    "message": "· experimentell"
+  },
+  "optKeysBlurb": {
+    "message": "Berühre einen registrierten Schlüssel, um einen Code auf diesem Computer auszufüllen, während dein Handy in der Tasche bleibt. Deine Codes liegen hier nur als Chiffretext; der Schlüssel entsperrt sie."
+  },
+  "optSecDevices": {
+    "message": "Gekoppelte Geräte"
+  },
+  "optPaired": {
+    "message": "Gekoppelt {0}"
+  },
+  "optLastUsed": {
+    "message": "kürzlich genutzt"
+  },
+  "optUnpairNote": {
+    "message": "Das Entkoppeln betrifft nur diesen Browser. Deine Codes bleiben unangetastet auf deinem Handy."
+  },
+  "optNoRules": {
+    "message": "Noch keine besonderen Regeln. Sie erscheinen hier, sobald du eine hinzufügst."
+  },
+  "optRulePlaceholder": {
+    "message": "seite.beispiel.com"
+  },
+  "optNoWebauthn": {
+    "message": "Dieser Browser unterstützt keine Sicherheitsschlüssel."
+  },
+  "optKeyReady": {
+    "message": "Bereit"
+  },
+  "optKeyNotConfirmed": {
+    "message": "Nicht bestätigt — tippe auf Entsperren testen"
+  },
+  "optAddedOn": {
+    "message": "Hinzugefügt {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "Diesen Schlüssel benennen (z. B. YubiKey)"
+  },
+  "optAddKey": {
+    "message": "Sicherheitsschlüssel hinzufügen"
+  },
+  "optDefaultKeyLabel": {
+    "message": "Sicherheitsschlüssel"
+  },
+  "optTouchKey": {
+    "message": "Berühre deinen Schlüssel…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} registriert. Tippe auf \"Entsperren testen\" und berühre ihn zur Bestätigung."
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} registriert, unterstützt aber möglicherweise kein Touch-zum-Entsperren. Teste das Entsperren zur Sicherheit."
+  },
+  "optRegisterFailed": {
+    "message": "Registrieren fehlgeschlagen: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "Bestätige, dass ein Touch den Tresor entsperrt"
+  },
+  "optTestUnlock": {
+    "message": "Entsperren testen"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0} entsperrt Purr hier. Alles bereit."
+  },
+  "optYourKey": {
+    "message": "Dein Schlüssel"
+  },
+  "optUnlockFailed": {
+    "message": "Entsperren fehlgeschlagen: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "Anmeldung mit deinem Schlüssel aktivieren"
+  },
+  "optEnableKeySignin": {
+    "message": "Schlüssel-Anmeldung aktivieren"
+  },
+  "optKeySigninOn": {
+    "message": "✓ Schlüssel-Anmeldung mit {0} an. Öffne einmal die Handy-App, damit sie deinen Tresor hierher synchronisiert."
+  },
+  "optEnableFailed": {
+    "message": "Aktivieren fehlgeschlagen: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "Schlüssel-Anmeldung ist an"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "Berühre auf dem Code-Feld einer Seite deinen Schlüssel, um es auszufüllen — dein Handy bleibt in der Tasche."
+  },
+  "optAddBackup": {
+    "message": "{0} als Ersatzschlüssel hinzufügen"
+  },
+  "optAddToSignin": {
+    "message": "Zur Anmeldung hinzufügen"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "Berühre einen eingetragenen Schlüssel, dann den neuen…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} hinzugefügt — jetzt ein Ersatzschlüssel."
+  },
+  "optAddFailed": {
+    "message": "Hinzufügen fehlgeschlagen: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "Schlüssel-Anmeldung ausschalten"
+  },
+  "optKeySigninOff": {
+    "message": "Schlüssel-Anmeldung auf diesem Computer ausgeschaltet."
+  }
 }
