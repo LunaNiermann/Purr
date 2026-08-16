@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Schlüssel-Anmeldung auf diesem Computer ausgeschaltet."
+  },
+  "optLanguage": {
+    "message": "Sprache"
+  },
+  "optLanguageAuto": {
+    "message": "Meinem Browser folgen"
+  },
+  "optLanguageSub": {
+    "message": "Wähle, wie Purr hier mit dir spricht"
   }
 }
