@@ -1,34 +1,40 @@
 # Store listings
 
-Canonical English source for every store's marketing copy. `en/` is the source
-of truth; the other locale folders are filled by Crowdin (see `crowdin.yml`,
-which maps `/store-listings/en/*.txt` to `/store-listings/<lang>/`).
+Canonical English source for every store's marketing copy, held as a single ARB
+of keyed strings. `en/listing.arb` is the source of truth; the other locale
+folders (`store-listings/<lang>/listing.arb`) are filled by Crowdin — see
+`crowdin.yml`.
 
-Translations are pulled back into this repo, then copied into each store's own
+> ARB, not `.txt`, on purpose: Crowdin caps how many distinct file formats a
+> project may use, and the app already uses `arb`. Reusing that format keeps the
+> store listings translatable without bumping the plan. The strings are split
+> back into each store's own fields at release time.
+
+Translations are pulled back into this repo, then copied into each store's
 upload format at release time.
 
-## Files (all plain UTF-8 text)
+## Keys (in `listing.arb`)
 
-| File | Store | Limit | Notes |
-|------|-------|-------|-------|
-| `title.txt` | Play | 30 chars | App name as shown on the listing. |
-| `short_description.txt` | Play | 80 chars | The one-line hook. |
-| `full_description.txt` | Play | 4000 chars | The main listing body. |
-| `extension_summary.txt` | Chrome Web Store / Edge | 132 chars | Short summary line. |
-| `extension_description.txt` | Chrome Web Store / Edge | 16000 chars | Full extension description. |
+| Key | Store | Limit | Notes |
+|-----|-------|-------|-------|
+| `title` | Play | 30 chars | App name as shown on the listing. |
+| `shortDescription` | Play | 80 chars | The one-line hook. |
+| `fullDescription` | Play | 4000 chars | The main listing body. |
+| `extensionSummary` | Chrome Web Store / Edge | 132 chars | Short summary line. |
+| `extensionDescription` | Chrome Web Store / Edge | 16000 chars | Full extension description. |
 
-Keep every translation within the limit for its file — some languages run long,
+Keep every translation within the limit for its key — some languages run long,
 so trim rather than overflow.
 
-## Where each file goes at upload time
+## Where each key goes at upload time
 
-- **Play Console**: the three `*_description` / `title` files map to the
-  Main store listing fields. For a fastlane/CI upload, mirror them into
-  `fastlane/metadata/android/<play-locale>/` (`title.txt`,
-  `short_description.txt`, `full_description.txt`).
-- **Chrome Web Store**: `extension_summary.txt` → "Summary",
-  `extension_description.txt` → "Description", per listing language.
-- **Edge Add-ons (Partner Center)**: same two files as Chrome.
+- **Play Console**: `title`, `shortDescription`, `fullDescription` map to the
+  Main store listing fields. For a fastlane/CI upload, write each into
+  `fastlane/metadata/android/<play-locale>/` as `title.txt`,
+  `short_description.txt`, `full_description.txt`.
+- **Chrome Web Store**: `extensionSummary` → "Summary",
+  `extensionDescription` → "Description", per listing language.
+- **Edge Add-ons (Partner Center)**: same two keys as Chrome.
 
 ## Language set
 

@@ -17,7 +17,9 @@ files:
     translation: /extension/public/_locales/%two_letters_code%/messages.json
     type: chrome
 
-  # Store listings (filled later) — plain per-locale text/markdown.
-  - source: /store-listings/en/*.txt
-    translation: /store-listings/%two_letters_code%/%original_file_name%
-    type: txt
+  # Store listings — one ARB of marketing strings per locale. Kept as ARB (not
+  # txt) so the project stays within its Crowdin file-format limit; the keys are
+  # split back into each store's own fields at release time.
+  - source: /store-listings/en/listing.arb
+    translation: /store-listings/%two_letters_code%/listing.arb
+    type: arb

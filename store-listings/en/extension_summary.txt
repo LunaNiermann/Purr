@@ -1,1 +1,0 @@
-Sign in on your computer with one tap. Purr brings your 2FA code from your phone or a security key, and never sees your secret.
