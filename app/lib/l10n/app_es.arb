@@ -1,5 +1,5 @@
 {
-  "@@locale": "es",
+  "@@locale": "es-ES",
   "appTitle": "Purr",
   "tabCodes": "Códigos",
   "tabSecurity": "Seguridad",
@@ -14,6 +14,9 @@
   "unlocking": "Desbloqueando…",
   "useMyPassword": "Usar mi contraseña",
   "unlockYourCodes": "Desbloquea tus códigos",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Idioma",
   "languageSubtitle": "Elige cómo te habla Purr",
   "languageSystemDefault": "Según mi dispositivo"
