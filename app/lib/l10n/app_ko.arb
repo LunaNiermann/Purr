@@ -14,14 +14,41 @@
   "unlocking": "잠금 해제 중…",
   "useMyPassword": "비밀번호 사용",
   "unlockYourCodes": "코드 잠금 해제",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "언어",
   "languageSubtitle": "Purr가 사용할 언어를 선택하세요",
   "languageSystemDefault": "기기 설정에 맞추기",
-  "accountCount": "{count, plural, other{계정 {count}개}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "계정 검색",
   "cancel": "취소",
   "tapToCopySeconds": "탭하여 복사 · {seconds}초",
-  "searchMatchCount": "{total, plural, other{{total}개}} 중 {shown}개",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "복사됨",
   "searchScopeNote": "검색은 사이트 이름과 사용자 이름만 확인하며, 코드는 확인하지 않습니다.",
   "emptyVaultTitle": "아직 계정이 없습니다",
@@ -35,8 +62,20 @@
   "detailBrowser": "브라우저",
   "detailAsked": "요청 시각",
   "justNow": "방금",
-  "secondsAgo": "{count, plural, other{{count}초 전}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "어느 계정인가요? {domain}에 저장되어 있지 않습니다.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "코드 보내기",
   "didntAskForThis": "내가 요청하지 않았어요",
   "justShowCode": "코드만 보여주기",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "본인인지 확인 중",
   "youreIn": "로그인되었습니다.",
   "signingYouIn": "{domain}에서 컴퓨터로 로그인하고 있습니다. 입력할 것이 없습니다.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "보낸 코드는 30초 후 만료되며 한 번만 사용할 수 있습니다.",
   "done": "완료",
   "blockedNothingSent": "차단됨. 아무것도 보내지 않았습니다.",
   "deniedBody": "누군가 당신처럼 로그인하려 했습니다. 코드는 이 휴대폰을 떠나지 않았고, 그들은 아무것도 얻지 못했습니다.",
   "deniedChangePassword": "실수가 아니었다면 오늘 {domain} 비밀번호를 바꾸세요. 그들이 가진 것은 비밀번호입니다.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "확인",
   "typeThisInto": "여기에 입력",
   "newCodeInSeconds": "새 코드까지 {seconds}초",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "브라우저로 아무것도 보내지 않았습니다. 직접 입력하거나 붙여넣으세요.",
   "copyCode": "코드 복사",
   "intrusionBadge": "차단됨 · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "방금",
-  "relativeMinutesAgo": "{count, plural, other{{count}분 전}}",
-  "relativeHoursAgo": "{count, plural, other{{count}시간 전}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "누군가 당신의 {domain} 비밀번호를 알고 있습니다.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "그들은 들어오지 못했습니다 — 이 휴대폰도 필요하기 때문입니다. 하지만 비밀번호가 유출됐으니 오늘 바꾸는 것이 좋습니다.",
   "intrusionTried": "시도",
-  "triedTimes": "{count, plural, other{{count}회}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "확인",
   "muteToday": "오늘 이 사이트 요청 음소거"
 }
