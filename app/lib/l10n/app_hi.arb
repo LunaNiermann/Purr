@@ -14,6 +14,9 @@
   "unlocking": "अनलॉक हो रहा है…",
   "useMyPassword": "मेरा पासवर्ड इस्तेमाल करें",
   "unlockYourCodes": "अपने कोड अनलॉक करें",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "भाषा",
   "languageSubtitle": "चुनें कि Purr आपसे किस भाषा में बात करे",
   "languageSystemDefault": "मेरे डिवाइस के अनुसार"
