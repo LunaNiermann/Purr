@@ -1,0 +1,23 @@
+Purr turns signing in on your computer into a single tap.
+
+Pair the extension with the Purr app on your phone once, by scanning one QR code. After that, when a website asks for a two-factor code, a request appears on your phone. You approve it, and the six digits fill themselves into the page.
+
+Your secrets never leave your phone. Only the finished six-digit code travels, and only after you approve it. The extension never sees the secret that generates your codes.
+
+WHAT YOU GET
+
+One tap to sign in. No typing codes, no switching apps, no hunting for the right account.
+
+Only six digits ever reach the page. The extension fills the code into the field that needs it and nothing else. It does not read or send the contents of the pages you visit.
+
+An optional security-key route. Touch a registered hardware key (such as a YubiKey) to fill a code directly in the browser, with your phone still in your pocket. Your codes are cached locally only as ciphertext that the key unlocks.
+
+No account required. Nothing to sign up for.
+
+Open source, auditable under GPL 3.0.
+
+PRIVACY
+
+The connection between your phone and this browser is end to end encrypted. The relay that carries messages between them only ever sees scrambled data it cannot read. Purr collects no personal information, shows no ads, and includes no trackers.
+
+You need the Purr app on your Android phone to use this extension.

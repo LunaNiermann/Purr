@@ -1,0 +1,27 @@
+A password on its own is not enough. Purr is the second factor, the part a thief on the other side of the world cannot reach, because it lives in your pocket.
+
+Purr keeps your two-factor codes where they belong: on your phone, and nowhere else. When a website asks for a code, only the six digits ever travel. Your secrets never leave the device.
+
+WHY PURR
+
+One tap on your computer. Pair the browser extension once, and signing in on your laptop becomes a single tap on your phone. No typing, no hunting for the right account.
+
+Nothing leaves this phone but six digits. Your codes are generated on the device and stay there. Purr works on a plane, with no signal, anywhere.
+
+No account, no email. There is nothing to sign up for and no address to hand over. You just set it up and go.
+
+A way back if you lose your phone. Print a twelve-word recovery kit once and you can restore every account onto a new device, even if you lose everything.
+
+Your codes are yours. Move them to another app any time. There is no lock-in.
+
+Open source. The whole project is public and auditable under GPL 3.0.
+
+HOW IT WORKS
+
+Add an account by scanning its setup QR code or typing the key by hand. Purr generates standard time-based one-time passwords (TOTP), so it works with the thousands of sites that support authenticator apps.
+
+To sign in on a computer, install the Purr browser extension and pair it with your phone by scanning one QR code. From then on, a sign-in request appears on your phone; you approve it, and the code fills itself in. You can also use a hardware security key to fill the code directly in the browser.
+
+PRIVACY
+
+Purr collects no personal information. It has no ads and no trackers. When your phone and computer talk to each other, the connection is end to end encrypted, and the relay that passes messages between them only ever sees scrambled data it cannot read.
