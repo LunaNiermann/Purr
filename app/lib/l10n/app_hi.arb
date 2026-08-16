@@ -14,14 +14,41 @@
   "unlocking": "अनलॉक हो रहा है…",
   "useMyPassword": "मेरा पासवर्ड इस्तेमाल करें",
   "unlockYourCodes": "अपने कोड अनलॉक करें",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "भाषा",
   "languageSubtitle": "चुनें कि Purr आपसे किस भाषा में बात करे",
   "languageSystemDefault": "मेरे डिवाइस के अनुसार",
   "accountCount": "{count, plural, =1{1 खाता} other{{count} खाते}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "खाते खोजें",
   "cancel": "रद्द करें",
   "tapToCopySeconds": "कॉपी करने के लिए टैप करें · {seconds}से",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{total, plural, =1{1 खाते} other{{total} खातों}} में से {shown}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "कॉपी किया गया",
   "searchScopeNote": "खोज साइट का नाम और आपका उपयोगकर्ता नाम देखती है — कोड नहीं।",
   "emptyVaultTitle": "अभी कोई खाता नहीं",
@@ -36,7 +63,19 @@
   "detailAsked": "पूछा गया",
   "justNow": "अभी-अभी",
   "secondsAgo": "{count, plural, =1{1 सेकंड पहले} other{{count} सेकंड पहले}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "यह किस खाते के लिए है? यह {domain} के तहत सहेजा नहीं गया है।",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "कोड भेजें",
   "didntAskForThis": "मैंने यह नहीं माँगा",
   "justShowCode": "बस मुझे कोड दिखाएँ",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "पुष्टि हो रही है कि यह सचमुच आप हैं",
   "youreIn": "आप अंदर आ गए।",
   "signingYouIn": "{domain} आपको आपके कंप्यूटर पर साइन इन कर रहा है। कुछ टाइप करने की ज़रूरत नहीं।",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "भेजा गया कोड 30 सेकंड में समाप्त हो जाता है और केवल एक बार इस्तेमाल हो सकता है।",
   "done": "हो गया",
   "blockedNothingSent": "अवरुद्ध। कुछ नहीं भेजा गया।",
   "deniedBody": "किसी ने आपके रूप में साइन इन करने की कोशिश की। आपके कोड ने यह फ़ोन कभी नहीं छोड़ा — उन्हें कुछ नहीं मिला।",
   "deniedChangePassword": "अगर यह गलती नहीं थी, तो आज ही अपना {domain} पासवर्ड बदलें। पासवर्ड ही वह हिस्सा है जो उनके पास है।",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "समझ गया",
   "typeThisInto": "इसे यहाँ टाइप करें",
   "newCodeInSeconds": "{seconds}से में नया कोड",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "आपके ब्राउज़र को कुछ नहीं भेजा गया। इसे खुद टाइप या पेस्ट करें।",
   "copyCode": "कोड कॉपी करें",
   "intrusionBadge": "अवरुद्ध · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "अभी-अभी",
   "relativeMinutesAgo": "{count, plural, =1{1 मिनट पहले} other{{count} मिनट पहले}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{1 घंटा पहले} other{{count} घंटे पहले}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "किसी के पास आपका {domain} पासवर्ड है।",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "वे अंदर नहीं आ सके — उन्हें यह फ़ोन भी चाहिए होता। पर पासवर्ड बाहर है, इसलिए आज ही बदलना बेहतर है।",
   "intrusionTried": "कोशिशें",
   "triedTimes": "{count, plural, =1{1 बार} other{{count} बार}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "ठीक है",
   "muteToday": "आज इस साइट के अनुरोध म्यूट करें"
 }
