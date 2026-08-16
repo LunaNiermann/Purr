@@ -14,14 +14,41 @@
   "unlocking": "Sblocco…",
   "useMyPassword": "Usa la mia password",
   "unlockYourCodes": "Sblocca i tuoi codici",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Lingua",
   "languageSubtitle": "Scegli la lingua di Purr",
   "languageSystemDefault": "Come il mio dispositivo",
   "accountCount": "{count, plural, =1{1 account} other{{count} account}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Cerca account",
   "cancel": "Annulla",
   "tapToCopySeconds": "TOCCA PER COPIARE · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} di {total, plural, =1{1 account} other{{total} account}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Copiato",
   "searchScopeNote": "La ricerca considera il nome del sito e il tuo nome utente, non i codici.",
   "emptyVaultTitle": "Ancora nessun account",
@@ -36,7 +63,19 @@
   "detailAsked": "Richiesto",
   "justNow": "Proprio ora",
   "secondsAgo": "{count, plural, =1{1 secondo fa} other{{count} secondi fa}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Per quale account? Non è salvato sotto {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Invia il codice",
   "didntAskForThis": "Non ho richiesto io questo",
   "justShowCode": "Mostrami solo il codice",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Conferma che sei davvero tu",
   "youreIn": "Sei dentro.",
   "signingYouIn": "{domain} ti sta accedendo sul computer. Nulla da digitare.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Il codice inviato scade tra 30 secondi e può essere usato una sola volta.",
   "done": "Fatto",
   "blockedNothingSent": "Bloccato. Non è stato inviato nulla.",
   "deniedBody": "Qualcuno ha provato ad accedere come te. I tuoi codici non hanno mai lasciato questo telefono: non hanno ottenuto nulla.",
   "deniedChangePassword": "Se non è stato un errore, cambia oggi la password di {domain}. La password è la parte che hanno loro.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Ho capito",
   "typeThisInto": "Digitalo in",
   "newCodeInSeconds": "Nuovo codice tra {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Non è stato inviato nulla al tuo browser. Digitalo o incollalo tu.",
   "copyCode": "Copia codice",
   "intrusionBadge": "BLOCCATO · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "proprio ora",
   "relativeMinutesAgo": "{count, plural, =1{1 minuto fa} other{{count} minuti fa}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{1 ora fa} other{{count} ore fa}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Qualcuno ha la tua password di {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Non sono entrati: servirebbe anche questo telefono. Ma la password è in giro, quindi conviene cambiarla oggi.",
   "intrusionTried": "Tentativi",
   "triedTimes": "{count, plural, =1{1 volta} other{{count} volte}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Ok",
   "muteToday": "Silenzia le richieste di questo sito oggi",
   "onbHeroTitle": "Una password da sola non basta.",
@@ -103,6 +190,11 @@
   "addCameraOk": "Va bene, chiedimelo",
   "addTypeByHand": "Digiterò il codice a mano",
   "scanCodeError": "Quel codice non ha funzionato: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "Abbinare questo computer?",
   "pairBody": "È un codice per collegare un computer, non un account di un sito. Vuoi abbinarlo ora?",
   "notNow": "Non ora",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "Primo codice: ",
   "saveLabel": "Salva",
   "saveNamed": "Salva {site}",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "Account",
   "importedAccountName": "Account importato",
   "importReadyCount": "{count, plural, =1{Un account, pronto per il trasloco} other{{count} account, pronti per il trasloco}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "Questa è la parte {index} di {size} — scansiona anche gli altri quadrati, in qualsiasi ordine.",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "Tutto qui sotto viene trasferito esattamente com'è. Niente viene saltato.",
   "unnamedAccount": "Senza nome",
   "importBringOne": "Portalo dentro",
   "importBringAll": "Porta dentro tutti e {count}",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "Rinomina",
   "detailRemoveTitle": "Rimuovere {site}?",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "Disattiva prima la verifica in due passaggi su {site}, altrimenti ti bloccherai fuori.",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "Mantieni",
   "detailRemove": "Rimuovi",
   "detailNewIn": "Nuovo tra {seconds}s",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "Dove si trova",
   "detailThisPhone": "Questo telefono",
   "detailPlusKit": "Più il tuo kit di carta — sei coperto se questo telefono sparisce",
@@ -154,6 +292,13 @@
   "restoreWordsError": "Quelle parole non combaciano del tutto — controlla ognuna sul foglio. L'ordine conta.",
   "restoreLostSheet": "Perso anche il foglio? Se il vecchio telefono funziona ancora, la sua scheda Sicurezza può stamparne uno nuovo.",
   "restoreWordsToGo": "{count, plural, =1{Manca 1 parola} other{Mancano {count} parole}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "Non abbiamo trovato un backup per quelle parole. Se i backup erano disattivati sul vecchio telefono, il solo foglio di carta non può recuperare gli account — ma puoi ripartire da zero.",
   "restoreGenericError": "Qualcosa si è messo di mezzo — controlla la connessione e riprova. Nulla è andato perso.",
   "restoreErrorTitle": "Non ha funzionato — ma nulla è perso",
@@ -162,9 +307,23 @@
   "restoreCheckFound": "Trovato il tuo backup cifrato",
   "restoreCheckUnlocked": "Le tue parole l'hanno sbloccato",
   "restoreCheckPutting": "{count, plural, =1{Ripristino di 1 account} other{Ripristino di {count} account}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "Ripristino dei tuoi account",
   "restoreOnPhoneNote": "Tutto questo avviene su questo telefono. Abbiamo salvato solo una copia cifrata che non possiamo leggere.",
   "restoreDoneTitle": "{count, plural, =1{Il tuo account è tornato.} other{Tutti i {count} account sono tornati.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "Il vecchio telefono è stato scollegato — se qualcuno lo trova, i suoi codici non funzionano più.",
   "restorePrintFreshTitle": "Un'ultima cosa: stampa un kit nuovo",
   "restorePrintFreshBody": "Il vecchio foglio ora è ritirato. Uno nuovo richiede dieci secondi e ti copre la prossima volta.",
@@ -189,6 +348,11 @@
   "secLoseSection": "Se perdi questo telefono",
   "secRecoveryKit": "Kit di recupero",
   "secSavedOn": "Salvato il {date}",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "Un foglio di carta che può riportare tutto, anche se perdi ogni dispositivo. Stampa un'altra copia quando vuoi.",
   "secPrintAgain": "Stampa di nuovo",
   "secKitReason": "Conferma per vedere il tuo kit di recupero",
@@ -213,6 +377,11 @@
   "secComputerPaired": "Quando un sito chiede un codice al tuo browser, questo telefono riceve la richiesta.",
   "secYourBrowser": "Il tuo browser",
   "secPairedOn": "Abbinato il {date}",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "Disabbina",
   "secPushChecking": "Verifica delle notifiche…",
   "secPushReady": "Notifiche pronte",
