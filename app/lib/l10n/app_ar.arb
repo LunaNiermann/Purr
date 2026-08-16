@@ -14,6 +14,9 @@
   "unlocking": "جارٍ فتح القفل…",
   "useMyPassword": "استخدام كلمة المرور",
   "unlockYourCodes": "افتح قفل رموزك",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "اللغة",
   "languageSubtitle": "اختر اللغة التي يتحدث بها Purr",
   "languageSystemDefault": "حسب جهازي"
