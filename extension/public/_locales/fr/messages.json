@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Connexion par clé désactivée sur cet ordinateur."
+  },
+  "optLanguage": {
+    "message": "Langue"
+  },
+  "optLanguageAuto": {
+    "message": "Suivre mon navigateur"
+  },
+  "optLanguageSub": {
+    "message": "Choisissez comment Purr vous parle ici"
   }
 }
