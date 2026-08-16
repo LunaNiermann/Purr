@@ -93,6 +93,16 @@ License; their license texts sit next to the font files in `app/assets/fonts/`.
 
 Found a security issue? Please report it privately — see [`SECURITY.md`](SECURITY.md).
 
+## Translations
+
+[![Crowdin](https://badges.crowdin.net/purr/localized.svg)](https://crowdin.com/project/purr)
+
+Purr follows your device language by default and can be switched by hand in
+Security → Language. It ships in English, Spanish, German, French, Italian,
+Portuguese, Indonesian, Hindi, Arabic, Japanese, and Korean. Strings live in
+`app/lib/l10n/*.arb` (app) and `extension/_locales/` (extension); corrections
+and new languages are welcome via [Crowdin](https://crowdin.com/project/purr).
+
 ## Support
 
 Purr is free, open, and has no ads or trackers. If it's useful to you and you

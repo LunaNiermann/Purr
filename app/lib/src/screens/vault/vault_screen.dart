@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../core/totp.dart';
 import '../../data/models.dart';
 import '../../design/tokens.dart';
@@ -45,6 +46,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final vault = ref.watch(vaultProvider);
     final prefs = ref.watch(prefsProvider);
     final copiedId = ref.watch(copiedIdProvider);
@@ -94,12 +96,11 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
                   Row(
                     crossAxisAlignment: CrossAxisAlignment.end,
                     children: [
-                      const Expanded(
-                          child: Text('Codes', style: TkText.pageHeading)),
+                      Expanded(
+                          child: Text(l.tabCodes, style: TkText.pageHeading)),
                       Padding(
                         padding: const EdgeInsets.only(bottom: 6),
-                        child: Text(
-                            '${accounts.length} account${accounts.length == 1 ? '' : 's'}',
+                        child: Text(l.accountCount(accounts.length),
                             style: TkText.metadata),
                       ),
                     ],
@@ -122,13 +123,13 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
                             onChanged: (_) => setState(() {}),
                             style: const TextStyle(
                                 fontFamily: TkFonts.sans, fontSize: 15.5),
-                            decoration: const InputDecoration(
-                              hintText: 'Search accounts',
-                              hintStyle: TextStyle(
+                            decoration: InputDecoration(
+                              hintText: l.searchAccountsHint,
+                              hintStyle: const TextStyle(
                                   fontSize: 15, color: TkColors.ink45),
                               border: InputBorder.none,
                               contentPadding:
-                                  EdgeInsets.symmetric(vertical: 12),
+                                  const EdgeInsets.symmetric(vertical: 12),
                             ),
                           ),
                         ),
@@ -138,7 +139,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
                               _search.clear();
                               setState(() {});
                             },
-                            child: Text('Cancel',
+                            child: Text(l.cancel,
                                 style: TkText.metadata.copyWith(
                                     fontWeight: FontWeight.w600,
                                     fontSize: 13)),
@@ -150,7 +151,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
                   if (query.isEmpty)
                     Row(
                       children: [
-                        Text('TAP TO COPY · ${secondsLeft}S',
+                        Text(l.tapToCopySeconds(secondsLeft),
                             style: TkText.sectionLabel
                                 .copyWith(letterSpacing: 11.5 * .06)),
                         const SizedBox(width: 10),
@@ -160,8 +161,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
                       ],
                     )
                   else
-                    Text(
-                        '${filtered.length} of ${accounts.length} account${accounts.length == 1 ? '' : 's'}',
+                    Text(l.searchMatchCount(filtered.length, accounts.length),
                         style: TkText.metadata),
                 ],
               ),
@@ -201,8 +201,7 @@ class _VaultScreenState extends ConsumerState<VaultScreen> {
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 26),
                 child: Text(
-                  'Searching looks at the site name and your username — not '
-                  'the codes themselves.',
+                  l.searchScopeNote,
                   textAlign: TextAlign.center,
                   style: TkText.bodySecondary.copyWith(color: TkColors.ink45),
                 ),
@@ -299,7 +298,7 @@ class _AccountRow extends StatelessWidget {
                       )),
                   const SizedBox(height: 1),
                   copied
-                      ? const Text('Copied',
+                      ? Text(AppLocalizations.of(context).copied,
                           style: TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 12.5,
@@ -460,7 +459,7 @@ class _CardsLayout extends StatelessWidget {
                 ),
                 const SizedBox(height: 6),
                 copied
-                    ? const Text('Copied',
+                    ? Text(AppLocalizations.of(context).copied,
                         style: TextStyle(
                             fontFamily: TkFonts.sans,
                             fontSize: 12.5,
@@ -486,6 +485,7 @@ class _EmptyVault extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -493,7 +493,7 @@ class _EmptyVault extends ConsumerWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Text('Codes', style: TkText.pageHeading),
+              Text(l.tabCodes, style: TkText.pageHeading),
               Expanded(
                 child: Center(
                   child: Column(
@@ -517,8 +517,8 @@ class _EmptyVault extends ConsumerWidget {
                                 color: Color.fromRGBO(27, 26, 23, .3))),
                       ),
                       const SizedBox(height: 16),
-                      const Text('No accounts yet',
-                          style: TextStyle(
+                      Text(l.emptyVaultTitle,
+                          style: const TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 22,
                               fontWeight: FontWeight.w600,
@@ -528,9 +528,7 @@ class _EmptyVault extends ConsumerWidget {
                       Padding(
                         padding: const EdgeInsets.symmetric(horizontal: 10),
                         child: Text(
-                          "Go to a site's security settings, choose "
-                          '"authenticator app", and point this phone at the '
-                          'square it shows you.',
+                          l.emptyVaultBody,
                           textAlign: TextAlign.center,
                           style: TkText.body.copyWith(fontSize: 15),
                         ),
@@ -540,12 +538,12 @@ class _EmptyVault extends ConsumerWidget {
                 ),
               ),
               TkPrimaryButton(
-                label: 'Scan a QR code',
+                label: l.scanQrCode,
                 onPressed: () => startAddEntry(context, ref, scan: true),
               ),
               const SizedBox(height: 10),
               TkSecondaryButton(
-                label: 'Type a setup code instead',
+                label: l.typeSetupCode,
                 onPressed: () => startAddEntry(context, ref, scan: false),
               ),
               const SizedBox(height: 64),

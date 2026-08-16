@@ -16,5 +16,16 @@
   "unlockYourCodes": "افتح قفل رموزك",
   "language": "اللغة",
   "languageSubtitle": "اختر اللغة التي يتحدث بها Purr",
-  "languageSystemDefault": "حسب جهازي"
+  "languageSystemDefault": "حسب جهازي",
+  "accountCount": "{count, plural, zero{لا حسابات} one{حساب واحد} two{حسابان} few{{count} حسابات} many{{count} حسابًا} other{{count} حساب}}",
+  "searchAccountsHint": "ابحث في الحسابات",
+  "cancel": "إلغاء",
+  "tapToCopySeconds": "انقر للنسخ · {seconds}ث",
+  "searchMatchCount": "{shown} من {total, plural, zero{لا حسابات} one{حساب واحد} two{حسابين} few{{total} حسابات} many{{total} حسابًا} other{{total} حساب}}",
+  "copied": "تم النسخ",
+  "searchScopeNote": "يبحث النظام في اسم الموقع واسم المستخدم فقط، وليس في الرموز نفسها.",
+  "emptyVaultTitle": "لا حسابات بعد",
+  "emptyVaultBody": "افتح إعدادات الأمان لأحد المواقع، واختر «تطبيق المصادقة»، ثم وجّه هذا الهاتف نحو المربّع الذي يظهر لك.",
+  "scanQrCode": "مسح رمز QR",
+  "typeSetupCode": "أدخل رمز الإعداد بدلاً من ذلك"
 }

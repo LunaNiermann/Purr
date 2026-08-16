@@ -16,5 +16,16 @@
   "unlockYourCodes": "Deine Codes entsperren",
   "language": "Sprache",
   "languageSubtitle": "Wähle, in welcher Sprache Purr mit dir spricht",
-  "languageSystemDefault": "Wie mein Gerät"
+  "languageSystemDefault": "Wie mein Gerät",
+  "accountCount": "{count, plural, =1{1 Konto} other{{count} Konten}}",
+  "searchAccountsHint": "Konten suchen",
+  "cancel": "Abbrechen",
+  "tapToCopySeconds": "ZUM KOPIEREN TIPPEN · {seconds}S",
+  "searchMatchCount": "{shown} von {total, plural, =1{1 Konto} other{{total} Konten}}",
+  "copied": "Kopiert",
+  "searchScopeNote": "Die Suche berücksichtigt den Namen der Website und deinen Benutzernamen – nicht die Codes selbst.",
+  "emptyVaultTitle": "Noch keine Konten",
+  "emptyVaultBody": "Öffne die Sicherheitseinstellungen einer Website, wähle „Authenticator-App“ und richte dieses Handy auf das angezeigte Quadrat.",
+  "scanQrCode": "QR-Code scannen",
+  "typeSetupCode": "Stattdessen einen Einrichtungscode eingeben"
 }

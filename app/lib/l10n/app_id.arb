@@ -16,5 +16,16 @@
   "unlockYourCodes": "Buka kunci kode Anda",
   "language": "Bahasa",
   "languageSubtitle": "Pilih bahasa yang digunakan Purr",
-  "languageSystemDefault": "Ikuti perangkat saya"
+  "languageSystemDefault": "Ikuti perangkat saya",
+  "accountCount": "{count, plural, other{{count} akun}}",
+  "searchAccountsHint": "Cari akun",
+  "cancel": "Batal",
+  "tapToCopySeconds": "KETUK UNTUK MENYALIN · {seconds}D",
+  "searchMatchCount": "{shown} dari {total, plural, other{{total} akun}}",
+  "copied": "Disalin",
+  "searchScopeNote": "Pencarian melihat nama situs dan nama pengguna Anda — bukan kodenya.",
+  "emptyVaultTitle": "Belum ada akun",
+  "emptyVaultBody": "Buka pengaturan keamanan sebuah situs, pilih \"aplikasi autentikator\", lalu arahkan ponsel ini ke kotak yang ditampilkan.",
+  "scanQrCode": "Pindai kode QR",
+  "typeSetupCode": "Ketik kode penyiapan saja"
 }

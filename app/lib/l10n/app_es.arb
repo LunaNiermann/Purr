@@ -16,5 +16,16 @@
   "unlockYourCodes": "Desbloquea tus códigos",
   "language": "Idioma",
   "languageSubtitle": "Elige cómo te habla Purr",
-  "languageSystemDefault": "Según mi dispositivo"
+  "languageSystemDefault": "Según mi dispositivo",
+  "accountCount": "{count, plural, =1{1 cuenta} other{{count} cuentas}}",
+  "searchAccountsHint": "Buscar cuentas",
+  "cancel": "Cancelar",
+  "tapToCopySeconds": "TOCA PARA COPIAR · {seconds}S",
+  "searchMatchCount": "{shown} de {total, plural, =1{1 cuenta} other{{total} cuentas}}",
+  "copied": "Copiado",
+  "searchScopeNote": "La búsqueda revisa el nombre del sitio y tu usuario, no los códigos.",
+  "emptyVaultTitle": "Aún no hay cuentas",
+  "emptyVaultBody": "Ve a los ajustes de seguridad de un sitio, elige «app de autenticación» y apunta este teléfono al cuadro que te muestre.",
+  "scanQrCode": "Escanear un código QR",
+  "typeSetupCode": "Escribir un código de configuración"
 }

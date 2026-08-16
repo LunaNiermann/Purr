@@ -16,5 +16,16 @@
   "unlockYourCodes": "अपने कोड अनलॉक करें",
   "language": "भाषा",
   "languageSubtitle": "चुनें कि Purr आपसे किस भाषा में बात करे",
-  "languageSystemDefault": "मेरे डिवाइस के अनुसार"
+  "languageSystemDefault": "मेरे डिवाइस के अनुसार",
+  "accountCount": "{count, plural, =1{1 खाता} other{{count} खाते}}",
+  "searchAccountsHint": "खाते खोजें",
+  "cancel": "रद्द करें",
+  "tapToCopySeconds": "कॉपी करने के लिए टैप करें · {seconds}से",
+  "searchMatchCount": "{total, plural, =1{1 खाते} other{{total} खातों}} में से {shown}",
+  "copied": "कॉपी किया गया",
+  "searchScopeNote": "खोज साइट का नाम और आपका उपयोगकर्ता नाम देखती है — कोड नहीं।",
+  "emptyVaultTitle": "अभी कोई खाता नहीं",
+  "emptyVaultBody": "किसी साइट की सुरक्षा सेटिंग में जाएँ, \"authenticator app\" चुनें, और इस फ़ोन को उस चौकोर कोड की ओर रखें जो दिखे।",
+  "scanQrCode": "QR कोड स्कैन करें",
+  "typeSetupCode": "इसके बजाय सेटअप कोड टाइप करें"
 }

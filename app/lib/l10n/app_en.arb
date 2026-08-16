@@ -17,5 +17,19 @@
   "@unlockYourCodes": { "description": "Reason shown in the OS biometric prompt when unlocking the app." },
   "language": "Language",
   "languageSubtitle": "Choose how Purr speaks to you",
-  "languageSystemDefault": "Match my device"
+  "languageSystemDefault": "Match my device",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": { "placeholders": { "count": { "type": "int" } } },
+  "searchAccountsHint": "Search accounts",
+  "cancel": "Cancel",
+  "tapToCopySeconds": "TAP TO COPY · {seconds}S",
+  "@tapToCopySeconds": { "placeholders": { "seconds": { "type": "int" } } },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": { "placeholders": { "shown": { "type": "int" }, "total": { "type": "int" } } },
+  "copied": "Copied",
+  "searchScopeNote": "Searching looks at the site name and your username — not the codes themselves.",
+  "emptyVaultTitle": "No accounts yet",
+  "emptyVaultBody": "Go to a site's security settings, choose \"authenticator app\", and point this phone at the square it shows you.",
+  "scanQrCode": "Scan a QR code",
+  "typeSetupCode": "Type a setup code instead"
 }
