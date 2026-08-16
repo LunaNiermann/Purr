@@ -39,7 +39,8 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
   }
 
   Future<void> _printKitAgain() async {
-    final ok = await Biometrics.confirmOrBypass('Confirm to view your recovery kit');
+    final ok = await Biometrics.confirmOrBypass(
+        AppLocalizations.of(context).secKitReason);
     if (!ok) return;
     final meta = await ref.read(vaultStoreProvider).kitMeta();
     if (meta == null || !mounted) return;
@@ -142,6 +143,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final prefs = ref.watch(prefsProvider);
     final kitDate = prefs.kitSavedAt;
 
@@ -153,8 +155,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
           children: [
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 22),
-              child: Text(AppLocalizations.of(context).securityTitle,
-                  style: TkText.pageHeading),
+              child: Text(l.securityTitle, style: TkText.pageHeading),
             ),
             const SizedBox(height: 18),
             Padding(
@@ -179,7 +180,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                           ),
                         ),
                         const SizedBox(width: 10),
-                        Text("YOU'RE COVERED",
+                        Text(l.secCovered,
                             style: TkText.sectionLabel.copyWith(
                                 fontSize: 12,
                                 color: const Color.fromRGBO(
@@ -187,8 +188,8 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                       ],
                     ),
                     const SizedBox(height: 12),
-                    const Text('Your two factors live on two separate devices.',
-                        style: TextStyle(
+                    Text(l.secCoveredTitle,
+                        style: const TextStyle(
                             fontFamily: TkFonts.sans,
                             fontSize: 21,
                             fontWeight: FontWeight.w600,
@@ -196,9 +197,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                             letterSpacing: 21 * -.01,
                             color: TkColors.paper)),
                     const SizedBox(height: 10),
-                    Text(
-                        "If someone steals your laptop, they still can't get "
-                        "in. They'd need this phone too.",
+                    Text(l.secCoveredBody,
                         style: TkText.body.copyWith(
                             fontSize: 14,
                             height: 1.5,
@@ -209,9 +208,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(22, 0, 22, 8),
-              child: TkSectionLabel('If you lose this phone'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
+              child: TkSectionLabel(l.secLoseSection),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -222,30 +221,28 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        const Text('Recovery kit',
-                            style: TextStyle(
+                        Text(l.secRecoveryKit,
+                            style: const TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 16,
                                 fontWeight: FontWeight.w600,
                                 color: TkColors.ink)),
                         if (kitDate != null)
-                          Text('Saved ${_shortDate(kitDate)}',
+                          Text(
+                              l.secSavedOn(MaterialLocalizations.of(context)
+                                  .formatShortMonthDay(kitDate)),
                               style: TkText.metadata.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: TkColors.green)),
                       ],
                     ),
                     const SizedBox(height: 6),
-                    Text(
-                        'One sheet of paper that can bring everything back, '
-                        'even if you lose every device. Print another copy '
-                        'any time.',
-                        style: TkText.bodySecondary),
+                    Text(l.secRecoveryBody, style: TkText.bodySecondary),
                     const SizedBox(height: 12),
                     Row(
                       children: [
                         _SmallOutlineButton(
-                            label: 'Print again', onTap: _printKitAgain),
+                            label: l.secPrintAgain, onTap: _printKitAgain),
                       ],
                     ),
                   ],
@@ -258,9 +255,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               child: _ComputerCard(),
             ),
             const SizedBox(height: 22),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(22, 0, 22, 8),
-              child: TkSectionLabel('How your codes look'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
+              child: TkSectionLabel(l.secHowCodesLook),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -270,7 +267,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     children: [
                       Expanded(
                         child: _LayoutPicker(
-                          label: 'One per row',
+                          label: l.secOnePerRow,
                           selected: prefs.layout == 'list',
                           isList: true,
                           onTap: () => ref
@@ -281,7 +278,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                       const SizedBox(width: 10),
                       Expanded(
                         child: _LayoutPicker(
-                          label: 'Two-up cards',
+                          label: l.secTwoUp,
                           selected: prefs.layout == 'cards',
                           isList: false,
                           onTap: () => ref
@@ -293,8 +290,8 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                   ),
                   const SizedBox(height: 8),
                   _ToggleRow(
-                    title: 'Hide codes until tapped',
-                    subtitle: 'Good for cafés and open offices',
+                    title: l.secHideCodes,
+                    subtitle: l.secHideCodesSub,
                     value: prefs.hideCodes,
                     onChanged: (v) => ref
                         .read(prefsProvider.notifier)
@@ -306,7 +303,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
             const SizedBox(height: 22),
             Padding(
               padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
-              child: TkSectionLabel(AppLocalizations.of(context).language),
+              child: TkSectionLabel(l.language),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -325,8 +322,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                                   fontWeight: FontWeight.w600,
                                   color: TkColors.ink)),
                           const SizedBox(height: 3),
-                          Text(AppLocalizations.of(context).languageSubtitle,
-                              style: TkText.metadata),
+                          Text(l.languageSubtitle, style: TkText.metadata),
                         ],
                       ),
                     ),
@@ -336,9 +332,9 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
               ),
             ),
             const SizedBox(height: 22),
-            const Padding(
-              padding: EdgeInsets.fromLTRB(22, 0, 22, 8),
-              child: TkSectionLabel('On this phone'),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(22, 0, 22, 8),
+              child: TkSectionLabel(l.secOnThisPhone),
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 14),
@@ -346,14 +342,12 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                 children: [
                   if (_canAuth) ...[
                     _ToggleRow(
-                      title: 'Quick unlock',
-                      subtitle: 'Open Purr with your fingerprint, face, or '
-                          "screen lock — it's not your second factor",
+                      title: l.secQuickUnlock,
+                      subtitle: l.secQuickUnlockSub,
                       value: prefs.biometricsEnabled,
                       onChanged: (v) async {
                         if (v) {
-                          final ok = await Biometrics.prompt(
-                              'Confirm it works — one try now');
+                          final ok = await Biometrics.prompt(l.bioConfirmTry);
                           if (!ok) return;
                         }
                         await ref
@@ -364,9 +358,8 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     const SizedBox(height: 8),
                   ],
                   _ToggleRow(
-                    title: 'Cloud backup',
-                    subtitle: 'An encrypted copy only your recovery kit can '
-                        'open — how a new phone gets your codes back',
+                    title: l.secCloudBackup,
+                    subtitle: l.secCloudBackupSub,
                     value: prefs.encryptedBackup,
                     onChanged: (v) async {
                       await ref
@@ -384,17 +377,14 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Move to another app',
-                            style: TextStyle(
+                        Text(l.secMoveApp,
+                            style: const TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 15.5,
                                 fontWeight: FontWeight.w600,
                                 color: TkColors.ink)),
                         const SizedBox(height: 3),
-                        Text(
-                            'Your codes are yours. Take them anywhere, '
-                            'any time.',
-                            style: TkText.metadata),
+                        Text(l.secMoveAppSub, style: TkText.metadata),
                       ],
                     ),
                   ),
@@ -412,7 +402,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                 child: Padding(
                   padding:
                       const EdgeInsets.symmetric(horizontal: 12, vertical: 8),
-                  child: Text('Privacy policy',
+                  child: Text(l.secPrivacyPolicy,
                       style: TkText.metadata.copyWith(
                           fontWeight: FontWeight.w600,
                           color: TkColors.green)),
@@ -426,6 +416,7 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
   }
 
   void _showExportSheet(BuildContext context) {
+    final l = AppLocalizations.of(context);
     showModalBottomSheet<void>(
       context: context,
       backgroundColor: TkColors.surface,
@@ -450,23 +441,19 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                 ),
               ),
               const SizedBox(height: 24),
-              const Text('Move to another app',
-                  style: TkText.screenTitle),
+              Text(l.secMoveApp, style: TkText.screenTitle),
               const SizedBox(height: 10),
-              Text(
-                  'This shows every account as a QR code the other app can '
-                  'scan — the same kind you scanned to get them in here. '
-                  "You'll confirm it's you first.",
+              Text(l.secExportBody,
                   style: TkText.body.copyWith(fontSize: 14.5)),
               const SizedBox(height: 18),
               TkPrimaryButton(
-                label: 'Show my export codes',
+                label: l.secShowExport,
                 onPressed: () async {
                   // Close the sheet first, then gate and navigate on the
                   // screen's context — the sheet context is dead after pop.
                   Navigator.pop(sheetContext);
-                  final ok = await Biometrics.confirmOrBypass(
-                      'Confirm to export your accounts');
+                  final ok =
+                      await Biometrics.confirmOrBypass(l.secExportReason);
                   if (!ok || !context.mounted) return;
                   _showExportQrs(context);
                 },
@@ -483,51 +470,40 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
       MaterialPageRoute(builder: (_) => const _ExportScreen()),
     );
   }
-
-  static String _shortDate(DateTime d) {
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-    ];
-    return '${d.day} ${months[d.month - 1]}';
-  }
 }
 
 /// "Your computer" card: pair, show, or unpair the browser extension.
 class _ComputerCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final pairing = ref.watch(pairingProvider);
     final paired = pairing.pairing;
     return TkCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          const Text('Your computer',
-              style: TextStyle(
+          Text(l.secYourComputer,
+              style: const TextStyle(
                   fontFamily: TkFonts.sans,
                   fontSize: 16,
                   fontWeight: FontWeight.w600,
                   color: TkColors.ink)),
           const SizedBox(height: 6),
           Text(
-              paired == null
-                  ? 'Pair the browser extension and signing in on your '
-                      'computer becomes one tap here.'
-                  : 'When a site asks your browser for a code, this phone '
-                      'gets the request.',
+              paired == null ? l.secComputerUnpaired : l.secComputerPaired,
               style: TkText.bodySecondary),
           const SizedBox(height: 12),
           if (paired == null)
             _SmallOutlineButton(
-              label: 'Pair a computer',
+              label: l.pairScreenTitle,
               onTap: () async {
                 final ok = await Navigator.of(context).push<bool>(
                     MaterialPageRoute(
                         builder: (_) => const PairComputerScreen()));
                 if (ok == true && context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-                    content: Text('Paired. Try a sign-in on your computer.'),
+                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                    content: Text(l.pairedSnack),
                     backgroundColor: TkColors.green,
                   ));
                 }
@@ -559,19 +535,22 @@ class _ComputerCard extends ConsumerWidget {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Your browser',
-                            style: TextStyle(
+                        Text(l.secYourBrowser,
+                            style: const TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 14.5,
                                 fontWeight: FontWeight.w600,
                                 color: TkColors.ink)),
-                        Text('Paired ${_shortDate(paired.pairedAt.toLocal())}',
+                        Text(
+                            l.secPairedOn(MaterialLocalizations.of(context)
+                                .formatShortMonthDay(
+                                    paired.pairedAt.toLocal())),
                             style: TkText.metadata),
                       ],
                     ),
                   ),
                   _SmallOutlineButton(
-                    label: 'Unpair',
+                    label: l.secUnpair,
                     onTap: () =>
                         ref.read(pairingProvider.notifier).unpair(),
                   ),
@@ -585,14 +564,6 @@ class _ComputerCard extends ConsumerWidget {
         ],
       ),
     );
-  }
-
-  static String _shortDate(DateTime d) {
-    const months = [
-      'Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun',
-      'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec',
-    ];
-    return '${d.day} ${months[d.month - 1]}';
   }
 }
 
@@ -631,15 +602,16 @@ class _PushStatusLineState extends State<_PushStatusLine> {
     final registered = d != null && d.available && d.hasToken;
     final ok = registered && d.notificationsAllowed;
     final needsPermission = registered && !d.notificationsAllowed;
+    final l = AppLocalizations.of(context);
     final label = d == null
-        ? 'Checking notifications…'
+        ? l.secPushChecking
         : ok
-            ? 'Notifications ready'
+            ? l.secPushReady
             : needsPermission
-                ? 'Turn on notifications to be alerted'
+                ? l.secPushTurnOn
                 : d.available
-                    ? "Notifications on, but this phone couldn't register"
-                    : 'Notifications unavailable on this device';
+                    ? l.secPushCantRegister
+                    : l.secPushUnavailable;
     final color = d == null
         ? TkColors.ink55
         : ok
@@ -855,14 +827,15 @@ class _ExportScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final accounts = ref.watch(vaultProvider).accounts;
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TkColors.paper,
         elevation: 0,
         leading: const BackButton(color: TkColors.ink),
-        title: const Text('Your export codes',
-            style: TextStyle(
+        title: Text(l.secExportScreenTitle,
+            style: const TextStyle(
                 fontFamily: TkFonts.sans,
                 fontSize: 17,
                 fontWeight: FontWeight.w600,
@@ -871,9 +844,7 @@ class _ExportScreen extends ConsumerWidget {
       body: ListView(
         padding: const EdgeInsets.fromLTRB(22, 8, 22, 40),
         children: [
-          Text(
-              'Scan each square with your new app. Every account moves over '
-              'with nothing lost.',
+          Text(l.secExportScanEach,
               style: TkText.body.copyWith(fontSize: 14.5)),
           const SizedBox(height: 18),
           for (final account in accounts) ...[
