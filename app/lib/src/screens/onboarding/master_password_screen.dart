@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../../services/biometrics.dart';
@@ -43,9 +44,11 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
   }
 
   /// Length-first strength: three unrelated words beat one word with symbols.
-  (double, String, Color) get _strength {
+  /// The int is a level (0 empty, 1 too short, 2 nearly, 3 strong) resolved to
+  /// a localized label in [build].
+  (double, int, Color) get _strength {
     final text = _password.text;
-    if (text.isEmpty) return (0, '', TkColors.ink16);
+    if (text.isEmpty) return (0, 0, TkColors.ink16);
     final length = text.length;
     final words = text.trim().split(RegExp(r'\s+')).length;
     final classes = [
@@ -56,12 +59,12 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
     ].where((re) => re.hasMatch(text)).length;
     final score = length * 4 + words * 6 + classes * 4;
     if (length < 8 || score < 48) {
-      return (.3, 'Too short — keep going', TkColors.danger);
+      return (.3, 1, TkColors.danger);
     }
     if (score < 72) {
-      return (.6, 'Nearly there — a little longer', const Color(0xFFB0682E));
+      return (.6, 2, const Color(0xFFB0682E));
     }
-    return (.85, 'Strong — good', TkColors.green);
+    return (.85, 3, TkColors.green);
   }
 
   bool get _canContinue {
@@ -73,7 +76,14 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final (fraction, label, color) = _strength;
+    final l = AppLocalizations.of(context);
+    final (fraction, level, color) = _strength;
+    final label = [
+      '',
+      l.strengthTooShort,
+      l.strengthNearly,
+      l.strengthStrong,
+    ][level];
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -83,13 +93,10 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
             children: [
               TkStepPills(step: 1, total: _totalSteps),
               const SizedBox(height: 22),
-              const Text('Pick one password to lock this app',
-                  style: TkText.screenTitle),
+              Text(l.mpTitle, style: TkText.screenTitle),
               const SizedBox(height: 10),
               Text(
-                "This is the only password you'll ever type here. Make it "
-                "long rather than clever — three unrelated words beat one "
-                "word with symbols.",
+                l.mpBody,
                 style: TkText.body.copyWith(fontSize: 14.5, height: 1.55),
               ),
               const SizedBox(height: 22),
@@ -100,11 +107,11 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
                     children: [
                       _field(
                         controller: _password,
-                        hint: 'Your password',
+                        hint: l.passwordHint,
                         focusBorder: true,
                         suffix: GestureDetector(
                           onTap: () => setState(() => _show = !_show),
-                          child: Text(_show ? 'Hide' : 'Show',
+                          child: Text(_show ? l.hide : l.show,
                               style: TkText.metadata.copyWith(
                                   fontWeight: FontWeight.w600,
                                   color: TkColors.ink45)),
@@ -139,19 +146,15 @@ class _MasterPasswordScreenState extends ConsumerState<MasterPasswordScreen> {
                         ),
                       ],
                       const SizedBox(height: 16),
-                      _field(controller: _confirm, hint: 'Type it again'),
+                      _field(controller: _confirm, hint: l.typeItAgain),
                       const SizedBox(height: 16),
-                      const TkNote(
-                          text:
-                              "If you forget it, we can't reset it for you — "
-                              "we never see it. Your recovery kit is the way "
-                              "back."),
+                      TkNote(text: l.mpForgotNote),
                     ],
                   ),
                 ),
               ),
               TkPrimaryButton(
-                label: 'Continue',
+                label: l.continueLabel,
                 enabled: _canContinue,
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(

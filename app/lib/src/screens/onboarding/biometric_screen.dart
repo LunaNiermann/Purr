@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../../services/biometrics.dart';
@@ -44,7 +45,8 @@ class _BiometricScreenState extends ConsumerState<BiometricScreen> {
     if (_busy) return;
     setState(() => _busy = true);
     if (enable) {
-      final ok = await Biometrics.prompt('Confirm it works — one try now');
+      final ok =
+          await Biometrics.prompt(AppLocalizations.of(context).bioConfirmTry);
       if (!ok) {
         setState(() => _busy = false);
         return;
@@ -64,14 +66,12 @@ class _BiometricScreenState extends ConsumerState<BiometricScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final title = _isFace
-        ? 'Use your face instead of typing it'
-        : 'Use your $_label instead of typing it';
-    final body = _isFace
-        ? 'Face unlock just opens the app faster. Your password still exists '
-            'underneath, and you\'ll need it after a restart.'
-        : 'Your $_label just opens the app faster. Your password still exists '
-            'underneath, and you\'ll need it after a restart.';
+    final l = AppLocalizations.of(context);
+    final (title, body, turnOn) = _isFace
+        ? (l.bioTitleFace, l.bioBodyFace, l.bioTurnOnFace)
+        : _label == 'fingerprint'
+            ? (l.bioTitleFingerprint, l.bioBodyFingerprint, l.bioTurnOnFingerprint)
+            : (l.bioTitleScreenLock, l.bioBodyScreenLock, l.bioTurnOnScreenLock);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -112,13 +112,13 @@ class _BiometricScreenState extends ConsumerState<BiometricScreen> {
                 ),
               ),
               TkPrimaryButton(
-                label: _isFace ? 'Turn on face unlock' : 'Turn on $_label',
+                label: turnOn,
                 enabled: _available && !_busy,
                 onPressed: () => _finish(enable: true),
               ),
               const SizedBox(height: 10),
               TkSecondaryButton(
-                label: "I'll type my password",
+                label: l.bioTypeInstead,
                 onPressed: _busy ? null : () => _finish(enable: false),
               ),
             ],

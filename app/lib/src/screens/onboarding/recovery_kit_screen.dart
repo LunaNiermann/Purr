@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../crypto/recovery.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
@@ -57,6 +58,7 @@ class _RecoveryKitScreenState extends ConsumerState<RecoveryKitScreen> {
   @override
   Widget build(BuildContext context) {
     final kit = _kit;
+    final l = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -70,18 +72,15 @@ class _RecoveryKitScreenState extends ConsumerState<RecoveryKitScreen> {
                     step: widget.stepNumber, total: widget.totalSteps),
               ),
               const SizedBox(height: 20),
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child:
-                    Text('Your way back in, on paper', style: TkText.screenTitle),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(l.rkTitle, style: TkText.screenTitle),
               ),
               const SizedBox(height: 9),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
                 child: Text(
-                  'Twelve words that can restore everything onto a new '
-                  "phone. Print them now — it's the one step people skip "
-                  'and regret.',
+                  l.rkBody,
                   style: TkText.body.copyWith(fontSize: 14.5, height: 1.55),
                 ),
               ),
@@ -141,24 +140,20 @@ class _RecoveryKitScreenState extends ConsumerState<RecoveryKitScreen> {
                               ),
                             ),
                             const SizedBox(height: 14),
-                            const TkNote(
-                                text:
-                                    "Don't screenshot these. A photo in your "
-                                    'camera roll is a copy anyone who unlocks '
-                                    'your phone can read.'),
+                            TkNote(text: l.rkNote),
                           ],
                         ),
                       ),
               ),
               const SizedBox(height: 12),
               TkPrimaryButton(
-                label: 'Print my kit',
+                label: l.rkPrint,
                 enabled: kit != null && !_finishing,
                 onPressed: () => _finish(printed: true),
               ),
               const SizedBox(height: 9),
               TkSecondaryButton(
-                label: 'I wrote them down by hand',
+                label: l.rkWroteByHand,
                 onPressed:
                     kit == null || _finishing ? null : () => _finish(printed: false),
               ),

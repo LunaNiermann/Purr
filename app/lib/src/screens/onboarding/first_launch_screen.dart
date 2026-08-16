@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../recovery/restore_flow.dart';
@@ -11,6 +12,7 @@ class FirstLaunchScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -26,28 +28,25 @@ class FirstLaunchScreen extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       mainAxisSize: MainAxisSize.min,
                       children: [
-                        const Text("A password isn't enough on its own.",
-                            style: TkText.heroTitle),
+                        Text(l.onbHeroTitle, style: TkText.heroTitle),
                         const SizedBox(height: 16),
                         Text(
-                          "This app is the second thing — the part a thief on "
-                          "the other side of the world can't get hold of, "
-                          "because it's in your pocket.",
+                          l.onbHeroBody,
                           style: TkText.body.copyWith(fontSize: 16),
                         ),
                         const SizedBox(height: 22),
-                        const _Tick('Nothing leaves this phone but six digits'),
+                        _Tick(l.onbTick1),
                         const SizedBox(height: 11),
-                        const _Tick('Works on a plane, with no signal'),
+                        _Tick(l.onbTick2),
                         const SizedBox(height: 11),
-                        const _Tick('No account to make, no email to give'),
+                        _Tick(l.onbTick3),
                       ],
                     ),
                   ),
                 ),
               ),
               TkPrimaryButton(
-                label: 'Set it up — about two minutes',
+                label: l.onbSetUp,
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(
                       builder: (_) => const MasterPasswordScreen()),
@@ -55,7 +54,7 @@ class FirstLaunchScreen extends StatelessWidget {
               ),
               const SizedBox(height: 10),
               TkSecondaryButton(
-                label: 'I already have a recovery kit',
+                label: l.onbHaveKit,
                 onPressed: () => Navigator.of(context).push(
                   MaterialPageRoute(builder: (_) => const RestoreFlow()),
                 ),
