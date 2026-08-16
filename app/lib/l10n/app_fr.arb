@@ -14,14 +14,41 @@
   "unlocking": "Déverrouillage…",
   "useMyPassword": "Utiliser mon mot de passe",
   "unlockYourCodes": "Déverrouillez vos codes",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Langue",
   "languageSubtitle": "Choisissez la langue de Purr",
   "languageSystemDefault": "Comme mon appareil",
   "accountCount": "{count, plural, =1{1 compte} other{{count} comptes}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Rechercher des comptes",
   "cancel": "Annuler",
   "tapToCopySeconds": "APPUYEZ POUR COPIER · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} sur {total, plural, =1{1 compte} other{{total} comptes}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Copié",
   "searchScopeNote": "La recherche porte sur le nom du site et votre identifiant, pas sur les codes.",
   "emptyVaultTitle": "Aucun compte pour l'instant",
@@ -36,7 +63,19 @@
   "detailAsked": "Demandé",
   "justNow": "À l'instant",
   "secondsAgo": "{count, plural, =1{il y a 1 seconde} other{il y a {count} secondes}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Pour quel compte ? Il n'est pas enregistré sous {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Envoyer le code",
   "didntAskForThis": "Je n'ai pas demandé ça",
   "justShowCode": "Affiche juste le code",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Confirmation que c'est bien vous",
   "youreIn": "Vous êtes connecté.",
   "signingYouIn": "{domain} vous connecte sur votre ordinateur. Rien à saisir.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Le code envoyé expire dans 30 secondes et ne peut servir qu'une fois.",
   "done": "Terminé",
   "blockedNothingSent": "Bloqué. Rien n'a été envoyé.",
   "deniedBody": "Quelqu'un a tenté de se connecter en votre nom. Vos codes n'ont jamais quitté ce téléphone : ils n'ont rien obtenu.",
   "deniedChangePassword": "Si ce n'était pas une erreur, changez aujourd'hui votre mot de passe {domain}. Le mot de passe, c'est ce qu'ils détiennent.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Compris",
   "typeThisInto": "Saisissez ceci dans",
   "newCodeInSeconds": "Nouveau code dans {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Rien n'a été envoyé à votre navigateur. Saisissez-le ou collez-le vous-même.",
   "copyCode": "Copier le code",
   "intrusionBadge": "BLOQUÉ · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "à l'instant",
   "relativeMinutesAgo": "{count, plural, =1{il y a 1 minute} other{il y a {count} minutes}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{il y a 1 heure} other{il y a {count} heures}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Quelqu'un a votre mot de passe {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Ils n'ont pas pu entrer : il leur faudrait aussi ce téléphone. Mais le mot de passe circule, mieux vaut le changer aujourd'hui.",
   "intrusionTried": "Tentatives",
   "triedTimes": "{count, plural, =1{1 fois} other{{count} fois}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "D'accord",
   "muteToday": "Ignorer les demandes de ce site aujourd'hui"
 }
