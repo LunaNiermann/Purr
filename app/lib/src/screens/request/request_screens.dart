@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../core/totp.dart';
 import '../../data/models.dart';
 import '../../design/tokens.dart';
@@ -79,7 +80,8 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
     // nothing to authenticate against, and prompt() returns false there — which
     // would silently bounce back to the request screen and make "Send the code"
     // look dead. With a lock, it still prompts.
-    final ok = await Biometrics.confirmOrBypass("Confirming it's really you");
+    final ok = await Biometrics.confirmOrBypass(
+        AppLocalizations.of(context).confirmingItsYou);
     if (!ok) {
       if (mounted) setState(() => _phase = _Phase.request);
       return;
@@ -123,6 +125,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
   // ---- A11 ----------------------------------------------------------------
 
   Widget _buildRequest() {
+    final l = AppLocalizations.of(context);
     final request = widget.request;
     final account = _account;
     final secondsAgo =
@@ -158,7 +161,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                                   crossAxisAlignment:
                                       CrossAxisAlignment.start,
                                   children: [
-                                    Text('Waiting for a code',
+                                    Text(l.approvalWaiting,
                                         style: TkText.bodySecondary.copyWith(
                                             fontSize: 13,
                                             color: TkColors.paper55)),
@@ -174,8 +177,8 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                               ],
                             ),
                             const SizedBox(height: 26),
-                            const Text('Your browser needs a code. Send it?',
-                                style: TextStyle(
+                            Text(l.approvalAsk,
+                                style: const TextStyle(
                                     fontFamily: TkFonts.sans,
                                     fontSize: 30,
                                     fontWeight: FontWeight.w600,
@@ -194,28 +197,27 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                               child: Column(
                                 children: [
                                   _detailRow(
-                                      'Account',
+                                      l.detailAccount,
                                       account == null
-                                          ? 'Pick below'
+                                          ? l.approvalPickBelow
                                           : (account.username.isEmpty
                                               ? account.siteName
                                               : account.username)),
                                   const SizedBox(height: 10),
-                                  _detailRow('Browser', request.browser),
+                                  _detailRow(l.detailBrowser, request.browser),
                                   const SizedBox(height: 10),
                                   _detailRow(
-                                      'Asked',
+                                      l.detailAsked,
                                       secondsAgo < 5
-                                          ? 'Just now'
-                                          : '$secondsAgo seconds ago'),
+                                          ? l.justNow
+                                          : l.secondsAgo(secondsAgo)),
                                 ],
                               ),
                             ),
                             if (account == null) ...[
                               const SizedBox(height: 16),
                               Text(
-                                  "Which account is this for? It isn't saved "
-                                  'under ${request.domain}.',
+                                  l.approvalWhichAccount(request.domain),
                                   style: TkText.bodySecondary.copyWith(
                                       color: TkColors.paper55)),
                               const SizedBox(height: 10),
@@ -232,7 +234,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                   ),
                   const SizedBox(height: 12),
                   TkPrimaryButton(
-                    label: 'Send the code',
+                    label: l.sendTheCode,
                     background: TkColors.greenBright,
                     foreground: TkColors.onGreenBrightText,
                     enabled: account != null,
@@ -240,21 +242,20 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                   ),
                   const SizedBox(height: 10),
                   TkSecondaryButton(
-                    label: "I didn't ask for this",
+                    label: l.didntAskForThis,
                     borderColor: TkColors.paper20,
                     foreground: const Color.fromRGBO(247, 245, 241, .8),
                     onPressed: _deny,
                   ),
                   TkTextButton(
-                    label: 'Just show me the code',
+                    label: l.justShowCode,
                     color: const Color.fromRGBO(247, 245, 241, .7),
                     onPressed: account == null ? null : _showCode,
                   ),
                   const SizedBox(height: 4),
                   Center(
                     child: Text(
-                        'Your codes stay on this phone. Only the six digits '
-                        'travel.',
+                        l.onlySixDigitsTravel,
                         textAlign: TextAlign.center,
                         style: TkText.metadata.copyWith(
                             fontSize: 12.5,
@@ -372,14 +373,14 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                     ),
                   ),
                   const SizedBox(height: 22),
-                  const Text('Prove it\'s you',
-                      style: TextStyle(
+                  Text(AppLocalizations.of(context).proveItsYou,
+                      style: const TextStyle(
                           fontFamily: TkFonts.sans,
                           fontSize: 19,
                           fontWeight: FontWeight.w600,
                           color: TkColors.paper)),
                   const SizedBox(height: 6),
-                  Text("Confirming it's really you",
+                  Text(AppLocalizations.of(context).confirmingItsYou,
                       style: TkText.body.copyWith(
                           fontSize: 14, color: TkColors.paper55)),
                 ],
@@ -424,13 +425,13 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                                   color: TkColors.greenDeep)),
                         ),
                         const SizedBox(height: 20),
-                        Text("You're in.",
+                        Text(AppLocalizations.of(context).youreIn,
                             style: TkText.heroTitle
                                 .copyWith(fontSize: 32, color: TkColors.paper)),
                         const SizedBox(height: 12),
                         Text(
-                            '${widget.request.domain} is signing you in on '
-                            'your computer. Nothing left to type.',
+                            AppLocalizations.of(context)
+                                .signingYouIn(widget.request.domain),
                             style: TkText.body.copyWith(
                                 fontSize: 16,
                                 color: const Color.fromRGBO(
@@ -444,8 +445,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
-                              'The code we sent expires in 30 seconds and '
-                              'can only be used once.',
+                              AppLocalizations.of(context).codeExpiresNote,
                               style: TkText.bodySecondary.copyWith(
                                   color: const Color.fromRGBO(
                                       247, 245, 241, .85))),
@@ -455,7 +455,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                   ),
                 ),
                 TkPrimaryButton(
-                  label: 'Done',
+                  label: AppLocalizations.of(context).done,
                   background: TkColors.paper,
                   foreground: TkColors.greenDeep,
                   onPressed: () => Navigator.of(context).pop(),
@@ -487,8 +487,8 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                       mainAxisSize: MainAxisSize.min,
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('Blocked. Nothing was sent.',
-                            style: TextStyle(
+                        Text(AppLocalizations.of(context).blockedNothingSent,
+                            style: const TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 30,
                                 fontWeight: FontWeight.w600,
@@ -497,8 +497,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                                 color: TkColors.paper)),
                         const SizedBox(height: 18),
                         Text(
-                            'Someone tried to sign in as you. Your codes '
-                            'never left this phone — they got nothing.',
+                            AppLocalizations.of(context).deniedBody,
                             style: TkText.body.copyWith(
                                 fontSize: 15.5,
                                 color: const Color.fromRGBO(
@@ -511,9 +510,8 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                             borderRadius: BorderRadius.circular(16),
                           ),
                           child: Text(
-                              "If that wasn't a mistake, change your "
-                              '${widget.request.domain} password today. '
-                              'The password is the part they have.',
+                              AppLocalizations.of(context)
+                                  .deniedChangePassword(widget.request.domain),
                               style: TkText.body.copyWith(
                                   fontSize: 14, color: TkColors.paper)),
                         ),
@@ -522,7 +520,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                   ),
                 ),
                 TkPrimaryButton(
-                  label: 'Got it',
+                  label: AppLocalizations.of(context).gotIt,
                   background: TkColors.paper,
                   foreground: TkColors.dangerBg,
                   onPressed: () => Navigator.of(context).pop(),
@@ -538,6 +536,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
   // ---- A12 ----------------------------------------------------------------
 
   Widget _buildCodeOnly() {
+    final l = AppLocalizations.of(context);
     final account = _account!;
     final now = ref.watch(tickProvider).maybeWhen(
           data: (t) => t,
@@ -566,7 +565,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                     Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        Text('Type this into',
+                        Text(l.typeThisInto,
                             style: TkText.metadata.copyWith(
                                 fontSize: 12.5, color: TkColors.paper55)),
                         Text(widget.request.domain,
@@ -590,7 +589,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                         const SizedBox(height: 20),
                         Row(
                           children: [
-                            Text('New code in ${secondsLeft}s',
+                            Text(l.newCodeInSeconds(secondsLeft),
                                 style: TkText.metadata.copyWith(
                                     fontSize: 12.5,
                                     color: TkColors.paper55)),
@@ -607,8 +606,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                         ),
                         const SizedBox(height: 20),
                         Text(
-                            'Nothing was sent to your browser. Type or '
-                            'paste it yourself.',
+                            l.codeOnlyNote,
                             textAlign: TextAlign.center,
                             style: TkText.bodySecondary
                                 .copyWith(color: TkColors.paper55)),
@@ -617,7 +615,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                   ),
                 ),
                 TkPrimaryButton(
-                  label: _copied ? 'Copied' : 'Copy code',
+                  label: _copied ? l.copied : l.copyCode,
                   background:
                       _copied ? TkColors.greenBrightHover : TkColors.greenBright,
                   foreground: TkColors.onGreenBrightText,
@@ -631,7 +629,7 @@ class _ApprovalFlowScreenState extends ConsumerState<ApprovalFlowScreen> {
                 ),
                 const SizedBox(height: 10),
                 TkSecondaryButton(
-                  label: 'Done',
+                  label: l.done,
                   borderColor: TkColors.paper20,
                   foreground: const Color.fromRGBO(247, 245, 241, .8),
                   onPressed: () => Navigator.of(context).pop(),
@@ -654,13 +652,14 @@ class IntrusionScreen extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     final minutesAgo =
         DateTime.now().toUtc().difference(incident.at).inMinutes;
     final agoLabel = minutesAgo < 1
-        ? 'just now'
+        ? l.relativeJustNow
         : minutesAgo < 60
-            ? '$minutesAgo minute${minutesAgo == 1 ? '' : 's'} ago'
-            : '${minutesAgo ~/ 60} hour${minutesAgo ~/ 60 == 1 ? '' : 's'} ago';
+            ? l.relativeMinutesAgo(minutesAgo)
+            : l.relativeHoursAgo(minutesAgo ~/ 60);
     return Scaffold(
       backgroundColor: TkColors.dangerBg,
       body: TkRiseIn(
@@ -670,12 +669,12 @@ class IntrusionScreen extends ConsumerWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Text('BLOCKED · ${agoLabel.toUpperCase()}',
+                Text(l.intrusionBadge(agoLabel),
                     style: TkText.sectionLabel.copyWith(
                         fontSize: 12,
                         color: const Color.fromRGBO(247, 245, 241, .7))),
                 const SizedBox(height: 14),
-                Text('Someone has your ${incident.domain} password.',
+                Text(l.intrusionTitle(incident.domain),
                     style: const TextStyle(
                         fontFamily: TkFonts.sans,
                         fontSize: 29,
@@ -685,9 +684,7 @@ class IntrusionScreen extends ConsumerWidget {
                         color: TkColors.paper)),
                 const SizedBox(height: 12),
                 Text(
-                    "They couldn't get in — they'd need this phone too. But "
-                    "the password itself is out there, so it's worth "
-                    'changing today.',
+                    l.intrusionBody,
                     style: TkText.body.copyWith(
                         fontSize: 15.5,
                         color: const Color.fromRGBO(247, 245, 241, .85))),
@@ -702,25 +699,22 @@ class IntrusionScreen extends ConsumerWidget {
                   ),
                   child: Column(
                     children: [
-                      _row('Browser', incident.browser),
+                      _row(l.detailBrowser, incident.browser),
                       const SizedBox(height: 9),
-                      _row(
-                          'Tried',
-                          '${incident.attempts} '
-                              'time${incident.attempts == 1 ? '' : 's'}'),
+                      _row(l.intrusionTried, l.triedTimes(incident.attempts)),
                     ],
                   ),
                 ),
                 const Spacer(),
                 TkPrimaryButton(
-                  label: 'Okay',
+                  label: l.okay,
                   background: TkColors.paper,
                   foreground: TkColors.dangerBg,
                   onPressed: () => _dismiss(context, ref, mute: false),
                 ),
                 const SizedBox(height: 10),
                 TkSecondaryButton(
-                  label: 'Mute requests for this site today',
+                  label: l.muteToday,
                   borderColor: const Color.fromRGBO(247, 245, 241, .28),
                   foreground: const Color.fromRGBO(247, 245, 241, .9),
                   onPressed: () => _dismiss(context, ref, mute: true),

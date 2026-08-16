@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:twofa/l10n/app_localizations.dart';
 import 'package:twofa/src/data/models.dart';
 import 'package:twofa/src/screens/request/request_screens.dart';
 import 'package:twofa/src/services/approval_service.dart';
@@ -23,7 +24,11 @@ void main() {
       overrides: [
         vaultProvider.overrideWith(() => _StubVault(accounts)),
       ],
-      child: MaterialApp(home: child),
+      child: MaterialApp(
+        localizationsDelegates: AppLocalizations.localizationsDelegates,
+        supportedLocales: AppLocalizations.supportedLocales,
+        home: child,
+      ),
     );
   }
 
