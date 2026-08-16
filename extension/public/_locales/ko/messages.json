@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "이 컴퓨터에서 키 로그인을 껐습니다."
+  },
+  "optLanguage": {
+    "message": "언어"
+  },
+  "optLanguageAuto": {
+    "message": "브라우저에 맞추기"
+  },
+  "optLanguageSub": {
+    "message": "여기서 Purr가 사용할 언어를 선택하세요"
   }
 }
