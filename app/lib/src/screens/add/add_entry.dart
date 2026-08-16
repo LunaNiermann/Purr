@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 import 'package:permission_handler/permission_handler.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../core/base32.dart';
 import '../../core/migration.dart';
 import '../../core/otpauth.dart';
@@ -43,49 +44,49 @@ Future<void> startAddEntry(BuildContext context, WidgetRef ref,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     ),
-    builder: (context) => SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 42,
-                height: 5,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(27, 26, 23, .15),
-                  borderRadius: BorderRadius.circular(99),
+    builder: (context) {
+      final l = AppLocalizations.of(context);
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 42,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(27, 26, 23, .15),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 24),
-            const _CameraGlyph(color: TkColors.green),
-            const SizedBox(height: 20),
-            const Text('The camera is only for reading QR codes',
-                style: TkText.screenTitle),
-            const SizedBox(height: 10),
-            Text(
-              'Your phone will ask for permission next. We use the camera to '
-              'read the setup QR code a site shows you — nothing is '
-              'photographed, saved, or sent anywhere.',
-              style: TkText.body.copyWith(fontSize: 15),
-            ),
-            const SizedBox(height: 22),
-            TkPrimaryButton(
-              label: 'OK, ask me',
-              onPressed: () => Navigator.pop(context, 'scan'),
-            ),
-            const SizedBox(height: 10),
-            TkSecondaryButton(
-              label: "I'll type the code by hand",
-              onPressed: () => Navigator.pop(context, 'manual'),
-            ),
-          ],
+              const SizedBox(height: 24),
+              const _CameraGlyph(color: TkColors.green),
+              const SizedBox(height: 20),
+              Text(l.addCameraTitle, style: TkText.screenTitle),
+              const SizedBox(height: 10),
+              Text(
+                l.addCameraBody,
+                style: TkText.body.copyWith(fontSize: 15),
+              ),
+              const SizedBox(height: 22),
+              TkPrimaryButton(
+                label: l.addCameraOk,
+                onPressed: () => Navigator.pop(context, 'scan'),
+              ),
+              const SizedBox(height: 10),
+              TkSecondaryButton(
+                label: l.addTypeByHand,
+                onPressed: () => Navigator.pop(context, 'manual'),
+              ),
+            ],
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
   if (!context.mounted) return;
   if (choice == 'manual') {
@@ -198,37 +199,35 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
   void _showError(String message) {
     _handled = false;
     ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-      content: Text("That code didn't work: $message"),
+      content: Text(AppLocalizations.of(context).scanCodeError(message)),
       backgroundColor: TkColors.ink,
     ));
   }
 
   /// A pairing QR scanned in the account scanner: confirm, then pair.
   Future<void> _handlePairingCode(String raw) async {
+    final l = AppLocalizations.of(context);
     final pair = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: TkColors.paper,
-        title: const Text('Pair this computer?',
-            style: TextStyle(
+        title: Text(l.pairTitle,
+            style: const TextStyle(
                 fontFamily: TkFonts.sans,
                 fontSize: 19,
                 fontWeight: FontWeight.w600)),
         content: Text(
-          "That's a code for linking a computer, not a website account. "
-          'Want to pair it now?',
+          l.pairBody,
           style: TkText.body.copyWith(fontSize: 14.5),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child:
-                const Text('Not now', style: TextStyle(color: TkColors.ink50)),
+            child: Text(l.notNow, style: const TextStyle(color: TkColors.ink50)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child:
-                const Text('Pair', style: TextStyle(color: TkColors.green)),
+            child: Text(l.pairAction, style: const TextStyle(color: TkColors.green)),
           ),
         ],
       ),
@@ -242,19 +241,20 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
       await ref.read(pairingProvider.notifier).refresh();
       if (!mounted) return;
       Navigator.of(context).pop();
-      ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-        content: Text('Paired. Try a sign-in on your computer.'),
+      ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+        content: Text(l.pairedSnack),
         backgroundColor: TkColors.green,
       ));
     } on FormatException catch (e) {
       _showError(e.message);
     } catch (_) {
-      _showError('couldn\'t reach the pairing service');
+      _showError(l.pairServiceUnreachable);
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: TkColors.inkDarkest,
       body: SafeArea(
@@ -266,16 +266,16 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(),
-                    child: Text('Cancel',
+                    child: Text(l.cancel,
                         style: TkText.secondaryButton.copyWith(
                             fontSize: 15,
                             color:
                                 const Color.fromRGBO(247, 245, 241, .6))),
                   ),
-                  const Expanded(
-                    child: Text('Add an account',
+                  Expanded(
+                    child: Text(l.addAccountTitle,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: TkFonts.sans,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -307,8 +307,8 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
                 ),
               ),
             ),
-            const Text('Hold the QR code inside the corners',
-                style: TextStyle(
+            Text(l.scanHoldInside,
+                style: const TextStyle(
                     fontFamily: TkFonts.sans,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -317,8 +317,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 38),
               child: Text(
-                'It\'s on the site\'s security page, usually next to '
-                '"set up authenticator app".',
+                l.scanWhereHint,
                 textAlign: TextAlign.center,
                 style: TkText.bodySecondary.copyWith(
                     color: const Color.fromRGBO(247, 245, 241, .55)),
@@ -327,7 +326,7 @@ class _ScanScreenState extends ConsumerState<ScanScreen> {
             Padding(
               padding: const EdgeInsets.fromLTRB(24, 24, 24, 40),
               child: TkSecondaryButton(
-                label: 'Type the code by hand instead',
+                label: l.scanTypeInstead,
                 borderColor: TkColors.paper20,
                 foreground: TkColors.paper,
                 onPressed: () => Navigator.of(context).pushReplacement(
@@ -401,11 +400,12 @@ class _CameraDenied extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     if (error.errorCode != MobileScannerErrorCode.permissionDenied) {
       return ColoredBox(
         color: TkColors.inkDarkest,
         child: Center(
-          child: Text('The camera isn\'t available right now.',
+          child: Text(l.cameraUnavailable,
               textAlign: TextAlign.center,
               style: TkText.bodySecondary.copyWith(
                   color: const Color.fromRGBO(247, 245, 241, .55))),
@@ -423,8 +423,7 @@ class _CameraDenied extends StatelessWidget {
                 color: Color.fromRGBO(247, 245, 241, .5), slashed: true),
             const SizedBox(height: 14),
             Text(
-              "No camera — that's completely fine. Every site also shows "
-              'the code as text.',
+              l.cameraDeniedBody,
               textAlign: TextAlign.center,
               style: TkText.bodySecondary.copyWith(
                   color: const Color.fromRGBO(247, 245, 241, .65)),
@@ -492,7 +491,9 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
     setState(() => _saving = true);
     final p = widget.prefill;
     final siteRaw = _site.text.trim();
-    final site = siteRaw.isEmpty ? 'Account' : siteRaw;
+    final site = siteRaw.isEmpty
+        ? AppLocalizations.of(context).defaultAccountName
+        : siteRaw;
     final username = _username.text.trim();
 
     // Never silently overwrite on collision (the Microsoft lesson): an
@@ -529,6 +530,7 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final preview = _preview;
     final now = ref.watch(tickProvider).maybeWhen(
           data: (t) => t,
@@ -547,31 +549,30 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: Text('Type what the site gave you',
-                    style: TkText.screenTitle),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(l.manualTitle, style: TkText.screenTitle),
               ),
               const SizedBox(height: 18),
               Expanded(
                 child: ListView(
                   children: [
                     _LabeledField(
-                        label: 'Site or app',
+                        label: l.manualSite,
                         controller: _site,
                         onChanged: () => setState(() {})),
                     const SizedBox(height: 12),
                     _LabeledField(
-                        label: 'Your username there',
+                        label: l.manualUsername,
                         controller: _username,
                         onChanged: () => setState(() {})),
                     const SizedBox(height: 12),
                     _LabeledField(
-                      label: 'Setup code — the long one',
+                      label: l.manualSecret,
                       controller: _secret,
                       mono: true,
                       active: true,
-                      helper: "Spaces and capitals don't matter.",
+                      helper: l.manualSecretHelper,
                       onChanged: () => setState(() {}),
                     ),
                     const SizedBox(height: 18),
@@ -610,15 +611,15 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
                                       crossAxisAlignment:
                                           CrossAxisAlignment.start,
                                       children: [
-                                        const Text('That code works',
-                                            style: TextStyle(
+                                        Text(l.codeWorks,
+                                            style: const TextStyle(
                                                 fontFamily: TkFonts.sans,
                                                 fontSize: 14.5,
                                                 fontWeight: FontWeight.w600,
                                                 color: TkColors.greenDeep)),
                                         Text.rich(
                                           TextSpan(
-                                            text: 'First code: ',
+                                            text: l.firstCodeLabel,
                                             children: [
                                               TextSpan(
                                                 text: formatCodeForDisplay(
@@ -647,7 +648,7 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
                 ),
               ),
               TkPrimaryButton(
-                label: site.isEmpty ? 'Save' : 'Save $site',
+                label: site.isEmpty ? l.saveLabel : l.saveNamed(site),
                 enabled: preview != null && !_saving,
                 onPressed: _save,
               ),
@@ -753,7 +754,7 @@ class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
     final added = <Account>[];
     for (final entry in widget.batch.entries) {
       var site = entry.issuer.isNotEmpty ? entry.issuer : entry.accountName;
-      if (site.isEmpty) site = 'Imported account';
+      if (site.isEmpty) site = AppLocalizations.of(context).importedAccountName;
       final username = entry.issuer.isNotEmpty ? entry.accountName : '';
       var finalSite = site;
       var n = 2;
@@ -792,6 +793,7 @@ class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     final entries = widget.batch.entries;
     final multi = widget.batch.batchSize > 1;
     return Scaffold(
@@ -806,19 +808,14 @@ class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(
-                  entries.length == 1
-                      ? 'One account, ready to move in'
-                      : '${entries.length} accounts, ready to move in',
+              Text(l.importReadyCount(entries.length),
                   style: TkText.screenTitle),
               const SizedBox(height: 10),
               Text(
                   multi
-                      ? 'This is part ${widget.batch.batchIndex + 1} of '
-                          '${widget.batch.batchSize} — scan the other squares '
-                          'too, in any order.'
-                      : 'Everything below comes across exactly as it is. '
-                          'Nothing is skipped.',
+                      ? l.importPartOf(widget.batch.batchIndex + 1,
+                          widget.batch.batchSize)
+                      : l.importAllComeAcross,
                   style: TkText.body.copyWith(fontSize: 14.5)),
               const SizedBox(height: 16),
               Expanded(
@@ -842,7 +839,7 @@ class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
-                                Text(site.isEmpty ? 'Unnamed' : site,
+                                Text(site.isEmpty ? l.unnamedAccount : site,
                                     style: const TextStyle(
                                         fontFamily: TkFonts.sans,
                                         fontSize: 16,
@@ -864,8 +861,8 @@ class _ImportReviewScreenState extends ConsumerState<ImportReviewScreen> {
               const SizedBox(height: 12),
               TkPrimaryButton(
                 label: entries.length == 1
-                    ? 'Bring it in'
-                    : 'Bring all ${entries.length} in',
+                    ? l.importBringOne
+                    : l.importBringAll(entries.length),
                 enabled: !_saving,
                 onPressed: _import,
               ),
