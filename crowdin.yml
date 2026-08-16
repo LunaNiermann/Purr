@@ -13,8 +13,8 @@ files:
     type: arb
 
   # Browser extension — Chrome i18n messages.json.
-  - source: /extension/_locales/en/messages.json
-    translation: /extension/_locales/%two_letters_code%/messages.json
+  - source: /extension/public/_locales/en/messages.json
+    translation: /extension/public/_locales/%two_letters_code%/messages.json
     type: chrome
 
   # Store listings (filled later) — plain per-locale text/markdown.
