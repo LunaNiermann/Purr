@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} adicionada — agora é uma chave reserva." },
   "optAddFailed": { "message": "Não foi possível adicionar: {0}" },
   "optTurnOffKeySignin": { "message": "Desativar login por chave" },
-  "optKeySigninOff": { "message": "Login por chave desativado neste computador." }
+  "optKeySigninOff": { "message": "Login por chave desativado neste computador." },
+  "optLanguage": { "message": "Idioma" },
+  "optLanguageAuto": { "message": "Acompanhar meu navegador" },
+  "optLanguageSub": { "message": "Escolha como o Purr fala com você aqui" }
 }

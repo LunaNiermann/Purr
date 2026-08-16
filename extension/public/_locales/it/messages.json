@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} aggiunta — ora è una chiave di riserva." },
   "optAddFailed": { "message": "Impossibile aggiungere: {0}" },
   "optTurnOffKeySignin": { "message": "Disattiva accesso con chiave" },
-  "optKeySigninOff": { "message": "Accesso con chiave disattivato su questo computer." }
+  "optKeySigninOff": { "message": "Accesso con chiave disattivato su questo computer." },
+  "optLanguage": { "message": "Lingua" },
+  "optLanguageAuto": { "message": "Come il mio browser" },
+  "optLanguageSub": { "message": "Scegli come Purr ti parla qui" }
 }

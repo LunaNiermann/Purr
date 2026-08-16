@@ -1,5 +1,5 @@
 import { getFlow, type Flow } from "../lib/flow";
-import { localizeDom, t } from "../lib/i18n";
+import { initI18n, localizeDom, t } from "../lib/i18n";
 import {
   codeFor,
   isEnrolled,
@@ -321,6 +321,7 @@ function renderFromFlow(flow: Flow): void {
 }
 
 async function init(): Promise<void> {
+  await initI18n(); // resolve the chosen (or browser) language before rendering
   localizeDom(); // header buttons carry data-i18n
   document.getElementById("open-settings")!.addEventListener("click", () => {
     void chrome.runtime.openOptionsPage();

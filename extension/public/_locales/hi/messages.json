@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} जोड़ी गई — अब यह बैकअप कुंजी है।" },
   "optAddFailed": { "message": "जोड़ा नहीं जा सका: {0}" },
   "optTurnOffKeySignin": { "message": "कुंजी साइन-इन बंद करें" },
-  "optKeySigninOff": { "message": "इस कंप्यूटर पर कुंजी साइन-इन बंद कर दिया गया।" }
+  "optKeySigninOff": { "message": "इस कंप्यूटर पर कुंजी साइन-इन बंद कर दिया गया।" },
+  "optLanguage": { "message": "भाषा" },
+  "optLanguageAuto": { "message": "मेरे ब्राउज़र के अनुसार" },
+  "optLanguageSub": { "message": "चुनें कि Purr यहाँ आपसे किस भाषा में बात करे" }
 }

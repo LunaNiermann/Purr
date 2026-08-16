@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} を追加 — これでバックアップ鍵になりました。" },
   "optAddFailed": { "message": "追加できませんでした: {0}" },
   "optTurnOffKeySignin": { "message": "鍵サインインをオフに" },
-  "optKeySigninOff": { "message": "このパソコンで鍵サインインをオフにしました。" }
+  "optKeySigninOff": { "message": "このパソコンで鍵サインインをオフにしました。" },
+  "optLanguage": { "message": "言語" },
+  "optLanguageAuto": { "message": "ブラウザに合わせる" },
+  "optLanguageSub": { "message": "ここでPurrが話す言語を選択" }
 }

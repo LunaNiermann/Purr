@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} hinzugefügt — jetzt ein Ersatzschlüssel." },
   "optAddFailed": { "message": "Hinzufügen fehlgeschlagen: {0}" },
   "optTurnOffKeySignin": { "message": "Schlüssel-Anmeldung ausschalten" },
-  "optKeySigninOff": { "message": "Schlüssel-Anmeldung auf diesem Computer ausgeschaltet." }
+  "optKeySigninOff": { "message": "Schlüssel-Anmeldung auf diesem Computer ausgeschaltet." },
+  "optLanguage": { "message": "Sprache" },
+  "optLanguageAuto": { "message": "Meinem Browser folgen" },
+  "optLanguageSub": { "message": "Wähle, wie Purr hier mit dir spricht" }
 }

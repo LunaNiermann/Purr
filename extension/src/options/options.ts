@@ -1,6 +1,6 @@
 import QRCode from "qrcode";
 
-import { t } from "../lib/i18n";
+import { getUiLang, initI18n, setUiLang, t, UI_LANGUAGES } from "../lib/i18n";
 import {
   deriveSessionKey,
   fromB64,
@@ -262,6 +262,14 @@ async function renderSettings(): Promise<void> {
   }
   const settings = await getSettings();
   const keyEnrolled = await isEnrolled();
+  const uiLang = await getUiLang();
+  const langOptions = [
+    `<option value="auto"${uiLang === "auto" ? " selected" : ""}>${t("optLanguageAuto")}</option>`,
+    ...UI_LANGUAGES.map(
+      (l) =>
+        `<option value="${l.code}"${uiLang === l.code ? " selected" : ""}>${esc(l.name)}</option>`,
+    ),
+  ].join("");
 
   const agoDays = Math.floor((Date.now() - pairing.pairedAt) / 86_400_000);
   const months = Math.floor(agoDays / 30);
@@ -317,6 +325,17 @@ async function renderSettings(): Promise<void> {
         }
       </div>
 
+      <div class="section-label">${t("optLanguage")}</div>
+      <div class="card">
+        <div class="row">
+          <div class="grow">
+            <div class="title">${t("optLanguage")}</div>
+            <div class="subtitle">${t("optLanguageSub")}</div>
+          </div>
+          <select class="vault-search" id="ui-lang" style="max-width:190px">${langOptions}</select>
+        </div>
+      </div>
+
       <div class="section-label">${t("optSecSiteRules")}</div>
       <div class="card" id="rules"></div>
 
@@ -351,6 +370,12 @@ async function renderSettings(): Promise<void> {
       toggle.classList.toggle("on", updated[key]);
     });
   }
+
+  // Display language: browser by default, or a manual pick. Never the phone's.
+  document.getElementById("ui-lang")!.addEventListener("change", async (e) => {
+    await setUiLang((e.target as HTMLSelectElement).value);
+    void renderSettings(); // re-render in the newly chosen language
+  });
 
   // Site rules
   const rules = document.getElementById("rules")!;
@@ -555,6 +580,7 @@ async function populateSecurityKeys(): Promise<void> {
 // ---- Boot -----------------------------------------------------------------
 
 void (async () => {
+  await initI18n(); // resolve the chosen (or browser) language before rendering
   const pairing = await getPairing();
   if (pairing) await renderSettings();
   else renderIntro();

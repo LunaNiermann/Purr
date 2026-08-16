@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ أُضيف {0} — أصبح الآن مفتاحًا احتياطيًا." },
   "optAddFailed": { "message": "تعذّرت الإضافة: {0}" },
   "optTurnOffKeySignin": { "message": "إيقاف الدخول بالمفتاح" },
-  "optKeySigninOff": { "message": "أُوقف الدخول بالمفتاح على هذا الحاسوب." }
+  "optKeySigninOff": { "message": "أُوقف الدخول بالمفتاح على هذا الحاسوب." },
+  "optLanguage": { "message": "اللغة" },
+  "optLanguageAuto": { "message": "حسب متصفحي" },
+  "optLanguageSub": { "message": "اختر اللغة التي يخاطبك بها Purr هنا" }
 }

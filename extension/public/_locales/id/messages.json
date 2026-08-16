@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} ditambahkan — kini jadi kunci cadangan." },
   "optAddFailed": { "message": "Tidak bisa menambahkan: {0}" },
   "optTurnOffKeySignin": { "message": "Matikan masuk dengan kunci" },
-  "optKeySigninOff": { "message": "Masuk dengan kunci dimatikan di komputer ini." }
+  "optKeySigninOff": { "message": "Masuk dengan kunci dimatikan di komputer ini." },
+  "optLanguage": { "message": "Bahasa" },
+  "optLanguageAuto": { "message": "Ikuti browser saya" },
+  "optLanguageSub": { "message": "Pilih bahasa yang Purr gunakan di sini" }
 }

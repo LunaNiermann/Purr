@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} ajoutée — c'est maintenant une clé de secours." },
   "optAddFailed": { "message": "Impossible d'ajouter : {0}" },
   "optTurnOffKeySignin": { "message": "Désactiver la connexion par clé" },
-  "optKeySigninOff": { "message": "Connexion par clé désactivée sur cet ordinateur." }
+  "optKeySigninOff": { "message": "Connexion par clé désactivée sur cet ordinateur." },
+  "optLanguage": { "message": "Langue" },
+  "optLanguageAuto": { "message": "Suivre mon navigateur" },
+  "optLanguageSub": { "message": "Choisissez comment Purr vous parle ici" }
 }

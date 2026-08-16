@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} added — it's now a backup key." },
   "optAddFailed": { "message": "Couldn't add: {0}" },
   "optTurnOffKeySignin": { "message": "Turn off key sign-in" },
-  "optKeySigninOff": { "message": "Key sign-in turned off on this computer." }
+  "optKeySigninOff": { "message": "Key sign-in turned off on this computer." },
+  "optLanguage": { "message": "Language" },
+  "optLanguageAuto": { "message": "Match my browser" },
+  "optLanguageSub": { "message": "Choose how Purr speaks to you here" }
 }

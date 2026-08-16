@@ -121,5 +121,8 @@
   "optBackupAdded": { "message": "✓ {0} añadida — ahora es una llave de respaldo." },
   "optAddFailed": { "message": "No se pudo añadir: {0}" },
   "optTurnOffKeySignin": { "message": "Desactivar inicio con llave" },
-  "optKeySigninOff": { "message": "Inicio con llave desactivado en esta computadora." }
+  "optKeySigninOff": { "message": "Inicio con llave desactivado en esta computadora." },
+  "optLanguage": { "message": "Idioma" },
+  "optLanguageAuto": { "message": "Según mi navegador" },
+  "optLanguageSub": { "message": "Elige cómo te habla Purr aquí" }
 }
