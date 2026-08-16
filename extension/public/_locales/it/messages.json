@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Accesso con chiave disattivato su questo computer."
+  },
+  "optLanguage": {
+    "message": "Lingua"
+  },
+  "optLanguageAuto": {
+    "message": "Come il mio browser"
+  },
+  "optLanguageSub": {
+    "message": "Scegli come Purr ti parla qui"
   }
 }
