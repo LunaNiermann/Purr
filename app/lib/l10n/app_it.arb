@@ -14,14 +14,41 @@
   "unlocking": "Sblocco…",
   "useMyPassword": "Usa la mia password",
   "unlockYourCodes": "Sblocca i tuoi codici",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Lingua",
   "languageSubtitle": "Scegli la lingua di Purr",
   "languageSystemDefault": "Come il mio dispositivo",
   "accountCount": "{count, plural, =1{1 account} other{{count} account}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Cerca account",
   "cancel": "Annulla",
   "tapToCopySeconds": "TOCCA PER COPIARE · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} di {total, plural, =1{1 account} other{{total} account}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Copiato",
   "searchScopeNote": "La ricerca considera il nome del sito e il tuo nome utente, non i codici.",
   "emptyVaultTitle": "Ancora nessun account",
@@ -36,7 +63,19 @@
   "detailAsked": "Richiesto",
   "justNow": "Proprio ora",
   "secondsAgo": "{count, plural, =1{1 secondo fa} other{{count} secondi fa}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Per quale account? Non è salvato sotto {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Invia il codice",
   "didntAskForThis": "Non ho richiesto io questo",
   "justShowCode": "Mostrami solo il codice",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Conferma che sei davvero tu",
   "youreIn": "Sei dentro.",
   "signingYouIn": "{domain} ti sta accedendo sul computer. Nulla da digitare.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Il codice inviato scade tra 30 secondi e può essere usato una sola volta.",
   "done": "Fatto",
   "blockedNothingSent": "Bloccato. Non è stato inviato nulla.",
   "deniedBody": "Qualcuno ha provato ad accedere come te. I tuoi codici non hanno mai lasciato questo telefono: non hanno ottenuto nulla.",
   "deniedChangePassword": "Se non è stato un errore, cambia oggi la password di {domain}. La password è la parte che hanno loro.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Ho capito",
   "typeThisInto": "Digitalo in",
   "newCodeInSeconds": "Nuovo codice tra {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Non è stato inviato nulla al tuo browser. Digitalo o incollalo tu.",
   "copyCode": "Copia codice",
   "intrusionBadge": "BLOCCATO · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "proprio ora",
   "relativeMinutesAgo": "{count, plural, =1{1 minuto fa} other{{count} minuti fa}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{1 ora fa} other{{count} ore fa}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Qualcuno ha la tua password di {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Non sono entrati: servirebbe anche questo telefono. Ma la password è in giro, quindi conviene cambiarla oggi.",
   "intrusionTried": "Tentativi",
   "triedTimes": "{count, plural, =1{1 volta} other{{count} volte}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Ok",
   "muteToday": "Silenzia le richieste di questo sito oggi"
 }
