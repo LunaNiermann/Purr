@@ -14,14 +14,41 @@
   "unlocking": "अनलॉक हो रहा है…",
   "useMyPassword": "मेरा पासवर्ड इस्तेमाल करें",
   "unlockYourCodes": "अपने कोड अनलॉक करें",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "भाषा",
   "languageSubtitle": "चुनें कि Purr आपसे किस भाषा में बात करे",
   "languageSystemDefault": "मेरे डिवाइस के अनुसार",
   "accountCount": "{count, plural, =1{1 खाता} other{{count} खाते}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "खाते खोजें",
   "cancel": "रद्द करें",
   "tapToCopySeconds": "कॉपी करने के लिए टैप करें · {seconds}से",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{total, plural, =1{1 खाते} other{{total} खातों}} में से {shown}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "कॉपी किया गया",
   "searchScopeNote": "खोज साइट का नाम और आपका उपयोगकर्ता नाम देखती है — कोड नहीं।",
   "emptyVaultTitle": "अभी कोई खाता नहीं",
@@ -36,7 +63,19 @@
   "detailAsked": "पूछा गया",
   "justNow": "अभी-अभी",
   "secondsAgo": "{count, plural, =1{1 सेकंड पहले} other{{count} सेकंड पहले}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "यह किस खाते के लिए है? यह {domain} के तहत सहेजा नहीं गया है।",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "कोड भेजें",
   "didntAskForThis": "मैंने यह नहीं माँगा",
   "justShowCode": "बस मुझे कोड दिखाएँ",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "पुष्टि हो रही है कि यह सचमुच आप हैं",
   "youreIn": "आप अंदर आ गए।",
   "signingYouIn": "{domain} आपको आपके कंप्यूटर पर साइन इन कर रहा है। कुछ टाइप करने की ज़रूरत नहीं।",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "भेजा गया कोड 30 सेकंड में समाप्त हो जाता है और केवल एक बार इस्तेमाल हो सकता है।",
   "done": "हो गया",
   "blockedNothingSent": "अवरुद्ध। कुछ नहीं भेजा गया।",
   "deniedBody": "किसी ने आपके रूप में साइन इन करने की कोशिश की। आपके कोड ने यह फ़ोन कभी नहीं छोड़ा — उन्हें कुछ नहीं मिला।",
   "deniedChangePassword": "अगर यह गलती नहीं थी, तो आज ही अपना {domain} पासवर्ड बदलें। पासवर्ड ही वह हिस्सा है जो उनके पास है।",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "समझ गया",
   "typeThisInto": "इसे यहाँ टाइप करें",
   "newCodeInSeconds": "{seconds}से में नया कोड",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "आपके ब्राउज़र को कुछ नहीं भेजा गया। इसे खुद टाइप या पेस्ट करें।",
   "copyCode": "कोड कॉपी करें",
   "intrusionBadge": "अवरुद्ध · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "अभी-अभी",
   "relativeMinutesAgo": "{count, plural, =1{1 मिनट पहले} other{{count} मिनट पहले}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{1 घंटा पहले} other{{count} घंटे पहले}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "किसी के पास आपका {domain} पासवर्ड है।",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "वे अंदर नहीं आ सके — उन्हें यह फ़ोन भी चाहिए होता। पर पासवर्ड बाहर है, इसलिए आज ही बदलना बेहतर है।",
   "intrusionTried": "कोशिशें",
   "triedTimes": "{count, plural, =1{1 बार} other{{count} बार}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "ठीक है",
   "muteToday": "आज इस साइट के अनुरोध म्यूट करें",
   "onbHeroTitle": "अकेला पासवर्ड काफ़ी नहीं है।",
@@ -103,6 +190,11 @@
   "addCameraOk": "ठीक है, मुझसे पूछें",
   "addTypeByHand": "मैं कोड हाथ से टाइप करूँगा",
   "scanCodeError": "वह कोड काम नहीं आया: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "इस कंप्यूटर को जोड़ें?",
   "pairBody": "यह किसी कंप्यूटर को जोड़ने का कोड है, किसी वेबसाइट खाते का नहीं। क्या अभी जोड़ना है?",
   "notNow": "अभी नहीं",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "पहला कोड: ",
   "saveLabel": "सहेजें",
   "saveNamed": "{site} सहेजें",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "खाता",
   "importedAccountName": "आयातित खाता",
   "importReadyCount": "{count, plural, =1{एक खाता, आने को तैयार} other{{count} खाते, आने को तैयार}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "यह {size} में से भाग {index} है — बाकी वर्गों को भी किसी भी क्रम में स्कैन करें।",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "नीचे की हर चीज़ ठीक वैसी ही आती है। कुछ भी नहीं छूटता।",
   "unnamedAccount": "अनाम",
   "importBringOne": "इसे लाएँ",
   "importBringAll": "सभी {count} लाएँ",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "नाम बदलें",
   "detailRemoveTitle": "{site} हटाएँ?",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "पहले {site} पर टू-स्टेप बंद करें, वरना आप उससे बाहर हो जाएँगे।",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "रहने दें",
   "detailRemove": "हटाएँ",
   "detailNewIn": "{seconds}से में नया",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "यह कहाँ रहता है",
   "detailThisPhone": "यह फ़ोन",
   "detailPlusKit": "साथ में आपकी कागज़ी किट — यह फ़ोन खो जाए तो भी आप सुरक्षित हैं",
@@ -154,6 +292,13 @@
   "restoreWordsError": "वे शब्द पूरी तरह मेल नहीं खाते — हर एक को शीट से मिलाएँ। क्रम मायने रखता है।",
   "restoreLostSheet": "शीट भी खो गई? अगर आपका पुराना फ़ोन अब भी चलता है, तो उसका सुरक्षा टैब नई प्रिंट कर सकता है।",
   "restoreWordsToGo": "{count, plural, =1{1 शब्द बाकी} other{{count} शब्द बाकी}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "उन शब्दों के लिए कोई बैकअप नहीं मिला। अगर आपके पुराने फ़ोन पर बैकअप बंद थे, तो अकेला कागज़ खाते वापस नहीं ला सकता — पर आप नए सिरे से शुरू कर सकते हैं।",
   "restoreGenericError": "कुछ बीच में आ गया — कनेक्शन जाँचें और फिर से कोशिश करें। कुछ नहीं खोया।",
   "restoreErrorTitle": "यह काम नहीं आया — पर कुछ नहीं खोया",
@@ -162,9 +307,23 @@
   "restoreCheckFound": "आपका एन्क्रिप्टेड बैकअप मिला",
   "restoreCheckUnlocked": "आपके शब्दों ने उसे खोल दिया",
   "restoreCheckPutting": "{count, plural, =1{1 खाता वापस रखा जा रहा है} other{{count} खाते वापस रखे जा रहे हैं}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "आपके खाते वापस रखे जा रहे हैं",
   "restoreOnPhoneNote": "यह सब इसी फ़ोन पर होता है। हमने केवल एक उलझी हुई कॉपी रखी जिसे हम पढ़ नहीं सकते।",
   "restoreDoneTitle": "{count, plural, =1{आपका खाता वापस आ गया।} other{सभी {count} खाते वापस आ गए।}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "आपका पुराना फ़ोन काट दिया गया है — कोई उसे ढूँढ ले, तो उसके कोड अब काम नहीं करते।",
   "restorePrintFreshTitle": "एक चीज़ बाकी: नई किट प्रिंट करें",
   "restorePrintFreshBody": "पुरानी शीट अब रिटायर हो गई। नई में दस सेकंड लगते हैं और अगली बार आपको कवर करती है।",
@@ -189,6 +348,11 @@
   "secLoseSection": "अगर आप यह फ़ोन खो दें",
   "secRecoveryKit": "रिकवरी किट",
   "secSavedOn": "{date} को सहेजा गया",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "कागज़ की एक शीट जो सब कुछ वापस ला सकती है, भले ही आप हर डिवाइस खो दें। कभी भी दूसरी कॉपी प्रिंट करें।",
   "secPrintAgain": "फिर से प्रिंट करें",
   "secKitReason": "अपनी रिकवरी किट देखने के लिए पुष्टि करें",
@@ -213,6 +377,11 @@
   "secComputerPaired": "जब कोई साइट आपके ब्राउज़र से कोड माँगती है, तो यह फ़ोन अनुरोध पाता है।",
   "secYourBrowser": "आपका ब्राउज़र",
   "secPairedOn": "{date} को जोड़ा गया",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "अलग करें",
   "secPushChecking": "नोटिफ़िकेशन जाँचे जा रहे हैं…",
   "secPushReady": "नोटिफ़िकेशन तैयार",
