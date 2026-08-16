@@ -14,14 +14,41 @@
   "unlocking": "Membuka kunci…",
   "useMyPassword": "Gunakan kata sandi saya",
   "unlockYourCodes": "Buka kunci kode Anda",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Bahasa",
   "languageSubtitle": "Pilih bahasa yang digunakan Purr",
   "languageSystemDefault": "Ikuti perangkat saya",
-  "accountCount": "{count, plural, other{{count} akun}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Cari akun",
   "cancel": "Batal",
   "tapToCopySeconds": "KETUK UNTUK MENYALIN · {seconds}D",
-  "searchMatchCount": "{shown} dari {total, plural, other{{total} akun}}",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Disalin",
   "searchScopeNote": "Pencarian melihat nama situs dan nama pengguna Anda — bukan kodenya.",
   "emptyVaultTitle": "Belum ada akun",
@@ -35,8 +62,20 @@
   "detailBrowser": "Browser",
   "detailAsked": "Diminta",
   "justNow": "Baru saja",
-  "secondsAgo": "{count, plural, other{{count} detik lalu}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Untuk akun yang mana? Tidak tersimpan di {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Kirim kode",
   "didntAskForThis": "Saya tidak meminta ini",
   "justShowCode": "Cukup tampilkan kodenya",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Memastikan ini benar Anda",
   "youreIn": "Anda berhasil masuk.",
   "signingYouIn": "{domain} sedang memasukkan Anda di komputer. Tidak ada yang perlu diketik.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Kode yang dikirim kedaluwarsa dalam 30 detik dan hanya bisa dipakai sekali.",
   "done": "Selesai",
   "blockedNothingSent": "Diblokir. Tidak ada yang dikirim.",
   "deniedBody": "Seseorang mencoba masuk sebagai Anda. Kode Anda tidak pernah keluar dari ponsel ini — mereka tidak dapat apa-apa.",
   "deniedChangePassword": "Jika itu bukan kesalahan, ganti kata sandi {domain} Anda hari ini. Kata sandi itulah yang mereka miliki.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Mengerti",
   "typeThisInto": "Ketik ini di",
   "newCodeInSeconds": "Kode baru dalam {seconds}d",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Tidak ada yang dikirim ke browser Anda. Ketik atau tempel sendiri.",
   "copyCode": "Salin kode",
   "intrusionBadge": "DIBLOKIR · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "baru saja",
-  "relativeMinutesAgo": "{count, plural, other{{count} menit lalu}}",
-  "relativeHoursAgo": "{count, plural, other{{count} jam lalu}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Seseorang memiliki kata sandi {domain} Anda.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Mereka tidak bisa masuk — mereka juga butuh ponsel ini. Tapi kata sandinya sudah bocor, jadi sebaiknya diganti hari ini.",
   "intrusionTried": "Percobaan",
-  "triedTimes": "{count, plural, other{{count} kali}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Oke",
   "muteToday": "Bisukan permintaan situs ini hari ini",
   "onbHeroTitle": "Kata sandi saja tidak cukup.",
@@ -103,6 +190,11 @@
   "addCameraOk": "Oke, minta saja",
   "addTypeByHand": "Saya akan mengetik kodenya",
   "scanCodeError": "Kode itu tidak berfungsi: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "Pasangkan komputer ini?",
   "pairBody": "Itu kode untuk menautkan komputer, bukan akun situs web. Pasangkan sekarang?",
   "notNow": "Nanti saja",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "Kode pertama: ",
   "saveLabel": "Simpan",
   "saveNamed": "Simpan {site}",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "Akun",
   "importedAccountName": "Akun impor",
   "importReadyCount": "{count, plural, =1{Satu akun, siap dipindahkan} other{{count} akun, siap dipindahkan}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "Ini bagian {index} dari {size} — pindai kotak lainnya juga, dalam urutan apa pun.",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "Semua di bawah dipindahkan persis apa adanya. Tidak ada yang dilewati.",
   "unnamedAccount": "Tanpa nama",
   "importBringOne": "Bawa masuk",
   "importBringAll": "Bawa masuk semua {count}",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "Ganti nama",
   "detailRemoveTitle": "Hapus {site}?",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "Matikan dulu verifikasi dua langkah di {site}, atau Anda akan terkunci dari akun itu.",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "Simpan saja",
   "detailRemove": "Hapus",
   "detailNewIn": "Baru dalam {seconds} dtk",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "Di mana ini tersimpan",
   "detailThisPhone": "Ponsel ini",
   "detailPlusKit": "Ditambah kit kertas Anda — Anda aman jika ponsel ini hilang",
@@ -153,7 +291,14 @@
   "restoreWordsSubtitle": "Berurutan, satu per kotak. Jangan khawatir soal huruf besar.",
   "restoreWordsError": "Kata-kata itu belum cocok — periksa masing-masing dengan lembarnya. Urutan penting.",
   "restoreLostSheet": "Kehilangan lembarnya juga? Jika ponsel lama masih berfungsi, tab Keamanannya bisa mencetak yang baru.",
-  "restoreWordsToGo": "{count, plural, other{Kurang {count} kata}}",
+  "restoreWordsToGo": "{count, plural, =1{1 word to go} other{{count} words to go}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "Kami tidak menemukan cadangan untuk kata-kata itu. Jika cadangan mati di ponsel lama, lembar kertas saja tidak bisa mengembalikan akun — tetapi Anda bisa mulai dari awal.",
   "restoreGenericError": "Ada yang menghalangi — periksa koneksi dan coba lagi. Tidak ada yang hilang.",
   "restoreErrorTitle": "Tidak berhasil — tetapi tidak ada yang hilang",
@@ -161,10 +306,24 @@
   "restoreUnscrambling": "Mengurai kode Anda…",
   "restoreCheckFound": "Menemukan cadangan terenkripsi Anda",
   "restoreCheckUnlocked": "Kata-kata Anda membukanya",
-  "restoreCheckPutting": "{count, plural, other{Mengembalikan {count} akun}}",
+  "restoreCheckPutting": "{count, plural, =1{Putting 1 account back} other{Putting {count} accounts back}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "Mengembalikan akun Anda",
   "restoreOnPhoneNote": "Semua ini terjadi di ponsel ini. Kami hanya menyimpan salinan teracak yang tidak bisa kami baca.",
-  "restoreDoneTitle": "{count, plural, other{Semua {count} akun sudah kembali.}}",
+  "restoreDoneTitle": "{count, plural, =1{Your account is back.} other{All {count} accounts are back.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "Ponsel lama Anda sudah diputus — jika ada yang menemukannya, kodenya tidak lagi berfungsi.",
   "restorePrintFreshTitle": "Tinggal satu hal: cetak kit baru",
   "restorePrintFreshBody": "Lembar lama kini dipensiunkan. Yang baru butuh sepuluh detik dan melindungi Anda lain kali.",
@@ -189,6 +348,11 @@
   "secLoseSection": "Jika Anda kehilangan ponsel ini",
   "secRecoveryKit": "Kit pemulihan",
   "secSavedOn": "Disimpan {date}",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "Selembar kertas yang bisa mengembalikan semuanya, bahkan jika Anda kehilangan setiap perangkat. Cetak salinan lain kapan saja.",
   "secPrintAgain": "Cetak lagi",
   "secKitReason": "Konfirmasi untuk melihat kit pemulihan Anda",
@@ -213,6 +377,11 @@
   "secComputerPaired": "Saat sebuah situs meminta kode ke browser Anda, ponsel ini menerima permintaannya.",
   "secYourBrowser": "Browser Anda",
   "secPairedOn": "Dipasangkan {date}",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "Lepas pasangan",
   "secPushChecking": "Memeriksa notifikasi…",
   "secPushReady": "Notifikasi siap",
