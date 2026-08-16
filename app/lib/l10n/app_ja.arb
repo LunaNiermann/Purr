@@ -19,5 +19,40 @@
   },
   "language": "言語",
   "languageSubtitle": "Purr が話す言語を選びます",
-  "languageSystemDefault": "端末に合わせる"
+  "languageSystemDefault": "端末に合わせる",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "searchAccountsHint": "アカウントを検索",
+  "cancel": "キャンセル",
+  "tapToCopySeconds": "タップしてコピー · {seconds}秒",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
+  "copied": "コピーしました",
+  "searchScopeNote": "検索はサイト名とユーザー名のみを対象とし、コード自体は対象にしません。",
+  "emptyVaultTitle": "アカウントはまだありません",
+  "emptyVaultBody": "サイトのセキュリティ設定で「認証アプリ」を選び、表示された四角いコードにこのスマホを向けてください。",
+  "scanQrCode": "QR コードをスキャン",
+  "typeSetupCode": "代わりにセットアップコードを入力"
 }
