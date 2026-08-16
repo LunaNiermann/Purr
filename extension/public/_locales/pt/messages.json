@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Login por chave desativado neste computador."
+  },
+  "optLanguage": {
+    "message": "Idioma"
+  },
+  "optLanguageAuto": {
+    "message": "Acompanhar meu navegador"
+  },
+  "optLanguageSub": {
+    "message": "Escolha como o Purr fala com você aqui"
   }
 }
