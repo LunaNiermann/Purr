@@ -14,6 +14,9 @@
   "unlocking": "ロック解除中…",
   "useMyPassword": "パスワードを使う",
   "unlockYourCodes": "コードのロックを解除",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "言語",
   "languageSubtitle": "Purr が話す言語を選びます",
   "languageSystemDefault": "端末に合わせる"
