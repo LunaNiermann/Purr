@@ -3,6 +3,7 @@ import 'dart:async';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../crypto/recovery.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
@@ -28,6 +29,7 @@ class _RestoreIntro extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TkColors.paper,
@@ -47,13 +49,10 @@ class _RestoreIntro extends StatelessWidget {
                     mainAxisSize: MainAxisSize.min,
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Lost the phone with your codes on it?',
-                          style: TkText.heroTitle),
+                      Text(l.restoreIntroTitle, style: TkText.heroTitle),
                       const SizedBox(height: 16),
                       Text(
-                        'You can get everything back. It takes a few minutes '
-                        "and you'll need the sheet of paper you kept "
-                        'somewhere safe.',
+                        l.restoreIntroBody,
                         style: TkText.body.copyWith(fontSize: 16),
                       ),
                     ],
@@ -61,13 +60,13 @@ class _RestoreIntro extends StatelessWidget {
                 ),
               ),
               TkPrimaryButton(
-                label: 'Bring my codes back',
+                label: l.restoreBringBack,
                 onPressed: () => Navigator.of(context).push(
                     MaterialPageRoute(builder: (_) => const _WordsEntry())),
               ),
               const SizedBox(height: 10),
               TkSecondaryButton(
-                label: 'Set up as a new phone',
+                label: l.restoreSetupNew,
                 onPressed: () => Navigator.of(context).pop(),
               ),
             ],
@@ -111,9 +110,7 @@ class _WordsEntryState extends ConsumerState<_WordsEntry> {
     final words = [for (final c in _controllers) c.text.trim().toLowerCase()];
     final kit = RecoveryKit.fromWords(words);
     if (kit == null) {
-      setState(() => _error =
-          "Those words don't quite line up — check each one against the "
-          'sheet. Order matters.');
+      setState(() => _error = AppLocalizations.of(context).restoreWordsError);
       return;
     }
     if (!mounted) return;
@@ -123,6 +120,7 @@ class _WordsEntryState extends ConsumerState<_WordsEntry> {
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       appBar: AppBar(
         backgroundColor: TkColors.paper,
@@ -135,15 +133,14 @@ class _WordsEntryState extends ConsumerState<_WordsEntry> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              const Padding(
-                padding: EdgeInsets.symmetric(horizontal: 4),
-                child: Text('Type the twelve words from your kit',
-                    style: TkText.screenTitle),
+              Padding(
+                padding: const EdgeInsets.symmetric(horizontal: 4),
+                child: Text(l.restoreWordsTitle, style: TkText.screenTitle),
               ),
               const SizedBox(height: 9),
               Padding(
                 padding: const EdgeInsets.symmetric(horizontal: 4),
-                child: Text("In order, one per box. Don't worry about capitals.",
+                child: Text(l.restoreWordsSubtitle,
                     style: TkText.bodySecondary.copyWith(fontSize: 14)),
               ),
               const SizedBox(height: 20),
@@ -169,10 +166,7 @@ class _WordsEntryState extends ConsumerState<_WordsEntry> {
                                 .copyWith(color: TkColors.danger)),
                       ],
                       const SizedBox(height: 16),
-                      const TkNote(
-                          text:
-                              'Lost the sheet too? If your old phone still '
-                              'works, its Security tab can print a new one.'),
+                      TkNote(text: l.restoreLostSheet),
                     ],
                   ),
                 ),
@@ -180,8 +174,8 @@ class _WordsEntryState extends ConsumerState<_WordsEntry> {
               const SizedBox(height: 12),
               TkPrimaryButton(
                 label: _allFilled
-                    ? 'Bring my codes back'
-                    : '$_remaining word${_remaining == 1 ? '' : 's'} to go',
+                    ? l.restoreBringBack
+                    : l.restoreWordsToGo(_remaining),
                 enabled: _allFilled,
                 onPressed: _restore,
               ),
@@ -287,10 +281,7 @@ class _RestoringState extends ConsumerState<_Restoring> {
       final fetched =
           await api.fetchBackup(backupId: backupId, backupAuth: backupAuth);
       if (fetched == null) {
-        setState(() => _error =
-            "We couldn't find a backup for those words. If backups were "
-            'off on your old phone, the paper kit alone can\'t bring '
-            'accounts back — but you can set up fresh.');
+        setState(() => _error = AppLocalizations.of(context).restoreNoBackup);
         return;
       }
       setState(() => _step = 1);
@@ -321,15 +312,15 @@ class _RestoringState extends ConsumerState<_Restoring> {
               _RestoreDone(count: _accountCount, newKit: newKit)));
     } on Exception {
       if (mounted) {
-        setState(() => _error =
-            "Something got in the way — check the connection and try again. "
-            'Nothing was lost.');
+        setState(
+            () => _error = AppLocalizations.of(context).restoreGenericError);
       }
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       body: SafeArea(
         child: Padding(
@@ -339,13 +330,12 @@ class _RestoringState extends ConsumerState<_Restoring> {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
                     const Spacer(),
-                    const Text("That didn't work — but nothing is lost",
-                        style: TkText.screenTitle),
+                    Text(l.restoreErrorTitle, style: TkText.screenTitle),
                     const SizedBox(height: 12),
                     Text(_error!, style: TkText.body),
                     const Spacer(),
                     TkPrimaryButton(
-                        label: 'Try the words again',
+                        label: l.restoreTryAgain,
                         onPressed: () => Navigator.of(context)
                             .pushReplacement(MaterialPageRoute(
                                 builder: (_) => const _WordsEntry()))),
@@ -356,8 +346,7 @@ class _RestoringState extends ConsumerState<_Restoring> {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const Spacer(),
-                    const Text('Unscrambling your codes…',
-                        style: TkText.heroTitle),
+                    Text(l.restoreUnscrambling, style: TkText.heroTitle),
                     const SizedBox(height: 22),
                     ClipRRect(
                       borderRadius: BorderRadius.circular(3),
@@ -375,19 +364,17 @@ class _RestoringState extends ConsumerState<_Restoring> {
                       ),
                     ),
                     const SizedBox(height: 22),
-                    _check('Found your encrypted backup', _step >= 1),
+                    _check(l.restoreCheckFound, _step >= 1),
                     const SizedBox(height: 11),
-                    _check('Your words unlocked it', _step >= 2),
+                    _check(l.restoreCheckUnlocked, _step >= 2),
                     const SizedBox(height: 11),
                     _check(
                         _accountCount > 0
-                            ? 'Putting $_accountCount account${_accountCount == 1 ? '' : 's'} back'
-                            : 'Putting your accounts back',
+                            ? l.restoreCheckPutting(_accountCount)
+                            : l.restoreCheckPuttingGeneric,
                         false),
                     const SizedBox(height: 22),
-                    Text(
-                        'This all happens on this phone. We only ever stored '
-                        "a scrambled copy we can't read.",
+                    Text(l.restoreOnPhoneNote,
                         style: TkText.bodySecondary
                             .copyWith(color: TkColors.ink50)),
                     const Spacer(),
@@ -441,6 +428,7 @@ class _RestoreDone extends ConsumerWidget {
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: TkColors.green,
       body: SafeArea(
@@ -468,16 +456,11 @@ class _RestoreDone extends ConsumerWidget {
                                 color: TkColors.greenDeep)),
                       ),
                       const SizedBox(height: 18),
-                      Text(
-                          count == 1
-                              ? 'Your account is back.'
-                              : 'All $count accounts are back.',
+                      Text(l.restoreDoneTitle(count),
                           style: TkText.heroTitle
                               .copyWith(color: TkColors.paper)),
                       const SizedBox(height: 12),
-                      Text(
-                          'Your old phone has been cut off — if someone finds '
-                          'it, its codes no longer work.',
+                      Text(l.restoreOldCutOff,
                           style: TkText.body.copyWith(
                               fontSize: 16,
                               color: const Color.fromRGBO(
@@ -492,16 +475,14 @@ class _RestoreDone extends ConsumerWidget {
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           children: [
-                            const Text('One thing left: print a fresh kit',
-                                style: TextStyle(
+                            Text(l.restorePrintFreshTitle,
+                                style: const TextStyle(
                                     fontFamily: TkFonts.sans,
                                     fontSize: 15.5,
                                     fontWeight: FontWeight.w700,
                                     color: TkColors.paper)),
                             const SizedBox(height: 7),
-                            Text(
-                                'The old sheet is retired now. A new one '
-                                'takes ten seconds and covers you next time.',
+                            Text(l.restorePrintFreshBody,
                                 style: TkText.bodySecondary.copyWith(
                                     color: const Color.fromRGBO(
                                         247, 245, 241, .85))),
@@ -513,7 +494,7 @@ class _RestoreDone extends ConsumerWidget {
                 ),
               ),
               TkPrimaryButton(
-                label: 'Print my new kit',
+                label: l.restorePrintNewKit,
                 background: TkColors.paper,
                 foreground: TkColors.greenDeep,
                 onPressed: () async {
@@ -523,7 +504,7 @@ class _RestoreDone extends ConsumerWidget {
               ),
               const SizedBox(height: 10),
               TkSecondaryButton(
-                label: 'Remind me tonight',
+                label: l.restoreRemindTonight,
                 borderColor: const Color.fromRGBO(247, 245, 241, .28),
                 foreground: TkColors.paper,
                 onPressed: () => _finish(context, ref),

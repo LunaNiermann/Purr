@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../core/totp.dart';
 import '../../data/models.dart';
 import '../../design/tokens.dart';
@@ -41,13 +42,14 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
   }
 
   Future<void> _rename(Account account) async {
+    final l = AppLocalizations.of(context);
     final controller = TextEditingController(text: account.siteName);
     final result = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: TkColors.paper,
-        title: const Text('Rename',
-            style: TextStyle(
+        title: Text(l.detailRename,
+            style: const TextStyle(
                 fontFamily: TkFonts.sans,
                 fontSize: 20,
                 fontWeight: FontWeight.w600)),
@@ -59,13 +61,11 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child: const Text('Cancel',
-                style: TextStyle(color: TkColors.ink50)),
+            child: Text(l.cancel, style: const TextStyle(color: TkColors.ink50)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child:
-                const Text('Save', style: TextStyle(color: TkColors.green)),
+            child: Text(l.saveLabel, style: const TextStyle(color: TkColors.green)),
           ),
         ],
       ),
@@ -83,30 +83,30 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
   }
 
   Future<void> _remove(Account account) async {
+    final l = AppLocalizations.of(context);
     final confirmed = await showDialog<bool>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: TkColors.paper,
-        title: Text('Remove ${account.siteName}?',
+        title: Text(l.detailRemoveTitle(account.siteName),
             style: const TextStyle(
                 fontFamily: TkFonts.sans,
                 fontSize: 20,
                 fontWeight: FontWeight.w600)),
         content: Text(
-          'Turn off two-step on ${account.siteName} first, or you\'ll lock '
-          'yourself out of it.',
+          l.detailRemoveWarning(account.siteName),
           style: TkText.body.copyWith(fontSize: 14.5),
         ),
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context, false),
-            child: const Text('Keep it',
-                style: TextStyle(color: TkColors.ink50)),
+            child: Text(l.detailKeepIt,
+                style: const TextStyle(color: TkColors.ink50)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, true),
-            child: const Text('Remove',
-                style: TextStyle(color: TkColors.danger)),
+            child: Text(l.detailRemove,
+                style: const TextStyle(color: TkColors.danger)),
           ),
         ],
       ),
@@ -124,6 +124,7 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
   @override
   Widget build(BuildContext context) {
     ref.watch(vaultProvider);
+    final l = AppLocalizations.of(context);
     final account = _account;
     if (account == null) {
       return const Scaffold(body: SizedBox.shrink());
@@ -186,7 +187,7 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                   const SizedBox(height: 12),
                   Row(
                     children: [
-                      Text('New in ${secondsLeft}s',
+                      Text(l.detailNewIn(secondsLeft),
                           style: TkText.metadata.copyWith(fontSize: 12)),
                       const SizedBox(width: 10),
                       Expanded(
@@ -196,7 +197,7 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                   ),
                   const SizedBox(height: 14),
                   TkPrimaryButton(
-                    label: _copied ? 'Copied' : 'Copy code',
+                    label: _copied ? l.copied : l.copyCode,
                     onPressed: () => _copy(code),
                   ),
                 ],
@@ -204,9 +205,9 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
             ),
           ),
           const SizedBox(height: 20),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 22),
-            child: TkSectionLabel('Where this lives'),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 22),
+            child: TkSectionLabel(l.detailWhereLives),
           ),
           const SizedBox(height: 8),
           Padding(
@@ -230,16 +231,13 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: [
-                        const Text('This phone',
-                            style: TextStyle(
+                        Text(l.detailThisPhone,
+                            style: const TextStyle(
                                 fontFamily: TkFonts.sans,
                                 fontSize: 14.5,
                                 fontWeight: FontWeight.w600,
                                 color: TkColors.ink)),
-                        Text(
-                            'Plus your paper kit — you\'re covered if this '
-                            'phone goes missing',
-                            style: TkText.metadata),
+                        Text(l.detailPlusKit, style: TkText.metadata),
                       ],
                     ),
                   ),
@@ -257,8 +255,8 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Rename',
-                          style: TextStyle(
+                      Text(l.detailRename,
+                          style: const TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 15.5,
                               fontWeight: FontWeight.w600,
@@ -291,13 +289,13 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Text('Move to top',
-                          style: TextStyle(
+                      Text(l.detailMoveTop,
+                          style: const TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 15.5,
                               fontWeight: FontWeight.w600,
                               color: TkColors.ink)),
-                      Text(account.pinned ? 'On' : 'Off',
+                      Text(account.pinned ? l.detailOn : l.detailOff,
                           style: TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 15.5,
@@ -313,16 +311,15 @@ class _AccountDetailScreenState extends ConsumerState<AccountDetailScreen> {
                   child: Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      const Text('Remove this account',
-                          style: TextStyle(
+                      Text(l.detailRemoveAccount,
+                          style: const TextStyle(
                               fontFamily: TkFonts.sans,
                               fontSize: 15.5,
                               fontWeight: FontWeight.w600,
                               color: TkColors.danger)),
                       const SizedBox(height: 5),
                       Text(
-                        'Turn off two-step on ${account.siteName} first, or '
-                        "you'll lock yourself out of it.",
+                        l.detailRemoveWarning(account.siteName),
                         style: TkText.bodySecondary.copyWith(
                             fontSize: 12.8, color: TkColors.ink55),
                       ),

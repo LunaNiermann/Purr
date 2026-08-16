@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:mobile_scanner/mobile_scanner.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../design/tokens.dart';
 import '../../services/approval_service.dart';
 
@@ -29,13 +30,14 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
   /// The QR is text; pasting it works from anywhere the person can copy it
   /// (remote desktops, a second monitor photo, accessibility tools).
   Future<void> _pasteInstead() async {
+    final l = AppLocalizations.of(context);
     final controller = TextEditingController();
     final pasted = await showDialog<String>(
       context: context,
       builder: (context) => AlertDialog(
         backgroundColor: TkColors.paper,
-        title: const Text('Paste the pairing code',
-            style: TextStyle(
+        title: Text(l.pairPasteTitle,
+            style: const TextStyle(
                 fontFamily: TkFonts.sans,
                 fontSize: 19,
                 fontWeight: FontWeight.w600)),
@@ -49,12 +51,11 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
         actions: [
           TextButton(
             onPressed: () => Navigator.pop(context),
-            child:
-                const Text('Cancel', style: TextStyle(color: TkColors.ink50)),
+            child: Text(l.cancel, style: const TextStyle(color: TkColors.ink50)),
           ),
           TextButton(
             onPressed: () => Navigator.pop(context, controller.text.trim()),
-            child: const Text('Pair', style: TextStyle(color: TkColors.green)),
+            child: Text(l.pairAction, style: const TextStyle(color: TkColors.green)),
           ),
         ],
       ),
@@ -72,7 +73,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
   }
 
   Future<void> _complete(String qrPayload) async {
-    setState(() => _status = 'Linking with your computer…');
+    setState(() => _status = AppLocalizations.of(context).pairLinking);
     try {
       await ref.read(pairingServiceProvider).completeFromQr(qrPayload);
       await ref.read(pairingProvider.notifier).refresh();
@@ -85,17 +86,17 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
         _status = e.message;
       });
     } catch (_) {
+      if (!mounted) return;
       setState(() {
         _handled = false;
-        _status =
-            "Couldn't reach the pairing service — check the connection and "
-            'try again.';
+        _status = AppLocalizations.of(context).pairUnreachable;
       });
     }
   }
 
   @override
   Widget build(BuildContext context) {
+    final l = AppLocalizations.of(context);
     return Scaffold(
       backgroundColor: TkColors.inkDarkest,
       body: SafeArea(
@@ -107,16 +108,16 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
                 children: [
                   GestureDetector(
                     onTap: () => Navigator.of(context).pop(false),
-                    child: Text('Cancel',
+                    child: Text(l.cancel,
                         style: TkText.secondaryButton.copyWith(
                             fontSize: 15,
                             color:
                                 const Color.fromRGBO(247, 245, 241, .6))),
                   ),
-                  const Expanded(
-                    child: Text('Pair a computer',
+                  Expanded(
+                    child: Text(l.pairScreenTitle,
                         textAlign: TextAlign.center,
-                        style: TextStyle(
+                        style: const TextStyle(
                             fontFamily: TkFonts.sans,
                             fontSize: 16,
                             fontWeight: FontWeight.w600,
@@ -139,9 +140,9 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
                 ),
               ),
             ),
-            const Text('Hold the square on your screen inside the frame',
+            Text(l.pairHoldSquare,
                 textAlign: TextAlign.center,
-                style: TextStyle(
+                style: const TextStyle(
                     fontFamily: TkFonts.sans,
                     fontSize: 16,
                     fontWeight: FontWeight.w600,
@@ -150,9 +151,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 38),
               child: Text(
-                  _status ??
-                      'In your browser, the Purr extension shows it '
-                          'under "Pair my phone".',
+                  _status ?? l.pairWhereHint,
                   textAlign: TextAlign.center,
                   style: TkText.bodySecondary.copyWith(
                       color: const Color.fromRGBO(247, 245, 241, .55))),
@@ -162,7 +161,7 @@ class _PairComputerScreenState extends ConsumerState<PairComputerScreen> {
               onTap: _pasteInstead,
               child: Padding(
                 padding: const EdgeInsets.all(10),
-                child: Text("Can't scan? Paste the code instead",
+                child: Text(l.pairCantScan,
                     style: TkText.secondaryButton.copyWith(
                         fontSize: 14.5,
                         color: const Color.fromRGBO(247, 245, 241, .7))),

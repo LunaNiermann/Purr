@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../l10n/app_localizations.dart';
 import '../../design/tokens.dart';
 import '../../design/widgets.dart';
 import '../../services/approval_service.dart';
@@ -25,82 +26,83 @@ Future<void> maybePrimeNotifications(
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     ),
-    builder: (context) => SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
-        child: Column(
-          mainAxisSize: MainAxisSize.min,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Center(
-              child: Container(
-                width: 42,
-                height: 5,
-                decoration: BoxDecoration(
-                  color: const Color.fromRGBO(27, 26, 23, .15),
-                  borderRadius: BorderRadius.circular(99),
+    builder: (context) {
+      final l = AppLocalizations.of(context);
+      return SafeArea(
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(26, 14, 26, 30),
+          child: Column(
+            mainAxisSize: MainAxisSize.min,
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Center(
+                child: Container(
+                  width: 42,
+                  height: 5,
+                  decoration: BoxDecoration(
+                    color: const Color.fromRGBO(27, 26, 23, .15),
+                    borderRadius: BorderRadius.circular(99),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 24),
-            const TkBrandTile(size: 52),
-            const SizedBox(height: 16),
-            const Text('Want the code to come to you?',
-                style: TkText.screenTitle),
-            const SizedBox(height: 10),
-            Text(
-              'With notifications on, signing in on your computer is one tap '
-              'here — no unlocking, no hunting for the right account.',
-              style: TkText.body.copyWith(fontSize: 15),
-            ),
-            const SizedBox(height: 15),
-            // Inline preview of the exact push.
-            TkCard(
-              padding: const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
-              child: Row(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  const TkBrandTile(size: 34),
-                  const SizedBox(width: 13),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        const Text('Purr',
-                            style: TextStyle(
-                                fontFamily: TkFonts.sans,
-                                fontSize: 14,
-                                fontWeight: FontWeight.w600,
-                                color: TkColors.ink)),
-                        const SizedBox(height: 2),
-                        Text('Your browser needs a code. Tap to approve.',
-                            style: TkText.bodySecondary
-                                .copyWith(fontSize: 13, height: 1.45)),
-                      ],
-                    ),
-                  ),
-                ],
+              const SizedBox(height: 24),
+              const TkBrandTile(size: 52),
+              const SizedBox(height: 16),
+              Text(l.notifTitle, style: TkText.screenTitle),
+              const SizedBox(height: 10),
+              Text(
+                l.notifBody,
+                style: TkText.body.copyWith(fontSize: 15),
               ),
-            ),
-            const SizedBox(height: 12),
-            Text(
-                "That's the only kind of notification we send. No tips, no "
-                'news, no nudges.',
-                style: TkText.bodySecondary.copyWith(color: TkColors.ink55)),
-            const SizedBox(height: 18),
-            TkPrimaryButton(
-              label: 'Turn on notifications',
-              onPressed: () => Navigator.pop(context, true),
-            ),
-            const SizedBox(height: 10),
-            TkSecondaryButton(
-              label: "Not now — I'll open the app myself",
-              onPressed: () => Navigator.pop(context, false),
-            ),
-          ],
+              const SizedBox(height: 15),
+              // Inline preview of the exact push.
+              TkCard(
+                padding:
+                    const EdgeInsets.symmetric(horizontal: 16, vertical: 15),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    const TkBrandTile(size: 34),
+                    const SizedBox(width: 13),
+                    Expanded(
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          const Text('Purr',
+                              style: TextStyle(
+                                  fontFamily: TkFonts.sans,
+                                  fontSize: 14,
+                                  fontWeight: FontWeight.w600,
+                                  color: TkColors.ink)),
+                          const SizedBox(height: 2),
+                          Text(l.notifPushPreview,
+                              style: TkText.bodySecondary
+                                  .copyWith(fontSize: 13, height: 1.45)),
+                        ],
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+              const SizedBox(height: 12),
+              Text(l.notifOnlyKind,
+                  style:
+                      TkText.bodySecondary.copyWith(color: TkColors.ink55)),
+              const SizedBox(height: 18),
+              TkPrimaryButton(
+                label: l.notifTurnOn,
+                onPressed: () => Navigator.pop(context, true),
+              ),
+              const SizedBox(height: 10),
+              TkSecondaryButton(
+                label: l.notifNotNow,
+                onPressed: () => Navigator.pop(context, false),
+              ),
+            ],
+          ),
         ),
-      ),
-    ),
+      );
+    },
   );
 
   final notifier = ref.read(prefsProvider.notifier);
