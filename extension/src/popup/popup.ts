@@ -1,4 +1,5 @@
 import { getFlow, type Flow } from "../lib/flow";
+import { localizeDom, t } from "../lib/i18n";
 import {
   codeFor,
   isEnrolled,
@@ -52,7 +53,7 @@ function chip(domain: string, username: string | null, matched: boolean): string
         <div class="site">${esc(domain)}</div>
         ${username ? `<div class="user">${esc(username)}</div>` : ""}
       </div>
-      ${matched ? '<div class="badge">MATCHED</div>' : ""}
+      ${matched ? `<div class="badge">${t("badgeMatched")}</div>` : ""}
     </div>`;
 }
 
@@ -62,10 +63,9 @@ function renderUnpaired(): void {
   document.getElementById("open-settings")?.removeAttribute("hidden");
   main.replaceChildren(
     el(`<div>
-      <div class="headline">Your phone is the key. This is the keyhole.</div>
-      <div class="sub">Pair your phone once and signing in becomes a tap. Your
-        codes stay on the phone — this extension never sees the secret.</div>
-      <div class="stack"><button class="btn" id="pair">Pair my phone</button></div>
+      <div class="headline">${t("popupUnpairedTitle")}</div>
+      <div class="sub">${t("popupUnpairedSub")}</div>
+      <div class="stack"><button class="btn" id="pair">${t("pairMyPhone")}</button></div>
     </div>`),
   );
   document.getElementById("pair")!.addEventListener("click", () => {
@@ -76,9 +76,8 @@ function renderUnpaired(): void {
 function renderNoField(): void {
   main.replaceChildren(
     el(`<div>
-      <div class="headline">Nothing to fill here.</div>
-      <div class="sub">Open this on a page asking for a six-digit code, and the
-        code can come straight from your phone.</div>
+      <div class="headline">${t("popupNoFieldTitle")}</div>
+      <div class="sub">${t("popupNoFieldSub")}</div>
     </div>`),
   );
 }
@@ -95,15 +94,15 @@ async function renderReady(domain: string): Promise<void> {
   const keyBtn = (primary: boolean) => `
     <button class="btn${primary ? "" : " secondary"}" id="key">
       <div class="glyph"></div>
-      <div class="btn-col">Fill with my key
-        <span class="btn-sub">Touch your security key — your phone stays in your pocket</span>
+      <div class="btn-col">${t("popupFillKey")}
+        <span class="btn-sub">${t("popupFillKeySub")}</span>
       </div>
     </button>`;
   const phoneBtn = (primary: boolean) => `
     <button class="btn${primary ? "" : " secondary"}" id="ask">
       <div class="glyph"></div>
-      <div class="btn-col">Ask my phone
-        <span class="btn-sub">Approve there and the code lands here</span>
+      <div class="btn-col">${t("popupAskPhone")}
+        <span class="btn-sub">${t("popupAskPhoneSub")}</span>
       </div>
     </button>`;
 
@@ -119,15 +118,12 @@ async function renderReady(domain: string): Promise<void> {
   main.replaceChildren(
     el(`<div>
       ${chip(domain, match?.username ?? null, match !== null)}
-      <div class="headline">Ready when you are.</div>
+      <div class="headline">${t("popupReadyTitle")}</div>
       <div class="sub">${
-        keyOn
-          ? "Touch your key to fill the code right here, or ask your phone."
-          : "Your code has to come from something you're holding — your phone."
+        keyOn ? t("popupReadySubKey") : t("popupReadySubPhone")
       }</div>
       <div class="stack">${actions.join("")}</div>
-      <div class="footnote">Only the six digits ever reach the page. You can
-        close this — a phone approval still fills in when you tap Approve.</div>
+      <div class="footnote">${t("popupReadyFootnote")}</div>
     </div>`),
   );
   document.getElementById("ask")?.addEventListener("click", () => void start(domain));
@@ -140,9 +136,8 @@ function renderKeyTouching(domain: string): void {
       ${chip(domain, null, false)}
       <div class="center">
         <div class="pulse-wrap"><div class="pulse-ring"></div><div class="phone-glyph"></div></div>
-        <div class="wait-title">Touch your key</div>
-        <div class="wait-sub">Tap your security key to unlock this code right
-          here — nothing leaves this computer but the six digits.</div>
+        <div class="wait-title">${t("popupKeyTouchTitle")}</div>
+        <div class="wait-sub">${t("popupKeyTouchSub")}</div>
       </div>
     </div>`),
   );
@@ -151,9 +146,9 @@ function renderKeyTouching(domain: string): void {
 function renderKeyError(domain: string, message: string): void {
   main.replaceChildren(
     el(`<div>
-      <div class="headline">Couldn't use your key</div>
+      <div class="headline">${t("popupKeyErrorTitle")}</div>
       <div class="sub">${esc(message)}</div>
-      <div class="stack"><button class="btn" id="again">Try again</button></div>
+      <div class="stack"><button class="btn" id="again">${t("tryAgain")}</button></div>
     </div>`),
   );
   document.getElementById("again")!.addEventListener("click", () => void fillWithKey(domain));
@@ -170,7 +165,7 @@ async function fillWithKey(domain: string): Promise<void> {
     if (!account) return renderUnmatched(domain);
     const code = codeFor(account);
     const tabId = (await activeTab())?.id;
-    if (tabId == null) return renderKeyError(domain, "No active tab to fill.");
+    if (tabId == null) return renderKeyError(domain, t("popupNoTab"));
     // Hand off to the worker to fill + report via the flow (renders next).
     await chrome.runtime.sendMessage({
       type: "tk-key-fill",
@@ -191,10 +186,9 @@ function renderAwaiting(domain: string): void {
       ${chip(domain, null, false)}
       <div class="center">
         <div class="pulse-wrap"><div class="pulse-ring"></div><div class="phone-glyph"></div></div>
-        <div class="wait-title">Sent to your phone</div>
-        <div class="wait-sub">Approve it there and the code lands here. You can
-          close this window — it keeps working.</div>
-        <button class="btn ghost" id="cancel">Cancel</button>
+        <div class="wait-title">${t("popupSentTitle")}</div>
+        <div class="wait-sub">${t("popupSentSub")}</div>
+        <button class="btn ghost" id="cancel">${t("cancel")}</button>
       </div>
     </div>`),
   );
@@ -208,9 +202,8 @@ function renderFilled(): void {
   main.replaceChildren(
     el(`<div>
       <div class="check-row"><div class="check-dot">✓</div>
-        <div class="check-title">Filled in for you.</div></div>
-      <div class="sub">Your phone made the code and sent only those six digits.
-        Nothing else crossed over.</div>
+        <div class="check-title">${t("popupFilledTitle")}</div></div>
+      <div class="sub">${t("popupFilledSub")}</div>
     </div>`),
   );
 }
@@ -219,18 +212,17 @@ function renderFilledClipboard(code: string): void {
   main.replaceChildren(
     el(`<div>
       <div class="check-row"><div class="check-dot">✓</div>
-        <div class="check-title">Here's your code.</div></div>
-      <div class="sub">We couldn't find the code box on this page, so copy it in
-        yourself:</div>
+        <div class="check-title">${t("popupClipTitle")}</div></div>
+      <div class="sub">${t("popupClipSub")}</div>
       <div class="stack">
-        <button class="btn" id="copy">Copy ${esc(code.slice(0, 3))} ${esc(code.slice(3))}</button>
+        <button class="btn" id="copy">${t("popupCopyCode", [esc(code.slice(0, 3)), esc(code.slice(3))])}</button>
       </div>
     </div>`),
   );
   document.getElementById("copy")!.addEventListener("click", async () => {
     await navigator.clipboard.writeText(code).catch(() => {});
     const b = document.getElementById("copy")!;
-    b.textContent = "Copied";
+    b.textContent = t("copied");
   });
 }
 
@@ -238,12 +230,11 @@ function renderDenied(domain: string): void {
   document.querySelector(".brand-tile")?.classList.add("danger");
   main.replaceChildren(
     el(`<div>
-      <div class="headline">You turned this one down</div>
-      <div class="sub">No code was sent. If that was a mistake, ask again — if it
-        wasn't, change your password for this site.</div>
+      <div class="headline">${t("popupDeniedTitle")}</div>
+      <div class="sub">${t("popupDeniedSub")}</div>
       <div class="stack">
-        <button class="btn secondary" id="again">Ask again</button>
-        <button class="btn danger" id="change">Change my password</button>
+        <button class="btn secondary" id="again">${t("askAgain")}</button>
+        <button class="btn danger" id="change">${t("popupChangePassword")}</button>
       </div>
     </div>`),
   );
@@ -260,10 +251,9 @@ function renderExpired(domain: string): void {
   document.querySelector(".brand-tile")?.classList.add("muted");
   main.replaceChildren(
     el(`<div>
-      <div class="headline">That request ran out of time</div>
-      <div class="sub">Requests expire after a minute so an old one can't be
-        approved by accident. Nothing went wrong — just ask again.</div>
-      <div class="stack"><button class="btn" id="again">Ask again</button></div>
+      <div class="headline">${t("popupExpiredTitle")}</div>
+      <div class="sub">${t("popupExpiredSub")}</div>
+      <div class="stack"><button class="btn" id="again">${t("askAgain")}</button></div>
     </div>`),
   );
   document.getElementById("again")!.addEventListener("click", () => {
@@ -275,12 +265,11 @@ function renderExpired(domain: string): void {
 function renderUnreachable(domain: string): void {
   main.replaceChildren(
     el(`<div>
-      <div class="headline">Your phone didn't answer</div>
-      <div class="sub">It might be asleep, out of signal, or face-down on a
-        table. Nothing's wrong with your account.</div>
+      <div class="headline">${t("popupUnreachableTitle")}</div>
+      <div class="sub">${t("popupUnreachableSub")}</div>
       <div class="stack">
-        <button class="btn" id="again">Ask again</button>
-        <button class="btn ghost" id="close">Or open the app and read the code</button>
+        <button class="btn" id="again">${t("askAgain")}</button>
+        <button class="btn ghost" id="close">${t("popupOpenApp")}</button>
       </div>
     </div>`),
   );
@@ -291,11 +280,9 @@ function renderUnreachable(domain: string): void {
 function renderUnmatched(domain: string): void {
   main.replaceChildren(
     el(`<div>
-      <div class="headline">You haven't saved ${esc(domain)} yet</div>
-      <div class="sub">If you already have this account on your phone under a
-        different name, open it there and approve — this popup will remember the
-        match next time.</div>
-      <div class="stack"><button class="btn" id="again">Ask again</button></div>
+      <div class="headline">${t("popupUnmatchedTitle", [esc(domain)])}</div>
+      <div class="sub">${t("popupUnmatchedSub")}</div>
+      <div class="stack"><button class="btn" id="again">${t("askAgain")}</button></div>
     </div>`),
   );
   document.getElementById("again")!.addEventListener("click", () => void start(domain));
@@ -334,6 +321,7 @@ function renderFromFlow(flow: Flow): void {
 }
 
 async function init(): Promise<void> {
+  localizeDom(); // header buttons carry data-i18n
   document.getElementById("open-settings")!.addEventListener("click", () => {
     void chrome.runtime.openOptionsPage();
   });

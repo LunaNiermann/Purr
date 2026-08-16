@@ -1,5 +1,6 @@
 import QRCode from "qrcode";
 
+import { t } from "../lib/i18n";
 import {
   deriveSessionKey,
   fromB64,
@@ -53,7 +54,7 @@ function stepDots(step: number): string {
       ${[1, 2, 3]
         .map((n) => `<div class="step-dot${n <= step ? " on" : ""}"></div>`)
         .join("")}
-      <span class="step-label">Step ${step} of 3</span>
+      <span class="step-label">${t("optStepOf", [step])}</span>
     </div>`;
 }
 
@@ -77,27 +78,21 @@ function renderIntro(): void {
       1,
       `<div class="pair-body">
         <div class="pair-main">
-          <div class="pair-hero">Your phone is<br>the key. This is<br>the keyhole.</div>
-          <div class="pair-copy">Pairing takes about a minute. After that,
-            signing in anywhere is a tap on your phone — no codes to type,
-            nothing to remember.</div>
+          <div class="pair-hero">${t("optIntroHero")}</div>
+          <div class="pair-copy">${t("optIntroCopy")}</div>
           <div class="tick-list">
-            <div class="tick"><div class="mark">✓</div><div class="text">Your
-              codes stay on your phone. This extension never sees the
-              secret.</div></div>
-            <div class="tick"><div class="mark">✓</div><div class="text">Works
-              with no account. Nothing to sign up for.</div></div>
-            <div class="tick"><div class="mark">✓</div><div class="text">Unpair
-              from either side, any time.</div></div>
+            <div class="tick"><div class="mark">✓</div><div class="text">${t("optTick1")}</div></div>
+            <div class="tick"><div class="mark">✓</div><div class="text">${t("optTick2")}</div></div>
+            <div class="tick"><div class="mark">✓</div><div class="text">${t("optTick3")}</div></div>
           </div>
           <div class="pair-actions">
-            <button class="btn large" id="start">Pair my phone</button>
+            <button class="btn large" id="start">${t("pairMyPhone")}</button>
           </div>
         </div>
         <div class="pair-side">
           <div style="width:132px;height:246px;border-radius:26px;border:2.5px solid rgba(27,26,23,.22);display:flex;flex-direction:column;align-items:center;justify-content:center;gap:12px">
             <div class="brand-tile" style="width:34px;height:34px;border-radius:11px;font-size:15px">2</div>
-            <div style="font-size:12.5px;color:rgba(27,26,23,.45);text-align:center;line-height:1.45;padding:0 16px">Get the app first, if you haven't</div>
+            <div style="font-size:12.5px;color:rgba(27,26,23,.45);text-align:center;line-height:1.45;padding:0 16px">${t("optGetApp")}</div>
           </div>
         </div>
       </div>`,
@@ -121,10 +116,9 @@ async function renderScan(): Promise<void> {
       pairShell(
         2,
         `<div class="pair-body"><div class="pair-main">
-          <div class="pair-hero" style="font-size:28px">Can't reach the pairing service</div>
-          <div class="pair-copy">Check the connection and try again. Nothing
-            was set up yet, so nothing is half-done.</div>
-          <div class="pair-actions"><button class="btn large" id="retry">Try again</button></div>
+          <div class="pair-hero" style="font-size:28px">${t("optScanErrTitle")}</div>
+          <div class="pair-copy">${t("optScanErrCopy")}</div>
+          <div class="pair-actions"><button class="btn large" id="retry">${t("tryAgain")}</button></div>
         </div></div>`,
       ),
     );
@@ -151,15 +145,16 @@ async function renderScan(): Promise<void> {
       2,
       `<div class="pair-body">
         <div class="pair-main">
-          <div class="pair-hero" style="font-size:30px">Point your phone at this</div>
-          <div class="pair-copy" style="font-size:15.5px;max-width:360px">Open
-            Purr on your phone, tap <b style="color:var(--ink);font-weight:600">Security
-            → Pair a computer</b>, then hold it up to the square.</div>
+          <div class="pair-hero" style="font-size:30px">${t("optScanTitle")}</div>
+          <div class="pair-copy" style="font-size:15.5px;max-width:360px">${t(
+            "optScanCopy",
+            [`<b style="color:var(--ink);font-weight:600">${t("optScanPath")}</b>`],
+          )}</div>
           <div class="waiting-line">
             <div class="waiting-dot"></div>
-            Waiting for your phone…
+            ${t("optWaitingPhone")}
           </div>
-          <button class="btn ghost" id="back" style="margin-top:26px;padding-left:0">Back</button>
+          <button class="btn ghost" id="back" style="margin-top:26px;padding-left:0">${t("optBack")}</button>
         </div>
         <div class="pair-side">
           <div class="qr-box"><canvas id="qr"></canvas></div>
@@ -193,7 +188,7 @@ async function renderScan(): Promise<void> {
       fromB64(result.phonePub!),
       secret,
     );
-    let phoneName = "Your phone";
+    let phoneName = t("optDefaultPhone");
     if (result.phoneNameBlob) {
       try {
         phoneName = openBlob<{ name: string }>(
@@ -236,20 +231,18 @@ function renderPaired(pairing: Pairing): void {
       3,
       `<div class="paired-wrap">
         <div class="paired-check">✓</div>
-        <div class="paired-title">Paired with "${esc(pairing.phoneName)}"</div>
-        <div class="paired-copy">Next time a site asks for a code, this
-          extension will spot it and ask your phone. You'll just tap
-          Approve.</div>
+        <div class="paired-title">${t("optPairedTitle", [esc(pairing.phoneName)])}</div>
+        <div class="paired-copy">${t("optPairedCopy")}</div>
         <div class="device-row">
           <div class="tile">${esc(pairing.phoneName[0]?.toUpperCase() ?? "P")}</div>
           <div class="grow">
             <div class="title">${esc(pairing.phoneName)}</div>
-            <div class="subtitle">Paired just now</div>
+            <div class="subtitle">${t("optPairedJustNow")}</div>
           </div>
-          <div class="badge">ACTIVE</div>
+          <div class="badge">${t("optActive")}</div>
         </div>
         <div class="pair-actions">
-          <button class="btn large" id="done">Done</button>
+          <button class="btn large" id="done">${t("optDone")}</button>
         </div>
       </div>`,
     ),
@@ -271,40 +264,43 @@ async function renderSettings(): Promise<void> {
   const keyEnrolled = await isEnrolled();
 
   const agoDays = Math.floor((Date.now() - pairing.pairedAt) / 86_400_000);
+  const months = Math.floor(agoDays / 30);
   const pairedAgo =
     agoDays === 0
-      ? "today"
+      ? t("optToday")
       : agoDays === 1
-        ? "yesterday"
+        ? t("optYesterday")
         : agoDays < 30
-          ? `${agoDays} days ago`
-          : `${Math.floor(agoDays / 30)} month${agoDays >= 60 ? "s" : ""} ago`;
+          ? t("optDaysAgo", [agoDays])
+          : months === 1
+            ? t("optMonthAgo", [months])
+            : t("optMonthsAgo", [months]);
 
   const ruleLabel = {
-    "always-phone": "Always ask my phone",
-    "never-autofill": "Never fill automatically",
+    "always-phone": t("optRuleAlwaysPhone"),
+    "never-autofill": t("optRuleNeverAutofill"),
   } as const;
 
   page.replaceChildren(
     el(`<div>
       <div class="page-head">
         <div class="brand-tile">2</div>
-        <div class="page-title">Purr settings</div>
+        <div class="page-title">${t("optSettingsTitle")}</div>
       </div>
 
-      <div class="section-label">When a site asks for a code</div>
+      <div class="section-label">${t("optSecWhenAsks")}</div>
       <div class="card">
         <div class="row">
           <div class="grow">
-            <div class="title">Fill it in for me automatically</div>
-            <div class="subtitle">After you approve — we never fill without a tap somewhere</div>
+            <div class="title">${t("optFillAuto")}</div>
+            <div class="subtitle">${t("optFillAutoSub")}</div>
           </div>
           <button class="toggle${settings.autofill ? " on" : ""}" data-key="autofill"><div class="knob"></div></button>
         </div>
         <div class="row">
           <div class="grow">
-            <div class="title">Submit the form once it's filled</div>
-            <div class="subtitle">Saves a click; turn off if a site behaves oddly</div>
+            <div class="title">${t("optSubmit")}</div>
+            <div class="subtitle">${t("optSubmitSub")}</div>
           </div>
           <button class="toggle${settings.autoSubmit ? " on" : ""}" data-key="autoSubmit"><div class="knob"></div></button>
         </div>
@@ -312,8 +308,8 @@ async function renderSettings(): Promise<void> {
           keyEnrolled
             ? `<div class="row">
           <div class="grow">
-            <div class="title">Lead with my security key</div>
-            <div class="subtitle">Offer the key touch first; your phone stays a tap away</div>
+            <div class="title">${t("optLeadKey")}</div>
+            <div class="subtitle">${t("optLeadKeySub")}</div>
           </div>
           <button class="toggle${settings.preferKey ? " on" : ""}" data-key="preferKey"><div class="knob"></div></button>
         </div>`
@@ -321,30 +317,27 @@ async function renderSettings(): Promise<void> {
         }
       </div>
 
-      <div class="section-label">Sites with their own rules</div>
+      <div class="section-label">${t("optSecSiteRules")}</div>
       <div class="card" id="rules"></div>
 
-      <div class="section-label">Sign in with a security key <span style="opacity:.6;font-weight:500">· experimental</span></div>
+      <div class="section-label">${t("optSecKeys")} <span style="opacity:.6;font-weight:500">${t("optExperimental")}</span></div>
       <div class="card" id="security-keys"></div>
-      <div class="sub" style="margin-top:10px">Touch a registered key to fill a
-        code on this computer with your phone in your pocket. Your codes live
-        here only as ciphertext; the key is what unlocks them.</div>
+      <div class="sub" style="margin-top:10px">${t("optKeysBlurb")}</div>
 
-      <div class="section-label">Paired devices</div>
+      <div class="section-label">${t("optSecDevices")}</div>
       <div class="card">
         <div class="row">
           <div class="device-row" style="margin:0;background:none;padding:0">
             <div class="tile">${esc(pairing.phoneName[0]?.toUpperCase() ?? "P")}</div>
             <div class="grow">
               <div class="title">${esc(pairing.phoneName)}</div>
-              <div class="subtitle">Paired ${pairedAgo}${pairing.lastUsedAt ? " · last used recently" : ""}</div>
+              <div class="subtitle">${t("optPaired", [pairedAgo])}${pairing.lastUsedAt ? ` · ${t("optLastUsed")}` : ""}</div>
             </div>
-            <button class="small-outline" id="unpair">Unpair</button>
+            <button class="small-outline" id="unpair">${t("unpair")}</button>
           </div>
         </div>
       </div>
-      <div class="sub" style="margin-top:10px">Unpairing only affects this
-        browser. Your codes stay on your phone, untouched.</div>
+      <div class="sub" style="margin-top:10px">${t("optUnpairNote")}</div>
     </div>`),
   );
 
@@ -365,14 +358,14 @@ async function renderSettings(): Promise<void> {
   if (entries.length === 0) {
     rules.appendChild(
       el(`<div class="subtitle" style="font-size:13.5px;color:var(--ink-55)">
-        No special rules yet. Rules land here when you add one.</div>`),
+        ${t("optNoRules")}</div>`),
     );
   }
   for (const [domain, rule] of entries) {
     const row = el(`<div class="row">
       <div class="grow"><div class="title" style="font-size:14.5px">${esc(domain)}</div></div>
       <div class="subtitle">${ruleLabel[rule]}</div>
-      <button class="small-outline">Remove</button>
+      <button class="small-outline">${t("remove")}</button>
     </div>`);
     row.querySelector("button")!.addEventListener("click", async () => {
       const current = await getSettings();
@@ -383,8 +376,8 @@ async function renderSettings(): Promise<void> {
     rules.appendChild(row);
   }
   const addRow = el(`<div class="row">
-    <input class="vault-search" id="rule-domain" placeholder="site.example.com" style="max-width:280px">
-    <button class="small-outline" id="add-never">Never fill automatically</button>
+    <input class="vault-search" id="rule-domain" placeholder="${t("optRulePlaceholder")}" style="max-width:280px">
+    <button class="small-outline" id="add-never">${t("optRuleNeverAutofill")}</button>
   </div>`);
   addRow.querySelector("#add-never")!.addEventListener("click", async () => {
     const input = document.getElementById("rule-domain") as HTMLInputElement;
@@ -420,7 +413,7 @@ async function populateSecurityKeys(): Promise<void> {
   if (!webauthnAvailable()) {
     card.appendChild(
       el(`<div class="subtitle" style="font-size:13.5px;color:var(--ink-55)">
-        This browser doesn't support security keys.</div>`),
+        ${t("optNoWebauthn")}</div>`),
     );
     return;
   }
@@ -432,15 +425,15 @@ async function populateSecurityKeys(): Promise<void> {
   const keys = await getSecurityKeys();
   for (const k of keys) {
     const state = k.prfConfirmed
-      ? `<span style="color:var(--green)">Ready</span>`
-      : `<span style="color:var(--ink-55)">Not confirmed — tap Test unlock</span>`;
+      ? `<span style="color:var(--green)">${t("optKeyReady")}</span>`
+      : `<span style="color:var(--ink-55)">${t("optKeyNotConfirmed")}</span>`;
     const row = el(`<div class="row">
       <div class="tile">⚿</div>
       <div class="grow">
         <div class="title" style="font-size:14.5px">${esc(k.label)}</div>
-        <div class="subtitle">Added ${new Date(k.addedAt).toLocaleDateString()} · ${state}</div>
+        <div class="subtitle">${t("optAddedOn", [new Date(k.addedAt).toLocaleDateString()])} · ${state}</div>
       </div>
-      <button class="small-outline">Remove</button>
+      <button class="small-outline">${t("remove")}</button>
     </div>`);
     row.querySelector("button")!.addEventListener("click", async () => {
       await removeSecurityKey(k.credentialIdB64);
@@ -450,14 +443,14 @@ async function populateSecurityKeys(): Promise<void> {
   }
 
   const addRow = el(`<div class="row">
-    <input class="vault-search" id="sk-label" placeholder="Name this key (e.g. YubiKey)" style="max-width:240px">
-    <button class="small-outline" id="sk-add">Add a security key</button>
+    <input class="vault-search" id="sk-label" placeholder="${t("optKeyNamePlaceholder")}" style="max-width:240px">
+    <button class="small-outline" id="sk-add">${t("optAddKey")}</button>
   </div>`);
   addRow.querySelector("#sk-add")!.addEventListener("click", async () => {
     const label =
       (document.getElementById("sk-label") as HTMLInputElement).value.trim() ||
-      "Security key";
-    status.textContent = "Touch your key…";
+      t("optDefaultKeyLabel");
+    status.textContent = t("optTouchKey");
     try {
       const res = await registerKey(label);
       await addSecurityKey({
@@ -467,22 +460,22 @@ async function populateSecurityKeys(): Promise<void> {
         prfConfirmed: false,
       });
       status.textContent = res.prfSupported
-        ? `✓ ${label} registered. Tap "Test unlock" and touch it to confirm.`
-        : `⚠ ${label} registered, but it may not support touch-to-unlock. Try Test unlock to be sure.`;
+        ? t("optKeyRegistered", [label])
+        : t("optKeyRegisteredWarn", [label]);
       await populateSecurityKeys();
     } catch (e) {
-      status.textContent = `Couldn't register: ${(e as Error).message}`;
+      status.textContent = t("optRegisterFailed", [(e as Error).message]);
     }
   });
   card.appendChild(addRow);
 
   if (keys.length > 0) {
     const testRow = el(`<div class="row">
-      <div class="grow"><div class="subtitle" style="font-size:13.5px">Confirm a touch unlocks the vault</div></div>
-      <button class="small-outline" id="sk-test">Test unlock</button>
+      <div class="grow"><div class="subtitle" style="font-size:13.5px">${t("optConfirmTouch")}</div></div>
+      <button class="small-outline" id="sk-test">${t("optTestUnlock")}</button>
     </div>`);
     testRow.querySelector("#sk-test")!.addEventListener("click", async () => {
-      status.textContent = "Touch your key…";
+      status.textContent = t("optTouchKey");
       try {
         const ids = (await getSecurityKeys()).map((k) => k.credentialIdB64);
         const { credentialIdB64 } = await deriveKek(ids);
@@ -490,10 +483,10 @@ async function populateSecurityKeys(): Promise<void> {
         const used = (await getSecurityKeys()).find(
           (k) => k.credentialIdB64 === credentialIdB64,
         );
-        status.textContent = `✓ ${used?.label ?? "Your key"} unlocks Purr here. You're all set.`;
+        status.textContent = t("optUnlockOk", [used?.label ?? t("optYourKey")]);
         await populateSecurityKeys();
       } catch (e) {
-        status.textContent = `Unlock failed: ${(e as Error).message}`;
+        status.textContent = t("optUnlockFailed", [(e as Error).message]);
       }
     });
     card.appendChild(testRow);
@@ -503,42 +496,42 @@ async function populateSecurityKeys(): Promise<void> {
   const confirmed = keys.filter((k) => k.prfConfirmed);
   if (confirmed.length > 0 && !(await isEnrolled())) {
     const enableRow = el(`<div class="row">
-      <div class="grow"><div class="subtitle" style="font-size:13.5px">Turn on sign-in with your key</div></div>
-      <button class="small-outline" id="sk-enable">Enable key sign-in</button>
+      <div class="grow"><div class="subtitle" style="font-size:13.5px">${t("optTurnOnKeySignin")}</div></div>
+      <button class="small-outline" id="sk-enable">${t("optEnableKeySignin")}</button>
     </div>`);
     enableRow.querySelector("#sk-enable")!.addEventListener("click", async () => {
-      status.textContent = "Touch your key…";
+      status.textContent = t("optTouchKey");
       try {
         const { label } = await enrollFirstKey();
-        status.textContent = `✓ Key sign-in on with ${label}. Open the phone app once so it syncs your vault here.`;
+        status.textContent = t("optKeySigninOn", [label]);
         await populateSecurityKeys();
       } catch (e) {
-        status.textContent = `Couldn't enable: ${(e as Error).message}`;
+        status.textContent = t("optEnableFailed", [(e as Error).message]);
       }
     });
     card.appendChild(enableRow);
   } else if (confirmed.length > 0) {
     const onRow = el(`<div class="row">
       <div class="grow">
-        <div class="title" style="font-size:14.5px;color:var(--green)">Key sign-in is on</div>
-        <div class="subtitle">On a site's code field, touch your key to fill it — your phone stays in your pocket.</div>
+        <div class="title" style="font-size:14.5px;color:var(--green)">${t("optKeySigninIsOn")}</div>
+        <div class="subtitle">${t("optKeySigninIsOnSub")}</div>
       </div>
     </div>`);
     card.appendChild(onRow);
 
     for (const k of confirmed.filter((c) => !c.wrappedKB64)) {
       const addToRow = el(`<div class="row">
-        <div class="grow"><div class="subtitle" style="font-size:13.5px">Add ${esc(k.label)} as a backup key</div></div>
-        <button class="small-outline">Add to sign-in</button>
+        <div class="grow"><div class="subtitle" style="font-size:13.5px">${t("optAddBackup", [esc(k.label)])}</div></div>
+        <button class="small-outline">${t("optAddToSignin")}</button>
       </div>`);
       addToRow.querySelector("button")!.addEventListener("click", async () => {
-        status.textContent = "Touch an enrolled key, then the new one…";
+        status.textContent = t("optTouchEnrolledThenNew");
         try {
           const { label } = await addTouchedKey(k.credentialIdB64);
-          status.textContent = `✓ ${label} added — it's now a backup key.`;
+          status.textContent = t("optBackupAdded", [label]);
           await populateSecurityKeys();
         } catch (e) {
-          status.textContent = `Couldn't add: ${(e as Error).message}`;
+          status.textContent = t("optAddFailed", [(e as Error).message]);
         }
       });
       card.appendChild(addToRow);
@@ -546,11 +539,11 @@ async function populateSecurityKeys(): Promise<void> {
 
     const offRow = el(`<div class="row">
       <div class="grow"></div>
-      <button class="small-outline" id="sk-off">Turn off key sign-in</button>
+      <button class="small-outline" id="sk-off">${t("optTurnOffKeySignin")}</button>
     </div>`);
     offRow.querySelector("#sk-off")!.addEventListener("click", async () => {
       await disableKeyRoute();
-      status.textContent = "Key sign-in turned off on this computer.";
+      status.textContent = t("optKeySigninOff");
       await populateSecurityKeys();
     });
     card.appendChild(offRow);

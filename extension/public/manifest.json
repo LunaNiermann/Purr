@@ -1,8 +1,9 @@
 {
   "manifest_version": 3,
-  "name": "Purr 2FA Authenticator",
+  "name": "__MSG_extName__",
   "version": "0.1.1",
-  "description": "Sign in on your computer with one tap. Purr brings your 2FA code from your phone or a security key. It never sees your secret.",
+  "description": "__MSG_extDescription__",
+  "default_locale": "en",
   "minimum_chrome_version": "116",
   "action": {
     "default_popup": "popup.html",
