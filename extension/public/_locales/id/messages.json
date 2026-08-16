@@ -1,125 +1,359 @@
 {
-  "extName": { "message": "Purr: Autentikator 2FA" },
-  "extDescription": { "message": "Masuk di komputer Anda dengan satu ketuk. Purr membawa kode 2FA Anda dari ponsel atau kunci keamanan. Ia tidak pernah melihat rahasia Anda." },
-
-  "barAllCodes": { "message": "Semua kode" },
-  "barSettings": { "message": "Pengaturan" },
-
-  "pairMyPhone": { "message": "Pasangkan ponsel saya" },
-  "tryAgain": { "message": "Coba lagi" },
-  "askAgain": { "message": "Minta lagi" },
-  "remove": { "message": "Hapus" },
-  "unpair": { "message": "Lepas pasangan" },
-  "copied": { "message": "Tersalin" },
-  "badgeMatched": { "message": "COCOK" },
-
-  "popupUnpairedTitle": { "message": "Ponsel Anda adalah kuncinya. Ini lubang kuncinya." },
-  "popupUnpairedSub": { "message": "Pasangkan ponsel sekali dan masuk jadi satu ketuk. Kode Anda tetap di ponsel — ekstensi ini tidak pernah melihat rahasianya." },
-  "popupNoFieldTitle": { "message": "Tidak ada yang diisi di sini." },
-  "popupNoFieldSub": { "message": "Buka ini di halaman yang meminta kode enam digit, dan kodenya bisa langsung datang dari ponsel Anda." },
-  "popupFillKey": { "message": "Isi dengan kunci saya" },
-  "popupFillKeySub": { "message": "Sentuh kunci keamanan Anda — ponsel tetap di saku" },
-  "popupAskPhone": { "message": "Minta ke ponsel saya" },
-  "popupAskPhoneSub": { "message": "Setujui di sana dan kodenya mendarat di sini" },
-  "popupReadyTitle": { "message": "Siap kapan pun Anda mau." },
-  "popupReadySubKey": { "message": "Sentuh kunci Anda untuk mengisi kode di sini, atau minta ke ponsel Anda." },
-  "popupReadySubPhone": { "message": "Kode Anda harus datang dari sesuatu yang Anda pegang — ponsel Anda." },
-  "popupReadyFootnote": { "message": "Hanya enam digit yang pernah sampai ke halaman. Anda bisa menutup ini — persetujuan ponsel tetap mengisi saat Anda ketuk Setujui." },
-  "popupKeyTouchTitle": { "message": "Sentuh kunci Anda" },
-  "popupKeyTouchSub": { "message": "Sentuh kunci keamanan Anda untuk membuka kode ini di sini — tidak ada yang keluar dari komputer ini selain enam digit." },
-  "popupKeyErrorTitle": { "message": "Tidak bisa menggunakan kunci Anda" },
-  "popupNoTab": { "message": "Tidak ada tab aktif untuk diisi." },
-  "popupSentTitle": { "message": "Dikirim ke ponsel Anda" },
-  "popupSentSub": { "message": "Setujui di sana dan kodenya mendarat di sini. Anda bisa menutup jendela ini — tetap berjalan." },
-  "cancel": { "message": "Batal" },
-  "popupFilledTitle": { "message": "Diisi untuk Anda." },
-  "popupFilledSub": { "message": "Ponsel Anda membuat kodenya dan hanya mengirim enam digit itu. Tidak ada yang lain menyeberang." },
-  "popupClipTitle": { "message": "Ini kode Anda." },
-  "popupClipSub": { "message": "Kami tidak menemukan kotak kode di halaman ini, jadi salin sendiri:" },
-  "popupCopyCode": { "message": "Salin {0} {1}" },
-  "popupDeniedTitle": { "message": "Anda menolak yang ini" },
-  "popupDeniedSub": { "message": "Tidak ada kode yang dikirim. Jika itu keliru, minta lagi — jika bukan, ubah kata sandi Anda untuk situs ini." },
-  "popupChangePassword": { "message": "Ubah kata sandi saya" },
-  "popupExpiredTitle": { "message": "Permintaan itu kehabisan waktu" },
-  "popupExpiredSub": { "message": "Permintaan kedaluwarsa setelah satu menit agar yang lama tidak disetujui tanpa sengaja. Tidak ada yang salah — cukup minta lagi." },
-  "popupUnreachableTitle": { "message": "Ponsel Anda tidak menjawab" },
-  "popupUnreachableSub": { "message": "Mungkin sedang tidur, tanpa sinyal, atau tengkurap di meja. Tidak ada yang salah dengan akun Anda." },
-  "popupOpenApp": { "message": "Atau buka aplikasi dan baca kodenya" },
-  "popupUnmatchedTitle": { "message": "Anda belum menyimpan {0}" },
-  "popupUnmatchedSub": { "message": "Jika Anda sudah punya akun ini di ponsel dengan nama lain, buka di sana dan setujui — popup ini akan mengingat kecocokannya lain kali." },
-
-  "optStepOf": { "message": "Langkah {0} dari 3" },
-  "optIntroHero": { "message": "Ponsel Anda adalah kuncinya. Ini lubang kuncinya." },
-  "optIntroCopy": { "message": "Memasangkan butuh sekitar satu menit. Setelah itu, masuk di mana pun cukup satu ketuk di ponsel — tak ada kode untuk diketik, tak ada yang perlu diingat." },
-  "optTick1": { "message": "Kode Anda tetap di ponsel. Ekstensi ini tidak pernah melihat rahasianya." },
-  "optTick2": { "message": "Bekerja tanpa akun. Tak ada yang perlu didaftarkan." },
-  "optTick3": { "message": "Lepas pasangan dari sisi mana pun, kapan saja." },
-  "optGetApp": { "message": "Unduh aplikasinya dulu, jika belum" },
-  "optScanErrTitle": { "message": "Tidak dapat menghubungi layanan pemasangan" },
-  "optScanErrCopy": { "message": "Periksa koneksi dan coba lagi. Belum ada yang disiapkan, jadi tidak ada yang setengah jalan." },
-  "optScanTitle": { "message": "Arahkan ponsel Anda ke sini" },
-  "optScanPath": { "message": "Keamanan → Pasangkan komputer" },
-  "optScanCopy": { "message": "Buka Purr di ponsel, ketuk {0}, lalu arahkan ke kotak." },
-  "optWaitingPhone": { "message": "Menunggu ponsel Anda…" },
-  "optBack": { "message": "Kembali" },
-  "optDefaultPhone": { "message": "Ponsel Anda" },
-  "optPairedTitle": { "message": "Terpasang dengan \"{0}\"" },
-  "optPairedCopy": { "message": "Lain kali sebuah situs meminta kode, ekstensi ini akan mengenalinya dan bertanya ke ponsel Anda. Anda cukup ketuk Setujui." },
-  "optPairedJustNow": { "message": "Baru saja terpasang" },
-  "optActive": { "message": "AKTIF" },
-  "optDone": { "message": "Selesai" },
-  "optToday": { "message": "hari ini" },
-  "optYesterday": { "message": "kemarin" },
-  "optDaysAgo": { "message": "{0} hari lalu" },
-  "optMonthAgo": { "message": "{0} bulan lalu" },
-  "optMonthsAgo": { "message": "{0} bulan lalu" },
-  "optRuleAlwaysPhone": { "message": "Selalu tanya ponsel saya" },
-  "optRuleNeverAutofill": { "message": "Jangan pernah isi otomatis" },
-  "optSettingsTitle": { "message": "Pengaturan Purr" },
-  "optSecWhenAsks": { "message": "Saat situs meminta kode" },
-  "optFillAuto": { "message": "Isikan untuk saya secara otomatis" },
-  "optFillAutoSub": { "message": "Setelah Anda menyetujui — kami tidak pernah mengisi tanpa satu ketukan di suatu tempat" },
-  "optSubmit": { "message": "Kirim formulir setelah terisi" },
-  "optSubmitSub": { "message": "Menghemat satu klik; matikan jika sebuah situs berperilaku aneh" },
-  "optLeadKey": { "message": "Utamakan kunci keamanan saya" },
-  "optLeadKeySub": { "message": "Tawarkan sentuhan kunci dulu; ponsel Anda tetap sejauh satu ketukan" },
-  "optSecSiteRules": { "message": "Situs dengan aturan sendiri" },
-  "optSecKeys": { "message": "Masuk dengan kunci keamanan" },
-  "optExperimental": { "message": "· eksperimental" },
-  "optKeysBlurb": { "message": "Sentuh kunci terdaftar untuk mengisi kode di komputer ini dengan ponsel di saku. Kode Anda ada di sini hanya sebagai teks terenkripsi; kuncilah yang membukanya." },
-  "optSecDevices": { "message": "Perangkat terpasang" },
-  "optPaired": { "message": "Terpasang {0}" },
-  "optLastUsed": { "message": "baru dipakai" },
-  "optUnpairNote": { "message": "Melepas pasangan hanya memengaruhi browser ini. Kode Anda tetap di ponsel, tak tersentuh." },
-  "optNoRules": { "message": "Belum ada aturan khusus. Aturan muncul di sini saat Anda menambahkannya." },
-  "optRulePlaceholder": { "message": "situs.contoh.com" },
-  "optNoWebauthn": { "message": "Browser ini tidak mendukung kunci keamanan." },
-  "optKeyReady": { "message": "Siap" },
-  "optKeyNotConfirmed": { "message": "Belum dikonfirmasi — ketuk Uji buka kunci" },
-  "optAddedOn": { "message": "Ditambahkan {0}" },
-  "optKeyNamePlaceholder": { "message": "Beri nama kunci ini (mis. YubiKey)" },
-  "optAddKey": { "message": "Tambahkan kunci keamanan" },
-  "optDefaultKeyLabel": { "message": "Kunci keamanan" },
-  "optTouchKey": { "message": "Sentuh kunci Anda…" },
-  "optKeyRegistered": { "message": "✓ {0} terdaftar. Ketuk \"Uji buka kunci\" dan sentuh untuk mengonfirmasi." },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} terdaftar, tetapi mungkin tidak mendukung sentuh-untuk-membuka. Coba Uji buka kunci untuk memastikan." },
-  "optRegisterFailed": { "message": "Tidak bisa mendaftar: {0}" },
-  "optConfirmTouch": { "message": "Konfirmasi bahwa sentuhan membuka brankas" },
-  "optTestUnlock": { "message": "Uji buka kunci" },
-  "optUnlockOk": { "message": "✓ {0} membuka Purr di sini. Semua siap." },
-  "optYourKey": { "message": "Kunci Anda" },
-  "optUnlockFailed": { "message": "Gagal membuka kunci: {0}" },
-  "optTurnOnKeySignin": { "message": "Aktifkan masuk dengan kunci Anda" },
-  "optEnableKeySignin": { "message": "Aktifkan masuk dengan kunci" },
-  "optKeySigninOn": { "message": "✓ Masuk dengan kunci aktif dengan {0}. Buka aplikasi ponsel sekali agar brankas Anda tersinkron di sini." },
-  "optEnableFailed": { "message": "Tidak bisa mengaktifkan: {0}" },
-  "optKeySigninIsOn": { "message": "Masuk dengan kunci aktif" },
-  "optKeySigninIsOnSub": { "message": "Di kolom kode sebuah situs, sentuh kunci Anda untuk mengisinya — ponsel Anda tetap di saku." },
-  "optAddBackup": { "message": "Tambahkan {0} sebagai kunci cadangan" },
-  "optAddToSignin": { "message": "Tambahkan ke proses masuk" },
-  "optTouchEnrolledThenNew": { "message": "Sentuh kunci terdaftar, lalu yang baru…" },
-  "optBackupAdded": { "message": "✓ {0} ditambahkan — kini jadi kunci cadangan." },
-  "optAddFailed": { "message": "Tidak bisa menambahkan: {0}" },
-  "optTurnOffKeySignin": { "message": "Matikan masuk dengan kunci" },
-  "optKeySigninOff": { "message": "Masuk dengan kunci dimatikan di komputer ini." }
+  "extName": {
+    "message": "Purr: Autentikator 2FA"
+  },
+  "extDescription": {
+    "message": "Masuk di komputer Anda dengan satu ketuk. Purr membawa kode 2FA Anda dari ponsel atau kunci keamanan. Ia tidak pernah melihat rahasia Anda."
+  },
+  "barAllCodes": {
+    "message": "Semua kode"
+  },
+  "barSettings": {
+    "message": "Pengaturan"
+  },
+  "pairMyPhone": {
+    "message": "Pasangkan ponsel saya"
+  },
+  "tryAgain": {
+    "message": "Coba lagi"
+  },
+  "askAgain": {
+    "message": "Minta lagi"
+  },
+  "remove": {
+    "message": "Hapus"
+  },
+  "unpair": {
+    "message": "Lepas pasangan"
+  },
+  "copied": {
+    "message": "Tersalin"
+  },
+  "badgeMatched": {
+    "message": "COCOK"
+  },
+  "popupUnpairedTitle": {
+    "message": "Ponsel Anda adalah kuncinya. Ini lubang kuncinya."
+  },
+  "popupUnpairedSub": {
+    "message": "Pasangkan ponsel sekali dan masuk jadi satu ketuk. Kode Anda tetap di ponsel — ekstensi ini tidak pernah melihat rahasianya."
+  },
+  "popupNoFieldTitle": {
+    "message": "Tidak ada yang diisi di sini."
+  },
+  "popupNoFieldSub": {
+    "message": "Buka ini di halaman yang meminta kode enam digit, dan kodenya bisa langsung datang dari ponsel Anda."
+  },
+  "popupFillKey": {
+    "message": "Isi dengan kunci saya"
+  },
+  "popupFillKeySub": {
+    "message": "Sentuh kunci keamanan Anda — ponsel tetap di saku"
+  },
+  "popupAskPhone": {
+    "message": "Minta ke ponsel saya"
+  },
+  "popupAskPhoneSub": {
+    "message": "Setujui di sana dan kodenya mendarat di sini"
+  },
+  "popupReadyTitle": {
+    "message": "Siap kapan pun Anda mau."
+  },
+  "popupReadySubKey": {
+    "message": "Sentuh kunci Anda untuk mengisi kode di sini, atau minta ke ponsel Anda."
+  },
+  "popupReadySubPhone": {
+    "message": "Kode Anda harus datang dari sesuatu yang Anda pegang — ponsel Anda."
+  },
+  "popupReadyFootnote": {
+    "message": "Hanya enam digit yang pernah sampai ke halaman. Anda bisa menutup ini — persetujuan ponsel tetap mengisi saat Anda ketuk Setujui."
+  },
+  "popupKeyTouchTitle": {
+    "message": "Sentuh kunci Anda"
+  },
+  "popupKeyTouchSub": {
+    "message": "Sentuh kunci keamanan Anda untuk membuka kode ini di sini — tidak ada yang keluar dari komputer ini selain enam digit."
+  },
+  "popupKeyErrorTitle": {
+    "message": "Tidak bisa menggunakan kunci Anda"
+  },
+  "popupNoTab": {
+    "message": "Tidak ada tab aktif untuk diisi."
+  },
+  "popupSentTitle": {
+    "message": "Dikirim ke ponsel Anda"
+  },
+  "popupSentSub": {
+    "message": "Setujui di sana dan kodenya mendarat di sini. Anda bisa menutup jendela ini — tetap berjalan."
+  },
+  "cancel": {
+    "message": "Batal"
+  },
+  "popupFilledTitle": {
+    "message": "Diisi untuk Anda."
+  },
+  "popupFilledSub": {
+    "message": "Ponsel Anda membuat kodenya dan hanya mengirim enam digit itu. Tidak ada yang lain menyeberang."
+  },
+  "popupClipTitle": {
+    "message": "Ini kode Anda."
+  },
+  "popupClipSub": {
+    "message": "Kami tidak menemukan kotak kode di halaman ini, jadi salin sendiri:"
+  },
+  "popupCopyCode": {
+    "message": "Salin {0} {1}"
+  },
+  "popupDeniedTitle": {
+    "message": "Anda menolak yang ini"
+  },
+  "popupDeniedSub": {
+    "message": "Tidak ada kode yang dikirim. Jika itu keliru, minta lagi — jika bukan, ubah kata sandi Anda untuk situs ini."
+  },
+  "popupChangePassword": {
+    "message": "Ubah kata sandi saya"
+  },
+  "popupExpiredTitle": {
+    "message": "Permintaan itu kehabisan waktu"
+  },
+  "popupExpiredSub": {
+    "message": "Permintaan kedaluwarsa setelah satu menit agar yang lama tidak disetujui tanpa sengaja. Tidak ada yang salah — cukup minta lagi."
+  },
+  "popupUnreachableTitle": {
+    "message": "Ponsel Anda tidak menjawab"
+  },
+  "popupUnreachableSub": {
+    "message": "Mungkin sedang tidur, tanpa sinyal, atau tengkurap di meja. Tidak ada yang salah dengan akun Anda."
+  },
+  "popupOpenApp": {
+    "message": "Atau buka aplikasi dan baca kodenya"
+  },
+  "popupUnmatchedTitle": {
+    "message": "Anda belum menyimpan {0}"
+  },
+  "popupUnmatchedSub": {
+    "message": "Jika Anda sudah punya akun ini di ponsel dengan nama lain, buka di sana dan setujui — popup ini akan mengingat kecocokannya lain kali."
+  },
+  "optStepOf": {
+    "message": "Langkah {0} dari 3"
+  },
+  "optIntroHero": {
+    "message": "Ponsel Anda adalah kuncinya. Ini lubang kuncinya."
+  },
+  "optIntroCopy": {
+    "message": "Memasangkan butuh sekitar satu menit. Setelah itu, masuk di mana pun cukup satu ketuk di ponsel — tak ada kode untuk diketik, tak ada yang perlu diingat."
+  },
+  "optTick1": {
+    "message": "Kode Anda tetap di ponsel. Ekstensi ini tidak pernah melihat rahasianya."
+  },
+  "optTick2": {
+    "message": "Bekerja tanpa akun. Tak ada yang perlu didaftarkan."
+  },
+  "optTick3": {
+    "message": "Lepas pasangan dari sisi mana pun, kapan saja."
+  },
+  "optGetApp": {
+    "message": "Unduh aplikasinya dulu, jika belum"
+  },
+  "optScanErrTitle": {
+    "message": "Tidak dapat menghubungi layanan pemasangan"
+  },
+  "optScanErrCopy": {
+    "message": "Periksa koneksi dan coba lagi. Belum ada yang disiapkan, jadi tidak ada yang setengah jalan."
+  },
+  "optScanTitle": {
+    "message": "Arahkan ponsel Anda ke sini"
+  },
+  "optScanPath": {
+    "message": "Keamanan → Pasangkan komputer"
+  },
+  "optScanCopy": {
+    "message": "Buka Purr di ponsel, ketuk {0}, lalu arahkan ke kotak."
+  },
+  "optWaitingPhone": {
+    "message": "Menunggu ponsel Anda…"
+  },
+  "optBack": {
+    "message": "Kembali"
+  },
+  "optDefaultPhone": {
+    "message": "Ponsel Anda"
+  },
+  "optPairedTitle": {
+    "message": "Terpasang dengan \"{0}\""
+  },
+  "optPairedCopy": {
+    "message": "Lain kali sebuah situs meminta kode, ekstensi ini akan mengenalinya dan bertanya ke ponsel Anda. Anda cukup ketuk Setujui."
+  },
+  "optPairedJustNow": {
+    "message": "Baru saja terpasang"
+  },
+  "optActive": {
+    "message": "AKTIF"
+  },
+  "optDone": {
+    "message": "Selesai"
+  },
+  "optToday": {
+    "message": "hari ini"
+  },
+  "optYesterday": {
+    "message": "kemarin"
+  },
+  "optDaysAgo": {
+    "message": "{0} hari lalu"
+  },
+  "optMonthAgo": {
+    "message": "{0} bulan lalu"
+  },
+  "optMonthsAgo": {
+    "message": "{0} bulan lalu"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "Selalu tanya ponsel saya"
+  },
+  "optRuleNeverAutofill": {
+    "message": "Jangan pernah isi otomatis"
+  },
+  "optSettingsTitle": {
+    "message": "Pengaturan Purr"
+  },
+  "optSecWhenAsks": {
+    "message": "Saat situs meminta kode"
+  },
+  "optFillAuto": {
+    "message": "Isikan untuk saya secara otomatis"
+  },
+  "optFillAutoSub": {
+    "message": "Setelah Anda menyetujui — kami tidak pernah mengisi tanpa satu ketukan di suatu tempat"
+  },
+  "optSubmit": {
+    "message": "Kirim formulir setelah terisi"
+  },
+  "optSubmitSub": {
+    "message": "Menghemat satu klik; matikan jika sebuah situs berperilaku aneh"
+  },
+  "optLeadKey": {
+    "message": "Utamakan kunci keamanan saya"
+  },
+  "optLeadKeySub": {
+    "message": "Tawarkan sentuhan kunci dulu; ponsel Anda tetap sejauh satu ketukan"
+  },
+  "optSecSiteRules": {
+    "message": "Situs dengan aturan sendiri"
+  },
+  "optSecKeys": {
+    "message": "Masuk dengan kunci keamanan"
+  },
+  "optExperimental": {
+    "message": "· eksperimental"
+  },
+  "optKeysBlurb": {
+    "message": "Sentuh kunci terdaftar untuk mengisi kode di komputer ini dengan ponsel di saku. Kode Anda ada di sini hanya sebagai teks terenkripsi; kuncilah yang membukanya."
+  },
+  "optSecDevices": {
+    "message": "Perangkat terpasang"
+  },
+  "optPaired": {
+    "message": "Terpasang {0}"
+  },
+  "optLastUsed": {
+    "message": "baru dipakai"
+  },
+  "optUnpairNote": {
+    "message": "Melepas pasangan hanya memengaruhi browser ini. Kode Anda tetap di ponsel, tak tersentuh."
+  },
+  "optNoRules": {
+    "message": "Belum ada aturan khusus. Aturan muncul di sini saat Anda menambahkannya."
+  },
+  "optRulePlaceholder": {
+    "message": "situs.contoh.com"
+  },
+  "optNoWebauthn": {
+    "message": "Browser ini tidak mendukung kunci keamanan."
+  },
+  "optKeyReady": {
+    "message": "Siap"
+  },
+  "optKeyNotConfirmed": {
+    "message": "Belum dikonfirmasi — ketuk Uji buka kunci"
+  },
+  "optAddedOn": {
+    "message": "Ditambahkan {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "Beri nama kunci ini (mis. YubiKey)"
+  },
+  "optAddKey": {
+    "message": "Tambahkan kunci keamanan"
+  },
+  "optDefaultKeyLabel": {
+    "message": "Kunci keamanan"
+  },
+  "optTouchKey": {
+    "message": "Sentuh kunci Anda…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} terdaftar. Ketuk \"Uji buka kunci\" dan sentuh untuk mengonfirmasi."
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} terdaftar, tetapi mungkin tidak mendukung sentuh-untuk-membuka. Coba Uji buka kunci untuk memastikan."
+  },
+  "optRegisterFailed": {
+    "message": "Tidak bisa mendaftar: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "Konfirmasi bahwa sentuhan membuka brankas"
+  },
+  "optTestUnlock": {
+    "message": "Uji buka kunci"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0} membuka Purr di sini. Semua siap."
+  },
+  "optYourKey": {
+    "message": "Kunci Anda"
+  },
+  "optUnlockFailed": {
+    "message": "Gagal membuka kunci: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "Aktifkan masuk dengan kunci Anda"
+  },
+  "optEnableKeySignin": {
+    "message": "Aktifkan masuk dengan kunci"
+  },
+  "optKeySigninOn": {
+    "message": "✓ Masuk dengan kunci aktif dengan {0}. Buka aplikasi ponsel sekali agar brankas Anda tersinkron di sini."
+  },
+  "optEnableFailed": {
+    "message": "Tidak bisa mengaktifkan: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "Masuk dengan kunci aktif"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "Di kolom kode sebuah situs, sentuh kunci Anda untuk mengisinya — ponsel Anda tetap di saku."
+  },
+  "optAddBackup": {
+    "message": "Tambahkan {0} sebagai kunci cadangan"
+  },
+  "optAddToSignin": {
+    "message": "Tambahkan ke proses masuk"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "Sentuh kunci terdaftar, lalu yang baru…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} ditambahkan — kini jadi kunci cadangan."
+  },
+  "optAddFailed": {
+    "message": "Tidak bisa menambahkan: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "Matikan masuk dengan kunci"
+  },
+  "optKeySigninOff": {
+    "message": "Masuk dengan kunci dimatikan di komputer ini."
+  }
 }
