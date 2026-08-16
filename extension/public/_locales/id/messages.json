@@ -355,5 +355,14 @@
   },
   "optKeySigninOff": {
     "message": "Masuk dengan kunci dimatikan di komputer ini."
+  },
+  "optLanguage": {
+    "message": "Bahasa"
+  },
+  "optLanguageAuto": {
+    "message": "Ikuti browser saya"
+  },
+  "optLanguageSub": {
+    "message": "Pilih bahasa yang Purr gunakan di sini"
   }
 }
