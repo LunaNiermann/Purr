@@ -14,14 +14,41 @@
   "unlocking": "Entsperren…",
   "useMyPassword": "Mein Passwort verwenden",
   "unlockYourCodes": "Deine Codes entsperren",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Sprache",
   "languageSubtitle": "Wähle, in welcher Sprache Purr mit dir spricht",
   "languageSystemDefault": "Wie mein Gerät",
   "accountCount": "{count, plural, =1{1 Konto} other{{count} Konten}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Konten suchen",
   "cancel": "Abbrechen",
   "tapToCopySeconds": "ZUM KOPIEREN TIPPEN · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} von {total, plural, =1{1 Konto} other{{total} Konten}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Kopiert",
   "searchScopeNote": "Die Suche berücksichtigt den Namen der Website und deinen Benutzernamen – nicht die Codes selbst.",
   "emptyVaultTitle": "Noch keine Konten",
@@ -36,7 +63,19 @@
   "detailAsked": "Angefragt",
   "justNow": "Gerade eben",
   "secondsAgo": "{count, plural, =1{vor 1 Sekunde} other{vor {count} Sekunden}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Für welches Konto ist das? Es ist nicht unter {domain} gespeichert.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Code senden",
   "didntAskForThis": "Das war ich nicht",
   "justShowCode": "Zeig mir nur den Code",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Bestätige, dass du es wirklich bist",
   "youreIn": "Du bist drin.",
   "signingYouIn": "{domain} meldet dich gerade auf deinem Computer an. Nichts mehr zu tippen.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "Der gesendete Code läuft in 30 Sekunden ab und kann nur einmal verwendet werden.",
   "done": "Fertig",
   "blockedNothingSent": "Blockiert. Es wurde nichts gesendet.",
   "deniedBody": "Jemand hat versucht, sich als du anzumelden. Deine Codes haben dieses Handy nie verlassen – sie bekamen nichts.",
   "deniedChangePassword": "Falls das kein Versehen war, ändere heute dein {domain}-Passwort. Das Passwort ist der Teil, den sie haben.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Verstanden",
   "typeThisInto": "Gib das ein bei",
   "newCodeInSeconds": "Neuer Code in {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "An deinen Browser wurde nichts gesendet. Tippe oder füge ihn selbst ein.",
   "copyCode": "Code kopieren",
   "intrusionBadge": "BLOCKIERT · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "gerade eben",
   "relativeMinutesAgo": "{count, plural, =1{vor 1 Minute} other{vor {count} Minuten}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{vor 1 Stunde} other{vor {count} Stunden}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Jemand hat dein {domain}-Passwort.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Sie kamen nicht rein – sie bräuchten auch dieses Handy. Aber das Passwort selbst ist draußen, also solltest du es heute ändern.",
   "intrusionTried": "Versuche",
   "triedTimes": "{count, plural, =1{1 Mal} other{{count} Mal}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Okay",
   "muteToday": "Anfragen für diese Seite heute stummschalten"
 }
