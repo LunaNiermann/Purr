@@ -9,11 +9,12 @@
 files:
   # Flutter app — ARB. English is the source; the rest are translations.
   #
-  # After `crowdin download`, check the `@@locale` key in each downloaded ARB.
+  # After `crowdin download`, run:
+  #     python3 scripts/check_arb_locales.py --fix
   # Filenames use %two_letters_code% (app_es.arb), but for regional targets like
   # Spanish (Spain) and Portuguese (Portugal), Crowdin writes the full code into
   # `@@locale` ("es-ES", "pt-PT"). Flutter's gen-l10n rejects that mismatch and
-  # `flutter pub get` fails, so re-normalize `@@locale` to the two-letter code.
+  # `flutter pub get` fails. CI's l10n job checks this too.
   - source: /app/lib/l10n/app_en.arb
     translation: /app/lib/l10n/app_%two_letters_code%.arb
     type: arb

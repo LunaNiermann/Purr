@@ -4,8 +4,23 @@ on:
   push:
     branches: [main]
   pull_request:
+  # Translation syncs land on main without triggering push/pull_request runs,
+  # so a broken commit can sit unchecked until a release build trips over it.
+  # The nightly run bounds that window; workflow_dispatch is for checking on demand.
+  schedule:
+    - cron: '0 6 * * *'
+  workflow_dispatch:
 
 jobs:
+  # Fails fast and independently of the Flutter toolchain: gen-l10n rejects an
+  # ARB whose @@locale disagrees with its filename, which breaks `flutter pub get`
+  # for every platform. Reports all offending files, not just the first.
+  l10n:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - run: python3 scripts/check_arb_locales.py
+
   app:
     runs-on: ubuntu-latest
     defaults:
