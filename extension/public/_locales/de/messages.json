@@ -3,7 +3,7 @@
     "message": "Purr: 2FA-Authenticator"
   },
   "extDescription": {
-    "message": "Melde dich an deinem Computer mit einem Tippen an. Purr holt deinen 2FA-Code von deinem Handy oder einem Sicherheitsschlüssel. Es sieht dein Geheimnis nie."
+    "message": "Melde dich an deinem Computer mit einem Tippen an. Purr holt deinen 2FA-Code von deinem Handy oder einem Sicherheitsschlüssel. Es sieht deinen Accountschlüssel nie."
   },
   "barAllCodes": {
     "message": "Alle Codes"
