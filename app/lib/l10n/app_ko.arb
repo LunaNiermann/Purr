@@ -373,8 +373,16 @@
   "secShowExport": "내 내보내기 코드 표시",
   "secExportReason": "계정을 내보내려면 확인하세요",
   "secYourComputer": "당신의 컴퓨터",
+  "secYourComputers": "당신의 컴퓨터",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "브라우저 확장 프로그램을 페어링하면 컴퓨터에서 로그인이 여기서 한 번의 탭이 됩니다.",
   "secComputerPaired": "사이트가 브라우저에 코드를 요청하면 이 휴대폰이 요청을 받습니다.",
+  "secComputersPaired": "사이트가 브라우저 중 하나에 코드를 요청하면 이 휴대폰이 요청을 받습니다.",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "당신의 브라우저",
   "secPairedOn": "{date} 페어링됨",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "페어링 해제",
+  "secPairAnother": "다른 컴퓨터 페어링",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "알림 확인 중…",
   "secPushReady": "알림 준비됨",
   "secPushTurnOn": "알림을 켜서 알림을 받으세요",
