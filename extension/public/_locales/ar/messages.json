@@ -1,128 +1,368 @@
 {
-  "extName": { "message": "Purr: مصادِق 2FA" },
-  "extDescription": { "message": "سجّل الدخول على حاسوبك بنقرة واحدة. يجلب Purr رمز 2FA من هاتفك أو من مفتاح أمان. وهو لا يرى سرّك أبدًا." },
-
-  "barAllCodes": { "message": "كل الرموز" },
-  "barSettings": { "message": "الإعدادات" },
-
-  "pairMyPhone": { "message": "إقران هاتفي" },
-  "tryAgain": { "message": "أعد المحاولة" },
-  "askAgain": { "message": "اطلب مجددًا" },
-  "remove": { "message": "إزالة" },
-  "unpair": { "message": "إلغاء الإقران" },
-  "copied": { "message": "تم النسخ" },
-  "badgeMatched": { "message": "مطابق" },
-
-  "popupUnpairedTitle": { "message": "هاتفك هو المفتاح. وهذا هو ثقب المفتاح." },
-  "popupUnpairedSub": { "message": "اقرن هاتفك مرة واحدة ويصبح تسجيل الدخول نقرة. تبقى رموزك على الهاتف — لا ترى هذه الإضافة السرّ أبدًا." },
-  "popupNoFieldTitle": { "message": "لا شيء لتعبئته هنا." },
-  "popupNoFieldSub": { "message": "افتح هذا في صفحة تطلب رمزًا من ستة أرقام، ويمكن أن يأتي الرمز مباشرة من هاتفك." },
-  "popupFillKey": { "message": "التعبئة بمفتاحي" },
-  "popupFillKeySub": { "message": "المس مفتاح الأمان — يبقى هاتفك في جيبك" },
-  "popupAskPhone": { "message": "اسأل هاتفي" },
-  "popupAskPhoneSub": { "message": "وافق هناك ويصل الرمز إلى هنا" },
-  "popupReadyTitle": { "message": "جاهز حين تكون مستعدًا." },
-  "popupReadySubKey": { "message": "المس مفتاحك لتعبئة الرمز هنا، أو اسأل هاتفك." },
-  "popupReadySubPhone": { "message": "يجب أن يأتي رمزك من شيء تمسكه — هاتفك." },
-  "popupReadyFootnote": { "message": "لا تصل الصفحة سوى الأرقام الستة. يمكنك إغلاق هذا — تُكمل موافقة الهاتف التعبئة عند نقرك موافقة." },
-  "popupKeyTouchTitle": { "message": "المس مفتاحك" },
-  "popupKeyTouchSub": { "message": "المس مفتاح الأمان لفتح هذا الرمز هنا — لا يغادر هذا الحاسوب سوى الأرقام الستة." },
-  "popupKeyErrorTitle": { "message": "تعذّر استخدام مفتاحك" },
-  "popupNoTab": { "message": "لا توجد علامة تبويب نشطة للتعبئة." },
-  "popupSentTitle": { "message": "أُرسل إلى هاتفك" },
-  "popupSentSub": { "message": "وافق هناك ويصل الرمز إلى هنا. يمكنك إغلاق هذه النافذة — تظل تعمل." },
-  "cancel": { "message": "إلغاء" },
-  "popupFilledTitle": { "message": "عُبّئ من أجلك." },
-  "popupFilledSub": { "message": "أنشأ هاتفك الرمز وأرسل تلك الأرقام الستة فقط. لم يعبر شيء آخر." },
-  "popupClipTitle": { "message": "إليك رمزك." },
-  "popupClipSub": { "message": "لم نعثر على خانة الرمز في هذه الصفحة، لذا انسخه بنفسك:" },
-  "popupCopyCode": { "message": "نسخ {0} {1}" },
-  "popupDeniedTitle": { "message": "لقد رفضت هذا" },
-  "popupDeniedSub": { "message": "لم يُرسل أي رمز. إن كان ذلك خطأً فاطلب مجددًا — وإن لم يكن، فغيّر كلمة مرورك لهذا الموقع." },
-  "popupChangePassword": { "message": "تغيير كلمة مروري" },
-  "popupExpiredTitle": { "message": "انتهت مهلة هذا الطلب" },
-  "popupExpiredSub": { "message": "تنتهي صلاحية الطلبات بعد دقيقة حتى لا يُوافَق على طلب قديم عن طريق الخطأ. لم يحدث خطأ — فقط اطلب مجددًا." },
-  "popupUnreachableTitle": { "message": "لم يستجب هاتفك" },
-  "popupUnreachableSub": { "message": "قد يكون نائمًا أو خارج التغطية أو موضوعًا على وجهه فوق طاولة. لا خطب في حسابك." },
-  "popupOpenApp": { "message": "أو افتح التطبيق واقرأ الرمز" },
-  "popupUnmatchedTitle": { "message": "لم تحفظ {0} بعد" },
-  "popupUnmatchedSub": { "message": "إن كان لديك هذا الحساب على هاتفك باسم آخر، فافتحه هناك ووافق — سيتذكر هذا المنبثق المطابقة في المرة القادمة." },
-
-  "optStepOf": { "message": "الخطوة {0} من 3" },
-  "optIntroHero": { "message": "هاتفك هو المفتاح. وهذا هو ثقب المفتاح." },
-  "optIntroCopy": { "message": "يستغرق الإقران نحو دقيقة. بعدها، يصبح تسجيل الدخول في أي مكان نقرة على هاتفك — لا رموز تُكتب ولا شيء يُحفظ." },
-  "optTick1": { "message": "تبقى رموزك على هاتفك. لا ترى هذه الإضافة السرّ أبدًا." },
-  "optTick2": { "message": "يعمل دون حساب. لا شيء للتسجيل فيه." },
-  "optTick3": { "message": "ألغِ الإقران من أي جهة، في أي وقت." },
-  "optGetApp": { "message": "احصل على التطبيق أولًا إن لم تكن قد فعلت" },
-  "optScanErrTitle": { "message": "تعذّر الوصول إلى خدمة الإقران" },
-  "optScanErrCopy": { "message": "تحقق من الاتصال وحاول مجددًا. لم يُعدّ شيء بعد، فلا شيء نصف منجز." },
-  "optScanTitle": { "message": "وجّه هاتفك إلى هذا" },
-  "optScanPath": { "message": "الأمان ← إقران حاسوب" },
-  "optScanCopy": { "message": "افتح Purr على هاتفك، والمس {0}، ثم ارفعه أمام المربع." },
-  "optWaitingPhone": { "message": "بانتظار هاتفك…" },
-  "optBack": { "message": "رجوع" },
-  "optDefaultPhone": { "message": "هاتفك" },
-  "optPairedTitle": { "message": "مقترن بـ \"{0}\"" },
-  "optPairedCopy": { "message": "في المرة القادمة التي يطلب فيها موقع رمزًا، ستكتشفه هذه الإضافة وتسأل هاتفك. ما عليك سوى نقر موافقة." },
-  "optPairedJustNow": { "message": "اقترن للتو" },
-  "optActive": { "message": "نشط" },
-  "optDone": { "message": "تم" },
-  "optToday": { "message": "اليوم" },
-  "optYesterday": { "message": "أمس" },
-  "optDaysAgo": { "message": "قبل {0} أيام" },
-  "optMonthAgo": { "message": "قبل شهر" },
-  "optMonthsAgo": { "message": "قبل {0} أشهر" },
-  "optRuleAlwaysPhone": { "message": "اسأل هاتفي دائمًا" },
-  "optRuleNeverAutofill": { "message": "لا تعبّئ تلقائيًا أبدًا" },
-  "optSettingsTitle": { "message": "إعدادات Purr" },
-  "optSecWhenAsks": { "message": "عندما يطلب موقع رمزًا" },
-  "optFillAuto": { "message": "عبّئه لي تلقائيًا" },
-  "optFillAutoSub": { "message": "بعد موافقتك — لا نعبّئ أبدًا دون نقرة في مكان ما" },
-  "optSubmit": { "message": "أرسل النموذج بمجرد تعبئته" },
-  "optSubmitSub": { "message": "يوفّر نقرة؛ أوقفه إذا تصرّف موقع بغرابة" },
-  "optLeadKey": { "message": "ابدأ بمفتاح الأمان" },
-  "optLeadKeySub": { "message": "اعرض لمسة المفتاح أولًا؛ يبقى هاتفك على بُعد نقرة" },
-  "optSecSiteRules": { "message": "مواقع بقواعدها الخاصة" },
-  "optSecKeys": { "message": "تسجيل الدخول بمفتاح أمان" },
-  "optExperimental": { "message": "· تجريبي" },
-  "optKeysBlurb": { "message": "المس مفتاحًا مسجَّلًا لتعبئة رمز على هذا الحاسوب وهاتفك في جيبك. تعيش رموزك هنا كنص مشفّر فقط؛ والمفتاح هو ما يفتحها." },
-  "optSecDevices": { "message": "الأجهزة المقترنة" },
-  "optPaired": { "message": "اقترن {0}" },
-  "optLastUsed": { "message": "استُخدم مؤخرًا" },
-  "optUnpairNote": { "message": "إلغاء الإقران يؤثر على هذا المتصفح فقط. تبقى رموزك على هاتفك دون مساس." },
-  "optNoRules": { "message": "لا قواعد خاصة بعد. تظهر هنا عندما تضيف واحدة." },
-  "optRulePlaceholder": { "message": "site.example.com" },
-  "optNoWebauthn": { "message": "هذا المتصفح لا يدعم مفاتيح الأمان." },
-  "optKeyReady": { "message": "جاهز" },
-  "optKeyNotConfirmed": { "message": "غير مؤكَّد — انقر اختبار الفتح" },
-  "optAddedOn": { "message": "أُضيف {0}" },
-  "optKeyNamePlaceholder": { "message": "سمِّ هذا المفتاح (مثل YubiKey)" },
-  "optAddKey": { "message": "إضافة مفتاح أمان" },
-  "optDefaultKeyLabel": { "message": "مفتاح أمان" },
-  "optTouchKey": { "message": "المس مفتاحك…" },
-  "optKeyRegistered": { "message": "✓ سُجّل {0}. انقر \"اختبار الفتح\" والمسه للتأكيد." },
-  "optKeyRegisteredWarn": { "message": "⚠ سُجّل {0}، لكنه قد لا يدعم الفتح باللمس. جرّب اختبار الفتح للتأكد." },
-  "optRegisterFailed": { "message": "تعذّر التسجيل: {0}" },
-  "optConfirmTouch": { "message": "أكّد أن لمسة تفتح الخزنة" },
-  "optTestUnlock": { "message": "اختبار الفتح" },
-  "optUnlockOk": { "message": "✓ يفتح {0} تطبيق Purr هنا. كل شيء جاهز." },
-  "optYourKey": { "message": "مفتاحك" },
-  "optUnlockFailed": { "message": "فشل الفتح: {0}" },
-  "optTurnOnKeySignin": { "message": "تفعيل تسجيل الدخول بمفتاحك" },
-  "optEnableKeySignin": { "message": "تفعيل الدخول بالمفتاح" },
-  "optKeySigninOn": { "message": "✓ الدخول بالمفتاح مُفعَّل مع {0}. افتح تطبيق الهاتف مرة ليزامن خزنتك هنا." },
-  "optEnableFailed": { "message": "تعذّر التفعيل: {0}" },
-  "optKeySigninIsOn": { "message": "الدخول بالمفتاح مُفعَّل" },
-  "optKeySigninIsOnSub": { "message": "في خانة الرمز بموقع ما، المس مفتاحك لتعبئته — يبقى هاتفك في جيبك." },
-  "optAddBackup": { "message": "أضف {0} كمفتاح احتياطي" },
-  "optAddToSignin": { "message": "أضف إلى تسجيل الدخول" },
-  "optTouchEnrolledThenNew": { "message": "المس مفتاحًا مسجَّلًا ثم الجديد…" },
-  "optBackupAdded": { "message": "✓ أُضيف {0} — أصبح الآن مفتاحًا احتياطيًا." },
-  "optAddFailed": { "message": "تعذّرت الإضافة: {0}" },
-  "optTurnOffKeySignin": { "message": "إيقاف الدخول بالمفتاح" },
-  "optKeySigninOff": { "message": "أُوقف الدخول بالمفتاح على هذا الحاسوب." },
-  "optLanguage": { "message": "اللغة" },
-  "optLanguageAuto": { "message": "حسب متصفحي" },
-  "optLanguageSub": { "message": "اختر اللغة التي يخاطبك بها Purr هنا" }
+  "extName": {
+    "message": "Purr: مصادِق 2FA"
+  },
+  "extDescription": {
+    "message": "سجّل الدخول على حاسوبك بنقرة واحدة. يجلب Purr رمز 2FA من هاتفك أو من مفتاح أمان. وهو لا يرى سرّك أبدًا."
+  },
+  "barAllCodes": {
+    "message": "كل الرموز"
+  },
+  "barSettings": {
+    "message": "الإعدادات"
+  },
+  "pairMyPhone": {
+    "message": "إقران هاتفي"
+  },
+  "tryAgain": {
+    "message": "أعد المحاولة"
+  },
+  "askAgain": {
+    "message": "اطلب مجددًا"
+  },
+  "remove": {
+    "message": "إزالة"
+  },
+  "unpair": {
+    "message": "إلغاء الإقران"
+  },
+  "copied": {
+    "message": "تم النسخ"
+  },
+  "badgeMatched": {
+    "message": "مطابق"
+  },
+  "popupUnpairedTitle": {
+    "message": "هاتفك هو المفتاح. وهذا هو ثقب المفتاح."
+  },
+  "popupUnpairedSub": {
+    "message": "اقرن هاتفك مرة واحدة ويصبح تسجيل الدخول نقرة. تبقى رموزك على الهاتف — لا ترى هذه الإضافة السرّ أبدًا."
+  },
+  "popupNoFieldTitle": {
+    "message": "لا شيء لتعبئته هنا."
+  },
+  "popupNoFieldSub": {
+    "message": "افتح هذا في صفحة تطلب رمزًا من ستة أرقام، ويمكن أن يأتي الرمز مباشرة من هاتفك."
+  },
+  "popupFillKey": {
+    "message": "التعبئة بمفتاحي"
+  },
+  "popupFillKeySub": {
+    "message": "المس مفتاح الأمان — يبقى هاتفك في جيبك"
+  },
+  "popupAskPhone": {
+    "message": "اسأل هاتفي"
+  },
+  "popupAskPhoneSub": {
+    "message": "وافق هناك ويصل الرمز إلى هنا"
+  },
+  "popupReadyTitle": {
+    "message": "جاهز حين تكون مستعدًا."
+  },
+  "popupReadySubKey": {
+    "message": "المس مفتاحك لتعبئة الرمز هنا، أو اسأل هاتفك."
+  },
+  "popupReadySubPhone": {
+    "message": "يجب أن يأتي رمزك من شيء تمسكه — هاتفك."
+  },
+  "popupReadyFootnote": {
+    "message": "لا تصل الصفحة سوى الأرقام الستة. يمكنك إغلاق هذا — تُكمل موافقة الهاتف التعبئة عند نقرك موافقة."
+  },
+  "popupKeyTouchTitle": {
+    "message": "المس مفتاحك"
+  },
+  "popupKeyTouchSub": {
+    "message": "المس مفتاح الأمان لفتح هذا الرمز هنا — لا يغادر هذا الحاسوب سوى الأرقام الستة."
+  },
+  "popupKeyErrorTitle": {
+    "message": "تعذّر استخدام مفتاحك"
+  },
+  "popupNoTab": {
+    "message": "لا توجد علامة تبويب نشطة للتعبئة."
+  },
+  "popupSentTitle": {
+    "message": "أُرسل إلى هاتفك"
+  },
+  "popupSentSub": {
+    "message": "وافق هناك ويصل الرمز إلى هنا. يمكنك إغلاق هذه النافذة — تظل تعمل."
+  },
+  "cancel": {
+    "message": "إلغاء"
+  },
+  "popupFilledTitle": {
+    "message": "عُبّئ من أجلك."
+  },
+  "popupFilledSub": {
+    "message": "أنشأ هاتفك الرمز وأرسل تلك الأرقام الستة فقط. لم يعبر شيء آخر."
+  },
+  "popupClipTitle": {
+    "message": "إليك رمزك."
+  },
+  "popupClipSub": {
+    "message": "لم نعثر على خانة الرمز في هذه الصفحة، لذا انسخه بنفسك:"
+  },
+  "popupCopyCode": {
+    "message": "نسخ {0} {1}"
+  },
+  "popupDeniedTitle": {
+    "message": "لقد رفضت هذا"
+  },
+  "popupDeniedSub": {
+    "message": "لم يُرسل أي رمز. إن كان ذلك خطأً فاطلب مجددًا — وإن لم يكن، فغيّر كلمة مرورك لهذا الموقع."
+  },
+  "popupChangePassword": {
+    "message": "تغيير كلمة مروري"
+  },
+  "popupExpiredTitle": {
+    "message": "انتهت مهلة هذا الطلب"
+  },
+  "popupExpiredSub": {
+    "message": "تنتهي صلاحية الطلبات بعد دقيقة حتى لا يُوافَق على طلب قديم عن طريق الخطأ. لم يحدث خطأ — فقط اطلب مجددًا."
+  },
+  "popupUnreachableTitle": {
+    "message": "لم يستجب هاتفك"
+  },
+  "popupUnreachableSub": {
+    "message": "قد يكون نائمًا أو خارج التغطية أو موضوعًا على وجهه فوق طاولة. لا خطب في حسابك."
+  },
+  "popupOpenApp": {
+    "message": "أو افتح التطبيق واقرأ الرمز"
+  },
+  "popupUnmatchedTitle": {
+    "message": "لم تحفظ {0} بعد"
+  },
+  "popupUnmatchedSub": {
+    "message": "إن كان لديك هذا الحساب على هاتفك باسم آخر، فافتحه هناك ووافق — سيتذكر هذا المنبثق المطابقة في المرة القادمة."
+  },
+  "optStepOf": {
+    "message": "الخطوة {0} من 3"
+  },
+  "optIntroHero": {
+    "message": "هاتفك هو المفتاح. وهذا هو ثقب المفتاح."
+  },
+  "optIntroCopy": {
+    "message": "يستغرق الإقران نحو دقيقة. بعدها، يصبح تسجيل الدخول في أي مكان نقرة على هاتفك — لا رموز تُكتب ولا شيء يُحفظ."
+  },
+  "optTick1": {
+    "message": "تبقى رموزك على هاتفك. لا ترى هذه الإضافة السرّ أبدًا."
+  },
+  "optTick2": {
+    "message": "يعمل دون حساب. لا شيء للتسجيل فيه."
+  },
+  "optTick3": {
+    "message": "ألغِ الإقران من أي جهة، في أي وقت."
+  },
+  "optGetApp": {
+    "message": "احصل على التطبيق أولًا إن لم تكن قد فعلت"
+  },
+  "optScanErrTitle": {
+    "message": "تعذّر الوصول إلى خدمة الإقران"
+  },
+  "optScanErrCopy": {
+    "message": "تحقق من الاتصال وحاول مجددًا. لم يُعدّ شيء بعد، فلا شيء نصف منجز."
+  },
+  "optScanTitle": {
+    "message": "وجّه هاتفك إلى هذا"
+  },
+  "optScanPath": {
+    "message": "الأمان ← إقران حاسوب"
+  },
+  "optScanCopy": {
+    "message": "افتح Purr على هاتفك، والمس {0}، ثم ارفعه أمام المربع."
+  },
+  "optWaitingPhone": {
+    "message": "بانتظار هاتفك…"
+  },
+  "optBack": {
+    "message": "رجوع"
+  },
+  "optDefaultPhone": {
+    "message": "هاتفك"
+  },
+  "optPairedTitle": {
+    "message": "مقترن بـ \"{0}\""
+  },
+  "optPairedCopy": {
+    "message": "في المرة القادمة التي يطلب فيها موقع رمزًا، ستكتشفه هذه الإضافة وتسأل هاتفك. ما عليك سوى نقر موافقة."
+  },
+  "optPairedJustNow": {
+    "message": "اقترن للتو"
+  },
+  "optActive": {
+    "message": "نشط"
+  },
+  "optDone": {
+    "message": "تم"
+  },
+  "optToday": {
+    "message": "اليوم"
+  },
+  "optYesterday": {
+    "message": "أمس"
+  },
+  "optDaysAgo": {
+    "message": "قبل {0} أيام"
+  },
+  "optMonthAgo": {
+    "message": "قبل شهر"
+  },
+  "optMonthsAgo": {
+    "message": "قبل {0} أشهر"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "اسأل هاتفي دائمًا"
+  },
+  "optRuleNeverAutofill": {
+    "message": "لا تعبّئ تلقائيًا أبدًا"
+  },
+  "optSettingsTitle": {
+    "message": "إعدادات Purr"
+  },
+  "optSecWhenAsks": {
+    "message": "عندما يطلب موقع رمزًا"
+  },
+  "optFillAuto": {
+    "message": "عبّئه لي تلقائيًا"
+  },
+  "optFillAutoSub": {
+    "message": "بعد موافقتك — لا نعبّئ أبدًا دون نقرة في مكان ما"
+  },
+  "optSubmit": {
+    "message": "أرسل النموذج بمجرد تعبئته"
+  },
+  "optSubmitSub": {
+    "message": "يوفّر نقرة؛ أوقفه إذا تصرّف موقع بغرابة"
+  },
+  "optLeadKey": {
+    "message": "ابدأ بمفتاح الأمان"
+  },
+  "optLeadKeySub": {
+    "message": "اعرض لمسة المفتاح أولًا؛ يبقى هاتفك على بُعد نقرة"
+  },
+  "optSecSiteRules": {
+    "message": "مواقع بقواعدها الخاصة"
+  },
+  "optSecKeys": {
+    "message": "تسجيل الدخول بمفتاح أمان"
+  },
+  "optExperimental": {
+    "message": "· تجريبي"
+  },
+  "optKeysBlurb": {
+    "message": "المس مفتاحًا مسجَّلًا لتعبئة رمز على هذا الحاسوب وهاتفك في جيبك. تعيش رموزك هنا كنص مشفّر فقط؛ والمفتاح هو ما يفتحها."
+  },
+  "optSecDevices": {
+    "message": "الأجهزة المقترنة"
+  },
+  "optPaired": {
+    "message": "اقترن {0}"
+  },
+  "optLastUsed": {
+    "message": "استُخدم مؤخرًا"
+  },
+  "optUnpairNote": {
+    "message": "إلغاء الإقران يؤثر على هذا المتصفح فقط. تبقى رموزك على هاتفك دون مساس."
+  },
+  "optNoRules": {
+    "message": "لا قواعد خاصة بعد. تظهر هنا عندما تضيف واحدة."
+  },
+  "optRulePlaceholder": {
+    "message": "site.example.com"
+  },
+  "optNoWebauthn": {
+    "message": "هذا المتصفح لا يدعم مفاتيح الأمان."
+  },
+  "optKeyReady": {
+    "message": "جاهز"
+  },
+  "optKeyNotConfirmed": {
+    "message": "غير مؤكَّد — انقر اختبار الفتح"
+  },
+  "optAddedOn": {
+    "message": "أُضيف {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "سمِّ هذا المفتاح (مثل YubiKey)"
+  },
+  "optAddKey": {
+    "message": "إضافة مفتاح أمان"
+  },
+  "optDefaultKeyLabel": {
+    "message": "مفتاح أمان"
+  },
+  "optTouchKey": {
+    "message": "المس مفتاحك…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ سُجّل {0}. انقر \"اختبار الفتح\" والمسه للتأكيد."
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ سُجّل {0}، لكنه قد لا يدعم الفتح باللمس. جرّب اختبار الفتح للتأكد."
+  },
+  "optRegisterFailed": {
+    "message": "تعذّر التسجيل: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "أكّد أن لمسة تفتح الخزنة"
+  },
+  "optTestUnlock": {
+    "message": "اختبار الفتح"
+  },
+  "optUnlockOk": {
+    "message": "✓ يفتح {0} تطبيق Purr هنا. كل شيء جاهز."
+  },
+  "optYourKey": {
+    "message": "مفتاحك"
+  },
+  "optUnlockFailed": {
+    "message": "فشل الفتح: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "تفعيل تسجيل الدخول بمفتاحك"
+  },
+  "optEnableKeySignin": {
+    "message": "تفعيل الدخول بالمفتاح"
+  },
+  "optKeySigninOn": {
+    "message": "✓ الدخول بالمفتاح مُفعَّل مع {0}. افتح تطبيق الهاتف مرة ليزامن خزنتك هنا."
+  },
+  "optEnableFailed": {
+    "message": "تعذّر التفعيل: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "الدخول بالمفتاح مُفعَّل"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "في خانة الرمز بموقع ما، المس مفتاحك لتعبئته — يبقى هاتفك في جيبك."
+  },
+  "optAddBackup": {
+    "message": "أضف {0} كمفتاح احتياطي"
+  },
+  "optAddToSignin": {
+    "message": "أضف إلى تسجيل الدخول"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "المس مفتاحًا مسجَّلًا ثم الجديد…"
+  },
+  "optBackupAdded": {
+    "message": "✓ أُضيف {0} — أصبح الآن مفتاحًا احتياطيًا."
+  },
+  "optAddFailed": {
+    "message": "تعذّرت الإضافة: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "إيقاف الدخول بالمفتاح"
+  },
+  "optKeySigninOff": {
+    "message": "أُوقف الدخول بالمفتاح على هذا الحاسوب."
+  },
+  "optLanguage": {
+    "message": "اللغة"
+  },
+  "optLanguageAuto": {
+    "message": "حسب متصفحي"
+  },
+  "optLanguageSub": {
+    "message": "اختر اللغة التي يخاطبك بها Purr هنا"
+  }
 }

@@ -1,5 +1,5 @@
 {
-  "@@locale": "pt",
+  "@@locale": "pt-PT",
   "appTitle": "Purr",
   "tabCodes": "Códigos",
   "tabSecurity": "Segurança",
@@ -14,14 +14,41 @@
   "unlocking": "Desbloqueando…",
   "useMyPassword": "Usar minha senha",
   "unlockYourCodes": "Desbloqueie seus códigos",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "Idioma",
   "languageSubtitle": "Escolha como o Purr fala com você",
   "languageSystemDefault": "Conforme meu dispositivo",
   "accountCount": "{count, plural, =1{1 conta} other{{count} contas}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "Buscar contas",
   "cancel": "Cancelar",
   "tapToCopySeconds": "TOQUE PARA COPIAR · {seconds}S",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "searchMatchCount": "{shown} de {total, plural, =1{1 conta} other{{total} contas}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "Copiado",
   "searchScopeNote": "A busca considera o nome do site e seu usuário — não os códigos.",
   "emptyVaultTitle": "Ainda sem contas",
@@ -36,7 +63,19 @@
   "detailAsked": "Solicitado",
   "justNow": "Agora mesmo",
   "secondsAgo": "{count, plural, =1{há 1 segundo} other{há {count} segundos}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "Para qual conta é? Não está salva em {domain}.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "Enviar o código",
   "didntAskForThis": "Não fui eu que pedi",
   "justShowCode": "Só me mostre o código",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "Confirmando que é você",
   "youreIn": "Você entrou.",
   "signingYouIn": "{domain} está conectando você no computador. Nada para digitar.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "O código enviado expira em 30 segundos e só pode ser usado uma vez.",
   "done": "Concluído",
   "blockedNothingSent": "Bloqueado. Nada foi enviado.",
   "deniedBody": "Alguém tentou entrar como você. Seus códigos nunca saíram deste telefone — não conseguiram nada.",
   "deniedChangePassword": "Se não foi engano, troque hoje sua senha de {domain}. A senha é a parte que eles têm.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "Entendi",
   "typeThisInto": "Digite isto em",
   "newCodeInSeconds": "Novo código em {seconds}s",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "Nada foi enviado ao seu navegador. Digite ou cole você mesmo.",
   "copyCode": "Copiar código",
   "intrusionBadge": "BLOQUEADO · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "agora mesmo",
   "relativeMinutesAgo": "{count, plural, =1{há 1 minuto} other{há {count} minutos}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "relativeHoursAgo": "{count, plural, =1{há 1 hora} other{há {count} horas}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "Alguém tem sua senha de {domain}.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "Não conseguiram entrar — precisariam também deste telefone. Mas a senha está por aí, então vale trocá-la hoje.",
   "intrusionTried": "Tentativas",
   "triedTimes": "{count, plural, =1{1 vez} other{{count} vezes}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "Ok",
   "muteToday": "Silenciar solicitações deste site hoje",
   "onbHeroTitle": "Uma senha sozinha não basta.",
@@ -103,6 +190,11 @@
   "addCameraOk": "Ok, pode pedir",
   "addTypeByHand": "Vou digitar o código à mão",
   "scanCodeError": "Esse código não funcionou: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "Parear este computador?",
   "pairBody": "Esse é um código para vincular um computador, não uma conta de site. Quer parear agora?",
   "notNow": "Agora não",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "Primeiro código: ",
   "saveLabel": "Salvar",
   "saveNamed": "Salvar {site}",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "Conta",
   "importedAccountName": "Conta importada",
   "importReadyCount": "{count, plural, =1{Uma conta, pronta para se mudar} other{{count} contas, prontas para se mudar}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "Esta é a parte {index} de {size} — escaneie os outros quadrados também, em qualquer ordem.",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "Tudo abaixo vem exatamente como está. Nada é ignorado.",
   "unnamedAccount": "Sem nome",
   "importBringOne": "Trazer",
   "importBringAll": "Trazer todas as {count}",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "Renomear",
   "detailRemoveTitle": "Remover {site}?",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "Desative a verificação em duas etapas em {site} primeiro, ou você ficará sem acesso.",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "Manter",
   "detailRemove": "Remover",
   "detailNewIn": "Novo em {seconds}s",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "Onde isto fica",
   "detailThisPhone": "Este telefone",
   "detailPlusKit": "Além do seu kit de papel — você está protegido se este telefone sumir",
@@ -154,6 +292,13 @@
   "restoreWordsError": "Essas palavras não batem direito — confira cada uma na folha. A ordem importa.",
   "restoreLostSheet": "Perdeu a folha também? Se o telefone antigo ainda funciona, a aba Segurança dele pode imprimir uma nova.",
   "restoreWordsToGo": "{count, plural, =1{Falta 1 palavra} other{Faltam {count} palavras}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "Não encontramos um backup para essas palavras. Se os backups estavam desligados no telefone antigo, só a folha de papel não recupera as contas — mas você pode começar do zero.",
   "restoreGenericError": "Algo atrapalhou — verifique a conexão e tente de novo. Nada foi perdido.",
   "restoreErrorTitle": "Não deu certo — mas nada foi perdido",
@@ -162,9 +307,23 @@
   "restoreCheckFound": "Encontramos seu backup criptografado",
   "restoreCheckUnlocked": "Suas palavras o desbloquearam",
   "restoreCheckPutting": "{count, plural, =1{Restaurando 1 conta} other{Restaurando {count} contas}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "Restaurando suas contas",
   "restoreOnPhoneNote": "Tudo isso acontece neste telefone. Só guardamos uma cópia embaralhada que não conseguimos ler.",
   "restoreDoneTitle": "{count, plural, =1{Sua conta voltou.} other{Todas as {count} contas voltaram.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "Seu telefone antigo foi desconectado — se alguém o achar, os códigos dele não funcionam mais.",
   "restorePrintFreshTitle": "Falta uma coisa: imprima um kit novo",
   "restorePrintFreshBody": "A folha antiga está aposentada. Uma nova leva dez segundos e protege você da próxima vez.",
@@ -189,6 +348,11 @@
   "secLoseSection": "Se você perder este telefone",
   "secRecoveryKit": "Kit de recuperação",
   "secSavedOn": "Salvo em {date}",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "Uma folha de papel que pode trazer tudo de volta, mesmo se você perder todos os dispositivos. Imprima outra cópia quando quiser.",
   "secPrintAgain": "Imprimir de novo",
   "secKitReason": "Confirme para ver seu kit de recuperação",
@@ -213,6 +377,11 @@
   "secComputerPaired": "Quando um site pede um código ao seu navegador, este telefone recebe a solicitação.",
   "secYourBrowser": "Seu navegador",
   "secPairedOn": "Pareado em {date}",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "Desparear",
   "secPushChecking": "Verificando notificações…",
   "secPushReady": "Notificações prontas",

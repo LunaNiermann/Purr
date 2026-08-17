@@ -1,128 +1,368 @@
 {
-  "extName": { "message": "Purr: autenticador 2FA" },
-  "extDescription": { "message": "Entre no seu computador com um toque. O Purr traz seu código 2FA do seu telefone ou de uma chave de segurança. Ele nunca vê seu segredo." },
-
-  "barAllCodes": { "message": "Todos os códigos" },
-  "barSettings": { "message": "Configurações" },
-
-  "pairMyPhone": { "message": "Parear meu telefone" },
-  "tryAgain": { "message": "Tentar de novo" },
-  "askAgain": { "message": "Pedir de novo" },
-  "remove": { "message": "Remover" },
-  "unpair": { "message": "Desparear" },
-  "copied": { "message": "Copiado" },
-  "badgeMatched": { "message": "CORRESPONDE" },
-
-  "popupUnpairedTitle": { "message": "Seu telefone é a chave. Isto é a fechadura." },
-  "popupUnpairedSub": { "message": "Pareie seu telefone uma vez e entrar vira um toque. Seus códigos ficam no telefone — esta extensão nunca vê o segredo." },
-  "popupNoFieldTitle": { "message": "Nada para preencher aqui." },
-  "popupNoFieldSub": { "message": "Abra isto em uma página que peça um código de seis dígitos, e o código pode vir direto do seu telefone." },
-  "popupFillKey": { "message": "Preencher com minha chave" },
-  "popupFillKeySub": { "message": "Toque sua chave de segurança — seu telefone fica no bolso" },
-  "popupAskPhone": { "message": "Pedir ao meu telefone" },
-  "popupAskPhoneSub": { "message": "Aprove lá e o código chega aqui" },
-  "popupReadyTitle": { "message": "Pronto quando você estiver." },
-  "popupReadySubKey": { "message": "Toque sua chave para preencher o código aqui mesmo, ou peça ao seu telefone." },
-  "popupReadySubPhone": { "message": "Seu código tem que vir de algo que você segura — seu telefone." },
-  "popupReadyFootnote": { "message": "Só os seis dígitos chegam à página. Você pode fechar isto — uma aprovação do telefone preenche mesmo assim quando você toca Aprovar." },
-  "popupKeyTouchTitle": { "message": "Toque sua chave" },
-  "popupKeyTouchSub": { "message": "Toque sua chave de segurança para desbloquear este código aqui mesmo — nada sai deste computador além dos seis dígitos." },
-  "popupKeyErrorTitle": { "message": "Não foi possível usar sua chave" },
-  "popupNoTab": { "message": "Nenhuma aba ativa para preencher." },
-  "popupSentTitle": { "message": "Enviado ao seu telefone" },
-  "popupSentSub": { "message": "Aprove lá e o código chega aqui. Você pode fechar esta janela — ela continua funcionando." },
-  "cancel": { "message": "Cancelar" },
-  "popupFilledTitle": { "message": "Preenchido para você." },
-  "popupFilledSub": { "message": "Seu telefone gerou o código e enviou só aqueles seis dígitos. Nada mais atravessou." },
-  "popupClipTitle": { "message": "Aqui está seu código." },
-  "popupClipSub": { "message": "Não encontramos a caixa do código nesta página, então copie você mesmo:" },
-  "popupCopyCode": { "message": "Copiar {0} {1}" },
-  "popupDeniedTitle": { "message": "Você recusou este" },
-  "popupDeniedSub": { "message": "Nenhum código foi enviado. Se foi engano, peça de novo — se não foi, mude sua senha deste site." },
-  "popupChangePassword": { "message": "Mudar minha senha" },
-  "popupExpiredTitle": { "message": "Essa solicitação expirou" },
-  "popupExpiredSub": { "message": "As solicitações expiram após um minuto para que uma antiga não seja aprovada por acidente. Nada deu errado — é só pedir de novo." },
-  "popupUnreachableTitle": { "message": "Seu telefone não respondeu" },
-  "popupUnreachableSub": { "message": "Pode estar dormindo, sem sinal ou virado para baixo em uma mesa. Não há nada de errado com sua conta." },
-  "popupOpenApp": { "message": "Ou abra o app e leia o código" },
-  "popupUnmatchedTitle": { "message": "Você ainda não salvou {0}" },
-  "popupUnmatchedSub": { "message": "Se você já tem esta conta no telefone com outro nome, abra-a lá e aprove — este popup vai lembrar da correspondência na próxima vez." },
-
-  "optStepOf": { "message": "Passo {0} de 3" },
-  "optIntroHero": { "message": "Seu telefone é a chave. Isto é a fechadura." },
-  "optIntroCopy": { "message": "O pareamento leva cerca de um minuto. Depois disso, entrar em qualquer lugar é um toque no seu telefone — nada para digitar, nada para lembrar." },
-  "optTick1": { "message": "Seus códigos ficam no seu telefone. Esta extensão nunca vê o segredo." },
-  "optTick2": { "message": "Funciona sem conta. Nada para se cadastrar." },
-  "optTick3": { "message": "Despareie de qualquer lado, a qualquer hora." },
-  "optGetApp": { "message": "Baixe o app primeiro, se ainda não tiver" },
-  "optScanErrTitle": { "message": "Não foi possível contatar o serviço de pareamento" },
-  "optScanErrCopy": { "message": "Verifique a conexão e tente de novo. Nada foi configurado ainda, então nada fica pela metade." },
-  "optScanTitle": { "message": "Aponte seu telefone para isto" },
-  "optScanPath": { "message": "Segurança → Parear um computador" },
-  "optScanCopy": { "message": "Abra o Purr no telefone, toque em {0} e aponte para o quadrado." },
-  "optWaitingPhone": { "message": "Aguardando seu telefone…" },
-  "optBack": { "message": "Voltar" },
-  "optDefaultPhone": { "message": "Seu telefone" },
-  "optPairedTitle": { "message": "Pareado com \"{0}\"" },
-  "optPairedCopy": { "message": "Da próxima vez que um site pedir um código, esta extensão vai notar e perguntar ao seu telefone. Você só toca em Aprovar." },
-  "optPairedJustNow": { "message": "Pareado agora mesmo" },
-  "optActive": { "message": "ATIVO" },
-  "optDone": { "message": "Concluído" },
-  "optToday": { "message": "hoje" },
-  "optYesterday": { "message": "ontem" },
-  "optDaysAgo": { "message": "há {0} dias" },
-  "optMonthAgo": { "message": "há {0} mês" },
-  "optMonthsAgo": { "message": "há {0} meses" },
-  "optRuleAlwaysPhone": { "message": "Sempre perguntar ao meu telefone" },
-  "optRuleNeverAutofill": { "message": "Nunca preencher automaticamente" },
-  "optSettingsTitle": { "message": "Configurações do Purr" },
-  "optSecWhenAsks": { "message": "Quando um site pede um código" },
-  "optFillAuto": { "message": "Preencher automaticamente para mim" },
-  "optFillAutoSub": { "message": "Depois da sua aprovação — nunca preenchemos sem um toque em algum lugar" },
-  "optSubmit": { "message": "Enviar o formulário assim que preenchido" },
-  "optSubmitSub": { "message": "Poupa um clique; desligue se um site se comportar de forma estranha" },
-  "optLeadKey": { "message": "Priorizar minha chave de segurança" },
-  "optLeadKeySub": { "message": "Oferecer primeiro o toque da chave; seu telefone fica a um toque" },
-  "optSecSiteRules": { "message": "Sites com regras próprias" },
-  "optSecKeys": { "message": "Entrar com uma chave de segurança" },
-  "optExperimental": { "message": "· experimental" },
-  "optKeysBlurb": { "message": "Toque uma chave registrada para preencher um código neste computador com o telefone no bolso. Seus códigos vivem aqui só como texto cifrado; a chave é o que os desbloqueia." },
-  "optSecDevices": { "message": "Dispositivos pareados" },
-  "optPaired": { "message": "Pareado {0}" },
-  "optLastUsed": { "message": "usado recentemente" },
-  "optUnpairNote": { "message": "Desparear afeta só este navegador. Seus códigos ficam no seu telefone, intactos." },
-  "optNoRules": { "message": "Nenhuma regra especial ainda. Elas aparecem aqui quando você adiciona uma." },
-  "optRulePlaceholder": { "message": "site.exemplo.com" },
-  "optNoWebauthn": { "message": "Este navegador não oferece suporte a chaves de segurança." },
-  "optKeyReady": { "message": "Pronta" },
-  "optKeyNotConfirmed": { "message": "Não confirmada — toque em Testar desbloqueio" },
-  "optAddedOn": { "message": "Adicionada {0}" },
-  "optKeyNamePlaceholder": { "message": "Dê um nome a esta chave (ex. YubiKey)" },
-  "optAddKey": { "message": "Adicionar uma chave de segurança" },
-  "optDefaultKeyLabel": { "message": "Chave de segurança" },
-  "optTouchKey": { "message": "Toque sua chave…" },
-  "optKeyRegistered": { "message": "✓ {0} registrada. Toque em \"Testar desbloqueio\" e toque nela para confirmar." },
-  "optKeyRegisteredWarn": { "message": "⚠ {0} registrada, mas pode não oferecer suporte a toque para desbloquear. Teste o desbloqueio para ter certeza." },
-  "optRegisterFailed": { "message": "Não foi possível registrar: {0}" },
-  "optConfirmTouch": { "message": "Confirme que um toque desbloqueia o cofre" },
-  "optTestUnlock": { "message": "Testar desbloqueio" },
-  "optUnlockOk": { "message": "✓ {0} desbloqueia o Purr aqui. Tudo pronto." },
-  "optYourKey": { "message": "Sua chave" },
-  "optUnlockFailed": { "message": "Falha no desbloqueio: {0}" },
-  "optTurnOnKeySignin": { "message": "Ativar login com sua chave" },
-  "optEnableKeySignin": { "message": "Ativar login por chave" },
-  "optKeySigninOn": { "message": "✓ Login por chave ativado com {0}. Abra o app do telefone uma vez para sincronizar seu cofre aqui." },
-  "optEnableFailed": { "message": "Não foi possível ativar: {0}" },
-  "optKeySigninIsOn": { "message": "O login por chave está ativado" },
-  "optKeySigninIsOnSub": { "message": "No campo de código de um site, toque sua chave para preenchê-lo — seu telefone fica no bolso." },
-  "optAddBackup": { "message": "Adicionar {0} como chave reserva" },
-  "optAddToSignin": { "message": "Adicionar ao login" },
-  "optTouchEnrolledThenNew": { "message": "Toque uma chave registrada e depois a nova…" },
-  "optBackupAdded": { "message": "✓ {0} adicionada — agora é uma chave reserva." },
-  "optAddFailed": { "message": "Não foi possível adicionar: {0}" },
-  "optTurnOffKeySignin": { "message": "Desativar login por chave" },
-  "optKeySigninOff": { "message": "Login por chave desativado neste computador." },
-  "optLanguage": { "message": "Idioma" },
-  "optLanguageAuto": { "message": "Acompanhar meu navegador" },
-  "optLanguageSub": { "message": "Escolha como o Purr fala com você aqui" }
+  "extName": {
+    "message": "Purr: autenticador 2FA"
+  },
+  "extDescription": {
+    "message": "Entre no seu computador com um toque. O Purr traz seu código 2FA do seu telefone ou de uma chave de segurança. Ele nunca vê seu segredo."
+  },
+  "barAllCodes": {
+    "message": "Todos os códigos"
+  },
+  "barSettings": {
+    "message": "Configurações"
+  },
+  "pairMyPhone": {
+    "message": "Parear meu telefone"
+  },
+  "tryAgain": {
+    "message": "Tentar de novo"
+  },
+  "askAgain": {
+    "message": "Pedir de novo"
+  },
+  "remove": {
+    "message": "Remover"
+  },
+  "unpair": {
+    "message": "Desparear"
+  },
+  "copied": {
+    "message": "Copiado"
+  },
+  "badgeMatched": {
+    "message": "CORRESPONDE"
+  },
+  "popupUnpairedTitle": {
+    "message": "Seu telefone é a chave. Isto é a fechadura."
+  },
+  "popupUnpairedSub": {
+    "message": "Pareie seu telefone uma vez e entrar vira um toque. Seus códigos ficam no telefone — esta extensão nunca vê o segredo."
+  },
+  "popupNoFieldTitle": {
+    "message": "Nada para preencher aqui."
+  },
+  "popupNoFieldSub": {
+    "message": "Abra isto em uma página que peça um código de seis dígitos, e o código pode vir direto do seu telefone."
+  },
+  "popupFillKey": {
+    "message": "Preencher com minha chave"
+  },
+  "popupFillKeySub": {
+    "message": "Toque sua chave de segurança — seu telefone fica no bolso"
+  },
+  "popupAskPhone": {
+    "message": "Pedir ao meu telefone"
+  },
+  "popupAskPhoneSub": {
+    "message": "Aprove lá e o código chega aqui"
+  },
+  "popupReadyTitle": {
+    "message": "Pronto quando você estiver."
+  },
+  "popupReadySubKey": {
+    "message": "Toque sua chave para preencher o código aqui mesmo, ou peça ao seu telefone."
+  },
+  "popupReadySubPhone": {
+    "message": "Seu código tem que vir de algo que você segura — seu telefone."
+  },
+  "popupReadyFootnote": {
+    "message": "Só os seis dígitos chegam à página. Você pode fechar isto — uma aprovação do telefone preenche mesmo assim quando você toca Aprovar."
+  },
+  "popupKeyTouchTitle": {
+    "message": "Toque sua chave"
+  },
+  "popupKeyTouchSub": {
+    "message": "Toque sua chave de segurança para desbloquear este código aqui mesmo — nada sai deste computador além dos seis dígitos."
+  },
+  "popupKeyErrorTitle": {
+    "message": "Não foi possível usar sua chave"
+  },
+  "popupNoTab": {
+    "message": "Nenhuma aba ativa para preencher."
+  },
+  "popupSentTitle": {
+    "message": "Enviado ao seu telefone"
+  },
+  "popupSentSub": {
+    "message": "Aprove lá e o código chega aqui. Você pode fechar esta janela — ela continua funcionando."
+  },
+  "cancel": {
+    "message": "Cancelar"
+  },
+  "popupFilledTitle": {
+    "message": "Preenchido para você."
+  },
+  "popupFilledSub": {
+    "message": "Seu telefone gerou o código e enviou só aqueles seis dígitos. Nada mais atravessou."
+  },
+  "popupClipTitle": {
+    "message": "Aqui está seu código."
+  },
+  "popupClipSub": {
+    "message": "Não encontramos a caixa do código nesta página, então copie você mesmo:"
+  },
+  "popupCopyCode": {
+    "message": "Copiar {0} {1}"
+  },
+  "popupDeniedTitle": {
+    "message": "Você recusou este"
+  },
+  "popupDeniedSub": {
+    "message": "Nenhum código foi enviado. Se foi engano, peça de novo — se não foi, mude sua senha deste site."
+  },
+  "popupChangePassword": {
+    "message": "Mudar minha senha"
+  },
+  "popupExpiredTitle": {
+    "message": "Essa solicitação expirou"
+  },
+  "popupExpiredSub": {
+    "message": "As solicitações expiram após um minuto para que uma antiga não seja aprovada por acidente. Nada deu errado — é só pedir de novo."
+  },
+  "popupUnreachableTitle": {
+    "message": "Seu telefone não respondeu"
+  },
+  "popupUnreachableSub": {
+    "message": "Pode estar dormindo, sem sinal ou virado para baixo em uma mesa. Não há nada de errado com sua conta."
+  },
+  "popupOpenApp": {
+    "message": "Ou abra o app e leia o código"
+  },
+  "popupUnmatchedTitle": {
+    "message": "Você ainda não salvou {0}"
+  },
+  "popupUnmatchedSub": {
+    "message": "Se você já tem esta conta no telefone com outro nome, abra-a lá e aprove — este popup vai lembrar da correspondência na próxima vez."
+  },
+  "optStepOf": {
+    "message": "Passo {0} de 3"
+  },
+  "optIntroHero": {
+    "message": "Seu telefone é a chave. Isto é a fechadura."
+  },
+  "optIntroCopy": {
+    "message": "O pareamento leva cerca de um minuto. Depois disso, entrar em qualquer lugar é um toque no seu telefone — nada para digitar, nada para lembrar."
+  },
+  "optTick1": {
+    "message": "Seus códigos ficam no seu telefone. Esta extensão nunca vê o segredo."
+  },
+  "optTick2": {
+    "message": "Funciona sem conta. Nada para se cadastrar."
+  },
+  "optTick3": {
+    "message": "Despareie de qualquer lado, a qualquer hora."
+  },
+  "optGetApp": {
+    "message": "Baixe o app primeiro, se ainda não tiver"
+  },
+  "optScanErrTitle": {
+    "message": "Não foi possível contatar o serviço de pareamento"
+  },
+  "optScanErrCopy": {
+    "message": "Verifique a conexão e tente de novo. Nada foi configurado ainda, então nada fica pela metade."
+  },
+  "optScanTitle": {
+    "message": "Aponte seu telefone para isto"
+  },
+  "optScanPath": {
+    "message": "Segurança → Parear um computador"
+  },
+  "optScanCopy": {
+    "message": "Abra o Purr no telefone, toque em {0} e aponte para o quadrado."
+  },
+  "optWaitingPhone": {
+    "message": "Aguardando seu telefone…"
+  },
+  "optBack": {
+    "message": "Voltar"
+  },
+  "optDefaultPhone": {
+    "message": "Seu telefone"
+  },
+  "optPairedTitle": {
+    "message": "Pareado com \"{0}\""
+  },
+  "optPairedCopy": {
+    "message": "Da próxima vez que um site pedir um código, esta extensão vai notar e perguntar ao seu telefone. Você só toca em Aprovar."
+  },
+  "optPairedJustNow": {
+    "message": "Pareado agora mesmo"
+  },
+  "optActive": {
+    "message": "ATIVO"
+  },
+  "optDone": {
+    "message": "Concluído"
+  },
+  "optToday": {
+    "message": "hoje"
+  },
+  "optYesterday": {
+    "message": "ontem"
+  },
+  "optDaysAgo": {
+    "message": "há {0} dias"
+  },
+  "optMonthAgo": {
+    "message": "há {0} mês"
+  },
+  "optMonthsAgo": {
+    "message": "há {0} meses"
+  },
+  "optRuleAlwaysPhone": {
+    "message": "Sempre perguntar ao meu telefone"
+  },
+  "optRuleNeverAutofill": {
+    "message": "Nunca preencher automaticamente"
+  },
+  "optSettingsTitle": {
+    "message": "Configurações do Purr"
+  },
+  "optSecWhenAsks": {
+    "message": "Quando um site pede um código"
+  },
+  "optFillAuto": {
+    "message": "Preencher automaticamente para mim"
+  },
+  "optFillAutoSub": {
+    "message": "Depois da sua aprovação — nunca preenchemos sem um toque em algum lugar"
+  },
+  "optSubmit": {
+    "message": "Enviar o formulário assim que preenchido"
+  },
+  "optSubmitSub": {
+    "message": "Poupa um clique; desligue se um site se comportar de forma estranha"
+  },
+  "optLeadKey": {
+    "message": "Priorizar minha chave de segurança"
+  },
+  "optLeadKeySub": {
+    "message": "Oferecer primeiro o toque da chave; seu telefone fica a um toque"
+  },
+  "optSecSiteRules": {
+    "message": "Sites com regras próprias"
+  },
+  "optSecKeys": {
+    "message": "Entrar com uma chave de segurança"
+  },
+  "optExperimental": {
+    "message": "· experimental"
+  },
+  "optKeysBlurb": {
+    "message": "Toque uma chave registrada para preencher um código neste computador com o telefone no bolso. Seus códigos vivem aqui só como texto cifrado; a chave é o que os desbloqueia."
+  },
+  "optSecDevices": {
+    "message": "Dispositivos pareados"
+  },
+  "optPaired": {
+    "message": "Pareado {0}"
+  },
+  "optLastUsed": {
+    "message": "usado recentemente"
+  },
+  "optUnpairNote": {
+    "message": "Desparear afeta só este navegador. Seus códigos ficam no seu telefone, intactos."
+  },
+  "optNoRules": {
+    "message": "Nenhuma regra especial ainda. Elas aparecem aqui quando você adiciona uma."
+  },
+  "optRulePlaceholder": {
+    "message": "site.exemplo.com"
+  },
+  "optNoWebauthn": {
+    "message": "Este navegador não oferece suporte a chaves de segurança."
+  },
+  "optKeyReady": {
+    "message": "Pronta"
+  },
+  "optKeyNotConfirmed": {
+    "message": "Não confirmada — toque em Testar desbloqueio"
+  },
+  "optAddedOn": {
+    "message": "Adicionada {0}"
+  },
+  "optKeyNamePlaceholder": {
+    "message": "Dê um nome a esta chave (ex. YubiKey)"
+  },
+  "optAddKey": {
+    "message": "Adicionar uma chave de segurança"
+  },
+  "optDefaultKeyLabel": {
+    "message": "Chave de segurança"
+  },
+  "optTouchKey": {
+    "message": "Toque sua chave…"
+  },
+  "optKeyRegistered": {
+    "message": "✓ {0} registrada. Toque em \"Testar desbloqueio\" e toque nela para confirmar."
+  },
+  "optKeyRegisteredWarn": {
+    "message": "⚠ {0} registrada, mas pode não oferecer suporte a toque para desbloquear. Teste o desbloqueio para ter certeza."
+  },
+  "optRegisterFailed": {
+    "message": "Não foi possível registrar: {0}"
+  },
+  "optConfirmTouch": {
+    "message": "Confirme que um toque desbloqueia o cofre"
+  },
+  "optTestUnlock": {
+    "message": "Testar desbloqueio"
+  },
+  "optUnlockOk": {
+    "message": "✓ {0} desbloqueia o Purr aqui. Tudo pronto."
+  },
+  "optYourKey": {
+    "message": "Sua chave"
+  },
+  "optUnlockFailed": {
+    "message": "Falha no desbloqueio: {0}"
+  },
+  "optTurnOnKeySignin": {
+    "message": "Ativar login com sua chave"
+  },
+  "optEnableKeySignin": {
+    "message": "Ativar login por chave"
+  },
+  "optKeySigninOn": {
+    "message": "✓ Login por chave ativado com {0}. Abra o app do telefone uma vez para sincronizar seu cofre aqui."
+  },
+  "optEnableFailed": {
+    "message": "Não foi possível ativar: {0}"
+  },
+  "optKeySigninIsOn": {
+    "message": "O login por chave está ativado"
+  },
+  "optKeySigninIsOnSub": {
+    "message": "No campo de código de um site, toque sua chave para preenchê-lo — seu telefone fica no bolso."
+  },
+  "optAddBackup": {
+    "message": "Adicionar {0} como chave reserva"
+  },
+  "optAddToSignin": {
+    "message": "Adicionar ao login"
+  },
+  "optTouchEnrolledThenNew": {
+    "message": "Toque uma chave registrada e depois a nova…"
+  },
+  "optBackupAdded": {
+    "message": "✓ {0} adicionada — agora é uma chave reserva."
+  },
+  "optAddFailed": {
+    "message": "Não foi possível adicionar: {0}"
+  },
+  "optTurnOffKeySignin": {
+    "message": "Desativar login por chave"
+  },
+  "optKeySigninOff": {
+    "message": "Login por chave desativado neste computador."
+  },
+  "optLanguage": {
+    "message": "Idioma"
+  },
+  "optLanguageAuto": {
+    "message": "Acompanhar meu navegador"
+  },
+  "optLanguageSub": {
+    "message": "Escolha como o Purr fala com você aqui"
+  }
 }
