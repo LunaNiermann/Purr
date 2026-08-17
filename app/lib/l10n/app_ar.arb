@@ -373,8 +373,16 @@
   "secShowExport": "عرض رموز التصدير",
   "secExportReason": "أكّد لتصدير حساباتك",
   "secYourComputer": "حاسوبك",
+  "secYourComputers": "حواسيبك",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "اقرن إضافة المتصفح ليصبح تسجيل الدخول على حاسوبك بنقرة واحدة هنا.",
   "secComputerPaired": "عندما يطلب موقع رمزًا من متصفحك، يتلقى هذا الهاتف الطلب.",
+  "secComputersPaired": "عندما يطلب موقع رمزًا من أحد متصفحاتك، يتلقى هذا الهاتف الطلب.",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "متصفحك",
   "secPairedOn": "اقترن في {date}",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "إلغاء الإقران",
+  "secPairAnother": "إقران حاسوب آخر",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "جارٍ فحص الإشعارات…",
   "secPushReady": "الإشعارات جاهزة",
   "secPushTurnOn": "فعّل الإشعارات لتصلك التنبيهات",
