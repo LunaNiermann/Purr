@@ -9,6 +9,7 @@
  */
 import { fromB64, open, seal } from "./lib/crypto";
 import { setFlow } from "./lib/flow";
+import { browserLabel } from "./lib/label";
 import { createRequest, waitForAnswer } from "./lib/relay";
 import { getPairing, getSettings, rememberMatch } from "./lib/state";
 
@@ -56,17 +57,6 @@ chrome.runtime.onMessage.addListener((msg, _sender, sendResponse) => {
   }
   return false;
 });
-
-function browserLabel(): string {
-  const ua = navigator.userAgent;
-  const browser = ua.includes("Edg/") ? "Edge" : "Chrome";
-  const os = ua.includes("Windows")
-    ? "Windows"
-    : ua.includes("Mac")
-      ? "Mac"
-      : "Linux";
-  return `${browser} · ${os}`;
-}
 
 /** Fill a code the popup already unlocked with a security-key touch. Reuses the
  * phone-route fill path so settings, per-site rules, and the clipboard fallback

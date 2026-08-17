@@ -11,5 +11,10 @@
     "domain": "github.com",
     "browser": "Chrome · Windows",
     "ts": 1754745600000
+  },
+  "nameKey": "z368RZJoOIsS+2aLavC3D4QacPVrPedMFIUChr6+1Fo=",
+  "sealedNameBlob": "CwwNDg8QERITFBUWFxgZGhscHR4fICEi6+uaops3DeZykMPJf3x4yVBU0S48Y5LGeI33/Jpt3ai2ji74AVLt42KWOyA=",
+  "namePayload": {
+    "name": "Chrome · Windows"
   }
 }

@@ -114,6 +114,23 @@ class RelayApi {
     );
   }
 
+  /// The sealed name blob the extension left at pairing time, or null when it
+  /// left none. Opened with the name key derived from the QR's pairing secret.
+  Future<String?> pairingInfo({
+    required String pairingId,
+    required String phoneToken,
+  }) async {
+    final res = await _client.get(
+      _u('/v1/pairings/$pairingId'),
+      headers: _headers(bearer: phoneToken),
+    );
+    if (res.statusCode != 200) {
+      throw RelayException('pairing info', res.statusCode);
+    }
+    final body = json.decode(res.body) as Map<String, dynamic>;
+    return body['extNameBlob'] as String?;
+  }
+
   Future<void> unpair({
     required String pairingId,
     required String token,

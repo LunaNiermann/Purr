@@ -20,6 +20,24 @@ const phonePub = x25519.getPublicKey(phonePriv);
 const shared = x25519.getSharedSecret(extPriv, phonePub);
 const session = hkdf(sha256, shared, secret, te.encode("twokeys/pairing-v1"), 32);
 
+// The browser-name blob is sealed before the extension has seen the phone's
+// public key, so its key comes from the pairing secret alone.
+const nameKey = hkdf(
+  sha256,
+  secret,
+  te.encode("twokeys-ext-name-v1"),
+  te.encode("twokeys/ext-name-v1"),
+  32,
+);
+const nameNonce = Uint8Array.from({ length: 24 }, (_, i) => 11 + i);
+const namePayload = { name: "Chrome · Windows" };
+const nameCt = xchacha20poly1305(nameKey, nameNonce).encrypt(
+  te.encode(JSON.stringify(namePayload)),
+);
+const nameBlob = new Uint8Array(nameNonce.length + nameCt.length);
+nameBlob.set(nameNonce);
+nameBlob.set(nameCt, nameNonce.length);
+
 const nonce = Uint8Array.from({ length: 24 }, (_, i) => 51 + i);
 const payload = { kind: "code", domain: "github.com", browser: "Chrome · Windows", ts: 1754745600000 };
 const ct = xchacha20poly1305(session, nonce).encrypt(te.encode(JSON.stringify(payload)));
@@ -39,6 +57,9 @@ writeFileSync(
       sessionKey: b64(session),
       sealedBlob: b64(blob),
       payload,
+      nameKey: b64(nameKey),
+      sealedNameBlob: b64(nameBlob),
+      namePayload,
     },
     null,
     2,

@@ -41,9 +41,11 @@ class ReplicaService {
   /// Sync using whatever pairing is stored. No-op when unpaired or when the key
   /// route hasn't been enrolled. Safe to call fire-and-forget on every change.
   Future<void> syncFromAccounts(List<Account> accounts) async {
-    final pairing = await PairingService().current();
-    if (pairing == null) return;
-    await sync(pairing, accounts);
+    // Each browser keeps its own replica under its own key, so every pairing
+    // that has enrolled the key route needs its own push.
+    for (final pairing in await PairingService().all()) {
+      await sync(pairing, accounts);
+    }
   }
 
   Future<void> sync(StoredPairing pairing, List<Account> accounts) async {

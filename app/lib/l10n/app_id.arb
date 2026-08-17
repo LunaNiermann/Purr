@@ -373,8 +373,16 @@
   "secShowExport": "Tampilkan kode ekspor saya",
   "secExportReason": "Konfirmasi untuk mengekspor akun Anda",
   "secYourComputer": "Komputer Anda",
+  "secYourComputers": "Komputer Anda",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "Pasangkan ekstensi browser dan masuk di komputer Anda menjadi satu ketuk di sini.",
   "secComputerPaired": "Saat sebuah situs meminta kode ke browser Anda, ponsel ini menerima permintaannya.",
+  "secComputersPaired": "Saat sebuah situs meminta kode ke salah satu browser Anda, ponsel ini menerima permintaannya.",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "Browser Anda",
   "secPairedOn": "Dipasangkan {date}",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "Lepas pasangan",
+  "secPairAnother": "Pasangkan komputer lain",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "Memeriksa notifikasi…",
   "secPushReady": "Notifikasi siap",
   "secPushTurnOn": "Aktifkan notifikasi agar diberi tahu",

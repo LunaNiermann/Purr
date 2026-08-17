@@ -39,6 +39,22 @@ export function deriveSessionKey(
   return hkdf(sha256, shared, pairingSecret, utf8("twokeys/pairing-v1"), 32);
 }
 
+/**
+ * Key for the browser-name blob deposited at pairing time. It derives from the
+ * pairing secret alone, because at that moment the extension has not yet seen
+ * the phone's public key and so cannot compute the session key. The secret
+ * travels only in the QR, so the relay still cannot read the name it stores.
+ */
+export function deriveNameKey(pairingSecret: Uint8Array): Uint8Array {
+  return hkdf(
+    sha256,
+    pairingSecret,
+    utf8("twokeys-ext-name-v1"),
+    utf8("twokeys/ext-name-v1"),
+    32,
+  );
+}
+
 export function seal(sessionKey: Uint8Array, plaintext: object): string {
   const nonce = randomBytes(24);
   const ct = xchacha20poly1305(sessionKey, nonce).encrypt(

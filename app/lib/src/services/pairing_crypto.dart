@@ -36,6 +36,19 @@ class PairingCrypto {
     return Uint8List.fromList(await session.extractBytes());
   }
 
+  /// Key for the browser-name blob the extension deposits at pairing time.
+  /// Derived from the pairing secret alone: when the extension seals the name
+  /// it has not yet seen our public key, so no session key exists. The secret
+  /// reaches us only through the QR, so the relay cannot read the name either.
+  static Future<Uint8List> deriveNameKey(Uint8List pairingSecret) async {
+    final key = await _hkdf.deriveKey(
+      secretKey: SecretKey(pairingSecret),
+      nonce: utf8.encode('twokeys-ext-name-v1'),
+      info: utf8.encode('twokeys/ext-name-v1'),
+    );
+    return Uint8List.fromList(await key.extractBytes());
+  }
+
   static Future<String> seal(
     Uint8List sessionKey,
     Map<String, dynamic> payload,

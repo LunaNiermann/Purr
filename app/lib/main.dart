@@ -35,16 +35,19 @@ Future<void> _setUpPush() async {
   await PushService.init();
   if (!PushService.available) return;
 
+  // Every paired browser has its own relay row carrying its own copy of this
+  // phone's token, so a refresh has to reach all of them or the ones left
+  // behind quietly stop being able to wake us.
   Future<void> register(String fcmToken) async {
-    final pairing = await PairingService().current();
-    if (pairing == null) return;
-    await RelayApi(baseUrl: pairing.relayUrl)
-        .updateFcmToken(
-          pairingId: pairing.pairingId,
-          phoneToken: pairing.phoneToken,
-          fcmToken: fcmToken,
-        )
-        .catchError((_) {});
+    for (final pairing in await PairingService().all()) {
+      await RelayApi(baseUrl: pairing.relayUrl)
+          .updateFcmToken(
+            pairingId: pairing.pairingId,
+            phoneToken: pairing.phoneToken,
+            fcmToken: fcmToken,
+          )
+          .catchError((_) {});
+    }
   }
 
   final token = await PushService.token();

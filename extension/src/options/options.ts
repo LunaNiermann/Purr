@@ -2,13 +2,16 @@ import QRCode from "qrcode";
 
 import { getUiLang, initI18n, setUiLang, t, UI_LANGUAGES } from "../lib/i18n";
 import {
+  deriveNameKey,
   deriveSessionKey,
   fromB64,
   generateKeyPair,
   newPairingSecret,
+  seal,
   toB64,
   open as openBlob,
 } from "../lib/crypto";
+import { browserLabel } from "../lib/label";
 import { RELAY_URL, createPairing, unpair, waitForPhone } from "../lib/relay";
 import {
   addSecurityKey,
@@ -108,9 +111,12 @@ function renderIntro(): void {
 async function renderScan(): Promise<void> {
   const keys = generateKeyPair();
   const secret = newPairingSecret();
+  // Name ourselves for the phone's paired-browser list. Sealed under a key only
+  // the QR's holder can derive, so the relay stores a label it cannot read.
+  const nameBlob = seal(deriveNameKey(secret), { name: browserLabel() });
   let created: { pairingId: string; extToken: string };
   try {
-    created = await createPairing(toB64(keys.pub));
+    created = await createPairing(toB64(keys.pub), nameBlob);
   } catch {
     page.replaceChildren(
       pairShell(

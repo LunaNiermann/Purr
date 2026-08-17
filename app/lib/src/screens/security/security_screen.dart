@@ -14,6 +14,7 @@ import '../../services/approval_service.dart';
 import '../../services/backup_service.dart';
 import '../../services/biometrics.dart';
 import '../../services/kit_pdf.dart';
+import '../../services/pairing_service.dart';
 import '../../services/push.dart';
 import '../../state/providers.dart';
 import 'pair_computer_screen.dart';
@@ -472,18 +473,20 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
   }
 }
 
-/// "Your computer" card: pair, show, or unpair the browser extension.
+/// "Your computers" card: pair browsers, see which are paired, unpair one.
+/// The vault never leaves this phone — pairing only ever adds a browser that
+/// may *ask* this phone for a code.
 class _ComputerCard extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l = AppLocalizations.of(context);
-    final pairing = ref.watch(pairingProvider);
-    final paired = pairing.pairing;
+    final pairings = ref.watch(pairingProvider).pairings;
+    final many = pairings.length > 1;
     return TkCard(
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Text(l.secYourComputer,
+          Text(many ? l.secYourComputers : l.secYourComputer,
               style: const TextStyle(
                   fontFamily: TkFonts.sans,
                   fontSize: 16,
@@ -491,76 +494,98 @@ class _ComputerCard extends ConsumerWidget {
                   color: TkColors.ink)),
           const SizedBox(height: 6),
           Text(
-              paired == null ? l.secComputerUnpaired : l.secComputerPaired,
+              pairings.isEmpty
+                  ? l.secComputerUnpaired
+                  : many
+                      ? l.secComputersPaired
+                      : l.secComputerPaired,
               style: TkText.bodySecondary),
           const SizedBox(height: 12),
-          if (paired == null)
-            _SmallOutlineButton(
-              label: l.pairScreenTitle,
-              onTap: () async {
-                final ok = await Navigator.of(context).push<bool>(
-                    MaterialPageRoute(
-                        builder: (_) => const PairComputerScreen()));
-                if (ok == true && context.mounted) {
-                  ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-                    content: Text(l.pairedSnack),
-                    backgroundColor: TkColors.green,
-                  ));
-                }
-              },
-            )
-          else
-            Container(
-              padding:
-                  const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
-              decoration: BoxDecoration(
-                color: TkColors.paperSunk,
-                borderRadius: BorderRadius.circular(13),
-              ),
-              child: Row(
-                children: [
-                  Container(
-                    width: 34,
-                    height: 34,
-                    decoration: BoxDecoration(
-                      color: TkColors.ink,
-                      borderRadius: BorderRadius.circular(10),
-                    ),
-                    alignment: Alignment.center,
-                    child: const Icon(Icons.laptop,
-                        size: 17, color: TkColors.paper),
-                  ),
-                  const SizedBox(width: 12),
-                  Expanded(
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Text(l.secYourBrowser,
-                            style: const TextStyle(
-                                fontFamily: TkFonts.sans,
-                                fontSize: 14.5,
-                                fontWeight: FontWeight.w600,
-                                color: TkColors.ink)),
-                        Text(
-                            l.secPairedOn(MaterialLocalizations.of(context)
-                                .formatShortMonthDay(
-                                    paired.pairedAt.toLocal())),
-                            style: TkText.metadata),
-                      ],
-                    ),
-                  ),
-                  _SmallOutlineButton(
-                    label: l.secUnpair,
-                    onTap: () =>
-                        ref.read(pairingProvider.notifier).unpair(),
-                  ),
-                ],
-              ),
-            ),
-          if (paired != null) ...[
+          for (final pairing in pairings) ...[
+            _PairedBrowserRow(pairing: pairing),
+            const SizedBox(height: 8),
+          ],
+          _SmallOutlineButton(
+            label: pairings.isEmpty ? l.pairScreenTitle : l.secPairAnother,
+            onTap: () async {
+              final ok = await Navigator.of(context).push<bool>(
+                  MaterialPageRoute(
+                      builder: (_) => const PairComputerScreen()));
+              if (ok == true && context.mounted) {
+                ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+                  content: Text(l.pairedSnack),
+                  backgroundColor: TkColors.green,
+                ));
+              }
+            },
+          ),
+          if (pairings.isNotEmpty) ...[
             const SizedBox(height: 10),
             const _PushStatusLine(),
           ],
+        ],
+      ),
+    );
+  }
+}
+
+/// One paired browser: what it calls itself, when it was paired, and the
+/// unpair control. Unpairing here only affects this row.
+class _PairedBrowserRow extends ConsumerWidget {
+  const _PairedBrowserRow({required this.pairing});
+
+  final StoredPairing pairing;
+
+  @override
+  Widget build(BuildContext context, WidgetRef ref) {
+    final l = AppLocalizations.of(context);
+    // Older pairings predate the browser exchanging a name; they fall back to
+    // the generic label rather than showing a blank row.
+    final name = pairing.browserName ?? l.secYourBrowser;
+    return Container(
+      padding: const EdgeInsets.symmetric(horizontal: 14, vertical: 12),
+      decoration: BoxDecoration(
+        color: TkColors.paperSunk,
+        borderRadius: BorderRadius.circular(13),
+      ),
+      child: Row(
+        children: [
+          Container(
+            width: 34,
+            height: 34,
+            decoration: BoxDecoration(
+              color: TkColors.ink,
+              borderRadius: BorderRadius.circular(10),
+            ),
+            alignment: Alignment.center,
+            child: const Icon(Icons.laptop, size: 17, color: TkColors.paper),
+          ),
+          const SizedBox(width: 12),
+          Expanded(
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(name,
+                    maxLines: 1,
+                    overflow: TextOverflow.ellipsis,
+                    style: const TextStyle(
+                        fontFamily: TkFonts.sans,
+                        fontSize: 14.5,
+                        fontWeight: FontWeight.w600,
+                        color: TkColors.ink)),
+                Text(
+                    l.secPairedOn(MaterialLocalizations.of(context)
+                        .formatShortMonthDay(pairing.pairedAt.toLocal())),
+                    style: TkText.metadata),
+              ],
+            ),
+          ),
+          _SmallOutlineButton(
+            label: l.secUnpair,
+            onTap: () => ref
+                .read(pairingProvider.notifier)
+                .unpair(pairing.pairingId),
+          ),
         ],
       ),
     );

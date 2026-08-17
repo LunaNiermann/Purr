@@ -5,6 +5,7 @@ import 'package:twofa/l10n/app_localizations.dart';
 import 'package:twofa/src/data/models.dart';
 import 'package:twofa/src/screens/request/request_screens.dart';
 import 'package:twofa/src/services/approval_service.dart';
+import 'package:twofa/src/services/pairing_service.dart';
 import 'package:twofa/src/state/providers.dart';
 
 /// The approval and intrusion screens are biometric-gated on-device, so they
@@ -35,6 +36,7 @@ void main() {
   testWidgets('A11 incoming request shows the browser-centric ask', (tester) async {
     final request = PendingApproval(
       requestId: 'r1',
+      pairing: _pairing(),
       domain: 'github.com',
       browser: 'Chrome · Windows',
       askedAt: DateTime.now(),
@@ -76,3 +78,12 @@ class _StubVault extends VaultController {
   VaultState build() =>
       VaultState(status: VaultStatus.unlocked, data: VaultData(accounts: _accounts));
 }
+
+StoredPairing _pairing() => StoredPairing(
+      pairingId: 'p1',
+      phoneToken: 't',
+      sessionKeyB64: 'AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=',
+      relayUrl: 'http://localhost:3000',
+      pairedAt: DateTime.now().toUtc(),
+      browserName: 'Chrome · Windows',
+    );

@@ -47,6 +47,45 @@ describe("pairing", () => {
     }
   });
 
+  it("hands the browser's sealed name blob to the phone", async () => {
+    // The phone's paired-browser list is built from this: the extension leaves
+    // a name blob at creation, the phone reads it back with its own token.
+    // Opaque ciphertext to the relay — it only has to store and return it.
+    const nameBlob = Buffer.alloc(64, 7).toString("base64");
+    const create = await app.inject({
+      method: "POST",
+      url: "/v1/pairings",
+      payload: { extPub: EXT_PUB, extNameBlob: nameBlob },
+    });
+    expect(create.statusCode).toBe(201);
+    const { pairingId } = create.json();
+    const complete = await app.inject({
+      method: "POST",
+      url: `/v1/pairings/${pairingId}/complete`,
+      payload: { phonePub: PHONE_PUB },
+    });
+    const { phoneToken } = complete.json();
+
+    const info = await app.inject({
+      method: "GET",
+      url: `/v1/pairings/${pairingId}`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+    });
+    expect(info.statusCode).toBe(200);
+    expect(info.json().extNameBlob).toBe(nameBlob);
+  });
+
+  it("leaves the name blob null when the extension sends none", async () => {
+    // An older extension pairs fine; the phone just shows an unnamed entry.
+    const { pairingId, phoneToken } = await pair();
+    const info = await app.inject({
+      method: "GET",
+      url: `/v1/pairings/${pairingId}`,
+      headers: { authorization: `Bearer ${phoneToken}` },
+    });
+    expect(info.json().extNameBlob).toBeNull();
+  });
+
   it("rejects a second completion and bad tokens", async () => {
     const { pairingId } = await pair();
     const again = await app.inject({

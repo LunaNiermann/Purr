@@ -82,6 +82,31 @@ WhatsApp-Web-style QR pairing, E2EE from the first byte:
 3. Extension receives `phonePubKey` via the relay, derives the same secret. From here every payload between the two is XChaCha20-Poly1305 sealed; the relay stores and forwards opaque blobs.
 4. Either side can unpair; the relay just deletes the pairing row.
 
+**One phone, many browsers.** The vault stays on the single phone — that is the
+product, not a limitation to design away — but that phone can serve any number
+of browsers. Each pairing is an independent relay row with its own session key,
+FCM registration, and replica slot; nothing links rows to a phone identity, so
+the fan-out lives entirely on the phone:
+
+- The phone stores a *list* of pairings and runs one long-poll loop per browser.
+  A pending approval carries the pairing it arrived on, so the answer is sealed
+  with the asking browser's session key rather than whichever is stored first.
+- Only one request is shown at a time. A request arriving while the screen is
+  busy is left unhandled on the relay and offered again when the slot frees.
+- An FCM token refresh is written to every pairing row; missing one would
+  silently stop that browser from being able to wake the phone.
+- Unpairing affects exactly one browser. The vault and the other pairings are
+  untouched.
+
+**Browser names.** At creation the extension seals `{name}` — "Chrome · Mac" —
+under `HKDF(pairingSecret, "twokeys/ext-name-v1")` and deposits it as
+`extNameBlob`. The key comes from the pairing secret alone because at that
+moment the extension has not yet seen the phone's public key, so no session key
+exists yet. The secret rides only in the QR, so the relay stores a label it
+cannot read. The phone reads it back after completing and uses it to label the
+list. Pairings from an older extension carry no name and fall back to a generic
+label — cosmetic only, never a reason to fail a pairing.
+
 ### Approval request lifecycle (the core flow)
 
 ```

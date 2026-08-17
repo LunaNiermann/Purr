@@ -373,8 +373,16 @@
   "secShowExport": "Mostrar meus códigos de exportação",
   "secExportReason": "Confirme para exportar suas contas",
   "secYourComputer": "Seu computador",
+  "secYourComputers": "Seus computadores",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "Pareie a extensão do navegador e entrar no seu computador vira um toque aqui.",
   "secComputerPaired": "Quando um site pede um código ao seu navegador, este telefone recebe a solicitação.",
+  "secComputersPaired": "Quando um site pede um código a um dos seus navegadores, este telefone recebe a solicitação.",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "Seu navegador",
   "secPairedOn": "Pareado em {date}",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "Desparear",
+  "secPairAnother": "Parear outro computador",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "Verificando notificações…",
   "secPushReady": "Notificações prontas",
   "secPushTurnOn": "Ative as notificações para ser avisado",

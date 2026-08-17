@@ -373,8 +373,16 @@
   "secShowExport": "エクスポート用コードを表示",
   "secExportReason": "アカウントをエクスポートするには確認してください",
   "secYourComputer": "あなたのパソコン",
+  "secYourComputers": "あなたのパソコン",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "ブラウザ拡張機能を連携すると、パソコンでのサインインがここで1タップになります。",
   "secComputerPaired": "サイトがブラウザにコードを求めると、この端末がリクエストを受け取ります。",
+  "secComputersPaired": "サイトがいずれかのブラウザにコードを求めると、この端末がリクエストを受け取ります。",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "あなたのブラウザ",
   "secPairedOn": "{date}に連携",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "連携を解除",
+  "secPairAnother": "ほかのパソコンを連携",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "通知を確認しています…",
   "secPushReady": "通知の準備完了",
   "secPushTurnOn": "通知をオンにして知らせを受け取る",

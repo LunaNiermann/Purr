@@ -18,7 +18,7 @@ Future<void> maybePrimeNotifications(
     BuildContext context, WidgetRef ref) async {
   if (!PushService.available) return;
   if (ref.read(prefsProvider).notificationsChoice != 'unasked') return;
-  if (ref.read(pairingProvider).pairing == null) return;
+  if (!ref.read(pairingProvider).isPaired) return;
 
   final wants = await showModalBottomSheet<bool>(
     context: context,
@@ -117,16 +117,17 @@ Future<void> maybePrimeNotifications(
 
   if (granted) {
     // Make sure the relay has our token now that we can actually receive.
-    final pairing = await PairingService().current();
     final token = await PushService.token();
-    if (pairing != null && token != null) {
-      await RelayApi(baseUrl: pairing.relayUrl)
-          .updateFcmToken(
-            pairingId: pairing.pairingId,
-            phoneToken: pairing.phoneToken,
-            fcmToken: token,
-          )
-          .catchError((_) {});
+    if (token != null) {
+      for (final pairing in await PairingService().all()) {
+        await RelayApi(baseUrl: pairing.relayUrl)
+            .updateFcmToken(
+              pairingId: pairing.pairingId,
+              phoneToken: pairing.phoneToken,
+              fcmToken: token,
+            )
+            .catchError((_) {});
+      }
     }
   }
 }

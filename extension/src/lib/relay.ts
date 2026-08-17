@@ -15,10 +15,11 @@ async function req(
 
 export async function createPairing(
   extPubB64: string,
+  extNameBlobB64?: string,
 ): Promise<{ pairingId: string; extToken: string }> {
   const res = await req("/v1/pairings", {
     method: "POST",
-    body: JSON.stringify({ extPub: extPubB64 }),
+    body: JSON.stringify({ extPub: extPubB64, extNameBlob: extNameBlobB64 }),
   });
   if (!res.ok) throw new Error(`pairing create failed (${res.status})`);
   return res.json();

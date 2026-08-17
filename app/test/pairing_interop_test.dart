@@ -44,6 +44,24 @@ void main() {
     expect(payload, v['payload']);
   });
 
+  test('phone derives the same browser-name key as the extension', () async {
+    final nameKey =
+        await PairingCrypto.deriveNameKey(b64('pairingSecret'));
+    expect(base64.encode(nameKey), v['nameKey'],
+        reason: 'name-key HKDF must match byte-for-byte');
+  });
+
+  test('phone opens the browser-name blob left at pairing time', () async {
+    // What the paired-browser list is built from: the extension seals its
+    // label under a key derived from the QR secret alone, because at that
+    // moment it has not yet seen the phone's public key.
+    final opened = await PairingCrypto.open(
+      await PairingCrypto.deriveNameKey(b64('pairingSecret')),
+      v['sealedNameBlob'] as String,
+    );
+    expect(opened, v['namePayload']);
+  });
+
   test('extension can open a blob sealed by the phone (round trip)',
       () async {
     // Seal on the Dart side, open with the same session key here — combined
