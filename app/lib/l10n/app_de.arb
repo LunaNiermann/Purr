@@ -373,8 +373,16 @@
   "secShowExport": "Meine Export-Codes anzeigen",
   "secExportReason": "Bestätige, um deine Konten zu exportieren",
   "secYourComputer": "Dein Computer",
+  "secYourComputers": "Deine Computer",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "Kopple die Browser-Erweiterung, und die Anmeldung an deinem Computer wird zum Tippen hier.",
   "secComputerPaired": "Wenn eine Seite deinen Browser nach einem Code fragt, erhält dieses Handy die Anfrage.",
+  "secComputersPaired": "Wenn eine Seite einen deiner Browser nach einem Code fragt, erhält dieses Handy die Anfrage.",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "Dein Browser",
   "secPairedOn": "Gekoppelt am {date}",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "Entkoppeln",
+  "secPairAnother": "Weiteren Computer koppeln",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "Benachrichtigungen werden geprüft…",
   "secPushReady": "Benachrichtigungen bereit",
   "secPushTurnOn": "Aktiviere Benachrichtigungen, um alarmiert zu werden",
