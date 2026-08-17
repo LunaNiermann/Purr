@@ -373,8 +373,16 @@
   "secShowExport": "मेरे एक्सपोर्ट कोड दिखाएँ",
   "secExportReason": "अपने खाते एक्सपोर्ट करने के लिए पुष्टि करें",
   "secYourComputer": "आपका कंप्यूटर",
+  "secYourComputers": "आपके कंप्यूटर",
+  "@secYourComputers": {
+    "description": "Heading of the paired-computers card when more than one browser is paired."
+  },
   "secComputerUnpaired": "ब्राउज़र एक्सटेंशन जोड़ें और अपने कंप्यूटर पर साइन-इन यहाँ एक टैप बन जाता है।",
   "secComputerPaired": "जब कोई साइट आपके ब्राउज़र से कोड माँगती है, तो यह फ़ोन अनुरोध पाता है।",
+  "secComputersPaired": "जब कोई साइट आपके किसी ब्राउज़र से कोड माँगती है, तो यह फ़ोन अनुरोध पाता है।",
+  "@secComputersPaired": {
+    "description": "Body of the paired-computers card when more than one browser is paired."
+  },
   "secYourBrowser": "आपका ब्राउज़र",
   "secPairedOn": "{date} को जोड़ा गया",
   "@secPairedOn": {
@@ -383,6 +391,10 @@
     }
   },
   "secUnpair": "अलग करें",
+  "secPairAnother": "एक और कंप्यूटर जोड़ें",
+  "@secPairAnother": {
+    "description": "Button that pairs an additional browser when at least one is already paired."
+  },
   "secPushChecking": "नोटिफ़िकेशन जाँचे जा रहे हैं…",
   "secPushReady": "नोटिफ़िकेशन तैयार",
   "secPushTurnOn": "सूचित होने के लिए नोटिफ़िकेशन चालू करें",
