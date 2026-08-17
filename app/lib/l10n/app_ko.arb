@@ -14,14 +14,41 @@
   "unlocking": "잠금 해제 중…",
   "useMyPassword": "비밀번호 사용",
   "unlockYourCodes": "코드 잠금 해제",
+  "@unlockYourCodes": {
+    "description": "Reason shown in the OS biometric prompt when unlocking the app."
+  },
   "language": "언어",
   "languageSubtitle": "Purr가 사용할 언어를 선택하세요",
   "languageSystemDefault": "기기 설정에 맞추기",
-  "accountCount": "{count, plural, other{계정 {count}개}}",
+  "accountCount": "{count, plural, =1{1 account} other{{count} accounts}}",
+  "@accountCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "searchAccountsHint": "계정 검색",
   "cancel": "취소",
   "tapToCopySeconds": "탭하여 복사 · {seconds}초",
-  "searchMatchCount": "{total, plural, other{{total}개}} 중 {shown}개",
+  "@tapToCopySeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
+  "searchMatchCount": "{shown} of {total, plural, =1{1 account} other{{total} accounts}}",
+  "@searchMatchCount": {
+    "placeholders": {
+      "shown": {
+        "type": "int"
+      },
+      "total": {
+        "type": "int"
+      }
+    }
+  },
   "copied": "복사됨",
   "searchScopeNote": "검색은 사이트 이름과 사용자 이름만 확인하며, 코드는 확인하지 않습니다.",
   "emptyVaultTitle": "아직 계정이 없습니다",
@@ -35,8 +62,20 @@
   "detailBrowser": "브라우저",
   "detailAsked": "요청 시각",
   "justNow": "방금",
-  "secondsAgo": "{count, plural, other{{count}초 전}}",
+  "secondsAgo": "{count, plural, =1{1 second ago} other{{count} seconds ago}}",
+  "@secondsAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "approvalWhichAccount": "어느 계정인가요? {domain}에 저장되어 있지 않습니다.",
+  "@approvalWhichAccount": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "sendTheCode": "코드 보내기",
   "didntAskForThis": "내가 요청하지 않았어요",
   "justShowCode": "코드만 보여주기",
@@ -45,24 +84,72 @@
   "confirmingItsYou": "본인인지 확인 중",
   "youreIn": "로그인되었습니다.",
   "signingYouIn": "{domain}에서 컴퓨터로 로그인하고 있습니다. 입력할 것이 없습니다.",
+  "@signingYouIn": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "codeExpiresNote": "보낸 코드는 30초 후 만료되며 한 번만 사용할 수 있습니다.",
   "done": "완료",
   "blockedNothingSent": "차단됨. 아무것도 보내지 않았습니다.",
   "deniedBody": "누군가 당신처럼 로그인하려 했습니다. 코드는 이 휴대폰을 떠나지 않았고, 그들은 아무것도 얻지 못했습니다.",
   "deniedChangePassword": "실수가 아니었다면 오늘 {domain} 비밀번호를 바꾸세요. 그들이 가진 것은 비밀번호입니다.",
+  "@deniedChangePassword": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "gotIt": "확인",
   "typeThisInto": "여기에 입력",
   "newCodeInSeconds": "새 코드까지 {seconds}초",
+  "@newCodeInSeconds": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "codeOnlyNote": "브라우저로 아무것도 보내지 않았습니다. 직접 입력하거나 붙여넣으세요.",
   "copyCode": "코드 복사",
   "intrusionBadge": "차단됨 · {when}",
+  "@intrusionBadge": {
+    "placeholders": {
+      "when": {}
+    }
+  },
   "relativeJustNow": "방금",
-  "relativeMinutesAgo": "{count, plural, other{{count}분 전}}",
-  "relativeHoursAgo": "{count, plural, other{{count}시간 전}}",
+  "relativeMinutesAgo": "{count, plural, =1{1 minute ago} other{{count} minutes ago}}",
+  "@relativeMinutesAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
+  "relativeHoursAgo": "{count, plural, =1{1 hour ago} other{{count} hours ago}}",
+  "@relativeHoursAgo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "intrusionTitle": "누군가 당신의 {domain} 비밀번호를 알고 있습니다.",
+  "@intrusionTitle": {
+    "placeholders": {
+      "domain": {}
+    }
+  },
   "intrusionBody": "그들은 들어오지 못했습니다 — 이 휴대폰도 필요하기 때문입니다. 하지만 비밀번호가 유출됐으니 오늘 바꾸는 것이 좋습니다.",
   "intrusionTried": "시도",
-  "triedTimes": "{count, plural, other{{count}회}}",
+  "triedTimes": "{count, plural, =1{1 time} other{{count} times}}",
+  "@triedTimes": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "okay": "확인",
   "muteToday": "오늘 이 사이트 요청 음소거",
   "onbHeroTitle": "비밀번호만으로는 충분하지 않습니다.",
@@ -103,6 +190,11 @@
   "addCameraOk": "네, 물어봐 주세요",
   "addTypeByHand": "코드를 직접 입력할게요",
   "scanCodeError": "그 코드는 작동하지 않았습니다: {message}",
+  "@scanCodeError": {
+    "placeholders": {
+      "message": {}
+    }
+  },
   "pairTitle": "이 컴퓨터를 페어링할까요?",
   "pairBody": "이것은 컴퓨터를 연결하는 코드이며, 웹사이트 계정이 아닙니다. 지금 페어링할까요?",
   "notNow": "나중에",
@@ -124,20 +216,66 @@
   "firstCodeLabel": "첫 코드: ",
   "saveLabel": "저장",
   "saveNamed": "{site} 저장",
+  "@saveNamed": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "defaultAccountName": "계정",
   "importedAccountName": "가져온 계정",
-  "importReadyCount": "{count, plural, other{계정 {count}개, 옮길 준비 완료}}",
+  "importReadyCount": "{count, plural, =1{One account, ready to move in} other{{count} accounts, ready to move in}}",
+  "@importReadyCount": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "importPartOf": "{size}개 중 {index}번째입니다 — 다른 사각형도 순서 상관없이 스캔하세요.",
+  "@importPartOf": {
+    "placeholders": {
+      "index": {
+        "type": "int"
+      },
+      "size": {
+        "type": "int"
+      }
+    }
+  },
   "importAllComeAcross": "아래 모든 것이 그대로 옮겨집니다. 빠지는 것은 없습니다.",
   "unnamedAccount": "이름 없음",
   "importBringOne": "가져오기",
   "importBringAll": "{count}개 모두 가져오기",
+  "@importBringAll": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "detailRename": "이름 변경",
   "detailRemoveTitle": "{site} 삭제할까요?",
+  "@detailRemoveTitle": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailRemoveWarning": "먼저 {site}에서 2단계 인증을 끄세요. 그러지 않으면 계정에서 잠깁니다.",
+  "@detailRemoveWarning": {
+    "placeholders": {
+      "site": {}
+    }
+  },
   "detailKeepIt": "그대로 두기",
   "detailRemove": "삭제",
   "detailNewIn": "{seconds}초 후 갱신",
+  "@detailNewIn": {
+    "placeholders": {
+      "seconds": {
+        "type": "int"
+      }
+    }
+  },
   "detailWhereLives": "이것이 있는 곳",
   "detailThisPhone": "이 휴대폰",
   "detailPlusKit": "종이 키트까지 — 이 휴대폰을 잃어도 안전합니다",
@@ -153,7 +291,14 @@
   "restoreWordsSubtitle": "순서대로, 칸마다 하나씩. 대소문자는 신경 쓰지 마세요.",
   "restoreWordsError": "그 단어들이 잘 맞지 않습니다 — 종이와 하나씩 대조하세요. 순서가 중요합니다.",
   "restoreLostSheet": "종이도 잃으셨나요? 예전 휴대폰이 아직 작동하면 보안 탭에서 새로 인쇄할 수 있습니다.",
-  "restoreWordsToGo": "{count, plural, other{{count}단어 남음}}",
+  "restoreWordsToGo": "{count, plural, =1{1 word to go} other{{count} words to go}}",
+  "@restoreWordsToGo": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreNoBackup": "그 단어에 대한 백업을 찾지 못했습니다. 예전 휴대폰에서 백업이 꺼져 있었다면 종이만으로는 계정을 되살릴 수 없습니다 — 하지만 새로 설정할 수 있습니다.",
   "restoreGenericError": "무언가 방해가 됐습니다 — 연결을 확인하고 다시 시도하세요. 잃은 것은 없습니다.",
   "restoreErrorTitle": "안 됐지만 — 잃은 것은 없습니다",
@@ -161,10 +306,24 @@
   "restoreUnscrambling": "코드를 복원하는 중…",
   "restoreCheckFound": "암호화된 백업을 찾았습니다",
   "restoreCheckUnlocked": "당신의 단어로 열렸습니다",
-  "restoreCheckPutting": "{count, plural, other{계정 {count}개를 되돌리는 중}}",
+  "restoreCheckPutting": "{count, plural, =1{Putting 1 account back} other{Putting {count} accounts back}}",
+  "@restoreCheckPutting": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreCheckPuttingGeneric": "계정을 되돌리는 중",
   "restoreOnPhoneNote": "이 모든 것은 이 휴대폰에서 일어납니다. 저희는 읽을 수 없는 뒤섞인 사본만 저장했습니다.",
-  "restoreDoneTitle": "{count, plural, other{{count}개 계정이 모두 돌아왔습니다.}}",
+  "restoreDoneTitle": "{count, plural, =1{Your account is back.} other{All {count} accounts are back.}}",
+  "@restoreDoneTitle": {
+    "placeholders": {
+      "count": {
+        "type": "int"
+      }
+    }
+  },
   "restoreOldCutOff": "예전 휴대폰은 차단되었습니다 — 누가 찾아도 그 코드는 더 이상 작동하지 않습니다.",
   "restorePrintFreshTitle": "한 가지 남음: 새 키트 인쇄",
   "restorePrintFreshBody": "예전 종이는 이제 은퇴했습니다. 새 것은 10초면 되고 다음을 대비해 줍니다.",
@@ -189,6 +348,11 @@
   "secLoseSection": "이 휴대폰을 잃으면",
   "secRecoveryKit": "복구 키트",
   "secSavedOn": "{date} 저장됨",
+  "@secSavedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secRecoveryBody": "모든 기기를 잃어도 모든 것을 되찾을 수 있는 종이 한 장입니다. 언제든 다른 사본을 인쇄하세요.",
   "secPrintAgain": "다시 인쇄",
   "secKitReason": "복구 키트를 보려면 확인하세요",
@@ -213,6 +377,11 @@
   "secComputerPaired": "사이트가 브라우저에 코드를 요청하면 이 휴대폰이 요청을 받습니다.",
   "secYourBrowser": "당신의 브라우저",
   "secPairedOn": "{date} 페어링됨",
+  "@secPairedOn": {
+    "placeholders": {
+      "date": {}
+    }
+  },
   "secUnpair": "페어링 해제",
   "secPushChecking": "알림 확인 중…",
   "secPushReady": "알림 준비됨",
