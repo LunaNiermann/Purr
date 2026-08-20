@@ -15,10 +15,11 @@ on:
 
 jobs:
   ios:
-    # macos-14 defaults to Xcode 15 (Swift 5.10). Firebase 12's sources use
-    # Swift 6 syntax — `sending`, access levels on imports — so they fail to
-    # parse there. This image defaults to Xcode 16.
-    runs-on: macos-15
+    # Apple requires App Store/TestFlight builds to use the current iOS SDK.
+    # As of 2026 that's the iOS 26 SDK (Xcode 26) — older images (macos-15 ships
+    # Xcode 16 / iOS 18.5 SDK) are rejected on upload with a 409 SDK-version
+    # error. macos-26 ships Xcode 26 by default.
+    runs-on: macos-26
     env:
       ASC_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
       # Job-level so the restore step can gate on `env.` in its `if:`.
