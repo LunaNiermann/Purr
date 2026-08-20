@@ -375,17 +375,24 @@ class _SecurityScreenState extends ConsumerState<SecurityScreen> {
                       // Export: exit rights are non-negotiable.
                       _showExportSheet(context);
                     },
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
+                    child: Row(
                       children: [
-                        Text(l.secMoveApp,
-                            style: const TextStyle(
-                                fontFamily: TkFonts.sans,
-                                fontSize: 15.5,
-                                fontWeight: FontWeight.w600,
-                                color: TkColors.ink)),
-                        const SizedBox(height: 3),
-                        Text(l.secMoveAppSub, style: TkText.metadata),
+                        Expanded(
+                          child: Column(
+                            crossAxisAlignment: CrossAxisAlignment.start,
+                            children: [
+                              Text(l.secMoveApp,
+                                  style: const TextStyle(
+                                      fontFamily: TkFonts.sans,
+                                      fontSize: 15.5,
+                                      fontWeight: FontWeight.w600,
+                                      color: TkColors.ink)),
+                              const SizedBox(height: 3),
+                              Text(l.secMoveAppSub, style: TkText.metadata),
+                            ],
+                          ),
+                        ),
+                        const Icon(Icons.chevron_right, color: TkColors.ink50),
                       ],
                     ),
                   ),
@@ -624,24 +631,21 @@ class _PushStatusLineState extends State<_PushStatusLine> {
   @override
   Widget build(BuildContext context) {
     final d = _diag;
-    final registered = d != null && d.available && d.hasToken;
+    // While still checking, show nothing rather than a transient banner.
+    if (d == null) return const SizedBox.shrink();
+    final registered = d.available && d.hasToken;
     final ok = registered && d.notificationsAllowed;
+    // Working as expected — no banner. Only surface when action is needed
+    // (permission off) or something's wrong (can't register / unavailable).
+    if (ok) return const SizedBox.shrink();
     final needsPermission = registered && !d.notificationsAllowed;
     final l = AppLocalizations.of(context);
-    final label = d == null
-        ? l.secPushChecking
-        : ok
-            ? l.secPushReady
-            : needsPermission
-                ? l.secPushTurnOn
-                : d.available
-                    ? l.secPushCantRegister
-                    : l.secPushUnavailable;
-    final color = d == null
-        ? TkColors.ink55
-        : ok
-            ? TkColors.green
-            : const Color(0xFFB4462F);
+    final label = needsPermission
+        ? l.secPushTurnOn
+        : d.available
+            ? l.secPushCantRegister
+            : l.secPushUnavailable;
+    const color = Color(0xFFB4462F);
     return GestureDetector(
       onTap: needsPermission ? _enable : _refresh,
       behavior: HitTestBehavior.opaque,

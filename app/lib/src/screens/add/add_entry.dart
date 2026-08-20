@@ -41,6 +41,7 @@ Future<void> startAddEntry(BuildContext context, WidgetRef ref,
     context: context,
     backgroundColor: TkColors.surface,
     barrierColor: const Color.fromRGBO(27, 26, 23, .32),
+    isScrollControlled: true, // grow to fit content; don't clip the lower button
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     ),
@@ -532,10 +533,6 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
   Widget build(BuildContext context) {
     final l = AppLocalizations.of(context);
     final preview = _preview;
-    final now = ref.watch(tickProvider).maybeWhen(
-          data: (t) => t,
-          orElse: DateTime.now,
-        );
     final site = _site.text.trim();
     return Scaffold(
       appBar: AppBar(
@@ -617,26 +614,6 @@ class _ManualEntryScreenState extends ConsumerState<ManualEntryScreen> {
                                                 fontSize: 14.5,
                                                 fontWeight: FontWeight.w600,
                                                 color: TkColors.greenDeep)),
-                                        Text.rich(
-                                          TextSpan(
-                                            text: l.firstCodeLabel,
-                                            children: [
-                                              TextSpan(
-                                                text: formatCodeForDisplay(
-                                                    preview.codeAt(now)),
-                                                style: const TextStyle(
-                                                    fontFamily: TkFonts.mono,
-                                                    fontWeight:
-                                                        FontWeight.w600),
-                                              ),
-                                            ],
-                                          ),
-                                          style: const TextStyle(
-                                              fontFamily: TkFonts.sans,
-                                              fontSize: 12.8,
-                                              color: Color.fromRGBO(
-                                                  27, 70, 54, .75)),
-                                        ),
                                       ],
                                     ),
                                   ),

@@ -23,6 +23,9 @@ Future<void> maybePrimeNotifications(
   final wants = await showModalBottomSheet<bool>(
     context: context,
     backgroundColor: TkColors.surface,
+    // Without this the sheet is capped at ~half the screen and the lower
+    // button gets clipped; let it grow to fit its content instead.
+    isScrollControlled: true,
     shape: const RoundedRectangleBorder(
       borderRadius: BorderRadius.vertical(top: Radius.circular(30)),
     ),
