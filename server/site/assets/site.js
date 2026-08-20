@@ -6,7 +6,7 @@
   // --- Browser detection (order matters: Brave/Opera/Edge UAs contain "Chrome") ---
   var stores = {
     chrome: ["Chrome", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
-    edge: ["Edge", "https://microsoftedge.microsoft.com/addons/", "Edge Add-ons"],
+    edge: ["Edge", "https://microsoftedge.microsoft.com/addons/detail/purr-2fa-authenticator/lgfjannafbclpekbiohccbnghhjacfhg", "Edge Add-ons"],
     firefox: ["Firefox", "https://addons.mozilla.org/", "Firefox Add-ons"],
     brave: ["Brave", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     opera: ["Opera", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
