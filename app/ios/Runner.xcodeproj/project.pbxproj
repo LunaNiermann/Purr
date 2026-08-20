@@ -585,6 +585,10 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = nl.notfinal.twofa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				CODE_SIGN_STYLE = Manual;
+				DEVELOPMENT_TEAM = 5858K3V8JQ;
+				PROVISIONING_PROFILE_SPECIFIER = "Purr Prov";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
 				SWIFT_OBJC_BRIDGING_HEADER = "Runner/Runner-Bridging-Header.h";
 				SWIFT_VERSION = 5.0;
 				VERSIONING_SYSTEM = "apple-generic";
