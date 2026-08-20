@@ -123,11 +123,21 @@ jobs:
           fi
           flutter build ipa $ARGS --export-options-plist=ios/ExportOptions.plist
 
+      # The upload action passes app-path straight to altool without expanding
+      # globs, so resolve the real filename here (flutter names it after the app).
+      - name: Locate the built IPA
+        if: env.ASC_KEY_ID != ''
+        id: ipa
+        run: |
+          IPA=$(ls app/build/ios/ipa/*.ipa | head -1)
+          echo "Found IPA: $IPA"
+          echo "path=$IPA" >> "$GITHUB_OUTPUT"
+
       - name: Upload to TestFlight
         if: env.ASC_KEY_ID != ''
         uses: apple-actions/upload-testflight-build@v3
         with:
-          app-path: app/build/ios/ipa/*.ipa
+          app-path: ${{ steps.ipa.outputs.path }}
           issuer-id: ${{ secrets.APPSTORE_ISSUER_ID }}
           api-key-id: ${{ secrets.APPSTORE_KEY_ID }}
           api-private-key: ${{ secrets.APPSTORE_PRIVATE_KEY }}
