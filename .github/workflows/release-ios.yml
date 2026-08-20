@@ -21,6 +21,8 @@ jobs:
     runs-on: macos-15
     env:
       ASC_KEY_ID: ${{ secrets.APPSTORE_KEY_ID }}
+      # Job-level so the restore step can gate on `env.` in its `if:`.
+      GOOGLE_SERVICE_INFO_PLIST_BASE64: ${{ secrets.GOOGLE_SERVICE_INFO_PLIST_BASE64 }}
     steps:
       - uses: actions/checkout@v4
 
@@ -44,6 +46,21 @@ jobs:
       - name: flutter pub get
         working-directory: app
         run: flutter pub get
+
+      # Firebase's iOS config. The file must already be a member of the Runner
+      # target in Xcode (add it once from the Firebase console download and
+      # commit the .pbxproj reference); the actual plist is gitignored and
+      # restored here so builds can bundle it. Without it, push is inert.
+      - name: Restore GoogleService-Info.plist (enables push, if configured)
+        if: env.GOOGLE_SERVICE_INFO_PLIST_BASE64 != ''
+        working-directory: app
+        run: |
+          echo "$GOOGLE_SERVICE_INFO_PLIST_BASE64" | base64 -d > ios/Runner/GoogleService-Info.plist
+          echo "Firebase iOS config restored — push enabled for this build."
+
+      - name: Warn if no Firebase iOS config
+        if: env.GOOGLE_SERVICE_INFO_PLIST_BASE64 == ''
+        run: echo "::warning::No GOOGLE_SERVICE_INFO_PLIST_BASE64 secret — building without Firebase; push notifications will not work in this build."
 
       # ---- Validation build (always) --------------------------------------
       - name: Build iOS (no code signing)
