@@ -78,6 +78,15 @@ jobs:
           p12-file-base64: ${{ secrets.IOS_DIST_CERT_P12_BASE64 }}
           p12-password: ${{ secrets.IOS_DIST_CERT_PASSWORD }}
 
+      # Signing diagnostics: a valid identity here is cert + matching private
+      # key with a complete chain. "0 valid identities found" means the .p12
+      # is cert-only, has a mismatched key, or is missing the WWDR intermediate.
+      - name: Show signing identities
+        if: env.ASC_KEY_ID != ''
+        run: |
+          echo "Keychains in search list:"; security list-keychains -d user
+          echo "Codesigning identities:"; security find-identity -v -p codesigning || true
+
       - name: Install provisioning profile
         if: env.ASC_KEY_ID != ''
         run: |
