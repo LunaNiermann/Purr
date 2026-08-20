@@ -586,6 +586,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = nl.notfinal.twofa;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				CODE_SIGN_STYLE = Manual;
+				CODE_SIGN_ENTITLEMENTS = Runner/Runner.entitlements;
 				DEVELOPMENT_TEAM = 5858K3V8JQ;
 				PROVISIONING_PROFILE_SPECIFIER = "Purr Prov";
 				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "Apple Distribution";
