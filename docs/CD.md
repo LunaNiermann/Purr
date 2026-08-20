@@ -70,22 +70,45 @@ a `--no-codesign` build on every tag — this proves the app builds for iOS, but
 Apple requires a signed build to install anywhere (including TestFlight), and
 that requires the **Apple Developer Program** ($99/yr).
 
+The project's identifiers (all non-secret) are already set:
+
+| | |
+|---|---|
+| Bundle ID | `nl.notfinal.twofa` |
+| Apple Team ID | `5858K3V8JQ` — baked into `release-ios.yml`'s ExportOptions |
+| App Store Connect Apple ID | `6803663064` |
+
 When you're ready, enroll, then add these secrets (all base64 where noted):
 
 | Secret | What it is |
 |---|---|
-| `APPLE_TEAM_ID` | 10-char team id from developer.apple.com → Membership |
 | `IOS_DIST_CERT_P12_BASE64` | your Apple **Distribution** certificate exported as `.p12`, base64 |
 | `IOS_DIST_CERT_PASSWORD` | the `.p12` export password |
-| `IOS_PROVISIONING_PROFILE_BASE64` | an App Store provisioning profile for `nl.notfinal.twofa`, base64 |
+| `IOS_PROVISIONING_PROFILE_BASE64` | an App Store provisioning profile for `nl.notfinal.twofa` **including the Push Notifications entitlement**, base64 |
 | `APPSTORE_ISSUER_ID` | App Store Connect API → Keys → Issuer ID |
 | `APPSTORE_KEY_ID` | the API key's Key ID |
 | `APPSTORE_PRIVATE_KEY` | contents of the API key `.p8` file |
+| `GOOGLE_SERVICE_INFO_PLIST_BASE64` | Firebase iOS `GoogleService-Info.plist`, base64 — restored by CI so builds can bundle it (enables push) |
 
 The presence of `APPSTORE_KEY_ID` flips the workflow from validation to a real
-signed build + TestFlight upload. Before the first run you must also, once, in
-App Store Connect: create the app record (bundle id `nl.notfinal.twofa`) so
-there's something to upload builds to.
+signed build + TestFlight upload. The app record already exists (bundle id
+`nl.notfinal.twofa`, Apple ID `6803663064`).
+
+### Push notifications (one-time setup)
+
+1. **Apple Developer** — App ID `nl.notfinal.twofa` needs the **Push
+   Notifications** capability, and the provisioning profile above must be
+   regenerated to include it.
+2. **Xcode** (`app/ios/Runner.xcworkspace`, needs a Mac) — add the **Push
+   Notifications** capability (this creates `Runner.entitlements` and wires the
+   `.pbxproj`) and enable **Background Modes → Remote notifications**. Drag the
+   Firebase `GoogleService-Info.plist` into the **Runner target** so it's
+   bundled, and commit the `.pbxproj` reference. The plist itself stays
+   gitignored and is restored in CI from the secret above.
+3. **Firebase** — register an iOS app (bundle id `nl.notfinal.twofa`), download
+   `GoogleService-Info.plist`, and upload an **APNs Auth Key (.p8)** under
+   Project Settings → Cloud Messaging. Without the `.p8`, FCM cannot deliver to
+   iOS at all.
 
 Tip: generating the cert/profile by hand is fiddly. If it becomes a chore,
 switch the iOS job to **fastlane match**, which stores signing assets in a
