@@ -81,8 +81,16 @@ class PushService {
 
   static Future<void> _ensureLocalReady() async {
     const android = AndroidInitializationSettings('@mipmap/ic_launcher');
+    // Don't let the plugin prompt for permission on init — the priming screen
+    // owns that moment via FirebaseMessaging.requestPermission (same OS
+    // permission underneath).
+    const darwin = DarwinInitializationSettings(
+      requestAlertPermission: false,
+      requestBadgePermission: false,
+      requestSoundPermission: false,
+    );
     await _local.initialize(
-      settings: const InitializationSettings(android: android),
+      settings: const InitializationSettings(android: android, iOS: darwin),
     );
     final android_ = _local
         .resolvePlatformSpecificImplementation<
@@ -110,11 +118,13 @@ class PushService {
           importance: Importance.high,
           priority: Priority.high,
         ),
+        iOS: DarwinNotificationDetails(presentAlert: true, presentSound: true),
       ),
     );
   }
 
-  /// Triggers the Android 13+ runtime notification prompt (and iOS later).
+  /// Triggers the OS notification prompt (Android 13+ runtime permission,
+  /// iOS authorization dialog).
   static Future<bool> requestPermission() async {
     await init();
     if (!available) return false;

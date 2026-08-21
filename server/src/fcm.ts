@@ -104,6 +104,32 @@ export function createPusher(config: FcmConfig, log: {
               token: fcmToken,
               data,
               android: { priority: "HIGH", ttl: "60s" },
+              // iOS can't render a data-only message: APNs would treat it as a
+              // silent background push — throttled, best-effort, and never
+              // delivered after the user swipes the app away. So for Apple we
+              // attach a visible alert with generic, static text: the same
+              // words for every request, so APNs/Google still learn nothing
+              // (the domain, account, and code stay in the sealed blob the
+              // phone fetches after the tap). No content-available flag: the
+              // system shows the banner itself; waking the app too would
+              // just double-post via the local-notification path.
+              apns: {
+                headers: {
+                  "apns-priority": "10",
+                  // Mirror the 60 s request TTL — a code prompt after expiry
+                  // would only open the app onto nothing.
+                  "apns-expiration": String(Math.ceil(Date.now() / 1000) + 60),
+                },
+                payload: {
+                  aps: {
+                    alert: {
+                      title: "Your browser needs a code",
+                      body: "Tap to approve on your phone",
+                    },
+                    sound: "default",
+                  },
+                },
+              },
             },
           }),
         });
