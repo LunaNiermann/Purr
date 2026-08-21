@@ -7,7 +7,7 @@
   var stores = {
     chrome: ["Chrome", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     edge: ["Edge", "https://microsoftedge.microsoft.com/addons/detail/purr-2fa-authenticator/lgfjannafbclpekbiohccbnghhjacfhg", "Edge Add-ons"],
-    firefox: ["Firefox", "https://addons.mozilla.org/", "Firefox Add-ons"],
+    firefox: ["Firefox", "#get", "Not supported yet, see other options"],
     brave: ["Brave", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     opera: ["Opera", "https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf", "Chrome Web Store"],
     safari: ["Safari", "#get", "Not supported yet, see other options"]
