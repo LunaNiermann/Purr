@@ -1,4 +1,4 @@
-import { getFlow, type Flow } from "../lib/flow";
+import { getFlow, setFlow, type Flow, type FlowStatus } from "../lib/flow";
 import { initI18n, localizeDom, t } from "../lib/i18n";
 import {
   codeFor,
@@ -300,6 +300,17 @@ function start(domain: string): void {
   });
 }
 
+// Only "awaitingPhone" is a live, in-progress state; everything else is a
+// terminal outcome the popup should show once and then let go of.
+function isTerminal(status: FlowStatus): boolean {
+  return status !== "awaitingPhone";
+}
+
+// A flow older than this is stale: an awaiting approval whose service worker was
+// killed mid-poll (orphaned), or a terminal result left over from a past visit.
+// The server request window is ~60 s; give it generous headroom.
+const FLOW_STALE_MS = 120_000;
+
 function renderFromFlow(flow: Flow): void {
   document.querySelector(".brand-tile")?.classList.remove("danger", "muted");
   switch (flow.status) {
@@ -337,14 +348,25 @@ async function init(): Promise<void> {
   // fresh local copy without racing a fetch against the WebAuthn gesture window.
   if (domain != null && (await isEnrolled())) void refreshReplica();
 
-  // Reflect any in-progress/terminal flow the service worker owns.
+  // Reflect the flow the service worker owns — but never get stuck on it.
+  //
+  // A live "awaitingPhone" is reflected wherever the popup opens, so switching
+  // to the phone and back shows the current state. A terminal outcome is shown
+  // once (only on the tab it belongs to) and then cleared, so reopening the
+  // popup — or moving to another page — returns to the ready screen instead of
+  // replaying a finished result. Stale flows (an orphaned poll, or a leftover
+  // result from an earlier visit) are dropped.
   const flow = await getFlow();
-  if (flow && (domain == null || flow.domain === domain)) {
+  const stale = flow != null && Date.now() - flow.at > FLOW_STALE_MS;
+  if (flow && !stale && !isTerminal(flow.status)) {
     renderFromFlow(flow);
-  } else if (domain == null) {
-    renderNoField();
+  } else if (flow && !stale && flow.domain === domain) {
+    renderFromFlow(flow); // terminal result for this tab: show it, then consume
+    void setFlow(null);
   } else {
-    await renderReady(domain);
+    if (flow) void setFlow(null); // stale or belongs to another page: forget it
+    if (domain == null) renderNoField();
+    else await renderReady(domain);
   }
 
   // Live updates while the popup stays open.
