@@ -4,12 +4,12 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Purr: 2FA authenticator with no account</title>
-<meta name="description" content="Purr is a free, open-source two-factor authenticator. Codes stay encrypted on your phone, the browser extension asks for them, and there is no account, email or phone number.">
+<meta name="description" content="Purr is a free, open-source two-factor app. Your codes stay on your phone, and the browser extension asks your phone when you sign in. No account, no email, no phone number.">
 <link rel="canonical" href="https://purr2fa.app/">
 <meta property="og:type" content="website">
 <meta property="og:url" content="https://purr2fa.app/">
 <meta property="og:title" content="Purr: 2FA authenticator with no account">
-<meta property="og:description" content="Codes stay on your phone. The extension asks, you tap once, six digits cross encrypted.">
+<meta property="og:description" content="Codes stay on your phone. The extension asks, you tap once, the code fills in.">
 <meta property="og:image" content="https://purr2fa.app/social-card.png">
 <meta name="twitter:card" content="summary_large_image">
 <meta name="theme-color" content="#F4F7F5">
@@ -24,13 +24,13 @@
 <link rel="stylesheet" href="/assets/site.css?v=20260813">
 <script type="application/ld+json">
 {"@context":"https://schema.org","@graph":[
-{"@type":"SoftwareApplication","name":"Purr","alternateName":"Purr 2FA Authenticator","applicationCategory":"SecurityApplication","operatingSystem":"iOS, Android, Chrome, Edge, Firefox","url":"https://purr2fa.app/","description":"Free open-source two-factor (TOTP) authenticator. TOTP secrets stay encrypted on the phone; the browser extension requests a single six-digit code per login. No account, email or phone number.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true},
+{"@type":"SoftwareApplication","name":"Purr","alternateName":"Purr 2FA Authenticator","applicationCategory":"SecurityApplication","operatingSystem":"iOS, Android, Chrome, Edge, Firefox","url":"https://purr2fa.app/","description":"Free, open-source two-factor (TOTP) authenticator. Codes stay on the phone; the browser extension asks the phone for one code per sign-in. No account, email or phone number.","offers":{"@type":"Offer","price":"0","priceCurrency":"USD"},"isAccessibleForFree":true},
 {"@type":"FAQPage","mainEntity":[
 {"@type":"Question","name":"Does Purr need an account?","acceptedAnswer":{"@type":"Answer","text":"No account, no email, no phone number. It works offline."}},
-{"@type":"Question","name":"Can I export my codes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Plaintext otpauth:// or encrypted, any time."}},
+{"@type":"Question","name":"Can I export my codes?","acceptedAnswer":{"@type":"Answer","text":"Yes. Move your codes to another app at any time, as QR codes or as an encrypted file."}},
 {"@type":"Question","name":"What if I lose my phone?","acceptedAnswer":{"@type":"Answer","text":"Twelve printed words restore every code on a new one."}},
-{"@type":"Question","name":"Can you see my codes?","acceptedAnswer":{"@type":"Answer","text":"No. Your secrets are encrypted on your device. Our relay only carries ciphertext."}},
-{"@type":"Question","name":"Switching from Authy?","acceptedAnswer":{"@type":"Answer","text":"Authy has no export, so those entries get re-added from each service. Google Authenticator, Aegis, 2FAS and Ente import directly."}},
+{"@type":"Question","name":"Can you see my codes?","acceptedAnswer":{"@type":"Answer","text":"No. Your codes are locked on your phone. What our server passes along is locked too, and we have no key."}},
+{"@type":"Question","name":"Switching from Authy?","acceptedAnswer":{"@type":"Answer","text":"Authy has no export, so you add those accounts again from each service. Google Authenticator, Aegis, 2FAS and Ente import directly."}},
 {"@type":"Question","name":"What does it cost?","acceptedAnswer":{"@type":"Answer","text":"Nothing. Open source, no ads, no trackers."}}]}]}
 </script>
 <script src="https://storage.ko-fi.com/cdn/widget/Widget_2.js" async></script>
@@ -73,7 +73,7 @@
 <section class="hero">
   <div class="hero-copy">
     <h1>Codes stay on your phone.</h1>
-    <p class="sub">The extension asks. You tap once. Six digits cross, encrypted, and expire.</p>
+    <p class="sub">The extension asks. You tap once. The code fills in, then expires.</p>
     <div class="cta-row">
       <a href="#get" class="btn-primary js-ext-href">
         <span>Add to <span class="js-browser-name">your browser</span></span>
@@ -86,7 +86,7 @@
     </div>
   </div>
   <div class="hero-shot">
-    <img src="/assets/img/hero-approve.png" width="1000" height="750" loading="eager" fetchpriority="high" alt="Purr filling a six-digit two-factor code: the browser shows the code fields while the phone asks to approve sending the code.">
+    <img src="/assets/img/hero-approve.png" width="1000" height="750" loading="eager" fetchpriority="high" alt="Purr fills in a six-digit code: the browser shows the code boxes while the phone asks you to approve.">
   </div>
 </section>
 
@@ -100,17 +100,17 @@
       <div class="step-card">
         <span class="num">01</span>
         <h3>Pair once</h3>
-        <p>Scan a QR. Our relay only ever sees ciphertext.</p>
+        <p>Scan a QR code. We cannot read what your devices send each other.</p>
       </div>
       <div class="step-card">
         <span class="num">02</span>
         <h3>Sign in</h3>
-        <p>The extension spots the field and asks your phone.</p>
+        <p>The extension finds the code box and asks your phone.</p>
       </div>
       <div class="step-card">
         <span class="num">03</span>
         <h3>Tap to approve</h3>
-        <p>Six digits cross. The secret behind them never does.</p>
+        <p>Your phone sends that one code. Everything else stays on it.</p>
       </div>
       <div class="step-card">
         <span class="num">04</span>
@@ -191,7 +191,7 @@
         <a href="#get" class="big-cta js-ext-href">
           <span class="stack">
             <span class="label">Add to <span class="js-browser-name">your browser</span></span>
-            <span class="store js-ext-store">Free · MV3 · no telemetry</span>
+            <span class="store js-ext-store">Free · No tracking</span>
           </span>
           <span class="arrow" aria-hidden="true">&#8594;</span>
         </a>
@@ -239,7 +239,7 @@
       </div>
       <div class="faq-item">
         <h3>Can I export my codes?</h3>
-        <p>Yes. Plaintext <span class="mono">otpauth://</span> or encrypted, any time.</p>
+        <p>Yes. Move your codes to another app at any time, as QR codes or as an encrypted file.</p>
       </div>
       <div class="faq-item">
         <h3>What if I lose my phone?</h3>
@@ -247,11 +247,11 @@
       </div>
       <div class="faq-item">
         <h3>Can you see my codes?</h3>
-        <p>No. Your secrets are encrypted on your device. Our relay only carries ciphertext.</p>
+        <p>No. Your codes are locked on your phone. What our server passes along is locked too, and we have no key.</p>
       </div>
       <div class="faq-item">
         <h3>Switching from Authy?</h3>
-        <p>Authy has no export, so those entries get re-added from each service. Google Authenticator, Aegis, 2FAS and Ente import directly.</p>
+        <p>Authy has no export, so you add those accounts again from each service. Google Authenticator, Aegis, 2FAS and Ente import directly.</p>
       </div>
       <div class="faq-item">
         <h3>What does it cost?</h3>
