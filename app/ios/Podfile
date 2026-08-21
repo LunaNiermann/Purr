@@ -46,6 +46,14 @@ post_install do |installer|
     # build; hold every pod at the app's floor.
     target.build_configurations.each do |config|
       config.build_settings['IPHONEOS_DEPLOYMENT_TARGET'] = '15.0'
+      # permission_handler (iOS) only compiles in the permissions whose macro is
+      # set. Without PERMISSION_CAMERA=1 the camera status always reads "denied",
+      # so the add-account priming sheet reappears even after access was granted.
+      # '$(inherited)' preserves the plugin's other defaults.
+      config.build_settings['GCC_PREPROCESSOR_DEFINITIONS'] ||= [
+        '$(inherited)',
+        'PERMISSION_CAMERA=1',
+      ]
     end
   end
 end
