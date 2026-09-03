@@ -187,7 +187,7 @@
   "rkWroteByHand": "手書きで書き留めました",
   "addCameraTitle": "カメラはQRコードの読み取り専用です",
   "addCameraBody": "次に端末が許可を求めます。サイトが表示する設定用QRコードを読み取るためにカメラを使います。撮影・保存・送信は一切ありません。",
-  "addCameraOk": "OK、確認して",
+  "addCameraOk": "続ける",
   "addTypeByHand": "コードは手で入力します",
   "scanCodeError": "そのコードは使えませんでした: {message}",
   "@scanCodeError": {

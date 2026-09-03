@@ -114,7 +114,7 @@
   "rkWroteByHand": "I wrote them down by hand",
   "addCameraTitle": "The camera is only for reading QR codes",
   "addCameraBody": "Your phone will ask for permission next. We use the camera to read the setup QR code a site shows you — nothing is photographed, saved, or sent anywhere.",
-  "addCameraOk": "OK, ask me",
+  "addCameraOk": "Continue",
   "addTypeByHand": "I'll type the code by hand",
   "scanCodeError": "That code didn't work: {message}",
   "@scanCodeError": { "placeholders": { "message": {} } },

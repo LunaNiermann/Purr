@@ -187,7 +187,7 @@
   "rkWroteByHand": "Ich habe sie von Hand notiert",
   "addCameraTitle": "Die Kamera dient nur zum Lesen von QR-Codes",
   "addCameraBody": "Dein Handy fragt gleich nach der Erlaubnis. Wir nutzen die Kamera, um den Einrichtungs-QR-Code zu lesen, den eine Seite dir zeigt — nichts wird fotografiert, gespeichert oder gesendet.",
-  "addCameraOk": "OK, frag mich",
+  "addCameraOk": "Weiter",
   "addTypeByHand": "Ich tippe den Code von Hand",
   "scanCodeError": "Dieser Code hat nicht funktioniert: {message}",
   "@scanCodeError": {

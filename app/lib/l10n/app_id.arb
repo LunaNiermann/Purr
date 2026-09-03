@@ -187,7 +187,7 @@
   "rkWroteByHand": "Saya menulisnya dengan tangan",
   "addCameraTitle": "Kamera hanya untuk membaca kode QR",
   "addCameraBody": "Ponsel Anda akan meminta izin berikutnya. Kami menggunakan kamera untuk membaca kode QR penyiapan yang ditampilkan situs — tidak ada yang difoto, disimpan, atau dikirim.",
-  "addCameraOk": "Oke, minta saja",
+  "addCameraOk": "Lanjutkan",
   "addTypeByHand": "Saya akan mengetik kodenya",
   "scanCodeError": "Kode itu tidak berfungsi: {message}",
   "@scanCodeError": {

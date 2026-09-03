@@ -187,7 +187,7 @@
   "rkWroteByHand": "كتبتها بخط يدي",
   "addCameraTitle": "الكاميرا مخصصة فقط لقراءة رموز QR",
   "addCameraBody": "سيطلب هاتفك الإذن بعد قليل. نستخدم الكاميرا لقراءة رمز QR للإعداد الذي يعرضه الموقع — لا يُلتقط شيء ولا يُحفظ ولا يُرسل.",
-  "addCameraOk": "حسنًا، اسألني",
+  "addCameraOk": "متابعة",
   "addTypeByHand": "سأكتب الرمز يدويًا",
   "scanCodeError": "لم ينجح هذا الرمز: {message}",
   "@scanCodeError": {

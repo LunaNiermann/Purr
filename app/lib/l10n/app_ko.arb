@@ -187,7 +187,7 @@
   "rkWroteByHand": "직접 손으로 적었어요",
   "addCameraTitle": "카메라는 QR 코드 읽기에만 사용됩니다",
   "addCameraBody": "다음에 휴대폰이 권한을 요청합니다. 사이트가 보여주는 설정용 QR 코드를 읽기 위해 카메라를 사용하며, 촬영·저장·전송은 전혀 하지 않습니다.",
-  "addCameraOk": "네, 물어봐 주세요",
+  "addCameraOk": "계속",
   "addTypeByHand": "코드를 직접 입력할게요",
   "scanCodeError": "그 코드는 작동하지 않았습니다: {message}",
   "@scanCodeError": {
