@@ -14,7 +14,7 @@ Three surfaces + one small service:
 
 App id: `nl.notfinal.twofa` · Relay: `https://2fa.apps.not-final.com` · Website: [purr2fa.app](https://purr2fa.app/)
 
-**Get Purr:** [Google Play](https://play.google.com/store/apps/details?id=nl.notfinal.twofa) · [direct APK](https://github.com/LunaNiermann/Purr/releases/latest) · [Chrome extension](https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf) · [Edge extension](https://microsoftedge.microsoft.com/addons/detail/purr-2fa-authenticator/lgfjannafbclpekbiohccbnghhjacfhg)
+**Get Purr:** [App Store](https://apps.apple.com/us/app/purr-2fa-authenticator/id6803663064) · [Google Play](https://play.google.com/store/apps/details?id=nl.notfinal.twofa) · [direct APK](https://github.com/LunaNiermann/Purr/releases/latest) · [Chrome extension](https://chromewebstore.google.com/detail/purr-2fa-authenticator/bfancenpneedgcnfjlajckcffpibjfkf) · [Edge extension](https://microsoftedge.microsoft.com/addons/detail/purr-2fa-authenticator/lgfjannafbclpekbiohccbnghhjacfhg)
 
 ## What makes it different
 
